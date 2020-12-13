@@ -9,7 +9,7 @@ import java.util.List;
 
 public interface UserDao {
 
-    @Query("SELECT * FROM user")
+    @Query("SELECT * FROM users")
     List<User> getAll();
 
     @Insert
