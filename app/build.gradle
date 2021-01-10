@@ -30,10 +30,13 @@ android {
 
 dependencies {
     def room_version = "2.2.5"
+    def fragment_version = "1.2.5"
 
     //Room library
     implementation "androidx.room:room-runtime:$room_version"
     annotationProcessor "androidx.room:room-compiler:$room_version"
+    //Fragment implementation
+    implementation "androidx.fragment:fragment:$fragment_version"
 
     implementation 'androidx.appcompat:appcompat:1.1.0'
     implementation 'com.google.android.material:material:1.1.0'
