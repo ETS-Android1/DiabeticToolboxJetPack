@@ -1,7 +1,9 @@
 package com.example.diabetictoolboxjetpack;
 
+import androidx.lifecycle.LiveData;
 import androidx.room.Delete;
 import androidx.room.Insert;
+import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 import androidx.room.Update;
 
@@ -9,10 +11,10 @@ import java.util.List;
 
 public interface UserDao {
 
-    @Query("SELECT * FROM users")
-    List<User> getAll();
+    @Query("SELECT * FROM user_table")
+    LiveData<List<User>> getAllUsers();
 
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
     void insert (User user);
 
     @Update

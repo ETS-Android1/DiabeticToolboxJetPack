@@ -4,7 +4,7 @@ import androidx.room.Embedded;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
-@Entity(tableName = "users")
+@Entity(tableName = "user_table")
 public class User {
 
     @PrimaryKey(autoGenerate = true)
