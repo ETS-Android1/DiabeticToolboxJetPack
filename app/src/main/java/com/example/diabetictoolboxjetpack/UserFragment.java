@@ -2,9 +2,9 @@ package com.example.diabetictoolboxjetpack;
 
 import androidx.fragment.app.Fragment;
 
-public class UserProfileFragment extends Fragment {
+public class UserFragment extends Fragment {
 
-    public UserProfileFragment(){
+    public UserFragment(){
         super(R.layout.user_profile);
     }
 }

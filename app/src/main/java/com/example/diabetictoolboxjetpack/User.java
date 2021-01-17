@@ -1,5 +1,7 @@
 package com.example.diabetictoolboxjetpack;
 
+import android.location.Address;
+
 import androidx.room.Embedded;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
@@ -10,18 +12,18 @@ public class User {
     @PrimaryKey(autoGenerate = true)
     private Integer uid;
     private String username;
-    private String name;
-    private String surname;
-    private String email;
-    private String phoneNumber;
-    private String gender;
-    private Integer age;
-    @Embedded
-    private Address address;
-    @Embedded
-    private MedicalData medicalData;
+    //private String name;
+    //private String surname;
+    //private String email;
+    //private String phoneNumber;
+    //private String gender;
+    //private Integer age;
+    //@Embedded
+    //private Address address;
+    //@Embedded
+    //private MedicalData medicalData;
 
-    public User(String username, String name, String surname, String email, String phoneNumber, String gender, Integer age) {
+    /*public User(String username, String name, String surname, String email, String phoneNumber, String gender, Integer age) {
         this.username = username;
         this.name = name;
         this.surname = surname;
@@ -29,6 +31,10 @@ public class User {
         this.phoneNumber = phoneNumber;
         this.gender = gender;
         this.age = age;
+    }*/
+
+    public User(String username){
+        this.username = username;
     }
 
     public void setUid(Integer uid) {
@@ -38,7 +44,7 @@ public class User {
     public void setUsername(String username) {
         this.username = username;
     }
-
+    /*
     public void setName(String name) {
         this.name = name;
     }
@@ -69,7 +75,7 @@ public class User {
 
     public void setMedicalData(MedicalData medicalData) {
         this.medicalData = medicalData;
-    }
+    }*/
 
     public Integer getUid() {
         return uid;
@@ -78,7 +84,7 @@ public class User {
     public String getUsername() {
         return username;
     }
-
+    /*
     public String getName() {
         return name;
     }
@@ -109,9 +115,9 @@ public class User {
 
     public MedicalData getMedicalData() {
         return medicalData;
-    }
+    }*/
 }
-
+/*
 class Address {
     private String streetName;
     private String houseNumber;
@@ -359,7 +365,7 @@ class TreatmentMethod {
     public void setNO_TREATMENT(String NO_TREATMENT) {
         this.NO_TREATMENT = NO_TREATMENT;
     }
-}
+}*/
 
 /*class AccompanyingDiseases {
 

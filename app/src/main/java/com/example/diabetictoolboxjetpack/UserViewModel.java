@@ -7,12 +7,12 @@ import androidx.lifecycle.LiveData;
 
 import java.util.List;
 
-public class UserProfileViewModel extends AndroidViewModel{
+public class UserViewModel extends AndroidViewModel{
 
     private UserRepository userRepository;
     private final LiveData<List<User>> allUsers;
 
-    public UserProfileViewModel(Application application){
+    public UserViewModel(Application application){
         super(application);
         userRepository = new UserRepository(application);
         allUsers = userRepository.getAllUsers();
