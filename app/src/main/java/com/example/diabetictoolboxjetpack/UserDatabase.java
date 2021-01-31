@@ -50,7 +50,7 @@ public abstract class UserDatabase extends RoomDatabase {
 
                 User user = new User("Konrad");
                 dao.insert(user);
-                user = new User("Iza");
+                user = new User("Miron");
                 dao.insert(user);
             });
         }
