@@ -7,6 +7,14 @@ import androidx.lifecycle.LiveData;
 
 import java.util.List;
 
+/*
+    A ViewModel object provides the data for a specific UI component, such as a fragment or activity,
+    and contains data-handling business logic to communicate with the model. For example,
+    the ViewModel can call other components to load the data, and it can forward user requests to modify the data.
+    The ViewModel doesn't know about UI components, so it isn't affected by configuration changes,
+    such as recreating an activity when rotating the device.
+ */
+
 public class UserViewModel extends AndroidViewModel{
 
     private UserRepository userRepository;
