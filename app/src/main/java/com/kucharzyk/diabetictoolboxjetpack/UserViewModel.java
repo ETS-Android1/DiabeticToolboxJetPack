@@ -1,4 +1,4 @@
-package com.example.diabetictoolboxjetpack;
+package com.kucharzyk.diabetictoolboxjetpack;
 
 import android.app.Application;
 

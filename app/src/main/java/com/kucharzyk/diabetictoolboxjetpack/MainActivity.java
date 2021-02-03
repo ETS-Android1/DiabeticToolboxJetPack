@@ -1,4 +1,4 @@
-package com.example.diabetictoolboxjetpack;
+package com.kucharzyk.diabetictoolboxjetpack;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -17,6 +17,7 @@ public class MainActivity extends AppCompatActivity {
 
     public static final int NEW_USER_ACTIVITY_REQUEST_CODE = 1;
     private UserViewModel userViewModel;
+    public static final String TAG = "MainActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +44,8 @@ public class MainActivity extends AppCompatActivity {
         UserDatabase userDatabase = Room.databaseBuilder(getApplicationContext(),
                 UserDatabase.class, "user_database")
                 .build();
+
+        //userDatabase.clearDatabase(userDatabase);
     }
 
     @Override

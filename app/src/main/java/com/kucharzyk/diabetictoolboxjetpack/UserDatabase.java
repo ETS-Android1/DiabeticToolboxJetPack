@@ -1,6 +1,7 @@
-package com.example.diabetictoolboxjetpack;
+package com.kucharzyk.diabetictoolboxjetpack;
 
 import android.content.Context;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.room.Database;
@@ -15,7 +16,7 @@ import java.util.concurrent.Executors;
 public abstract class UserDatabase extends RoomDatabase {
 
     public abstract UserDao userDao();
-
+    public static final String TAG = "UserDatabase";
     private static UserDatabase INSTANCE;
     private static final int NUMBER_OF_THREADS = 4;
     static final ExecutorService databaseWriteExecutor =
@@ -25,21 +26,34 @@ public abstract class UserDatabase extends RoomDatabase {
         if (INSTANCE == null) {
             synchronized (UserDatabase.class) {
                 if (INSTANCE == null) {
+                    Log.d(TAG, "getDatabaseStart: " + INSTANCE);
                     INSTANCE = Room.databaseBuilder(context.getApplicationContext(),
                             UserDatabase.class, "user_database")
                             .addCallback(sRoomDatabaseCallback)
                             .build();
+                    Log.d(TAG, "getDatabaseEnd: " + INSTANCE);
+                    //clearDatabase(INSTANCE);
+                } else {
+                    Log.d(TAG, "getDatabase: " + INSTANCE);
+                    INSTANCE.clearAllTables();
                 }
             }
         }
         return INSTANCE;
     }
 
+    private static void clearDatabase(UserDatabase database){
+        databaseWriteExecutor.execute(() -> {
+            database.clearAllTables();
+        });
+    }
+
     private static RoomDatabase.Callback sRoomDatabaseCallback = new RoomDatabase.Callback() {
         @Override
         public void onCreate(@NonNull SupportSQLiteDatabase db) {
+            Log.d(TAG, "onCreateCallbackStart: ");
             super.onCreate(db);
-
+            Log.d(TAG, "onCreate: Creating databases");
             // If you want to keep data through app restarts,
             // comment out the following block
             databaseWriteExecutor.execute(() -> {

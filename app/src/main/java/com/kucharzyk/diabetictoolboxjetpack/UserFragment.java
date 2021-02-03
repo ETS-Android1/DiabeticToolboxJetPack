@@ -1,4 +1,4 @@
-package com.example.diabetictoolboxjetpack;
+package com.kucharzyk.diabetictoolboxjetpack;
 
 import androidx.fragment.app.Fragment;
 

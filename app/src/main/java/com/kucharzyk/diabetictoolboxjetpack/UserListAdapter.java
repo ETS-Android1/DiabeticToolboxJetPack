@@ -1,13 +1,10 @@
-package com.example.diabetictoolboxjetpack;
+package com.kucharzyk.diabetictoolboxjetpack;
 
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.ListAdapter;
-
-import com.example.diabetictoolboxjetpack.User;
-import com.example.diabetictoolboxjetpack.UserViewHolder;
 
 public class UserListAdapter extends ListAdapter<User, UserViewHolder> {
 
