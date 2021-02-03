@@ -1,4 +1,4 @@
-package com.kucharzyk.diabetictoolboxjetpack;
+package com.kucharzyk.diabetictoolboxjetpack.room_databases;
 
 import androidx.lifecycle.LiveData;
 import androidx.room.Dao;

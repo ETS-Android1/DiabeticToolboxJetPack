@@ -1,9 +1,12 @@
-package com.kucharzyk.diabetictoolboxjetpack;
+package com.kucharzyk.diabetictoolboxjetpack.view_models;
 
 import android.app.Application;
 
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
+
+import com.kucharzyk.diabetictoolboxjetpack.repositories.UserRepository;
+import com.kucharzyk.diabetictoolboxjetpack.room_databases.User;
 
 import java.util.List;
 

@@ -1,4 +1,4 @@
-package com.kucharzyk.diabetictoolboxjetpack;
+package com.kucharzyk.diabetictoolboxjetpack.view_models;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -7,6 +7,8 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.kucharzyk.diabetictoolboxjetpack.R;
 
 public class UserViewHolder extends RecyclerView.ViewHolder {
     private final TextView userItemView;

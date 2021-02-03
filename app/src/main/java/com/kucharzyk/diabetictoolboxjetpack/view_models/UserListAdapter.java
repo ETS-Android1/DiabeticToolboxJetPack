@@ -1,10 +1,12 @@
-package com.kucharzyk.diabetictoolboxjetpack;
+package com.kucharzyk.diabetictoolboxjetpack.view_models;
 
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.ListAdapter;
+
+import com.kucharzyk.diabetictoolboxjetpack.room_databases.User;
 
 public class UserListAdapter extends ListAdapter<User, UserViewHolder> {
 

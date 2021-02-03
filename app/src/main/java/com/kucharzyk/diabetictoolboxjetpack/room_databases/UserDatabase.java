@@ -1,4 +1,4 @@
-package com.kucharzyk.diabetictoolboxjetpack;
+package com.kucharzyk.diabetictoolboxjetpack.room_databases;
 
 import android.content.Context;
 import android.util.Log;
@@ -19,7 +19,7 @@ public abstract class UserDatabase extends RoomDatabase {
     public static final String TAG = "UserDatabase";
     private static UserDatabase INSTANCE;
     private static final int NUMBER_OF_THREADS = 4;
-    static final ExecutorService databaseWriteExecutor =
+    public static final ExecutorService databaseWriteExecutor =
             Executors.newFixedThreadPool(NUMBER_OF_THREADS);
 
     public static UserDatabase getDatabase(final Context context) {

@@ -1,4 +1,4 @@
-package com.kucharzyk.diabetictoolboxjetpack;
+package com.kucharzyk.diabetictoolboxjetpack.activities_and_fragments;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -12,6 +12,11 @@ import android.os.Bundle;
 import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.kucharzyk.diabetictoolboxjetpack.R;
+import com.kucharzyk.diabetictoolboxjetpack.room_databases.User;
+import com.kucharzyk.diabetictoolboxjetpack.room_databases.UserDatabase;
+import com.kucharzyk.diabetictoolboxjetpack.view_models.UserListAdapter;
+import com.kucharzyk.diabetictoolboxjetpack.view_models.UserViewModel;
 
 public class MainActivity extends AppCompatActivity {
 
