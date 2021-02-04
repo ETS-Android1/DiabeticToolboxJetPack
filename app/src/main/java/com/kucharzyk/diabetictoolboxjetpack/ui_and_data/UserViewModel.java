@@ -1,12 +1,11 @@
-package com.kucharzyk.diabetictoolboxjetpack.view_models;
+package com.kucharzyk.diabetictoolboxjetpack.ui_and_data;
 
 import android.app.Application;
 
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 
-import com.kucharzyk.diabetictoolboxjetpack.repositories.UserRepository;
-import com.kucharzyk.diabetictoolboxjetpack.room_databases.User;
+import com.kucharzyk.diabetictoolboxjetpack.room_database.User;
 
 import java.util.List;
 
@@ -37,6 +36,4 @@ public class UserViewModel extends AndroidViewModel{
         userRepository.insert(user);
     }
 
-    //private String userID = TODO();
-    //private User user = TODO();
 }

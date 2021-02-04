@@ -1,4 +1,4 @@
-package com.kucharzyk.diabetictoolboxjetpack.view_models;
+package com.kucharzyk.diabetictoolboxjetpack.ui_and_data;
 
 import android.view.LayoutInflater;
 import android.view.View;

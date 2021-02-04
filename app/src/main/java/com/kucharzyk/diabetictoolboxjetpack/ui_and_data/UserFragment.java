@@ -1,4 +1,4 @@
-package com.kucharzyk.diabetictoolboxjetpack.activities_and_fragments;
+package com.kucharzyk.diabetictoolboxjetpack.ui_and_data;
 
 import androidx.fragment.app.Fragment;
 

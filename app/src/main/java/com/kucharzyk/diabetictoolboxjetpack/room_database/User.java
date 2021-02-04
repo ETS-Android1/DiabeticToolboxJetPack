@@ -1,4 +1,4 @@
-package com.kucharzyk.diabetictoolboxjetpack.room_databases;
+package com.kucharzyk.diabetictoolboxjetpack.room_database;
 
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;

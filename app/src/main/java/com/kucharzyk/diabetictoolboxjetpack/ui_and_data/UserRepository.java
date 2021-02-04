@@ -1,17 +1,17 @@
-package com.kucharzyk.diabetictoolboxjetpack.repositories;
+package com.kucharzyk.diabetictoolboxjetpack.ui_and_data;
 
 
 import android.app.Application;
 
 import androidx.lifecycle.LiveData;
 
-import com.kucharzyk.diabetictoolboxjetpack.room_databases.User;
-import com.kucharzyk.diabetictoolboxjetpack.room_databases.UserDao;
-import com.kucharzyk.diabetictoolboxjetpack.room_databases.UserDatabase;
+import com.kucharzyk.diabetictoolboxjetpack.room_database.User;
+import com.kucharzyk.diabetictoolboxjetpack.room_database.UserDao;
+import com.kucharzyk.diabetictoolboxjetpack.room_database.UserDatabase;
 
 import java.util.List;
 
-public class UserRepository {
+class UserRepository {
 
     private UserDao userDao;
     private LiveData<List<User>> allUsers;
