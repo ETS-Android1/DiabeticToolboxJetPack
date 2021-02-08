@@ -17,7 +17,7 @@ import java.util.List;
     such as recreating an activity when rotating the device.
  */
 
-public class UserViewModel extends AndroidViewModel{
+public class UserViewModel extends AndroidViewModel {
 
     private UserRepository userRepository;
     private final LiveData<List<User>> allUsers;

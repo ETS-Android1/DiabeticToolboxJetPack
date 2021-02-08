@@ -10,10 +10,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.kucharzyk.diabetictoolboxjetpack.R;
 
-public class UserViewHolder extends RecyclerView.ViewHolder {
+class UserViewHolder extends RecyclerView.ViewHolder {
     private final TextView userItemView;
 
-    public UserViewHolder(@NonNull View itemView) {
+    private UserViewHolder(@NonNull View itemView) {
         super(itemView);
         userItemView = itemView.findViewById(R.id.textView);
     }
