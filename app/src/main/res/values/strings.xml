@@ -4,6 +4,10 @@
     <string name="hint_user">User...</string>
     <string name="button_save">Save</string>
     <string name="button_next">Next</string>
+    <string name="home_tab">Home </string>
+    <string name="calc_tab">Calculator</string>
+    <string name="stats_tab">Stats</string>
+    <string name="diary_tab">Diary</string>
     <string name="empty_not_saved">User not saved because it is empty.</string>
 
 </resources>
