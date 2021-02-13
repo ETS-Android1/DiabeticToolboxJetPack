@@ -3,6 +3,7 @@
     <string name="add_user">Add User </string>
     <string name="hint_user">User...</string>
     <string name="button_save">Save</string>
+    <string name="button_next">Next</string>
     <string name="empty_not_saved">User not saved because it is empty.</string>
 
 </resources>

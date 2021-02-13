@@ -9,14 +9,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.DiabeticToolboxJetpack">
-        <activity android:name="com.kucharzyk.diabetictoolboxjetpack.ui_and_data.NewUserActivity"></activity>
-        <activity android:name="com.kucharzyk.diabetictoolboxjetpack.ui_and_data.MainActivity">
+        <activity android:name=".ui_and_data.WelcomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".ui_and_data.NewUserActivity" />
+        <activity android:name=".ui_and_data.MainActivity" />
     </application>
 
 </manifest>
