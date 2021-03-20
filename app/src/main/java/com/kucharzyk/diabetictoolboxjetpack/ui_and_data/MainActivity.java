@@ -43,6 +43,7 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(navView, navController);
 
+/*
         RecyclerView recyclerView = findViewById(R.id.recyclerview);
         final UserListAdapter adapter = new UserListAdapter(new UserListAdapter.UserDiff());
         recyclerView.setAdapter(adapter);
@@ -59,6 +60,7 @@ public class MainActivity extends AppCompatActivity {
             Intent intent = new Intent(MainActivity.this, NewUserActivity.class);
             startActivityForResult(intent, NEW_USER_ACTIVITY_REQUEST_CODE);
         });
+*/
 
         UserDatabase userDatabase = Room.databaseBuilder(getApplicationContext(),
                 UserDatabase.class, "user_database")
@@ -67,7 +69,7 @@ public class MainActivity extends AppCompatActivity {
         //userDatabase.clearDatabase(userDatabase);
     }
 
-    @Override
+/*    @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
@@ -79,5 +81,5 @@ public class MainActivity extends AppCompatActivity {
             , R.string.empty_not_saved,
                     Toast.LENGTH_LONG).show();
         }
-    }
+    }*/
 }
