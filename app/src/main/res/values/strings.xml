@@ -13,5 +13,6 @@
     <string name="stats_tab">Stats</string>
     <string name="diary_tab">Diary</string>
     <string name="empty_not_saved">User not saved because it is empty.</string>
+    <string name="search_product">Search product...</string>
 
 </resources>
