@@ -27,7 +27,7 @@ public class CalculatorFragment extends Fragment {
     private RecyclerView mRecyclerView;
     private MealAdapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
-    private ArrayList<ExampleMeal> exampleMealList;
+    private ArrayList<ExampleMeal> mExampleMealList;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -53,24 +53,13 @@ public class CalculatorFragment extends Fragment {
                 filter(s.toString());
             }
         });
-
-/*        calculatorViewModel =
-                new ViewModelProvider(this).get(CalculatorViewModel.class);
-        View root = inflater.inflate(R.layout.fragment_calculator, container, false);
-        final TextView textView = root.findViewById(R.id.autoCompleteTextViewMeal);
-        calculatorViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
-            @Override
-            public void onChanged(@Nullable String s) {
-                textView.setText(s);
-            }
-        });*/
         return root;
     }
 
     private void filter(String mealText){
         ArrayList<ExampleMeal> filteredList = new ArrayList<>();
 
-        for (ExampleMeal meal : exampleMealList){
+        for (ExampleMeal meal : mExampleMealList){
             if(meal.getMealName().toLowerCase().contains(mealText.toLowerCase())) {
                 filteredList.add(meal);
             }
@@ -78,17 +67,22 @@ public class CalculatorFragment extends Fragment {
         mAdapter.filterList(filteredList);
     }
 
+    public void changeItem(int position, String mealName){
+        mExampleMealList.get(position).addMeal(mealName);
+        mAdapter.notifyItemChanged(position);
+    }
+
     private void createExampleMealList(){
-        exampleMealList = new ArrayList<>();
-        exampleMealList.add(new ExampleMeal("banana"));
-        exampleMealList.add(new ExampleMeal("apple"));
-        exampleMealList.add(new ExampleMeal("pear"));
-        exampleMealList.add(new ExampleMeal("cornflakes"));
-        exampleMealList.add(new ExampleMeal("bear"));
-        exampleMealList.add(new ExampleMeal("orange juice"));
-        exampleMealList.add(new ExampleMeal("sandwich"));
-        exampleMealList.add(new ExampleMeal("fish"));
-        exampleMealList.add(new ExampleMeal("chicken wings"));
+        mExampleMealList = new ArrayList<>();
+        mExampleMealList.add(new ExampleMeal("banana"));
+        mExampleMealList.add(new ExampleMeal("apple"));
+        mExampleMealList.add(new ExampleMeal("pear"));
+        mExampleMealList.add(new ExampleMeal("cornflakes"));
+        mExampleMealList.add(new ExampleMeal("bear"));
+        mExampleMealList.add(new ExampleMeal("orange juice"));
+        mExampleMealList.add(new ExampleMeal("sandwich"));
+        mExampleMealList.add(new ExampleMeal("fish"));
+        mExampleMealList.add(new ExampleMeal("chicken wings"));
     }
 
     private void buildRecyclerView(View rootView){
@@ -96,9 +90,21 @@ public class CalculatorFragment extends Fragment {
         mRecyclerView.setHasFixedSize(true);
         mLayoutManager = new LinearLayoutManager(getActivity());
 
-        mAdapter = new MealAdapter(exampleMealList);
+        mAdapter = new MealAdapter(mExampleMealList);
 
         mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.setAdapter(mAdapter);
+
+        mAdapter.setOnItemClickListener(new MealAdapter.OnItemClickListener() {
+            @Override
+            public void onAddMealClick(int position) {
+
+            }
+
+            @Override
+            public void onItemClick(int position) {
+                changeItem(position, "Selected");
+            }
+        });
     }
 }

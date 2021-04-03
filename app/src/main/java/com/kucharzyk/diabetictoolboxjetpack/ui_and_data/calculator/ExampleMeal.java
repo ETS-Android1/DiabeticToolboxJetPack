@@ -7,6 +7,10 @@ public class ExampleMeal {
         mMealName = mealName;
     }
 
+    public void addMeal(String mealName){
+        mMealName = mealName;
+    }
+
     public String getMealName() {
         return mMealName;
     }
