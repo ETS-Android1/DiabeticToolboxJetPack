@@ -25,9 +25,9 @@ public class CalculatorFragment extends Fragment {
 
     private CalculatorViewModel calculatorViewModel;
     private RecyclerView mRecyclerView;
-    private MealAdapter mAdapter;
+    private FoodProductAdapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
-    private ArrayList<ExampleMeal> mExampleMealList;
+    private ArrayList<ExampleFoodProduct> mExampleFoodProductList;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -53,13 +53,23 @@ public class CalculatorFragment extends Fragment {
                 filter(s.toString());
             }
         });
+/*        mealTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Fragment mealSelectionFragment = new MealSelection();
+                FragmentTransaction transaction = getParentFragmentManager().beginTransaction();
+                transaction.replace(R.id.fragment_calculator, mealSelectionFragment);
+                transaction.addToBackStack(null);
+                transaction.commit();
+            }
+        });*/
         return root;
     }
 
     private void filter(String mealText){
-        ArrayList<ExampleMeal> filteredList = new ArrayList<>();
+        ArrayList<ExampleFoodProduct> filteredList = new ArrayList<>();
 
-        for (ExampleMeal meal : mExampleMealList){
+        for (ExampleFoodProduct meal : mExampleFoodProductList){
             if(meal.getMealName().toLowerCase().contains(mealText.toLowerCase())) {
                 filteredList.add(meal);
             }
@@ -68,21 +78,21 @@ public class CalculatorFragment extends Fragment {
     }
 
     public void changeItem(int position, String mealName){
-        mExampleMealList.get(position).addMeal(mealName);
+        mExampleFoodProductList.get(position).addMeal(mealName);
         mAdapter.notifyItemChanged(position);
     }
 
     private void createExampleMealList(){
-        mExampleMealList = new ArrayList<>();
-        mExampleMealList.add(new ExampleMeal("banana"));
-        mExampleMealList.add(new ExampleMeal("apple"));
-        mExampleMealList.add(new ExampleMeal("pear"));
-        mExampleMealList.add(new ExampleMeal("cornflakes"));
-        mExampleMealList.add(new ExampleMeal("bear"));
-        mExampleMealList.add(new ExampleMeal("orange juice"));
-        mExampleMealList.add(new ExampleMeal("sandwich"));
-        mExampleMealList.add(new ExampleMeal("fish"));
-        mExampleMealList.add(new ExampleMeal("chicken wings"));
+        mExampleFoodProductList = new ArrayList<>();
+        mExampleFoodProductList.add(new ExampleFoodProduct("banana", 20.24, 0.33, 1.09));
+        mExampleFoodProductList.add(new ExampleFoodProduct("apple", 10.1, 0.4, 0.4));
+        mExampleFoodProductList.add(new ExampleFoodProduct("pear", 12.3, 0.2, 0.6));
+        mExampleFoodProductList.add(new ExampleFoodProduct("cornflakes", 82.6, 7.4, 1.4));
+        mExampleFoodProductList.add(new ExampleFoodProduct("beer", 3.8, 0.0, 0.5));
+        mExampleFoodProductList.add(new ExampleFoodProduct("orange juice", 10.0, 0.2, 0.7));
+        mExampleFoodProductList.add(new ExampleFoodProduct("sandwich", 23.0, 11.0, 14.0));
+        mExampleFoodProductList.add(new ExampleFoodProduct("fish", 0.0, 12.0, 22.0));
+        mExampleFoodProductList.add(new ExampleFoodProduct("chicken wings", 8.9, 21.8, 19.6));
     }
 
     private void buildRecyclerView(View rootView){
@@ -90,12 +100,12 @@ public class CalculatorFragment extends Fragment {
         mRecyclerView.setHasFixedSize(true);
         mLayoutManager = new LinearLayoutManager(getActivity());
 
-        mAdapter = new MealAdapter(mExampleMealList);
+        mAdapter = new FoodProductAdapter(mExampleFoodProductList);
 
         mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.setAdapter(mAdapter);
 
-        mAdapter.setOnItemClickListener(new MealAdapter.OnItemClickListener() {
+        mAdapter.setOnItemClickListener(new FoodProductAdapter.OnItemClickListener() {
             @Override
             public void onAddMealClick(int position) {
 

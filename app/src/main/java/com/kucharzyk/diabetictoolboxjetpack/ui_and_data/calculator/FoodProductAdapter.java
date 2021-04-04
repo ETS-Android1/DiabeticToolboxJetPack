@@ -13,48 +13,55 @@ import com.kucharzyk.diabetictoolboxjetpack.R;
 
 import java.util.ArrayList;
 
-public class MealAdapter extends RecyclerView.Adapter<MealAdapter.MealViewHolder> {
+public class FoodProductAdapter extends RecyclerView.Adapter<FoodProductAdapter.MealViewHolder> {
 
-    private ArrayList<ExampleMeal> mExampleMeal;
+    private ArrayList<ExampleFoodProduct> mExampleFoodProduct;
     private OnItemClickListener mOnItemClickListener;
 
-    public interface OnItemClickListener{
+    public interface OnItemClickListener {
         void onItemClick(int position);
+
         void onAddMealClick(int position);
     }
 
-    public void setOnItemClickListener(OnItemClickListener listener){
+    public void setOnItemClickListener(OnItemClickListener listener) {
         mOnItemClickListener = listener;
     }
 
-    public static class MealViewHolder extends RecyclerView.ViewHolder{
+    public static class MealViewHolder extends RecyclerView.ViewHolder {
 
-        public TextView mTextView;
+        public TextView mMealName;
+        public TextView mCarbsValue;
+        public TextView mFatValue;
+        public TextView mProteinsValue;
         public ImageView mAddMealImage;
+
 
         public MealViewHolder(@NonNull View itemView, OnItemClickListener listener) {
             super(itemView);
-            mTextView = itemView.findViewById(R.id.mealName);
+            mMealName = itemView.findViewById(R.id.text_meal_name);
             mAddMealImage = itemView.findViewById(R.id.image_add_meal);
-
-            itemView.setOnClickListener(new View.OnClickListener() {
+            mCarbsValue = itemView.findViewById(R.id.text_carbs_value);
+            mFatValue = itemView.findViewById(R.id.text_fat_value);
+            mProteinsValue = itemView.findViewById(R.id.text_proteins_value);
+/*            itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if (listener != null){
+                    if (listener != null) {
                         int position = getAdapterPosition();
-                        if (position != RecyclerView.NO_POSITION){
+                        if (position != RecyclerView.NO_POSITION) {
                             listener.onItemClick(position);
                         }
                     }
                 }
-            });
+            });*/
 
             mAddMealImage.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if (listener != null){
+                    if (listener != null) {
                         int position = getAdapterPosition();
-                        if (position != RecyclerView.NO_POSITION){
+                        if (position != RecyclerView.NO_POSITION) {
                             listener.onAddMealClick(position);
                         }
                     }
@@ -63,8 +70,8 @@ public class MealAdapter extends RecyclerView.Adapter<MealAdapter.MealViewHolder
         }
     }
 
-    public MealAdapter(ArrayList<ExampleMeal> exampleMeal){
-        mExampleMeal = exampleMeal;
+    public FoodProductAdapter(ArrayList<ExampleFoodProduct> exampleFoodProduct) {
+        mExampleFoodProduct = exampleFoodProduct;
     }
 
     @NonNull
@@ -77,18 +84,21 @@ public class MealAdapter extends RecyclerView.Adapter<MealAdapter.MealViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull MealViewHolder holder, int position) {
-        ExampleMeal currentMeal = mExampleMeal.get(position);
-        holder.mTextView.setText(currentMeal.getMealName());
+        ExampleFoodProduct currentMeal = mExampleFoodProduct.get(position);
+        holder.mMealName.setText(currentMeal.getMealName());
+        holder.mCarbsValue.setText(currentMeal.getCarbohydrates().toString());
+        holder.mFatValue.setText(currentMeal.getFat().toString());
+        holder.mProteinsValue.setText(currentMeal.getProteins().toString());
     }
 
 
     @Override
     public int getItemCount() {
-        return mExampleMeal.size();
+        return mExampleFoodProduct.size();
     }
 
-    public void filterList(ArrayList<ExampleMeal> filteredList) {
-        mExampleMeal = filteredList;
+    public void filterList(ArrayList<ExampleFoodProduct> filteredList) {
+        mExampleFoodProduct = filteredList;
         notifyDataSetChanged();
     }
 }
