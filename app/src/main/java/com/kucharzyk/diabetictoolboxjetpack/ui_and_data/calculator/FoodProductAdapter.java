@@ -13,9 +13,9 @@ import com.kucharzyk.diabetictoolboxjetpack.R;
 
 import java.util.ArrayList;
 
-public class FoodProductAdapter extends RecyclerView.Adapter<FoodProductAdapter.MealViewHolder> {
+public class FoodProductAdapter extends RecyclerView.Adapter<FoodProductAdapter.ProductViewHolder> {
 
-    private ArrayList<ExampleFoodProduct> mExampleFoodProduct;
+    private ArrayList<FoodProduct> mFoodProduct;
     private OnItemClickListener mOnItemClickListener;
 
     public interface OnItemClickListener {
@@ -28,7 +28,7 @@ public class FoodProductAdapter extends RecyclerView.Adapter<FoodProductAdapter.
         mOnItemClickListener = listener;
     }
 
-    public static class MealViewHolder extends RecyclerView.ViewHolder {
+    public static class ProductViewHolder extends RecyclerView.ViewHolder {
 
         public TextView mMealName;
         public TextView mCarbsValue;
@@ -37,13 +37,14 @@ public class FoodProductAdapter extends RecyclerView.Adapter<FoodProductAdapter.
         public ImageView mAddMealImage;
 
 
-        public MealViewHolder(@NonNull View itemView, OnItemClickListener listener) {
+        public ProductViewHolder(@NonNull View itemView, OnItemClickListener listener) {
             super(itemView);
             mMealName = itemView.findViewById(R.id.text_meal_name);
             mAddMealImage = itemView.findViewById(R.id.image_add_meal);
             mCarbsValue = itemView.findViewById(R.id.text_carbs_value);
             mFatValue = itemView.findViewById(R.id.text_fat_value);
             mProteinsValue = itemView.findViewById(R.id.text_proteins_value);
+
 /*            itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -70,21 +71,22 @@ public class FoodProductAdapter extends RecyclerView.Adapter<FoodProductAdapter.
         }
     }
 
-    public FoodProductAdapter(ArrayList<ExampleFoodProduct> exampleFoodProduct) {
-        mExampleFoodProduct = exampleFoodProduct;
+    public FoodProductAdapter(ArrayList<FoodProduct> foodProduct) {
+        mFoodProduct = foodProduct;
     }
+
 
     @NonNull
     @Override
-    public MealViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public ProductViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.example_meal, parent, false);
-        MealViewHolder mealViewHolder = new MealViewHolder(view, mOnItemClickListener);
-        return mealViewHolder;
+        ProductViewHolder productViewHolder = new ProductViewHolder(view, mOnItemClickListener);
+        return productViewHolder;
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MealViewHolder holder, int position) {
-        ExampleFoodProduct currentMeal = mExampleFoodProduct.get(position);
+    public void onBindViewHolder(@NonNull ProductViewHolder holder, int position) {
+        FoodProduct currentMeal = mFoodProduct.get(position);
         holder.mMealName.setText(currentMeal.getMealName());
         holder.mCarbsValue.setText(currentMeal.getCarbohydrates().toString());
         holder.mFatValue.setText(currentMeal.getFat().toString());
@@ -94,11 +96,11 @@ public class FoodProductAdapter extends RecyclerView.Adapter<FoodProductAdapter.
 
     @Override
     public int getItemCount() {
-        return mExampleFoodProduct.size();
+        return mFoodProduct.size();
     }
 
-    public void filterList(ArrayList<ExampleFoodProduct> filteredList) {
-        mExampleFoodProduct = filteredList;
+    public void filterList(ArrayList<FoodProduct> filteredList) {
+        mFoodProduct = filteredList;
         notifyDataSetChanged();
     }
 }

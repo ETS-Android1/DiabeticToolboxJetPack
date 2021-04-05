@@ -1,13 +1,13 @@
 package com.kucharzyk.diabetictoolboxjetpack.ui_and_data.calculator;
 
-public class ExampleFoodProduct {
+public class FoodProduct {
     private String mMealName;
     private Double mCarbohydrates;
     private Double mFat;
     private Double mProteins;
     private Double mWeight = 100.0;
 
-    public ExampleFoodProduct(String mealName, Double carbohydrates, Double fat, Double proteins){
+    public FoodProduct(String mealName, Double carbohydrates, Double fat, Double proteins){
         mMealName = mealName;
         mCarbohydrates = carbohydrates;
         mFat = fat;
