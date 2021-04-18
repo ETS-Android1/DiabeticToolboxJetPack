@@ -14,9 +14,12 @@
     <string name="diary_tab">Diary</string>
     <string name="empty_not_saved">User not saved because it is empty.</string>
     <string name="search_product">Search product...</string>
-    <string name="macro_carbs">Carbohydrates:</string>
-    <string name="macro_fat">Fat:</string>
-    <string name="macro_proteins">Proteins:</string>
+    <string name="macro_carbs">Carbohydrates: </string>
+    <string name="macro_fat">Fat: </string>
+    <string name="macro_proteins">Proteins: </string>
+    <string name="macro_carbs_exchanger">WW: </string>
+    <string name="macro_fat_exchanger">WBT: </string>
+    <string name="common_numeric_value_double">00.00 </string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 

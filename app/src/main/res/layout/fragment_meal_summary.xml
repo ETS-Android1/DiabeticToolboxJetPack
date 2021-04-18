@@ -3,14 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui_and_data.calculator.MealSelection"
+    tools:context=".ui_and_data.calculator.MealSummary"
     android:background="@color/white">
 
-    <AutoCompleteTextView
-        android:id="@+id/autoCompleteTextView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="AutoCompleteTextView" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewMeal"

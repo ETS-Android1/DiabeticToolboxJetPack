@@ -21,7 +21,9 @@ public class FoodProductAdapter extends RecyclerView.Adapter<FoodProductAdapter.
     public interface OnItemClickListener {
         void onItemClick(int position);
 
-        void onAddMealClick(int position);
+        void onAddProductClick(int position);
+
+        void onDeleteProductClick(int position);
     }
 
     public void setOnItemClickListener(OnItemClickListener listener) {
@@ -30,20 +32,36 @@ public class FoodProductAdapter extends RecyclerView.Adapter<FoodProductAdapter.
 
     public static class ProductViewHolder extends RecyclerView.ViewHolder {
 
-        public TextView mMealName;
-        public TextView mCarbsValue;
-        public TextView mFatValue;
-        public TextView mProteinsValue;
-        public ImageView mAddMealImage;
+        public TextView mProductName;
+        public TextView mProductBrand;
+        public TextView mProductQuantity;
+
+        public TextView mProductCarbsValue;
+        public TextView mProductFatValue;
+        public TextView mProductProteinsValue;
+        public TextView mProductCarbsExchangerValue;
+        public TextView mProductFatExchangerValue;
+
+        public ImageView mAddProductImage;
+        public ImageView mDeleteProductImage;
+        public ImageView mEditProductImage;
 
 
         public ProductViewHolder(@NonNull View itemView, OnItemClickListener listener) {
             super(itemView);
-            mMealName = itemView.findViewById(R.id.text_meal_name);
-            mAddMealImage = itemView.findViewById(R.id.image_add_meal);
-            mCarbsValue = itemView.findViewById(R.id.text_carbs_value);
-            mFatValue = itemView.findViewById(R.id.text_fat_value);
-            mProteinsValue = itemView.findViewById(R.id.text_proteins_value);
+            mProductName = itemView.findViewById(R.id.text_meal_name);
+            mProductBrand = itemView.findViewById(R.id.text_product_brand);
+            mProductQuantity = itemView.findViewById(R.id.text_product_quantity);
+
+            mProductCarbsValue = itemView.findViewById(R.id.text_product_carbs_value);
+            mProductFatValue = itemView.findViewById(R.id.text_product_fat_value);
+            mProductProteinsValue = itemView.findViewById(R.id.text_product_proteins_value);
+            mProductCarbsExchangerValue = itemView.findViewById(R.id.text_product_carbs_exchanger_value);
+            mProductFatExchangerValue = itemView.findViewById(R.id.text_product_fat_exchanger_value);
+
+            mAddProductImage = itemView.findViewById(R.id.image_add_product);
+            mDeleteProductImage = itemView.findViewById(R.id.image_delete_product);
+            mEditProductImage = itemView.findViewById(R.id.image_edit_product);
 
 /*            itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -57,13 +75,25 @@ public class FoodProductAdapter extends RecyclerView.Adapter<FoodProductAdapter.
                 }
             });*/
 
-            mAddMealImage.setOnClickListener(new View.OnClickListener() {
+            mAddProductImage.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     if (listener != null) {
                         int position = getAdapterPosition();
                         if (position != RecyclerView.NO_POSITION) {
-                            listener.onAddMealClick(position);
+                            listener.onAddProductClick(position);
+                        }
+                    }
+                }
+            });
+
+            mDeleteProductImage.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (listener != null) {
+                        int position = getAdapterPosition();
+                        if (position != RecyclerView.NO_POSITION) {
+                            listener.onDeleteProductClick(position);
                         }
                     }
                 }
@@ -79,7 +109,7 @@ public class FoodProductAdapter extends RecyclerView.Adapter<FoodProductAdapter.
     @NonNull
     @Override
     public ProductViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.example_meal, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.example_product, parent, false);
         ProductViewHolder productViewHolder = new ProductViewHolder(view, mOnItemClickListener);
         return productViewHolder;
     }
@@ -87,10 +117,10 @@ public class FoodProductAdapter extends RecyclerView.Adapter<FoodProductAdapter.
     @Override
     public void onBindViewHolder(@NonNull ProductViewHolder holder, int position) {
         FoodProduct currentMeal = mFoodProduct.get(position);
-        holder.mMealName.setText(currentMeal.getMealName());
-        holder.mCarbsValue.setText(currentMeal.getCarbohydrates().toString());
-        holder.mFatValue.setText(currentMeal.getFat().toString());
-        holder.mProteinsValue.setText(currentMeal.getProteins().toString());
+        holder.mProductName.setText(currentMeal.getProductName());
+        holder.mProductCarbsValue.setText(currentMeal.getCarbohydrates().toString());
+        holder.mProductFatValue.setText(currentMeal.getFat().toString());
+        holder.mProductProteinsValue.setText(currentMeal.getProteins().toString());
     }
 
 
