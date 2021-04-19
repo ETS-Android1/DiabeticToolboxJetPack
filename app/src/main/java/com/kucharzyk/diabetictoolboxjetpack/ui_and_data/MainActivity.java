@@ -20,12 +20,16 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.kucharzyk.diabetictoolboxjetpack.R;
 import com.kucharzyk.diabetictoolboxjetpack.room_database.User;
 import com.kucharzyk.diabetictoolboxjetpack.room_database.UserDatabase;
+import com.kucharzyk.diabetictoolboxjetpack.ui_and_data.diary.DiaryEntry;
+
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
     public static final int NEW_USER_ACTIVITY_REQUEST_CODE = 1;
     private UserViewModel userViewModel;
     public static final String TAG = "MainActivity";
+    private ArrayList<DiaryEntry> mDiaryEntryList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

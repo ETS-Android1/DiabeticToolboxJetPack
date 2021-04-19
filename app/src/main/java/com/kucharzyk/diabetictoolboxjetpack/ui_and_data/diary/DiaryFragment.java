@@ -3,34 +3,57 @@ package com.kucharzyk.diabetictoolboxjetpack.ui_and_data.diary;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import com.kucharzyk.diabetictoolboxjetpack.R;
+
+import java.util.ArrayList;
 
 public class DiaryFragment extends Fragment {
 
     private DiaryViewModel diaryViewModel;
+    private DiaryEntryAdapter mAdapter;
+    private RecyclerView mDiaryRecyclerView;
+    private RecyclerView.LayoutManager mLayoutManager;
+    private ArrayList<DiaryEntry> mDiaryEntryList;
+
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         diaryViewModel =
                 new ViewModelProvider(this).get(DiaryViewModel.class);
         View root = inflater.inflate(R.layout.fragment_diary, container, false);
-        final TextView textView = root.findViewById(R.id.text_diary);
-        diaryViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
-            @Override
-            public void onChanged(@Nullable String s) {
-                textView.setText(s);
-            }
-        });
+
+        createExampleDiaryEntryList();
+        buildRecyclerView(root);
+
         return root;
+    }
+
+    private void buildRecyclerView(View rootView){
+        mDiaryRecyclerView = rootView.findViewById(R.id.diary_recycler_view);
+        mDiaryRecyclerView.setHasFixedSize(true);
+        mLayoutManager = new LinearLayoutManager(getActivity());
+
+        mAdapter = new DiaryEntryAdapter(mDiaryEntryList);
+
+        mDiaryRecyclerView.setLayoutManager(mLayoutManager);
+        mDiaryRecyclerView.setAdapter(mAdapter);
+    }
+
+    private void createExampleDiaryEntryList(){
+        mDiaryEntryList = new ArrayList<>();
+        mDiaryEntryList.add(new DiaryEntry("banana", 20.24, 0.33, 1.09));;
+    }
+
+    public void addDiaryEntry(DiaryEntry newDiaryEntry){
+        mDiaryEntryList.add(newDiaryEntry);
     }
 }

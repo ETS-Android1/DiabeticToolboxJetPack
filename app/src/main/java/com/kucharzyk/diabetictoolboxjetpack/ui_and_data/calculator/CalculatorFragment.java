@@ -22,6 +22,7 @@ import android.widget.AutoCompleteTextView;
 import android.widget.TextView;
 
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.kucharzyk.diabetictoolboxjetpack.R;
 
 import java.text.DecimalFormat;
@@ -149,6 +150,13 @@ public class CalculatorFragment extends Fragment {
         mFoodProductList.add(new FoodProduct("sandwich", 23.0, 11.0, 14.0));
         mFoodProductList.add(new FoodProduct("fish", 0.0, 12.0, 22.0));
         mFoodProductList.add(new FoodProduct("chicken wings", 8.9, 21.8, 19.6));
+    }
+
+    public void  onClickConsumeMeal(View v){
+
+        //v.findViewById(R.id.layout_meal_summary_constraint_layout)
+
+
     }
 
     private void buildRecyclerView(View rootView){
