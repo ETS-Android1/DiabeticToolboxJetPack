@@ -8,6 +8,9 @@
 /.idea/navEditor.xml
 /.idea/assetWizardSettings.xml
 /.idea/encodings.xml
+/.idea/compiler.xml
+/.idea/misc.xml
+/.idea/runConfigurations.xml
 .DS_Store
 /build
 /captures
@@ -15,3 +18,4 @@
 .cxx
 local.properties
 gradlew*
+*.gradle
