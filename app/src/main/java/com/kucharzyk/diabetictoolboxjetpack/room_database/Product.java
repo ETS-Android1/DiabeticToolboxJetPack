@@ -22,7 +22,7 @@ public class Product {
 
     public void setPid(Integer mPid) { this.mPid = mPid; }
 
-    public void setName(String name) {
+    public void setProductName(String name) {
         this.mProductName = name;
     }
 
@@ -40,7 +40,7 @@ public class Product {
 
     public Integer getPid() { return mPid; }
 
-    public String getName() {
+    public String getProductName() {
         return mProductName;
     }
 
