@@ -12,23 +12,25 @@ import androidx.sqlite.db.SupportSQLiteDatabase;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-@Database(entities = {User.class}, version = 1)
-public abstract class UserDatabase extends RoomDatabase {
+@Database(entities = {User.class, Product.class}, version = 1)
+public abstract class AppDatabase extends RoomDatabase {
 
     public abstract UserDao userDao();
-    public static final String TAG = "UserDatabase";
-    private static UserDatabase INSTANCE;
+    public abstract ProductDao productDao();
+
+    public static final String TAG = "AppDatabase";
+    private static AppDatabase INSTANCE;
     private static final int NUMBER_OF_THREADS = 4;
     public static final ExecutorService databaseWriteExecutor =
             Executors.newFixedThreadPool(NUMBER_OF_THREADS);
 
-    public static UserDatabase getDatabase(final Context context) {
+    public static AppDatabase getDatabase(final Context context) {
         if (INSTANCE == null) {
-            synchronized (UserDatabase.class) {
+            synchronized (AppDatabase.class) {
                 if (INSTANCE == null) {
                     Log.d(TAG, "getDatabaseStart: " + INSTANCE);
                     INSTANCE = Room.databaseBuilder(context.getApplicationContext(),
-                            UserDatabase.class, "user_database")
+                            AppDatabase.class, "user_database")
                             .addCallback(sRoomDatabaseCallback)
                             .build();
                     Log.d(TAG, "getDatabaseEnd: " + INSTANCE);
@@ -42,7 +44,7 @@ public abstract class UserDatabase extends RoomDatabase {
         return INSTANCE;
     }
 
-    private static void clearDatabase(UserDatabase database){
+    private static void clearDatabase(AppDatabase database){
         databaseWriteExecutor.execute(() -> {
             database.clearAllTables();
         });

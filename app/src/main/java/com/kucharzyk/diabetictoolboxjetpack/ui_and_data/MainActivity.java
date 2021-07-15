@@ -1,25 +1,17 @@
 package com.kucharzyk.diabetictoolboxjetpack.ui_and_data;
 
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 import androidx.room.Room;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.kucharzyk.diabetictoolboxjetpack.R;
-import com.kucharzyk.diabetictoolboxjetpack.room_database.User;
-import com.kucharzyk.diabetictoolboxjetpack.room_database.UserDatabase;
+import com.kucharzyk.diabetictoolboxjetpack.room_database.AppDatabase;
 import com.kucharzyk.diabetictoolboxjetpack.ui_and_data.diary.DiaryEntry;
 
 import java.util.ArrayList;
@@ -66,8 +58,8 @@ public class MainActivity extends AppCompatActivity {
         });
 */
 
-        UserDatabase userDatabase = Room.databaseBuilder(getApplicationContext(),
-                UserDatabase.class, "user_database")
+        AppDatabase appDatabase = Room.databaseBuilder(getApplicationContext(),
+                AppDatabase.class, "user_database")
                 .build();
 
         //userDatabase.clearDatabase(userDatabase);

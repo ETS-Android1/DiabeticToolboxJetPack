@@ -18,7 +18,7 @@ import java.util.ArrayList;
 
 public class DiaryFragment extends Fragment {
 
-    private DiaryViewModel diaryViewModel;
+    private DiaryEntryViewModel diaryEntryViewModel;
     private DiaryEntryAdapter mAdapter;
     private RecyclerView mDiaryRecyclerView;
     private RecyclerView.LayoutManager mLayoutManager;
@@ -27,8 +27,8 @@ public class DiaryFragment extends Fragment {
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        diaryViewModel =
-                new ViewModelProvider(this).get(DiaryViewModel.class);
+        diaryEntryViewModel =
+                new ViewModelProvider(this).get(DiaryEntryViewModel.class);
         View root = inflater.inflate(R.layout.fragment_diary, container, false);
 
         createExampleDiaryEntryList();

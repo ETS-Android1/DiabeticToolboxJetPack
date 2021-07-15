@@ -87,13 +87,12 @@ public class CalculatorFragment extends Fragment {
                 Double sumMealFatValue = 0.0;
                 Double sumMealProteinsValue = 0.0;
 
-                if (foodProducts == null){
+                if (foodProducts == null) {
                     mMealCarbsValue.setText(sumMealCarbsValue.toString());
                     mMealFatValue.setText(sumMealFatValue.toString());
                     mMealProteinValue.setText(sumMealProteinsValue.toString());
-                }
-                else {
-                    for (FoodProduct product : foodProducts){
+                } else {
+                    for (FoodProduct product : foodProducts) {
                         sumMealCarbsValue = sumMealCarbsValue + product.getCarbohydrates();
                         sumMealFatValue = sumMealFatValue + product.getFat();
                         sumMealProteinsValue = sumMealProteinsValue + product.getProteins();
@@ -122,24 +121,24 @@ public class CalculatorFragment extends Fragment {
     }
 
 
-    private void filter(String mealText){
+    private void filter(String mealText) {
         ArrayList<FoodProduct> filteredList = new ArrayList<>();
 
-        for (FoodProduct meal : mFoodProductList){
-            if(meal.getProductName().toLowerCase().contains(mealText.toLowerCase())) {
+        for (FoodProduct meal : mFoodProductList) {
+            if (meal.getProductName().toLowerCase().contains(mealText.toLowerCase())) {
                 filteredList.add(meal);
             }
         }
         mAdapter.filterList(filteredList);
     }
 
-    public void changeItem(int position, String mealName){
+    public void changeItem(int position, String mealName) {
         mFoodProductList.get(position).addMeal(mealName);
         mAdapter.notifyItemChanged(position);
     }
 
 
-    private void createExampleMealList(){
+    private void createExampleMealList() {
         mFoodProductList = new ArrayList<>();
         mFoodProductList.add(new FoodProduct("banana", 20.24, 0.33, 1.09));
         mFoodProductList.add(new FoodProduct("apple", 10.1, 0.4, 0.4));
@@ -152,14 +151,14 @@ public class CalculatorFragment extends Fragment {
         mFoodProductList.add(new FoodProduct("chicken wings", 8.9, 21.8, 19.6));
     }
 
-    public void  onClickConsumeMeal(View v){
+    public void onClickConsumeMeal(View v) {
 
         //v.findViewById(R.id.layout_meal_summary_constraint_layout)
 
 
     }
 
-    private void buildRecyclerView(View rootView){
+    private void buildRecyclerView(View rootView) {
         mRecyclerView = rootView.findViewById(R.id.recyclerView2);
         mRecyclerView.setHasFixedSize(true);
         mLayoutManager = new LinearLayoutManager(getActivity());
