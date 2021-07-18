@@ -3,7 +3,9 @@ package com.kucharzyk.diabetictoolboxjetpack.ui_and_data.diary;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -11,10 +13,13 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.kucharzyk.diabetictoolboxjetpack.R;
+import com.kucharzyk.diabetictoolboxjetpack.room_database.Product;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class DiaryFragment extends Fragment {
 
@@ -22,7 +27,7 @@ public class DiaryFragment extends Fragment {
     private DiaryEntryAdapter mAdapter;
     private RecyclerView mDiaryRecyclerView;
     private RecyclerView.LayoutManager mLayoutManager;
-    private ArrayList<DiaryEntry> mDiaryEntryList;
+    private List<Product> mDiaryEntryList;
 
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -31,9 +36,17 @@ public class DiaryFragment extends Fragment {
                 new ViewModelProvider(this).get(DiaryEntryViewModel.class);
         View root = inflater.inflate(R.layout.fragment_diary, container, false);
 
-        createExampleDiaryEntryList();
+        //createExampleDiaryEntryList();
         buildRecyclerView(root);
 
+
+        final Observer<List<Product>> diaryEntriesObserver = new Observer<List<Product>>() {
+            @Override
+            public void onChanged(List<Product> diaryEntries) {
+                mAdapter.setDiaryEntries(diaryEntries);
+            }
+        };
+        diaryEntryViewModel.getAllProducts().observe(getViewLifecycleOwner(), diaryEntriesObserver);
         return root;
     }
 
@@ -42,7 +55,7 @@ public class DiaryFragment extends Fragment {
         mDiaryRecyclerView.setHasFixedSize(true);
         mLayoutManager = new LinearLayoutManager(getActivity());
 
-        mAdapter = new DiaryEntryAdapter(mDiaryEntryList);
+        mAdapter = new DiaryEntryAdapter();
 
         mDiaryRecyclerView.setLayoutManager(mLayoutManager);
         mDiaryRecyclerView.setAdapter(mAdapter);

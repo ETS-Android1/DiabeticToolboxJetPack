@@ -21,13 +21,29 @@ public class ProductRepository {
         mAllProducts = mProductDao.getAllProducts();
     }
 
-    public LiveData<List<Product>> getAllProducts() {
-        return mAllProducts;
-    }
-
-    void insert(Product product) {
+    public void insert(Product product) {
         AppDatabase.databaseWriteExecutor.execute(() -> {
             mProductDao.insert(product);
         });
+    }
+
+    public void update(Product product){
+        AppDatabase.databaseWriteExecutor.execute(() -> {
+            mProductDao.update(product);
+        });
+    }
+
+    public void delete(Product product){
+        AppDatabase.databaseWriteExecutor.execute(() -> {
+            mProductDao.delete(product);
+        });
+    }
+
+/*    public void deleteAllProducts(){
+
+    }*/
+
+    public LiveData<List<Product>> getAllProducts() {
+        return mAllProducts;
     }
 }

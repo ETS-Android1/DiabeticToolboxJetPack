@@ -1,24 +1,24 @@
 package com.kucharzyk.diabetictoolboxjetpack.ui_and_data.diary;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.kucharzyk.diabetictoolboxjetpack.R;
 import com.kucharzyk.diabetictoolboxjetpack.room_database.Product;
 
-import org.jetbrains.annotations.NotNull;
-
 import java.util.ArrayList;
+import java.util.List;
 
 public class DiaryEntryAdapter extends RecyclerView.Adapter<DiaryEntryAdapter.DiaryEntryViewHolder> {
+    public static final String TAG = "DiaryEntryAdapter";
 
-    private ArrayList<DiaryEntry> mDiaryEntry;
+    private List<Product> diaryEntries = new ArrayList<>();
     private OnItemClickListener mOnItemClickListener;
 
     public interface OnItemClickListener {
@@ -97,11 +97,6 @@ public class DiaryEntryAdapter extends RecyclerView.Adapter<DiaryEntryAdapter.Di
     }
 
 
-    public DiaryEntryAdapter(ArrayList<DiaryEntry> diaryEntry) {
-        mDiaryEntry = diaryEntry;
-    }
-
-
     @NonNull
     @Override
     public DiaryEntryViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -113,7 +108,7 @@ public class DiaryEntryAdapter extends RecyclerView.Adapter<DiaryEntryAdapter.Di
 
     @Override
     public void onBindViewHolder(@NonNull DiaryEntryViewHolder holder, int position) {
-        DiaryEntry currentDiaryEntry = mDiaryEntry.get(position);
+        Product currentDiaryEntry = diaryEntries.get(position);
         holder.mProductName.setText(currentDiaryEntry.getProductName());
         holder.mProductCarbsValue.setText(currentDiaryEntry.getCarbohydrates().toString());
         holder.mProductFatValue.setText(currentDiaryEntry.getFat().toString());
@@ -123,11 +118,21 @@ public class DiaryEntryAdapter extends RecyclerView.Adapter<DiaryEntryAdapter.Di
 
     @Override
     public int getItemCount() {
-        return mDiaryEntry.size();
+        if (diaryEntries == null){
+            Log.d(TAG, "getItemCount: No elements to display");
+            return 0;
+        }
+
+        return diaryEntries.size();
     }
 
-    public void filterList(ArrayList<DiaryEntry> filteredList) {
-        mDiaryEntry = filteredList;
+    public void setDiaryEntries(List<Product> diaryEntries){
+        this.diaryEntries = diaryEntries;
+        notifyDataSetChanged();
+    }
+
+    public void filterList(ArrayList<Product> filteredList) {
+        diaryEntries = filteredList;
         notifyDataSetChanged();
     }
 }
