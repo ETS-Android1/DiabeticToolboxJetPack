@@ -13,18 +13,17 @@ import com.kucharzyk.diabetictoolboxjetpack.ui_and_data.ProductRepository;
 import java.util.List;
 
 public class DiaryEntryViewModel extends ViewModel {
-
     private ProductRepository mProductRepository;
-
     private LiveData<List<Product>> mAllProducts;
 
-    public DiaryEntryViewModel(Application application) {
-        mProductRepository = new ProductRepository(application);
-        mAllProducts = mProductRepository.getAllProducts();
+    public DiaryEntryViewModel() {
+
+/*        mProductRepository = new ProductRepository(application);
+        mAllProducts = mProductRepository.getAllProducts();*/
     }
 
-    public LiveData<List<Product>> getAllProducts() {
+/*    public LiveData<List<Product>> getAllProducts() {
         return mAllProducts;
-    }
+    }*/
 
 }
