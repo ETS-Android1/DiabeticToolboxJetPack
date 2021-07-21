@@ -30,6 +30,8 @@ public class DiaryEntryViewModel extends AndroidViewModel {
     public void insert(Product product){
         mProductRepository.insert(product);
     }
+    public void delete(Product product) { mProductRepository.delete(product); }
+    public void deleteAllProducts() { mProductRepository.deleteAllProducts(); }
 
     public LiveData<List<Product>> getAllProducts() {
         return mAllProducts;

@@ -39,9 +39,12 @@ public class ProductRepository {
         });
     }
 
-/*    public void deleteAllProducts(){
+    public void deleteAllProducts(){
+        AppDatabase.databaseWriteExecutor.execute(() -> {
+            mProductDao.deleteAllProducts();
+        });
+    }
 
-    }*/
 
     public LiveData<List<Product>> getAllProducts() {
         return mAllProducts;
