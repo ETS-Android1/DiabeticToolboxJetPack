@@ -16,12 +16,9 @@ import java.util.List;
 public class DiaryEntryViewModel extends AndroidViewModel {
     private ProductRepository mProductRepository;
     private LiveData<List<Product>> mAllProducts;
-//    private MutableLiveData<String> mText;
 
     public DiaryEntryViewModel(@NonNull Application application) {
         super(application);
-//        mText = new MutableLiveData<>();
-//        mText.setValue("This is calculator fragment");
 
         mProductRepository = new ProductRepository(application);
         mAllProducts = mProductRepository.getAllProducts();
@@ -36,9 +33,5 @@ public class DiaryEntryViewModel extends AndroidViewModel {
     public LiveData<List<Product>> getAllProducts() {
         return mAllProducts;
     }
-
-//    public LiveData<String> getText() {
-//        return mText;
-//    }
 
 }

@@ -1,6 +1,7 @@
 package com.kucharzyk.diabetictoolboxjetpack.ui_and_data;
 
 import android.app.Application;
+import android.util.Log;
 
 import androidx.lifecycle.LiveData;
 
@@ -12,6 +13,7 @@ import java.util.List;
 
 public class ProductRepository {
 
+    private static final String TAG = "ProductRepository";
     private ProductDao mProductDao;
     private LiveData<List<Product>> mAllProducts;
 
@@ -35,6 +37,7 @@ public class ProductRepository {
 
     public void delete(Product product){
         AppDatabase.databaseWriteExecutor.execute(() -> {
+            Log.d(TAG, "delete: starting");
             mProductDao.delete(product);
         });
     }

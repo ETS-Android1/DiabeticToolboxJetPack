@@ -31,7 +31,7 @@ public class DiaryFragment extends Fragment {
     private RecyclerView.LayoutManager mLayoutManager;
     private FloatingActionButton mAddProductButton;
     private FloatingActionButton mSubProductButton;
-    Product product1 = new Product("TestProduct2.0", 11.0, 6.0, 3.0);
+    Product product1;
 
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -44,6 +44,7 @@ public class DiaryFragment extends Fragment {
 
         mAddProductButton = root.findViewById(R.id.diary_button_add_product);
         mSubProductButton = root.findViewById(R.id.diary_button_subtract_product);
+        product1 = new Product("TestProduct2.0", 11.0, 6.0, 3.0);
 
         final Observer<List<Product>> diaryEntriesObserver = new Observer<List<Product>>() {
             @Override
@@ -60,7 +61,7 @@ public class DiaryFragment extends Fragment {
 
         mSubProductButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
-                diaryEntryViewModel.deleteAllProducts();
+                diaryEntryViewModel.delete(product1);
             }
         });
 
