@@ -19,7 +19,7 @@ import java.util.ArrayList;
 
 public class CalculatorViewModel extends AndroidViewModel {
     private MutableLiveData<ArrayList<FoodProduct>> mMealSummary;
-    private ProductRepository mProductRepository;
+    private final ProductRepository mProductRepository;
 
     public CalculatorViewModel(@NonNull @NotNull Application application) {
         super(application);

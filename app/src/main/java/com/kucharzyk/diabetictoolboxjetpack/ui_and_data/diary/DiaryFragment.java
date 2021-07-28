@@ -57,19 +57,7 @@ public class DiaryFragment extends Fragment {
 
         mSubProductButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
-                LiveData<List<Product>> productList = diaryEntryViewModel.getAllProducts();
-                List<Product> temporaryList = productList.getValue();
-                if (temporaryList == null){
-                    temporaryList = new ArrayList<>();
-                }
-                int id = 0;
-                for (Product product : temporaryList){
-                    if (product.getPid() > id) { id = product.getPid(); }
-                    Log.d(TAG, "onClick: product: " + product);
-                }
-                Log.d(TAG, "onClick: id= " + id);
-                product1.setPid(id);
-                diaryEntryViewModel.delete(product1);
+                diaryEntryViewModel.deleteLastProduct(product1);
             }
         });
 
