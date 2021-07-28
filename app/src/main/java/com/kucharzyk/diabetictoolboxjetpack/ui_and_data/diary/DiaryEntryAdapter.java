@@ -1,24 +1,24 @@
 package com.kucharzyk.diabetictoolboxjetpack.ui_and_data.diary;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.kucharzyk.diabetictoolboxjetpack.R;
 import com.kucharzyk.diabetictoolboxjetpack.room_database.Product;
 
-import org.jetbrains.annotations.NotNull;
-
 import java.util.ArrayList;
+import java.util.List;
 
-public class DiaryEntryAdapter extends ListAdapter<Product, DiaryEntryViewHolder> {
+public class DiaryEntryAdapter extends RecyclerView.Adapter<DiaryEntryAdapter.DiaryEntryViewHolder> {
+    public static final String TAG = "DiaryEntryAdapter";
 
-    private ArrayList<DiaryEntry> mDiaryEntry;
+    private List<Product> diaryEntries = new ArrayList<>();
     private OnItemClickListener mOnItemClickListener;
 
     public interface OnItemClickListener {
@@ -33,8 +33,67 @@ public class DiaryEntryAdapter extends ListAdapter<Product, DiaryEntryViewHolder
         mOnItemClickListener = listener;
     }
 
-    public DiaryEntryAdapter(ArrayList<DiaryEntry> diaryEntry) {
-        mDiaryEntry = diaryEntry;
+    public static class DiaryEntryViewHolder extends RecyclerView.ViewHolder{
+
+        private final TextView mProductName;
+/*        public TextView mProductBrand;
+        public TextView mProductQuantity;*/
+
+        private final TextView mProductCarbsValue;
+        private final TextView mProductFatValue;
+        private final TextView mProductProteinsValue;
+        private final TextView mProductCarbsExchangerValue;
+        private final TextView mProductFatExchangerValue;
+
+        public DiaryEntryViewHolder(@NonNull View itemView, DiaryEntryAdapter.OnItemClickListener listener) {
+            super(itemView);
+            mProductName = itemView.findViewById(R.id.diary_text_meal_summary);
+/*            mProductBrand = itemView.findViewById(R.id.text_product_brand);
+            mProductQuantity = itemView.findViewById(R.id.text_product_quantity);*/
+
+            mProductCarbsValue = itemView.findViewById(R.id.diary_text_carbs_summary_value);
+            mProductFatValue = itemView.findViewById(R.id.diary_text_fat_summary_value);
+            mProductProteinsValue = itemView.findViewById(R.id.diary_text_proteins_summary_value);
+            mProductCarbsExchangerValue = itemView.findViewById(R.id.diary_text_carbs_exchanger_summary_value);
+            mProductFatExchangerValue = itemView.findViewById(R.id.diary_text_protein_fat_exchanger_summary_value);
+
+
+/*            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (listener != null) {
+                        int position = getAdapterPosition();
+                        if (position != RecyclerView.NO_POSITION) {
+                            listener.onItemClick(position);
+                        }
+                    }
+                }
+            });*/
+
+/*            mAddProductImage.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (listener != null) {
+                        int position = getAdapterPosition();
+                        if (position != RecyclerView.NO_POSITION) {
+                            listener.onAddProductClick(position);
+                        }
+                    }
+                }
+            });
+
+            mDeleteProductImage.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (listener != null) {
+                        int position = getAdapterPosition();
+                        if (position != RecyclerView.NO_POSITION) {
+                            listener.onDeleteProductClick(position);
+                        }
+                    }
+                }
+            });*/
+        }
     }
 
 
@@ -49,7 +108,7 @@ public class DiaryEntryAdapter extends ListAdapter<Product, DiaryEntryViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull DiaryEntryViewHolder holder, int position) {
-        DiaryEntry currentDiaryEntry = mDiaryEntry.get(position);
+        Product currentDiaryEntry = diaryEntries.get(position);
         holder.mProductName.setText(currentDiaryEntry.getProductName());
         holder.mProductCarbsValue.setText(currentDiaryEntry.getCarbohydrates().toString());
         holder.mProductFatValue.setText(currentDiaryEntry.getFat().toString());
@@ -59,11 +118,21 @@ public class DiaryEntryAdapter extends ListAdapter<Product, DiaryEntryViewHolder
 
     @Override
     public int getItemCount() {
-        return mDiaryEntry.size();
+        if (diaryEntries == null){
+            Log.d(TAG, "getItemCount: No elements to display");
+            return 0;
+        }
+
+        return diaryEntries.size();
     }
 
-    public void filterList(ArrayList<DiaryEntry> filteredList) {
-        mDiaryEntry = filteredList;
+    public void setDiaryEntries(List<Product> diaryEntries){
+        this.diaryEntries = diaryEntries;
+        notifyDataSetChanged();
+    }
+
+    public void filterList(ArrayList<Product> filteredList) {
+        diaryEntries = filteredList;
         notifyDataSetChanged();
     }
 }

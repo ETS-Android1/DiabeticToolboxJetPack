@@ -59,10 +59,10 @@ public class MainActivity extends AppCompatActivity {
 */
 
         AppDatabase appDatabase = Room.databaseBuilder(getApplicationContext(),
-                AppDatabase.class, "user_database")
+                AppDatabase.class, "app_database")
                 .build();
 
-        //userDatabase.clearDatabase(userDatabase);
+//        userDatabase.clearDatabase(userDatabase);
     }
 
 /*    @Override

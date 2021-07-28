@@ -1,5 +1,6 @@
 package com.kucharzyk.diabetictoolboxjetpack.room_database;
 
+import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
@@ -7,40 +8,26 @@ import androidx.room.PrimaryKey;
 public class Product {
 
     @PrimaryKey(autoGenerate = true)
-    private Integer mPid;
+    @NonNull
+    private int mPid;
     private String mProductName;
     private Double mCarbohydrates;
     private Double mFat;
     private Double mProteins;
 
-    public Product(String productName, Double carbohydrates, Double fat, Double proteins) {
+    public Product(@NonNull String productName, Double carbohydrates, Double fat, Double proteins) {
         this.mProductName = productName;
         this.mCarbohydrates = carbohydrates;
         this.mFat = fat;
         this.mProteins = proteins;
     }
 
-    public void setPid(Integer mPid) { this.mPid = mPid; }
+    public void setPid(int mPid) { this.mPid = mPid; }
 
-    public void setName(String name) {
-        this.mProductName = name;
-    }
 
-    public void setCarbohydrates(Double carbohydrates) {
-        this.mCarbohydrates = carbohydrates;
-    }
+    public int getPid() { return mPid; }
 
-    public void setFat(Double fat) {
-        this.mFat = fat;
-    }
-
-    public void setProteins(Double proteins) {
-        this.mProteins = proteins;
-    }
-
-    public Integer getPid() { return mPid; }
-
-    public String getName() {
+    public String getProductName() {
         return mProductName;
     }
 

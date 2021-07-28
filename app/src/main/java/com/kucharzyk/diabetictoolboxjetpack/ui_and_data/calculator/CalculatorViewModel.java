@@ -1,36 +1,42 @@
 package com.kucharzyk.diabetictoolboxjetpack.ui_and_data.calculator;
 
+import android.app.Application;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.kucharzyk.diabetictoolboxjetpack.R;
+import com.kucharzyk.diabetictoolboxjetpack.room_database.Product;
+import com.kucharzyk.diabetictoolboxjetpack.ui_and_data.ProductRepository;
+
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 
-public class CalculatorViewModel extends ViewModel {
-    private MutableLiveData<String> mText;
+public class CalculatorViewModel extends AndroidViewModel {
     private MutableLiveData<ArrayList<FoodProduct>> mMealSummary;
+    private final ProductRepository mProductRepository;
 
+    public CalculatorViewModel(@NonNull @NotNull Application application) {
+        super(application);
 
-    public CalculatorViewModel() {
-        mText = new MutableLiveData<>();
-        mText.setValue("This is calculator fragment");
-
-        mMealSummary = new MutableLiveData<>();
+        mProductRepository = new ProductRepository(application);
     }
+
+    public void insert(Product product){
+        mProductRepository.insert(product);
+    }
+    public void update(Product product) { mProductRepository.update(product); }
 
     public MutableLiveData<ArrayList<FoodProduct>> getMealSummary(){
         if (mMealSummary == null) {
             mMealSummary = new MutableLiveData<>();
         }
         return mMealSummary;
-    }
-
-    public LiveData<String> getText() {
-        return mText;
     }
 
 }

@@ -30,7 +30,7 @@ public abstract class AppDatabase extends RoomDatabase {
                 if (INSTANCE == null) {
                     Log.d(TAG, "getDatabaseStart: " + INSTANCE);
                     INSTANCE = Room.databaseBuilder(context.getApplicationContext(),
-                            AppDatabase.class, "user_database")
+                            AppDatabase.class, "app_database")
                             .addCallback(sRoomDatabaseCallback)
                             .build();
                     Log.d(TAG, "getDatabaseEnd: " + INSTANCE);
@@ -61,13 +61,18 @@ public abstract class AppDatabase extends RoomDatabase {
             databaseWriteExecutor.execute(() -> {
                 // Populate the database in the background.
                 // If you want to start with more words, just add them.
-                UserDao dao = INSTANCE.userDao();
-                dao.deleteAll();
+                //UserDao userDao = INSTANCE.userDao();
+                ProductDao productDao = INSTANCE.productDao();
 
-                User user = new User("Konrad");
-                dao.insert(user);
-                user = new User("Miron");
-                dao.insert(user);
+                //userDao.deleteAll();
+
+                //User user = new User("Konrad");
+                //userDao.insert(user);
+                Log.d(TAG, "onCreate: before new product");
+                Product product = new Product("TestProduct", 10.0, 5.0, 2.0);
+                productDao.insert(product);
+                Log.d(TAG, "onCreate: product inserted: " + product);
+
             });
         }
     };
