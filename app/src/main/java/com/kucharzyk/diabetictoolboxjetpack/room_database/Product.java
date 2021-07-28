@@ -8,6 +8,7 @@ import androidx.room.PrimaryKey;
 public class Product {
 
     @PrimaryKey(autoGenerate = true)
+    @NonNull
     private int mPid;
     private String mProductName;
     private Double mCarbohydrates;
@@ -21,10 +22,10 @@ public class Product {
         this.mProteins = proteins;
     }
 
-    public void setPid(Integer mPid) { this.mPid = mPid; }
+    public void setPid(int mPid) { this.mPid = mPid; }
 
 
-    public Integer getPid() { return mPid; }
+    public int getPid() { return mPid; }
 
     public String getProductName() {
         return mProductName;

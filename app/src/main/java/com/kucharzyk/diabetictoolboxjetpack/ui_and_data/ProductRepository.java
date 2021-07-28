@@ -14,8 +14,8 @@ import java.util.List;
 public class ProductRepository {
 
     private static final String TAG = "ProductRepository";
-    private ProductDao mProductDao;
-    private LiveData<List<Product>> mAllProducts;
+    private final ProductDao mProductDao;
+    private final LiveData<List<Product>> mAllProducts;
 
     public ProductRepository(Application application){
         AppDatabase db = AppDatabase.getDatabase(application);
@@ -25,6 +25,7 @@ public class ProductRepository {
 
     public void insert(Product product) {
         AppDatabase.databaseWriteExecutor.execute(() -> {
+            Log.d(TAG, "insert " + product + " starting");
             mProductDao.insert(product);
         });
     }

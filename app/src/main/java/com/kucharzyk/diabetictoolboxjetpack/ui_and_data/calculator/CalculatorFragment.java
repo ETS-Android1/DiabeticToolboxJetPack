@@ -24,6 +24,7 @@ import android.widget.TextView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.kucharzyk.diabetictoolboxjetpack.R;
+import com.kucharzyk.diabetictoolboxjetpack.room_database.Product;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -33,18 +34,13 @@ public class CalculatorFragment extends Fragment {
     private static DecimalFormat REAL_FORMATTER = new DecimalFormat("0.##");
 
     private CalculatorViewModel calculatorViewModel;
-    private RecyclerView mRecyclerView;
     private FoodProductAdapter mAdapter;
-    private RecyclerView.LayoutManager mLayoutManager;
     private ArrayList<FoodProduct> mFoodProductList;
     private ArrayList<FoodProduct> mMeal;
 
-    AutoCompleteTextView mMealTextView;
-    CardView mMealSummaryCardView;
-    ConstraintLayout mMealSummaryConstraintLayout;
-    public TextView mMealCarbsValue;
-    public TextView mMealFatValue;
-    public TextView mMealProteinValue;
+    private TextView mMealCarbsValue;
+    private TextView mMealFatValue;
+    private TextView mMealProteinValue;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -54,13 +50,15 @@ public class CalculatorFragment extends Fragment {
         createExampleMealList();
         buildRecyclerView(root);
 
-        mMealTextView = root.findViewById(R.id.MealAutoCompleteTextView);
+        AutoCompleteTextView mMealTextView = root.findViewById(R.id.MealAutoCompleteTextView);
         mMealCarbsValue = root.findViewById(R.id.text_carbs_summary_value);
         mMealFatValue = root.findViewById(R.id.text_fat_summary_value);
         mMealProteinValue = root.findViewById(R.id.text_proteins_summary_value);
-        mMealSummaryCardView = root.findViewById(R.id.view_meal_summary_card_view);
-        mMealSummaryConstraintLayout = root.findViewById(R.id.layout_meal_summary_constraint_layout);
+        FloatingActionButton mButtonConsumeMeal = root.findViewById(R.id.calculator_button_consume_meal);
+        CardView mMealSummaryCardView = root.findViewById(R.id.view_meal_summary_card_view);
+        ConstraintLayout mMealSummaryConstraintLayout = root.findViewById(R.id.layout_meal_summary_constraint_layout);
         mMeal = new ArrayList<>();
+        Product product2 = new Product("TestProduct3.0", 12.0, 77.0, 4.0);
 
         mMealTextView.addTextChangedListener(new TextWatcher() {
             @Override
@@ -116,6 +114,13 @@ public class CalculatorFragment extends Fragment {
             }
         });
 
+        mButtonConsumeMeal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                calculatorViewModel.insert(product2);
+            }
+        });
+
         calculatorViewModel.getMealSummary().observe(getViewLifecycleOwner(), mealSummaryObserver);
         return root;
     }
@@ -151,17 +156,11 @@ public class CalculatorFragment extends Fragment {
         mFoodProductList.add(new FoodProduct("chicken wings", 8.9, 21.8, 19.6));
     }
 
-    public void onClickConsumeMeal(View v) {
-
-        //v.findViewById(R.id.layout_meal_summary_constraint_layout)
-
-
-    }
 
     private void buildRecyclerView(View rootView) {
-        mRecyclerView = rootView.findViewById(R.id.recyclerView2);
+        RecyclerView mRecyclerView = rootView.findViewById(R.id.recyclerView2);
         mRecyclerView.setHasFixedSize(true);
-        mLayoutManager = new LinearLayoutManager(getActivity());
+        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
 
         mAdapter = new FoodProductAdapter(mFoodProductList);
 

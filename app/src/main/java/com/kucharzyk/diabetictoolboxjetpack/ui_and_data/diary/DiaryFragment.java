@@ -3,18 +3,17 @@ package com.kucharzyk.diabetictoolboxjetpack.ui_and_data.diary;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.TextView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.kucharzyk.diabetictoolboxjetpack.R;
@@ -24,13 +23,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DiaryFragment extends Fragment {
+    public static final String TAG = "DiaryFragment";
 
     private DiaryEntryViewModel diaryEntryViewModel;
     private DiaryEntryAdapter mAdapter;
-    private RecyclerView mDiaryRecyclerView;
-    private RecyclerView.LayoutManager mLayoutManager;
-    private FloatingActionButton mAddProductButton;
-    private FloatingActionButton mSubProductButton;
     Product product1;
 
 
@@ -42,8 +38,8 @@ public class DiaryFragment extends Fragment {
 
         buildRecyclerView(root);
 
-        mAddProductButton = root.findViewById(R.id.diary_button_add_product);
-        mSubProductButton = root.findViewById(R.id.diary_button_subtract_product);
+        FloatingActionButton mAddProductButton = root.findViewById(R.id.diary_button_add_product);
+        FloatingActionButton mSubProductButton = root.findViewById(R.id.diary_button_subtract_product);
         product1 = new Product("TestProduct2.0", 11.0, 6.0, 3.0);
 
         final Observer<List<Product>> diaryEntriesObserver = new Observer<List<Product>>() {
@@ -61,6 +57,18 @@ public class DiaryFragment extends Fragment {
 
         mSubProductButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
+                LiveData<List<Product>> productList = diaryEntryViewModel.getAllProducts();
+                List<Product> temporaryList = productList.getValue();
+                if (temporaryList == null){
+                    temporaryList = new ArrayList<>();
+                }
+                int id = 0;
+                for (Product product : temporaryList){
+                    if (product.getPid() > id) { id = product.getPid(); }
+                    Log.d(TAG, "onClick: product: " + product);
+                }
+                Log.d(TAG, "onClick: id= " + id);
+                product1.setPid(id);
                 diaryEntryViewModel.delete(product1);
             }
         });
@@ -70,9 +78,9 @@ public class DiaryFragment extends Fragment {
     }
 
     private void buildRecyclerView(View rootView){
-        mDiaryRecyclerView = rootView.findViewById(R.id.diary_recycler_view);
+        RecyclerView mDiaryRecyclerView = rootView.findViewById(R.id.diary_recycler_view);
         mDiaryRecyclerView.setHasFixedSize(true);
-        mLayoutManager = new LinearLayoutManager(getActivity());
+        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
 
         mAdapter = new DiaryEntryAdapter();
 
