@@ -10,12 +10,14 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.kucharzyk.diabetictoolboxjetpack.R;
+import com.kucharzyk.diabetictoolboxjetpack.room_database.Product;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class FoodProductAdapter extends RecyclerView.Adapter<FoodProductAdapter.ProductViewHolder> {
 
-    private ArrayList<FoodProduct> mFoodProduct;
+    private List<Product> mFoodProducts = new ArrayList<>();
     private OnItemClickListener mOnItemClickListener;
 
     public interface OnItemClickListener {
@@ -101,11 +103,6 @@ public class FoodProductAdapter extends RecyclerView.Adapter<FoodProductAdapter.
         }
     }
 
-    public FoodProductAdapter(ArrayList<FoodProduct> foodProduct) {
-        mFoodProduct = foodProduct;
-    }
-
-
     @NonNull
     @Override
     public ProductViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -116,7 +113,7 @@ public class FoodProductAdapter extends RecyclerView.Adapter<FoodProductAdapter.
 
     @Override
     public void onBindViewHolder(@NonNull ProductViewHolder holder, int position) {
-        FoodProduct currentMeal = mFoodProduct.get(position);
+        Product currentMeal = mFoodProducts.get(position);
         holder.mProductName.setText(currentMeal.getProductName());
         holder.mProductCarbsValue.setText(currentMeal.getCarbohydrates().toString());
         holder.mProductFatValue.setText(currentMeal.getFat().toString());
@@ -126,11 +123,16 @@ public class FoodProductAdapter extends RecyclerView.Adapter<FoodProductAdapter.
 
     @Override
     public int getItemCount() {
-        return mFoodProduct.size();
+        return mFoodProducts.size();
     }
 
-    public void filterList(ArrayList<FoodProduct> filteredList) {
-        mFoodProduct = filteredList;
+    public void setProducts(List<Product> mFoodProducts){
+        this.mFoodProducts = mFoodProducts;
+        notifyDataSetChanged();
+    }
+
+    public void filterList(ArrayList<Product> filteredList) {
+        mFoodProducts = filteredList;
         notifyDataSetChanged();
     }
 }

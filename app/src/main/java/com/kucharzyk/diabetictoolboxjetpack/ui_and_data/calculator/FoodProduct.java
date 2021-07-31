@@ -1,6 +1,8 @@
 package com.kucharzyk.diabetictoolboxjetpack.ui_and_data.calculator;
 
-public class FoodProduct {
+import com.kucharzyk.diabetictoolboxjetpack.room_database.Product;
+
+public class FoodProduct extends Product {
     private String mProductName;
     private Double mCarbohydrates;
     private Double mFat;
@@ -8,6 +10,7 @@ public class FoodProduct {
     private Double mWeight = 100.0;
 
     public FoodProduct(String productName, Double carbohydrates, Double fat, Double proteins){
+        super(productName, carbohydrates, fat, proteins);
         mProductName = productName;
         mCarbohydrates = carbohydrates;
         mFat = fat;

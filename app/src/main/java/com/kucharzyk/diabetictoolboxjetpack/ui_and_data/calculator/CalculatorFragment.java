@@ -8,6 +8,7 @@ import androidx.cardview.widget.CardView;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 
+import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -28,14 +29,15 @@ import com.kucharzyk.diabetictoolboxjetpack.room_database.Product;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.List;
 
 public class CalculatorFragment extends Fragment {
 
-    private static DecimalFormat REAL_FORMATTER = new DecimalFormat("0.##");
+    private static final DecimalFormat REAL_FORMATTER = new DecimalFormat("0.##");
 
     private CalculatorViewModel calculatorViewModel;
     private FoodProductAdapter mAdapter;
-    private ArrayList<FoodProduct> mFoodProductList;
+    //private ArrayList<FoodProduct> mFoodProductList;
     private ArrayList<FoodProduct> mMeal;
 
     private TextView mMealCarbsValue;
@@ -47,7 +49,7 @@ public class CalculatorFragment extends Fragment {
         calculatorViewModel = new ViewModelProvider(this).get(CalculatorViewModel.class);
         View root = inflater.inflate(R.layout.fragment_calculator, container, false);
 
-        createExampleMealList();
+//        createExampleMealList();
         buildRecyclerView(root);
 
         AutoCompleteTextView mMealTextView = root.findViewById(R.id.MealAutoCompleteTextView);
@@ -73,7 +75,7 @@ public class CalculatorFragment extends Fragment {
 
             @Override
             public void afterTextChanged(Editable s) {
-                filter(s.toString());
+//                filter(s.toString());
             }
         });
 
@@ -103,6 +105,13 @@ public class CalculatorFragment extends Fragment {
             }
         };
 
+        final Observer<List<Product>> allProductsObserver = new Observer<List<Product>>() {
+            @Override
+            public void onChanged(List<Product> products) {
+                mAdapter.setProducts(products);
+            }
+        };
+
         mMealSummaryConstraintLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -122,14 +131,15 @@ public class CalculatorFragment extends Fragment {
         });
 
         calculatorViewModel.getMealSummary().observe(getViewLifecycleOwner(), mealSummaryObserver);
+        calculatorViewModel.getAllProducts().observe(getViewLifecycleOwner(), allProductsObserver);
         return root;
     }
 
 
-    private void filter(String mealText) {
-        ArrayList<FoodProduct> filteredList = new ArrayList<>();
+/*    private void filter(String mealText) {
+        ArrayList<Product> filteredList = new ArrayList<>();
 
-        for (FoodProduct meal : mFoodProductList) {
+        for (Product meal : mFoodProductList) {
             if (meal.getProductName().toLowerCase().contains(mealText.toLowerCase())) {
                 filteredList.add(meal);
             }
@@ -140,10 +150,10 @@ public class CalculatorFragment extends Fragment {
     public void changeItem(int position, String mealName) {
         mFoodProductList.get(position).addMeal(mealName);
         mAdapter.notifyItemChanged(position);
-    }
+    }*/
 
 
-    private void createExampleMealList() {
+/*    private void createExampleMealList() {
         mFoodProductList = new ArrayList<>();
         mFoodProductList.add(new FoodProduct("banana", 20.24, 0.33, 1.09));
         mFoodProductList.add(new FoodProduct("apple", 10.1, 0.4, 0.4));
@@ -154,7 +164,7 @@ public class CalculatorFragment extends Fragment {
         mFoodProductList.add(new FoodProduct("sandwich", 23.0, 11.0, 14.0));
         mFoodProductList.add(new FoodProduct("fish", 0.0, 12.0, 22.0));
         mFoodProductList.add(new FoodProduct("chicken wings", 8.9, 21.8, 19.6));
-    }
+    }*/
 
 
     private void buildRecyclerView(View rootView) {
@@ -162,12 +172,12 @@ public class CalculatorFragment extends Fragment {
         mRecyclerView.setHasFixedSize(true);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
 
-        mAdapter = new FoodProductAdapter(mFoodProductList);
+        mAdapter = new FoodProductAdapter();
 
         mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.setAdapter(mAdapter);
 
-        mAdapter.setOnItemClickListener(new FoodProductAdapter.OnItemClickListener() {
+/*        mAdapter.setOnItemClickListener(new FoodProductAdapter.OnItemClickListener() {
             @Override
             public void onAddProductClick(int position) {
                 mMeal.add(mFoodProductList.get(position));
@@ -185,7 +195,7 @@ public class CalculatorFragment extends Fragment {
             public void onItemClick(int position) {
                 changeItem(position, "Selected");
             }
-        });
+        });*/
     }
 
 }

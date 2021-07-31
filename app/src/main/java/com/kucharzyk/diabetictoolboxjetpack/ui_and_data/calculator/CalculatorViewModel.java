@@ -16,21 +16,27 @@ import com.kucharzyk.diabetictoolboxjetpack.ui_and_data.ProductRepository;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class CalculatorViewModel extends AndroidViewModel {
     private MutableLiveData<ArrayList<FoodProduct>> mMealSummary;
+    private final LiveData<List<Product>> mAllProducts;
     private final ProductRepository mProductRepository;
 
     public CalculatorViewModel(@NonNull @NotNull Application application) {
         super(application);
 
         mProductRepository = new ProductRepository(application);
+        mAllProducts = mProductRepository.getAllProducts();
     }
 
     public void insert(Product product){
         mProductRepository.insert(product);
     }
     public void update(Product product) { mProductRepository.update(product); }
+    public LiveData<List<Product>> getAllProducts() {
+        return mAllProducts;
+    }
 
     public MutableLiveData<ArrayList<FoodProduct>> getMealSummary(){
         if (mMealSummary == null) {
@@ -38,5 +44,7 @@ public class CalculatorViewModel extends AndroidViewModel {
         }
         return mMealSummary;
     }
+
+
 
 }
