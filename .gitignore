@@ -1,5 +1,4 @@
 *.iml
-.gradle
 .gradle/*
 /local.properties
 /.idea/*
@@ -10,4 +9,3 @@
 .cxx
 local.properties
 gradlew*
-*.gradle
