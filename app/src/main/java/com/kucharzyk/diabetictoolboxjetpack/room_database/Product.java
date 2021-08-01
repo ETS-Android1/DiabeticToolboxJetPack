@@ -22,6 +22,10 @@ public class Product {
         this.mProteins = proteins;
     }
 
+    public void addMeal(String mealName){
+        mProductName = mealName;
+    }
+
     public void setPid(int mPid) { this.mPid = mPid; }
 
 

@@ -38,7 +38,7 @@ public class CalculatorFragment extends Fragment {
     private CalculatorViewModel calculatorViewModel;
     private FoodProductAdapter mAdapter;
     //private ArrayList<FoodProduct> mFoodProductList;
-    private ArrayList<FoodProduct> mMeal;
+    private ArrayList<Product> mMeal;
 
     private TextView mMealCarbsValue;
     private TextView mMealFatValue;
@@ -49,7 +49,6 @@ public class CalculatorFragment extends Fragment {
         calculatorViewModel = new ViewModelProvider(this).get(CalculatorViewModel.class);
         View root = inflater.inflate(R.layout.fragment_calculator, container, false);
 
-//        createExampleMealList();
         buildRecyclerView(root);
 
         AutoCompleteTextView mMealTextView = root.findViewById(R.id.MealAutoCompleteTextView);
@@ -79,9 +78,9 @@ public class CalculatorFragment extends Fragment {
             }
         });
 
-        final Observer<ArrayList<FoodProduct>> mealSummaryObserver = new Observer<ArrayList<FoodProduct>>() {
+        final Observer<ArrayList<Product>> mealSummaryObserver = new Observer<ArrayList<Product>>() {
             @Override
-            public void onChanged(ArrayList<FoodProduct> foodProducts) {
+            public void onChanged(ArrayList<Product> foodProducts) {
 
                 Double sumMealCarbsValue = 0.0;
                 Double sumMealFatValue = 0.0;
@@ -92,7 +91,7 @@ public class CalculatorFragment extends Fragment {
                     mMealFatValue.setText(sumMealFatValue.toString());
                     mMealProteinValue.setText(sumMealProteinsValue.toString());
                 } else {
-                    for (FoodProduct product : foodProducts) {
+                    for (Product product : foodProducts) {
                         sumMealCarbsValue = sumMealCarbsValue + product.getCarbohydrates();
                         sumMealFatValue = sumMealFatValue + product.getFat();
                         sumMealProteinsValue = sumMealProteinsValue + product.getProteins();
@@ -145,26 +144,12 @@ public class CalculatorFragment extends Fragment {
             }
         }
         mAdapter.filterList(filteredList);
-    }
+    }*/
 
     public void changeItem(int position, String mealName) {
-        mFoodProductList.get(position).addMeal(mealName);
+        mAdapter.mFoodProducts.get(position).addMeal(mealName);
         mAdapter.notifyItemChanged(position);
-    }*/
-
-
-/*    private void createExampleMealList() {
-        mFoodProductList = new ArrayList<>();
-        mFoodProductList.add(new FoodProduct("banana", 20.24, 0.33, 1.09));
-        mFoodProductList.add(new FoodProduct("apple", 10.1, 0.4, 0.4));
-        mFoodProductList.add(new FoodProduct("pear", 12.3, 0.2, 0.6));
-        mFoodProductList.add(new FoodProduct("cornflakes", 82.6, 7.4, 1.4));
-        mFoodProductList.add(new FoodProduct("beer", 3.8, 0.0, 0.5));
-        mFoodProductList.add(new FoodProduct("orange juice", 10.0, 0.2, 0.7));
-        mFoodProductList.add(new FoodProduct("sandwich", 23.0, 11.0, 14.0));
-        mFoodProductList.add(new FoodProduct("fish", 0.0, 12.0, 22.0));
-        mFoodProductList.add(new FoodProduct("chicken wings", 8.9, 21.8, 19.6));
-    }*/
+    }
 
 
     private void buildRecyclerView(View rootView) {
@@ -177,17 +162,16 @@ public class CalculatorFragment extends Fragment {
         mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.setAdapter(mAdapter);
 
-/*        mAdapter.setOnItemClickListener(new FoodProductAdapter.OnItemClickListener() {
+        mAdapter.setOnItemClickListener(new FoodProductAdapter.OnItemClickListener() {
             @Override
             public void onAddProductClick(int position) {
-                mMeal.add(mFoodProductList.get(position));
+                mMeal.add(mAdapter.mFoodProducts.get(position));
                 calculatorViewModel.getMealSummary().setValue(mMeal);
-                //mAdapter.notifyItemChanged(position);
             }
 
             @Override
             public void onDeleteProductClick(int position) {
-                mMeal.remove(mFoodProductList.get(position));
+                mMeal.remove(mAdapter.mFoodProducts.get(position));
                 calculatorViewModel.getMealSummary().setValue(mMeal);
             }
 
@@ -195,7 +179,7 @@ public class CalculatorFragment extends Fragment {
             public void onItemClick(int position) {
                 changeItem(position, "Selected");
             }
-        });*/
+        });
     }
 
 }

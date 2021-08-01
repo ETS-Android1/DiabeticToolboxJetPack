@@ -17,7 +17,7 @@ import java.util.List;
 
 public class FoodProductAdapter extends RecyclerView.Adapter<FoodProductAdapter.ProductViewHolder> {
 
-    private List<Product> mFoodProducts = new ArrayList<>();
+    public List<Product> mFoodProducts = new ArrayList<>();
     private OnItemClickListener mOnItemClickListener;
 
     public interface OnItemClickListener {
@@ -35,7 +35,7 @@ public class FoodProductAdapter extends RecyclerView.Adapter<FoodProductAdapter.
     public static class ProductViewHolder extends RecyclerView.ViewHolder {
 
         public TextView mProductName;
-        public TextView mProductBrand;
+        public TextView mProductProducer;
         public TextView mProductQuantity;
 
         public TextView mProductCarbsValue;
@@ -51,8 +51,8 @@ public class FoodProductAdapter extends RecyclerView.Adapter<FoodProductAdapter.
 
         public ProductViewHolder(@NonNull View itemView, OnItemClickListener listener) {
             super(itemView);
-            mProductName = itemView.findViewById(R.id.text_meal_name);
-            mProductBrand = itemView.findViewById(R.id.text_product_brand);
+            mProductName = itemView.findViewById(R.id.text_product_name);
+            mProductProducer = itemView.findViewById(R.id.text_producer_name);
             mProductQuantity = itemView.findViewById(R.id.text_product_quantity);
 
             mProductCarbsValue = itemView.findViewById(R.id.text_product_carbs_value);
@@ -115,11 +115,8 @@ public class FoodProductAdapter extends RecyclerView.Adapter<FoodProductAdapter.
     public void onBindViewHolder(@NonNull ProductViewHolder holder, int position) {
         Product currentMeal = mFoodProducts.get(position);
         holder.mProductName.setText(currentMeal.getProductName());
-        holder.mProductCarbsValue.setText(currentMeal.getCarbohydrates().toString());
-        holder.mProductFatValue.setText(currentMeal.getFat().toString());
-        holder.mProductProteinsValue.setText(currentMeal.getProteins().toString());
-    }
 
+    }
 
     @Override
     public int getItemCount() {
