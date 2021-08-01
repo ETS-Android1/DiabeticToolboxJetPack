@@ -19,7 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CalculatorViewModel extends AndroidViewModel {
-    private MutableLiveData<ArrayList<Product>> mMealSummary;
+    private MutableLiveData<List<Product>> mMealSummary;
     private final LiveData<List<Product>> mAllProducts;
     private final ProductRepository mProductRepository;
 
@@ -38,7 +38,7 @@ public class CalculatorViewModel extends AndroidViewModel {
         return mAllProducts;
     }
 
-    public MutableLiveData<ArrayList<Product>> getMealSummary(){
+    public MutableLiveData<List<Product>> getMealSummary(){
         if (mMealSummary == null) {
             mMealSummary = new MutableLiveData<>();
         }

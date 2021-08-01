@@ -9,6 +9,7 @@ import com.kucharzyk.diabetictoolboxjetpack.room_database.AppDatabase;
 import com.kucharzyk.diabetictoolboxjetpack.room_database.Product;
 import com.kucharzyk.diabetictoolboxjetpack.room_database.ProductDao;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ProductRepository {

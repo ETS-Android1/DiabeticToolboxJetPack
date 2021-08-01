@@ -37,7 +37,6 @@ public class CalculatorFragment extends Fragment {
 
     private CalculatorViewModel calculatorViewModel;
     private FoodProductAdapter mAdapter;
-    //private ArrayList<FoodProduct> mFoodProductList;
     private ArrayList<Product> mMeal;
 
     private TextView mMealCarbsValue;
@@ -59,7 +58,6 @@ public class CalculatorFragment extends Fragment {
         CardView mMealSummaryCardView = root.findViewById(R.id.view_meal_summary_card_view);
         ConstraintLayout mMealSummaryConstraintLayout = root.findViewById(R.id.layout_meal_summary_constraint_layout);
         mMeal = new ArrayList<>();
-        Product product2 = new Product("TestProduct3.0", 12.0, 77.0, 4.0);
 
         mMealTextView.addTextChangedListener(new TextWatcher() {
             @Override
@@ -74,13 +72,13 @@ public class CalculatorFragment extends Fragment {
 
             @Override
             public void afterTextChanged(Editable s) {
-//                filter(s.toString());
+                filter(s.toString());
             }
         });
 
-        final Observer<ArrayList<Product>> mealSummaryObserver = new Observer<ArrayList<Product>>() {
+        final Observer<List<Product>> mealSummaryObserver = new Observer<List<Product>>() {
             @Override
-            public void onChanged(ArrayList<Product> foodProducts) {
+            public void onChanged(List<Product> foodProducts) {
 
                 Double sumMealCarbsValue = 0.0;
                 Double sumMealFatValue = 0.0;
@@ -122,29 +120,22 @@ public class CalculatorFragment extends Fragment {
             }
         });
 
-        mButtonConsumeMeal.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                calculatorViewModel.insert(product2);
-            }
-        });
-
         calculatorViewModel.getMealSummary().observe(getViewLifecycleOwner(), mealSummaryObserver);
         calculatorViewModel.getAllProducts().observe(getViewLifecycleOwner(), allProductsObserver);
         return root;
     }
 
 
-/*    private void filter(String mealText) {
-        ArrayList<Product> filteredList = new ArrayList<>();
+    private void filter(String productText) {
+        List<Product> filteredList = new ArrayList<>();
 
-        for (Product meal : mFoodProductList) {
-            if (meal.getProductName().toLowerCase().contains(mealText.toLowerCase())) {
-                filteredList.add(meal);
+        for (Product product : mAdapter.mFoodProductsFull) {
+            if (product.getProductName().toLowerCase().contains(productText.toLowerCase())) {
+                filteredList.add(product);
             }
         }
         mAdapter.filterList(filteredList);
-    }*/
+    }
 
     public void changeItem(int position, String mealName) {
         mAdapter.mFoodProducts.get(position).addMeal(mealName);
