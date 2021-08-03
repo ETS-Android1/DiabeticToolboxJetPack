@@ -66,7 +66,7 @@ public class FoodProductAdapter extends RecyclerView.Adapter<FoodProductAdapter.
             mDeleteProductImage = itemView.findViewById(R.id.image_delete_product);
             mEditProductImage = itemView.findViewById(R.id.image_edit_product);
 
-/*            itemView.setOnClickListener(new View.OnClickListener() {
+            itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     if (listener != null) {
@@ -76,7 +76,7 @@ public class FoodProductAdapter extends RecyclerView.Adapter<FoodProductAdapter.
                         }
                     }
                 }
-            });*/
+            });
 
             mAddProductImage.setOnClickListener(new View.OnClickListener() {
                 @Override

@@ -28,5 +28,6 @@
     <string name="delete_product_sign">Delete product sign</string>
     <string name="example_serving_size">Serving Size</string>
     <string name="serving_size_quantity">gram/ml</string>
+    <string name="save_button">Save button</string>
 
 </resources>

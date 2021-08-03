@@ -33,7 +33,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recyclerView2"
+                android:id="@+id/recycler_view_product"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_marginStart="8dp"
@@ -170,17 +170,6 @@
                 app:layout_constraintBaseline_toBaselineOf="@+id/text_meal_proteins_summary"
                 app:layout_constraintEnd_toStartOf="@+id/text_meal_carbs_summary" />
 
-            <com.google.android.material.floatingactionbutton.FloatingActionButton
-                android:id="@+id/calculator_button_consume_meal"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:clickable="true"
-                android:src="@android:drawable/ic_input_add"
-                android:onClick="onClickConsumeMeal"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/text_protein_fat_exchanger"
-                app:layout_constraintStart_toEndOf="@+id/text_meal_summary"
-                app:layout_constraintTop_toTopOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.cardview.widget.CardView>
