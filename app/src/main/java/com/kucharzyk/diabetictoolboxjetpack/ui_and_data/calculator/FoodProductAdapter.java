@@ -17,8 +17,8 @@ import java.util.List;
 
 public class FoodProductAdapter extends RecyclerView.Adapter<FoodProductAdapter.ProductViewHolder> {
 
-    public List<Product> mFoodProducts = new ArrayList<>();
-    public List<Product> mFoodProductsFull;
+    private List<Product> mFoodProducts = new ArrayList<>();
+    private List<Product> mFoodProductsFull;
     private OnItemClickListener mOnItemClickListener;
 
     public interface OnItemClickListener {
@@ -133,5 +133,15 @@ public class FoodProductAdapter extends RecyclerView.Adapter<FoodProductAdapter.
     public void filterList(List<Product> filteredList) {
         mFoodProducts = filteredList;
         notifyDataSetChanged();
+    }
+
+    public Product getProduct(int position) {return mFoodProducts.get(position); }
+    public List<Product> getProductsList() {
+        if (mFoodProductsFull != null){
+            return new ArrayList<>(mFoodProductsFull);
+        }
+        else {
+            return new ArrayList<>(mFoodProducts);
+        }
     }
 }

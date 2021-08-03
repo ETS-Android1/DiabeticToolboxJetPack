@@ -126,8 +126,6 @@ public class CalculatorFragment extends Fragment {
             }
         });
 
-
-
         calculatorViewModel.getMealSummary().observe(getViewLifecycleOwner(), mealSummaryObserver);
         calculatorViewModel.getAllProducts().observe(getViewLifecycleOwner(), allProductsObserver);
         return root;
@@ -137,7 +135,7 @@ public class CalculatorFragment extends Fragment {
     private void filter(String productText) {
         List<Product> filteredList = new ArrayList<>();
 
-        for (Product product : mAdapter.mFoodProductsFull) {
+        for (Product product : mAdapter.getProductsList()) {
             if (product.getProductName().toLowerCase().contains(productText.toLowerCase())) {
                 filteredList.add(product);
             }
@@ -164,19 +162,19 @@ public class CalculatorFragment extends Fragment {
         mAdapter.setOnItemClickListener(new FoodProductAdapter.OnItemClickListener() {
             @Override
             public void onAddProductClick(int position) {
-                mMeal.add(mAdapter.mFoodProducts.get(position));
+                mMeal.add(mAdapter.getProduct(position));
                 calculatorViewModel.getMealSummary().setValue(mMeal);
             }
 
             @Override
             public void onDeleteProductClick(int position) {
-                mMeal.remove(mAdapter.mFoodProducts.get(position));
+                mMeal.remove(mAdapter.getProduct(position));
                 calculatorViewModel.getMealSummary().setValue(mMeal);
             }
 
             @Override
             public void onItemClick(int position) {
-                String productName = mAdapter.mFoodProducts.get(position).getProductName();
+                String productName = mAdapter.getProduct(position).getProductName();
 
                 @NonNull NavDirections action = CalculatorFragmentDirections.
                         actionNavigationCalculatorToProductSummaryFragment(productName);
