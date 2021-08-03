@@ -14,21 +14,31 @@ import com.kucharzyk.diabetictoolboxjetpack.R;
 
 public class ProductSummaryFragment extends Fragment {
 
-    public TextView mProductName;
-    public String mNameTemp;
+    private TextView mProductName;
 
-    public ProductSummaryFragment(String mNameTemp) {
-        this.mNameTemp = mNameTemp;
-    }
+//    public TextView mProductName;
+//    public String mNameTemp;
+//    private ProductSummaryFragmentArgs
+
+//    public ProductSummaryFragment(String mNameTemp) {
+//        this.mNameTemp = mNameTemp;
+//    }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View child = inflater.inflate(R.layout.fragment_product_summary, container, false);
 
-        mProductName = child.findViewById(R.id.text_product_name);
-        mProductName.setText(mNameTemp);
+//        mProductName = child.findViewById(R.id.text_product_name);
+//        mProductName.setText(mNameTemp);
 
         return child;
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        mProductName = view.findViewById(R.id.text_product_name);
+        String productName = ProductSummaryFragmentArgs.fromBundle(getArguments()).getMProductName();
+        mProductName.setText(productName);
     }
 }

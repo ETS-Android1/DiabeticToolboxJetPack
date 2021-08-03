@@ -10,6 +10,10 @@ import androidx.fragment.app.Fragment;
 
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.NavController;
+import androidx.navigation.NavDirections;
+import androidx.navigation.fragment.NavHostFragment;
+import androidx.navigation.ui.NavigationUI;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -43,10 +47,13 @@ public class CalculatorFragment extends Fragment {
     private TextView mMealFatValue;
     private TextView mMealProteinValue;
 
+    private NavController navController;
+
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         calculatorViewModel = new ViewModelProvider(this).get(CalculatorViewModel.class);
         View root = inflater.inflate(R.layout.fragment_calculator, container, false);
+        navController = NavHostFragment.findNavController(this);
 
         buildRecyclerView(root);
 
@@ -169,12 +176,11 @@ public class CalculatorFragment extends Fragment {
 
             @Override
             public void onItemClick(int position) {
-                String nameTemp = mAdapter.mFoodProducts.get(position).getProductName();
-                ProductSummaryFragment productSummary = new ProductSummaryFragment(nameTemp);
-                requireActivity().getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.view_products_selection_card_view, productSummary, "TagProductSummary")
-                        .addToBackStack(null)
-                        .commit();
+                String productName = mAdapter.mFoodProducts.get(position).getProductName();
+
+                @NonNull NavDirections action = CalculatorFragmentDirections.
+                        actionNavigationCalculatorToProductSummaryFragment(productName);
+                navController.navigate(action);
             }
         });
     }
