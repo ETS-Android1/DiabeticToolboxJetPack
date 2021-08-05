@@ -29,5 +29,6 @@
     <string name="example_serving_size">Serving Size</string>
     <string name="serving_size_quantity">gram/ml</string>
     <string name="save_button">Save button</string>
+    <string name="product_serving_size">g/ml</string>
 
 </resources>

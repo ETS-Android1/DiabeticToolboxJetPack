@@ -58,19 +58,6 @@
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/text_product_name" />
 
-                <EditText
-                    android:id="@+id/edit_text_serving_size"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="4dp"
-                    android:ems="4"
-                    android:hint="@string/serving_size_quantity"
-                    android:inputType="numberDecimal"
-                    android:minHeight="48dp"
-                    android:textAlignment="textEnd"
-                    app:layout_constraintBaseline_toBaselineOf="@id/text_serving_size"
-                    app:layout_constraintEnd_toEndOf="parent" />
-
                 <TextView
                     android:id="@+id/text_producer_name"
                     android:layout_width="wrap_content"
@@ -80,6 +67,26 @@
                     android:textSize="18sp"
                     app:layout_constraintBaseline_toBaselineOf="@id/text_product_name"
                     app:layout_constraintEnd_toEndOf="parent" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/layout_productSummary_textInputLayout"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="80dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginEnd="4dp"
+                    android:layout_marginBottom="4dp"
+                    android:hint="@string/product_serving_size"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/text_producer_name">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/edit_text_input_serving_size"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="numberDecimal"/>
+                </com.google.android.material.textfield.TextInputLayout>
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </androidx.cardview.widget.CardView>

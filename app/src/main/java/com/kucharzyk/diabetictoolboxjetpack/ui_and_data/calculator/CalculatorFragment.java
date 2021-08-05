@@ -13,7 +13,6 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.NavDirections;
 import androidx.navigation.fragment.NavHostFragment;
-import androidx.navigation.ui.NavigationUI;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -26,18 +25,14 @@ import android.widget.AutoCompleteTextView;
 import android.widget.TextView;
 
 
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.kucharzyk.diabetictoolboxjetpack.R;
 import com.kucharzyk.diabetictoolboxjetpack.room_database.Product;
+import com.kucharzyk.diabetictoolboxjetpack.Globals;
 
-import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 public class CalculatorFragment extends Fragment {
-
-    private static final DecimalFormat REAL_FORMATTER = new DecimalFormat("0.##");
 
     private CalculatorViewModel calculatorViewModel;
     private FoodProductAdapter mAdapter;
@@ -91,18 +86,18 @@ public class CalculatorFragment extends Fragment {
                 Double sumMealProteinsValue = 0.0;
 
                 if (foodProducts == null) {
-                    mMealCarbsValue.setText(sumMealCarbsValue.toString());
-                    mMealFatValue.setText(sumMealFatValue.toString());
-                    mMealProteinValue.setText(sumMealProteinsValue.toString());
+                    mMealCarbsValue.setText(Globals.REAL_FORMATTER.format(sumMealCarbsValue));
+                    mMealFatValue.setText(Globals.REAL_FORMATTER.format(sumMealFatValue));
+                    mMealProteinValue.setText(Globals.REAL_FORMATTER.format(sumMealProteinsValue));
                 } else {
                     for (Product product : foodProducts) {
                         sumMealCarbsValue = sumMealCarbsValue + product.getCarbohydrates();
                         sumMealFatValue = sumMealFatValue + product.getFat();
                         sumMealProteinsValue = sumMealProteinsValue + product.getProteins();
                     }
-                    mMealCarbsValue.setText(REAL_FORMATTER.format(sumMealCarbsValue));
-                    mMealFatValue.setText(REAL_FORMATTER.format(sumMealFatValue));
-                    mMealProteinValue.setText(REAL_FORMATTER.format(sumMealProteinsValue));
+                    mMealCarbsValue.setText(Globals.REAL_FORMATTER.format(sumMealCarbsValue));
+                    mMealFatValue.setText(Globals.REAL_FORMATTER.format(sumMealFatValue));
+                    mMealProteinValue.setText(Globals.REAL_FORMATTER.format(sumMealProteinsValue));
                 }
 
             }
