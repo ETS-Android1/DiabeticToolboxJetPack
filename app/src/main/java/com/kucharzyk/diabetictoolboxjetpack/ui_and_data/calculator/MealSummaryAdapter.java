@@ -9,26 +9,29 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.kucharzyk.diabetictoolboxjetpack.Globals;
 import com.kucharzyk.diabetictoolboxjetpack.R;
+import com.kucharzyk.diabetictoolboxjetpack.room_database.Product;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class MealSummaryAdapter extends RecyclerView.Adapter<MealSummaryAdapter.MealSummaryViewHolder> {
 
-    private ArrayList<MealSummary> mMealSummary;
+    private final ArrayList<MealSummary> mMealSummary;
 
     public static class MealSummaryViewHolder extends RecyclerView.ViewHolder {
 
-        public TextView mProductName;
-        public TextView mProductBrand;
-        public TextView mProductQuantity;
-        public TextView mProductCarbsValue;
-        public TextView mProductFatValue;
-        public TextView mProductProteinsValue;
-        public TextView mProductCarbsExchangerValue;
-        public TextView mProductFatExchangerValue;
-        public ImageView mEditProductImage;
-        public ImageView mDeleteProductImage;
+        private TextView mProductName;
+        private TextView mProductBrand;
+        private TextView mProductQuantity;
+        private TextView mProductCarbsValue;
+        private TextView mProductFatValue;
+        private TextView mProductProteinsValue;
+        private TextView mProductCarbsExchangerValue;
+        private TextView mProductFatExchangerValue;
+        private ImageView mEditProductImage;
+        private ImageView mDeleteProductImage;
 
         public MealSummaryViewHolder(@NonNull View itemView) {
             super(itemView);

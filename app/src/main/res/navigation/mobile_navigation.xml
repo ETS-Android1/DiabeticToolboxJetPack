@@ -18,6 +18,9 @@
         <action
             android:id="@+id/action_navigation_calculator_to_productSummaryFragment"
             app:destination="@id/productSummaryFragment" />
+        <argument
+            android:name="ParcelizedProduct"
+            app:argType="com.kucharzyk.diabetictoolboxjetpack.room_database.Product" />
     </fragment>
     <fragment
         android:id="@+id/navigation_stats"
@@ -36,5 +39,8 @@
         <argument
             android:name="ParcelizedProduct"
             app:argType="com.kucharzyk.diabetictoolboxjetpack.room_database.Product" />
+        <action
+            android:id="@+id/action_productSummaryFragment_to_navigation_calculator"
+            app:destination="@id/navigation_calculator" />
     </fragment>
 </navigation>

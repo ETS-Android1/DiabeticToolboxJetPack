@@ -6,14 +6,17 @@ import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.NavController;
+import androidx.navigation.NavDirections;
+import androidx.navigation.fragment.NavHostFragment;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.textfield.TextInputEditText;
 import com.kucharzyk.diabetictoolboxjetpack.Globals;
 import com.kucharzyk.diabetictoolboxjetpack.R;
@@ -22,6 +25,9 @@ import com.kucharzyk.diabetictoolboxjetpack.room_database.Product;
 import java.util.Objects;
 
 public class ProductSummaryFragment extends Fragment {
+
+    private CalculatorViewModel calculatorViewModel;
+    private NavController navController;
 
     private Double productCarbohydrates;
     private Double productFat;
@@ -37,10 +43,12 @@ public class ProductSummaryFragment extends Fragment {
     TextView mProductCarbohydrateExchangerValue;
     TextView mProductProteinFatExchangerValue;
     TextInputEditText mProductServingSize;
+    FloatingActionButton mSaveProductButton;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        calculatorViewModel = new ViewModelProvider(this).get(CalculatorViewModel.class);
         View child = inflater.inflate(R.layout.fragment_product_summary, container, false);
         mProductName = child.findViewById(R.id.text_product_name);
         mProductCarbohydrates = child.findViewById(R.id.text_product_carbs_value);
@@ -49,6 +57,7 @@ public class ProductSummaryFragment extends Fragment {
         mProductCarbohydrateExchangerValue = child.findViewById(R.id.text_product_carbs_exchanger_value);
         mProductProteinFatExchangerValue = child.findViewById(R.id.text_product_fat_exchanger_value);
         mProductServingSize = child.findViewById(R.id.edit_text_input_serving_size);
+        mSaveProductButton = child.findViewById(R.id.button_save_product);
         return child;
     }
 
@@ -84,6 +93,14 @@ public class ProductSummaryFragment extends Fragment {
             }
         });
 
+        mSaveProductButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                calculatorViewModel.getMeal().add(new Product(productName, productCarbohydrates, productFat, productProteins));
+                calculatorViewModel.getMealSummary().setValue(calculatorViewModel.getMeal());
+            }
+        });
+
     }
 
     private void setProductAttributes(String productName, Double productCarbohydrates,
@@ -105,6 +122,12 @@ public class ProductSummaryFragment extends Fragment {
         productCarbohydrateExchangerValue = productCarbohydrates / 12;
         productProteinFatExchangerValue = (9 * productFat + 4 * productProteins) / 100;
     }
+
+/*
+    private Product saveCurrentProduct() {
+
+    }
+*/
 
 
 }

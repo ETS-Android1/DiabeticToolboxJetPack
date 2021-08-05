@@ -18,6 +18,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,22 +26,23 @@ import android.widget.AutoCompleteTextView;
 import android.widget.TextView;
 
 
+import com.kucharzyk.diabetictoolboxjetpack.Globals;
 import com.kucharzyk.diabetictoolboxjetpack.R;
 import com.kucharzyk.diabetictoolboxjetpack.room_database.Product;
-import com.kucharzyk.diabetictoolboxjetpack.Globals;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class CalculatorFragment extends Fragment {
-
-    private CalculatorViewModel calculatorViewModel;
-    private FoodProductAdapter mAdapter;
-    private ArrayList<Product> mMeal;
+    public static final String TAG = "CalculatorFragment";
 
     private TextView mMealCarbsValue;
     private TextView mMealFatValue;
     private TextView mMealProteinValue;
+
+    private CalculatorViewModel calculatorViewModel;
+    private FoodProductAdapter mFoodProductAdapter;
+    private ArrayList<Product> mMeal;
 
     private NavController navController;
 
@@ -52,10 +54,10 @@ public class CalculatorFragment extends Fragment {
 
         buildRecyclerView(root);
 
-        AutoCompleteTextView mMealTextView = root.findViewById(R.id.MealAutoCompleteTextView);
         mMealCarbsValue = root.findViewById(R.id.text_carbs_summary_value);
         mMealFatValue = root.findViewById(R.id.text_fat_summary_value);
         mMealProteinValue = root.findViewById(R.id.text_proteins_summary_value);
+        AutoCompleteTextView mMealTextView = root.findViewById(R.id.MealAutoCompleteTextView);
         CardView mMealSummaryCardView = root.findViewById(R.id.view_meal_summary_card_view);
         ConstraintLayout mMealSummaryConstraintLayout = root.findViewById(R.id.layout_meal_summary_constraint_layout);
         mMeal = new ArrayList<>();
@@ -80,33 +82,27 @@ public class CalculatorFragment extends Fragment {
         final Observer<List<Product>> mealSummaryObserver = new Observer<List<Product>>() {
             @Override
             public void onChanged(List<Product> foodProducts) {
-
                 Double sumMealCarbsValue = 0.0;
                 Double sumMealFatValue = 0.0;
                 Double sumMealProteinsValue = 0.0;
 
-                if (foodProducts == null) {
-                    mMealCarbsValue.setText(Globals.REAL_FORMATTER.format(sumMealCarbsValue));
-                    mMealFatValue.setText(Globals.REAL_FORMATTER.format(sumMealFatValue));
-                    mMealProteinValue.setText(Globals.REAL_FORMATTER.format(sumMealProteinsValue));
-                } else {
+                if (foodProducts != null) {
                     for (Product product : foodProducts) {
                         sumMealCarbsValue = sumMealCarbsValue + product.getCarbohydrates();
                         sumMealFatValue = sumMealFatValue + product.getFat();
                         sumMealProteinsValue = sumMealProteinsValue + product.getProteins();
                     }
-                    mMealCarbsValue.setText(Globals.REAL_FORMATTER.format(sumMealCarbsValue));
-                    mMealFatValue.setText(Globals.REAL_FORMATTER.format(sumMealFatValue));
-                    mMealProteinValue.setText(Globals.REAL_FORMATTER.format(sumMealProteinsValue));
                 }
-
+                mMealCarbsValue.setText(Globals.REAL_FORMATTER.format(sumMealCarbsValue));
+                mMealFatValue.setText(Globals.REAL_FORMATTER.format(sumMealFatValue));
+                mMealProteinValue.setText(Globals.REAL_FORMATTER.format(sumMealProteinsValue));
             }
         };
 
         final Observer<List<Product>> allProductsObserver = new Observer<List<Product>>() {
             @Override
             public void onChanged(List<Product> products) {
-                mAdapter.setProducts(products);
+                mFoodProductAdapter.setProducts(products);
             }
         };
 
@@ -130,12 +126,12 @@ public class CalculatorFragment extends Fragment {
     private void filter(String productText) {
         List<Product> filteredList = new ArrayList<>();
 
-        for (Product product : mAdapter.getProductsList()) {
+        for (Product product : mFoodProductAdapter.getProductsList()) {
             if (product.getProductName().toLowerCase().contains(productText.toLowerCase())) {
                 filteredList.add(product);
             }
         }
-        mAdapter.filterList(filteredList);
+        mFoodProductAdapter.filterList(filteredList);
     }
 
 /*    public void changeItem(int position, String mealName) {
@@ -149,31 +145,27 @@ public class CalculatorFragment extends Fragment {
         mRecyclerView.setHasFixedSize(true);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
 
-        mAdapter = new FoodProductAdapter();
+        mFoodProductAdapter = new FoodProductAdapter();
 
         mRecyclerView.setLayoutManager(mLayoutManager);
-        mRecyclerView.setAdapter(mAdapter);
+        mRecyclerView.setAdapter(mFoodProductAdapter);
 
-        mAdapter.setOnItemClickListener(new FoodProductAdapter.OnItemClickListener() {
+        mFoodProductAdapter.setOnItemClickListener(new FoodProductAdapter.OnItemClickListener() {
             @Override
             public void onAddProductClick(int position) {
-                mMeal.add(mAdapter.getProduct(position));
+                calculatorViewModel.getMeal().add(mFoodProductAdapter.getProduct(position));
                 calculatorViewModel.getMealSummary().setValue(mMeal);
             }
 
             @Override
             public void onDeleteProductClick(int position) {
-                mMeal.remove(mAdapter.getProduct(position));
+                calculatorViewModel.getMeal().remove(mFoodProductAdapter.getProduct(position));
                 calculatorViewModel.getMealSummary().setValue(mMeal);
             }
 
             @Override
             public void onItemClick(int position) {
-                Product product = mAdapter.getProduct(position);
-
-                Double carbohydrates = product.getCarbohydrates();
-                Double fat = product.getFat();
-                Double proteins = product.getProteins();
+                Product product = mFoodProductAdapter.getProduct(position);
 
                 @NonNull NavDirections action = CalculatorFragmentDirections.
                         actionNavigationCalculatorToProductSummaryFragment(product);
