@@ -116,7 +116,6 @@ public class FoodProductAdapter extends RecyclerView.Adapter<FoodProductAdapter.
     public void onBindViewHolder(@NonNull ProductViewHolder holder, int position) {
         Product currentMeal = mFoodProducts.get(position);
         holder.mProductName.setText(currentMeal.getProductName());
-
     }
 
     @Override
@@ -136,6 +135,7 @@ public class FoodProductAdapter extends RecyclerView.Adapter<FoodProductAdapter.
     }
 
     public Product getProduct(int position) {return mFoodProducts.get(position); }
+
     public List<Product> getProductsList() {
         if (mFoodProductsFull != null){
             return new ArrayList<>(mFoodProductsFull);

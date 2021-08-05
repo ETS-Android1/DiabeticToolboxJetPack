@@ -34,7 +34,7 @@
         android:name="com.kucharzyk.diabetictoolboxjetpack.ui_and_data.calculator.ProductSummaryFragment"
         android:label="ProductSummaryFragment" >
         <argument
-            android:name="mProductName"
-            app:argType="string" />
+            android:name="ParcelizedProduct"
+            app:argType="com.kucharzyk.diabetictoolboxjetpack.room_database.Product" />
     </fragment>
 </navigation>

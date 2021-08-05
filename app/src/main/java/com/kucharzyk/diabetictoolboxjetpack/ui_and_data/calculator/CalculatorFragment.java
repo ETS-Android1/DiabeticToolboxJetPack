@@ -174,10 +174,14 @@ public class CalculatorFragment extends Fragment {
 
             @Override
             public void onItemClick(int position) {
-                String productName = mAdapter.getProduct(position).getProductName();
+                Product product = mAdapter.getProduct(position);
+
+                Double carbohydrates = product.getCarbohydrates();
+                Double fat = product.getFat();
+                Double proteins = product.getProteins();
 
                 @NonNull NavDirections action = CalculatorFragmentDirections.
-                        actionNavigationCalculatorToProductSummaryFragment(productName);
+                        actionNavigationCalculatorToProductSummaryFragment(product);
                 navController.navigate(action);
             }
         });
