@@ -29,6 +29,7 @@ import android.widget.TextView;
 import com.kucharzyk.diabetictoolboxjetpack.Globals;
 import com.kucharzyk.diabetictoolboxjetpack.R;
 import com.kucharzyk.diabetictoolboxjetpack.room_database.Product;
+import com.kucharzyk.diabetictoolboxjetpack.ui_and_data.MainActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -48,7 +49,7 @@ public class CalculatorFragment extends Fragment {
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        calculatorViewModel = new ViewModelProvider(this).get(CalculatorViewModel.class);
+        calculatorViewModel = new ViewModelProvider(requireActivity()).get(CalculatorViewModel.class);
         View root = inflater.inflate(R.layout.fragment_calculator, container, false);
         navController = NavHostFragment.findNavController(this);
 
@@ -154,13 +155,13 @@ public class CalculatorFragment extends Fragment {
             @Override
             public void onAddProductClick(int position) {
                 calculatorViewModel.getMeal().add(mFoodProductAdapter.getProduct(position));
-                calculatorViewModel.getMealSummary().setValue(mMeal);
+                calculatorViewModel.getMealSummary().setValue(calculatorViewModel.getMeal());
             }
 
             @Override
             public void onDeleteProductClick(int position) {
                 calculatorViewModel.getMeal().remove(mFoodProductAdapter.getProduct(position));
-                calculatorViewModel.getMealSummary().setValue(mMeal);
+                calculatorViewModel.getMealSummary().setValue(calculatorViewModel.getMeal());
             }
 
             @Override

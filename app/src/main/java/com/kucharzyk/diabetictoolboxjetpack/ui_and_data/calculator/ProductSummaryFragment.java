@@ -48,8 +48,9 @@ public class ProductSummaryFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        calculatorViewModel = new ViewModelProvider(this).get(CalculatorViewModel.class);
+        calculatorViewModel = new ViewModelProvider(requireActivity()).get(CalculatorViewModel.class);
         View child = inflater.inflate(R.layout.fragment_product_summary, container, false);
+        navController = NavHostFragment.findNavController(this);
         mProductName = child.findViewById(R.id.text_product_name);
         mProductCarbohydrates = child.findViewById(R.id.text_product_carbs_value);
         mProductFat = child.findViewById(R.id.text_product_fat_value);
@@ -66,7 +67,7 @@ public class ProductSummaryFragment extends Fragment {
         Product currentProduct = ProductSummaryFragmentArgs.fromBundle(getArguments()).getParcelizedProduct();
 
         String productName = currentProduct.getProductName();
-        productServingSize = 1.00;
+        productServingSize = 100.0;
         getProductAttributes(currentProduct, productServingSize);
         setProductAttributes(productName, productCarbohydrates, productFat, productProteins,
                 productCarbohydrateExchangerValue, productProteinFatExchangerValue);
@@ -82,7 +83,7 @@ public class ProductSummaryFragment extends Fragment {
                 if (count > 0) {
                     productServingSize = Double.parseDouble(Objects.requireNonNull(mProductServingSize.getText()).toString());
                 }
-                else productServingSize = 1.00;
+                else productServingSize = 100.0;
                 getProductAttributes(currentProduct, productServingSize);
                 setProductAttributes(productName, productCarbohydrates, productFat, productProteins,
                         productCarbohydrateExchangerValue, productProteinFatExchangerValue);
@@ -98,6 +99,8 @@ public class ProductSummaryFragment extends Fragment {
             public void onClick(View v) {
                 calculatorViewModel.getMeal().add(new Product(productName, productCarbohydrates, productFat, productProteins));
                 calculatorViewModel.getMealSummary().setValue(calculatorViewModel.getMeal());
+                NavDirections action = ProductSummaryFragmentDirections.actionProductSummaryFragmentToNavigationCalculator();
+                navController.navigate(action);
             }
         });
 
@@ -116,9 +119,9 @@ public class ProductSummaryFragment extends Fragment {
     }
 
     private void getProductAttributes(Product currentProduct, Double productServingSize){
-        productCarbohydrates = productServingSize * currentProduct.getCarbohydrates();
-        productFat = productServingSize * currentProduct.getFat();
-        productProteins = productServingSize * currentProduct.getProteins();
+        productCarbohydrates = 0.01 * productServingSize * currentProduct.getCarbohydrates();
+        productFat = 0.01 * productServingSize * currentProduct.getFat();
+        productProteins = 0.01 * productServingSize * currentProduct.getProteins();
         productCarbohydrateExchangerValue = productCarbohydrates / 12;
         productProteinFatExchangerValue = (9 * productFat + 4 * productProteins) / 100;
     }

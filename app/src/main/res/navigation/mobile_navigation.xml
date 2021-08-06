@@ -18,9 +18,6 @@
         <action
             android:id="@+id/action_navigation_calculator_to_productSummaryFragment"
             app:destination="@id/productSummaryFragment" />
-        <argument
-            android:name="ParcelizedProduct"
-            app:argType="com.kucharzyk.diabetictoolboxjetpack.room_database.Product" />
     </fragment>
     <fragment
         android:id="@+id/navigation_stats"
