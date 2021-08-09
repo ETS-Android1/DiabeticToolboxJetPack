@@ -17,16 +17,15 @@ public class Product implements Parcelable {
     private Double mCarbohydrates;
     private Double mFat;
     private Double mProteins;
+    private Double mServingSize;
 
-    public Product(@NonNull String productName, Double carbohydrates, Double fat, Double proteins) {
+    public Product(@NonNull String productName, Double carbohydrates, Double fat, Double proteins,
+                   Double servingSize) {
         this.mProductName = productName;
         this.mCarbohydrates = carbohydrates;
         this.mFat = fat;
         this.mProteins = proteins;
-    }
-
-    public void addMeal(String mealName){
-        mProductName = mealName;
+        this.mServingSize = servingSize;
     }
 
     public void setPid(int mPid) { this.mPid = mPid; }
@@ -50,6 +49,10 @@ public class Product implements Parcelable {
         return mProteins;
     }
 
+    public Double getServingSize() {
+        return mServingSize;
+    }
+
     //************* Parcelable *****************//
 
     protected Product(Parcel in) {
@@ -69,6 +72,11 @@ public class Product implements Parcelable {
             mProteins = null;
         } else {
             mProteins = in.readDouble();
+        }
+        if (in.readByte() == 0) {
+            mServingSize = null;
+        } else {
+            mServingSize = in.readDouble();
         }
     }
 
@@ -110,6 +118,12 @@ public class Product implements Parcelable {
         } else {
             dest.writeByte((byte) 1);
             dest.writeDouble(mProteins);
+        }
+        if (mServingSize == null) {
+            dest.writeByte((byte) 0);
+        } else {
+            dest.writeByte((byte) 1);
+            dest.writeDouble(mServingSize);
         }
     }
 }

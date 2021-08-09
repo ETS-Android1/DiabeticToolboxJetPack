@@ -54,5 +54,23 @@ public class MealSummaryFragment extends Fragment {
 
         mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.setAdapter(mMealSummaryAdapter);
+
+        mMealSummaryAdapter.setOnItemClickListener(new MealSummaryAdapter.OnItemClickListener() {
+            @Override
+            public void onEditProductClick(int position) {
+                Product product = mMealSummaryAdapter.getProduct(position);
+
+                NavDirections action = MealSummaryFragmentDirections.
+                        actionMealSummaryToProductSummaryFragment(product, position);
+                navController.navigate(action);
+            }
+
+            @Override
+            public void onDeleteProductClick(int position) {
+                calculatorViewModel.getMeal().remove(mMealSummaryAdapter.getProduct(position));
+                calculatorViewModel.getMealSummary().setValue(calculatorViewModel.getMeal());
+                //TODO If numof(products) == 0 then go back to the CalculatorFragment
+            }
+        });
     }
 }

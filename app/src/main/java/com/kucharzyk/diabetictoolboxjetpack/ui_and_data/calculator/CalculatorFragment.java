@@ -162,7 +162,7 @@ public class CalculatorFragment extends Fragment {
                 Product product = mFoodProductAdapter.getProduct(position);
 
                 @NonNull NavDirections action = CalculatorFragmentDirections.
-                        actionNavigationCalculatorToProductSummaryFragment(product);
+                        actionNavigationCalculatorToProductSummaryFragment(product, position);
                 navController.navigate(action);
             }
         });

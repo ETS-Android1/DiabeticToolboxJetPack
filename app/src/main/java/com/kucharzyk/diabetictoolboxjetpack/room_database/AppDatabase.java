@@ -69,7 +69,7 @@ public abstract class AppDatabase extends RoomDatabase {
                 //User user = new User("Konrad");
                 //userDao.insert(user);
                 Log.d(TAG, "onCreate: before new product");
-                Product product = new Product("TestProduct", 10.0, 5.0, 2.0);
+                Product product = new Product("TestProduct", 10.0, 5.0, 2.0, 100.0);
                 productDao.insert(product);
                 Log.d(TAG, "onCreate: product inserted: " + product);
 

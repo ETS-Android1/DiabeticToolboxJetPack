@@ -28,6 +28,7 @@ public class ProductSummaryFragment extends Fragment {
 
     private CalculatorViewModel calculatorViewModel;
     private NavController navController;
+    private Double ratio;
 
     private Double productCarbohydrates;
     private Double productFat;
@@ -65,9 +66,11 @@ public class ProductSummaryFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         Product currentProduct = ProductSummaryFragmentArgs.fromBundle(getArguments()).getParcelizedProduct();
+        Integer currentProductPosition = ProductSummaryFragmentArgs.fromBundle(getArguments()).getPosition();
 
         String productName = currentProduct.getProductName();
-        productServingSize = 100.0;
+        productServingSize = currentProduct.getServingSize();
+        ratio = calculateRatio(productServingSize);
         getProductAttributes(currentProduct, productServingSize);
         setProductAttributes(productName, productCarbohydrates, productFat, productProteins,
                 productCarbohydrateExchangerValue, productProteinFatExchangerValue);
@@ -97,10 +100,17 @@ public class ProductSummaryFragment extends Fragment {
         mSaveProductButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                calculatorViewModel.getMeal().add(new Product(productName, productCarbohydrates, productFat, productProteins));
+                if (Globals.containsProduct(calculatorViewModel.getMeal(), currentProduct.getProductName())){
+                    calculatorViewModel.getMeal().
+                            set(currentProductPosition, new Product(productName, productCarbohydrates, productFat, productProteins, productServingSize));
+                }
+                else {
+                    calculatorViewModel.getMeal().
+                            add(new Product(productName, productCarbohydrates, productFat, productProteins, productServingSize));
+                }
                 calculatorViewModel.getMealSummary().setValue(calculatorViewModel.getMeal());
-                NavDirections action = ProductSummaryFragmentDirections.actionProductSummaryFragmentToNavigationCalculator();
-                navController.navigate(action);
+
+                navController.navigateUp();
             }
         });
 
@@ -119,11 +129,16 @@ public class ProductSummaryFragment extends Fragment {
     }
 
     private void getProductAttributes(Product currentProduct, Double productServingSize){
-        productCarbohydrates = 0.01 * productServingSize * currentProduct.getCarbohydrates();
-        productFat = 0.01 * productServingSize * currentProduct.getFat();
-        productProteins = 0.01 * productServingSize * currentProduct.getProteins();
-        productCarbohydrateExchangerValue = productCarbohydrates / 12;
-        productProteinFatExchangerValue = (9 * productFat + 4 * productProteins) / 100;
+
+            productCarbohydrates = ratio * productServingSize * currentProduct.getCarbohydrates();
+            productFat = ratio * productServingSize * currentProduct.getFat();
+            productProteins = ratio * productServingSize * currentProduct.getProteins();
+            productCarbohydrateExchangerValue = productCarbohydrates / 12;
+            productProteinFatExchangerValue = (9 * productFat + 4 * productProteins) / 100;
+    }
+
+    private Double calculateRatio(Double productServingSize) {
+        return (100.0 / productServingSize) * 0.01;
     }
 
 

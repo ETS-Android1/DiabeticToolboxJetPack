@@ -40,7 +40,7 @@ public class DiaryFragment extends Fragment {
 
         FloatingActionButton mAddProductButton = root.findViewById(R.id.diary_button_add_product);
         FloatingActionButton mSubProductButton = root.findViewById(R.id.diary_button_subtract_product);
-        product1 = new Product("TestProduct2.1", 41.0, 16.0, 13.0);
+        product1 = new Product("TestProduct2.1", 41.0, 16.0, 13.0, 100.0);
 
         final Observer<List<Product>> diaryEntriesObserver = new Observer<List<Product>>() {
             @Override

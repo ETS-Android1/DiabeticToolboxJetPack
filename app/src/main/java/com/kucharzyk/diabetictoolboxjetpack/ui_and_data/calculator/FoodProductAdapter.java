@@ -29,8 +29,8 @@ public class FoodProductAdapter extends RecyclerView.Adapter<FoodProductAdapter.
         void onDeleteProductClick(int position);
     }
 
-    public void setOnItemClickListener(OnItemClickListener listener) {
-        mOnItemClickListener = listener;
+    public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
+        mOnItemClickListener = onItemClickListener;
     }
 
     public static class ProductViewHolder extends RecyclerView.ViewHolder {
