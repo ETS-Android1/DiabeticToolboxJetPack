@@ -23,6 +23,7 @@ public class MainActivity extends AppCompatActivity {
     private UserViewModel userViewModel;
     public static final String TAG = "MainActivity";
     private ArrayList<DiaryEntry> mDiaryEntryList;
+    private NavController navController;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,29 +39,11 @@ public class MainActivity extends AppCompatActivity {
 
         NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment);
         if (navHostFragment != null) {
-            NavController navController = navHostFragment.getNavController();
+            navController = navHostFragment.getNavController();
+            setSupportActionBar(findViewById(R.id.toolbar));
             NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
             NavigationUI.setupWithNavController(navView, navController);
         }
-
-/*
-        RecyclerView recyclerView = findViewById(R.id.recyclerview);
-        final UserListAdapter adapter = new UserListAdapter(new UserListAdapter.UserDiff());
-        recyclerView.setAdapter(adapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-
-        userViewModel = new ViewModelProvider(this).get(UserViewModel.class);
-        userViewModel.getAllUsers().observe(this, users -> {
-            // Update the cached copy of the words in the adapter.
-            adapter.submitList(users);
-        });
-
-        FloatingActionButton fab = findViewById(R.id.floatingActionButton);
-        fab.setOnClickListener( view -> {
-            Intent intent = new Intent(MainActivity.this, NewUserActivity.class);
-            startActivityForResult(intent, NEW_USER_ACTIVITY_REQUEST_CODE);
-        });
-*/
 
         AppDatabase appDatabase = Room.databaseBuilder(getApplicationContext(),
                 AppDatabase.class, "app_database")
@@ -69,17 +52,8 @@ public class MainActivity extends AppCompatActivity {
 //        userDatabase.clearDatabase(userDatabase);
     }
 
-/*    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        if(requestCode == NEW_USER_ACTIVITY_REQUEST_CODE && resultCode == RESULT_OK) {
-            User user = new User(data.getStringExtra(NewUserActivity.EXTRA_REPLY));
-            userViewModel.insert(user);
-        } else {
-            Toast.makeText(getApplicationContext()
-            , R.string.empty_not_saved,
-                    Toast.LENGTH_LONG).show();
-        }
-    }*/
+    @Override
+    public boolean onSupportNavigateUp() {
+        return navController.navigateUp() || super.onSupportNavigateUp();
+    }
 }

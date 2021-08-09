@@ -35,7 +35,7 @@
     <fragment
         android:id="@+id/productSummaryFragment"
         android:name="com.kucharzyk.diabetictoolboxjetpack.ui_and_data.calculator.ProductSummaryFragment"
-        android:label="ProductSummaryFragment" >
+        android:label="Product Summary">
         <argument
             android:name="ParcelizedProduct"
             app:argType="com.kucharzyk.diabetictoolboxjetpack.room_database.Product" />
@@ -46,8 +46,8 @@
     <fragment
         android:id="@+id/mealSummary"
         android:name="com.kucharzyk.diabetictoolboxjetpack.ui_and_data.calculator.MealSummaryFragment"
-        android:label="fragment_meal_summary"
-        tools:layout="@layout/fragment_meal_summary" >
+        android:label="Meal Summary"
+        tools:layout="@layout/fragment_meal_summary">
         <action
             android:id="@+id/action_mealSummary_to_navigation_calculator"
             app:destination="@id/navigation_calculator" />

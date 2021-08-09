@@ -17,10 +17,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="4dp"
-            android:layout_marginBottom="16dp"
+            android:layout_marginEnd="137dp"
             android:text="Example Product"
-            android:textSize="18sp"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:textSize="24sp"
+            app:layout_constraintEnd_toStartOf="@+id/image_edit_product"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -38,7 +38,7 @@
             android:id="@+id/text_product_quantity"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="4dp"
+            android:layout_marginStart="6dp"
             android:text="Example Quantity"
             android:textSize="12sp"
             app:layout_constraintBaseline_toBaselineOf="@+id/text_product_brand"
@@ -75,99 +75,108 @@
             android:id="@+id/text_product_carbs"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="16dp"
             android:text="@string/macro_carbs"
             android:textSize="12sp"
-            app:layout_constraintBaseline_toBaselineOf="@+id/text_product_carbs_value"
-            app:layout_constraintEnd_toStartOf="@+id/text_product_carbs_value" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/text_product_brand" />
 
         <TextView
             android:id="@+id/text_product_fat"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="4dp"
             android:text="@string/macro_fat"
             android:textSize="12sp"
-            app:layout_constraintBaseline_toBaselineOf="@+id/text_product_fat_value"
-            app:layout_constraintEnd_toStartOf="@+id/text_product_fat_value" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/text_product_carbs" />
 
         <TextView
             android:id="@+id/text_product_proteins"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="4dp"
             android:text="@string/macro_proteins"
             android:textSize="12sp"
-            app:layout_constraintBaseline_toBaselineOf="@+id/text_product_proteins_value"
-            app:layout_constraintEnd_toStartOf="@+id/text_product_proteins_value" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/text_product_fat" />
 
         <TextView
             android:id="@+id/text_product_carbs_value"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_marginStart="6dp"
             android:text="@string/common_numeric_value_double"
             android:textSize="12sp"
-            app:layout_constraintStart_toStartOf="@+id/text_product_fat_value"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintBaseline_toBaselineOf="@+id/text_product_carbs"
+            app:layout_constraintStart_toEndOf="@+id/text_product_carbs" />
 
         <TextView
             android:id="@+id/text_product_fat_value"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_marginStart="68dp"
             android:text="@string/common_numeric_value_double"
             android:textSize="12sp"
-            app:layout_constraintStart_toStartOf="@+id/text_product_proteins_value"
-            app:layout_constraintTop_toBottomOf="@id/text_product_carbs_value" />
+            app:layout_constraintBaseline_toBaselineOf="@+id/text_product_fat"
+            app:layout_constraintStart_toEndOf="@+id/text_product_fat" />
 
         <TextView
             android:id="@+id/text_product_proteins_value"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_marginStart="40dp"
             android:text="@string/common_numeric_value_double"
             android:textSize="12sp"
-            app:layout_constraintStart_toStartOf="@+id/text_product_carbs_exchanger_value"
-            app:layout_constraintTop_toBottomOf="@+id/text_product_fat_value" />
+            app:layout_constraintBaseline_toBaselineOf="@+id/text_product_proteins"
+            app:layout_constraintStart_toEndOf="@+id/text_product_proteins" />
 
         <TextView
             android:id="@+id/text_product_carbs_exchanger"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="4dp"
             android:text="@string/macro_carbs_exchanger"
             android:textSize="12sp"
-            app:layout_constraintBaseline_toBaselineOf="@+id/text_product_carbs_exchanger_value"
-            app:layout_constraintEnd_toStartOf="@+id/text_product_carbs_exchanger_value" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/text_product_proteins" />
 
         <TextView
             android:id="@+id/text_product_fat_exchanger"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="4dp"
             android:text="@string/macro_fat_exchanger"
             android:textSize="12sp"
-            app:layout_constraintBaseline_toBaselineOf="@+id/text_product_fat_exchanger_value"
-            app:layout_constraintEnd_toStartOf="@+id/text_product_fat_exchanger_value" />
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/text_product_carbs_exchanger" />
 
         <TextView
             android:id="@+id/text_product_carbs_exchanger_value"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_marginStart="64dp"
             android:text="@string/common_numeric_value_double"
             android:textSize="12sp"
-            app:layout_constraintStart_toStartOf="@+id/text_product_fat_exchanger_value"
-            app:layout_constraintTop_toBottomOf="@+id/text_product_proteins_value" />
+            app:layout_constraintBaseline_toBaselineOf="@+id/text_product_carbs_exchanger"
+            app:layout_constraintStart_toEndOf="@+id/text_product_carbs_exchanger" />
 
         <TextView
             android:id="@+id/text_product_fat_exchanger_value"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginBottom="8dp"
+            android:layout_marginStart="60dp"
             android:text="@string/common_numeric_value_double"
             android:textSize="12sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/image_edit_product"
-            app:layout_constraintTop_toBottomOf="@+id/text_product_carbs_exchanger_value" />
+            app:layout_constraintBaseline_toBaselineOf="@+id/text_product_fat_exchanger"
+            app:layout_constraintStart_toEndOf="@+id/text_product_fat_exchanger" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>
