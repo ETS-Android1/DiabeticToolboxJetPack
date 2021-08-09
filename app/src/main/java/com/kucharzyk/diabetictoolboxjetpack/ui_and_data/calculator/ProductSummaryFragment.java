@@ -126,11 +126,5 @@ public class ProductSummaryFragment extends Fragment {
         productProteinFatExchangerValue = (9 * productFat + 4 * productProteins) / 100;
     }
 
-/*
-    private Product saveCurrentProduct() {
-
-    }
-*/
-
 
 }

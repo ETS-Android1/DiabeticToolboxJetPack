@@ -18,7 +18,7 @@ import java.util.List;
 
 public class MealSummaryAdapter extends RecyclerView.Adapter<MealSummaryAdapter.MealSummaryViewHolder> {
 
-    private final ArrayList<MealSummary> mMealSummary;
+    private List<Product> mMealSummary = new ArrayList<>();
 
     public static class MealSummaryViewHolder extends RecyclerView.ViewHolder {
 
@@ -48,10 +48,6 @@ public class MealSummaryAdapter extends RecyclerView.Adapter<MealSummaryAdapter.
         }
     }
 
-    public MealSummaryAdapter(ArrayList<MealSummary> mealSummary){
-        mMealSummary = mealSummary;
-    }
-
     @NonNull
     @Override
     public MealSummaryViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -62,16 +58,21 @@ public class MealSummaryAdapter extends RecyclerView.Adapter<MealSummaryAdapter.
 
     @Override
     public void onBindViewHolder(@NonNull MealSummaryViewHolder holder, int position) {
-   /*     MealSummary currentProduct = mMealSummary.get(position);
-        holder.mMealName.setText(currentProduct.getProductName());
-        holder.mCarbsValue.setText(currentProduct.getCarbohydrates().toString());
-        holder.mFatValue.setText(currentProduct.getFat().toString());
-        holder.mProteinsValue.setText(currentProduct.getProteins().toString());*/
+        Product currentProduct = mMealSummary.get(position);
+        holder.mProductName.setText(currentProduct.getProductName());
+        holder.mProductCarbsValue.setText(Globals.REAL_FORMATTER.format(currentProduct.getCarbohydrates()));
+        holder.mProductFatValue.setText(Globals.REAL_FORMATTER.format(currentProduct.getFat()));
+        holder.mProductProteinsValue.setText(Globals.REAL_FORMATTER.format(currentProduct.getProteins()));
     }
 
     @Override
     public int getItemCount() {
         return mMealSummary.size();
+    }
+
+    public void setProducts(List<Product> mealSummary) {
+        mMealSummary = mealSummary;
+        notifyDataSetChanged();
     }
 
 

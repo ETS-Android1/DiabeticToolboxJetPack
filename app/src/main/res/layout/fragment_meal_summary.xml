@@ -3,14 +3,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui_and_data.calculator.MealSummary"
-    android:background="@color/white">
+    android:background="@color/white"
+    tools:context=".ui_and_data.calculator.MealSummaryFragment">
 
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerViewMeal"
+        android:id="@+id/recyclerViewMealSummary"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:scrollbars="vertical"
-        android:layout_marginTop="50dp"/>
+        android:scrollbars="vertical" />
 </FrameLayout>

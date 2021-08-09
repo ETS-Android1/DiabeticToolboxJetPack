@@ -18,7 +18,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,7 +28,6 @@ import android.widget.TextView;
 import com.kucharzyk.diabetictoolboxjetpack.Globals;
 import com.kucharzyk.diabetictoolboxjetpack.R;
 import com.kucharzyk.diabetictoolboxjetpack.room_database.Product;
-import com.kucharzyk.diabetictoolboxjetpack.ui_and_data.MainActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,7 +41,6 @@ public class CalculatorFragment extends Fragment {
 
     private CalculatorViewModel calculatorViewModel;
     private FoodProductAdapter mFoodProductAdapter;
-    private ArrayList<Product> mMeal;
 
     private NavController navController;
 
@@ -61,7 +58,6 @@ public class CalculatorFragment extends Fragment {
         AutoCompleteTextView mMealTextView = root.findViewById(R.id.MealAutoCompleteTextView);
         CardView mMealSummaryCardView = root.findViewById(R.id.view_meal_summary_card_view);
         ConstraintLayout mMealSummaryConstraintLayout = root.findViewById(R.id.layout_meal_summary_constraint_layout);
-        mMeal = new ArrayList<>();
 
         mMealTextView.addTextChangedListener(new TextWatcher() {
             @Override
@@ -110,11 +106,8 @@ public class CalculatorFragment extends Fragment {
         mMealSummaryConstraintLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                MealSummary MealSummaryFragment = new MealSummary();
-                requireActivity().getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.view_products_selection_card_view, MealSummaryFragment, "findThisFragment")
-                        .addToBackStack(null)
-                        .commit();
+                NavDirections action = CalculatorFragmentDirections.actionNavigationCalculatorToMealSummary();
+                navController.navigate(action);
             }
         });
 
@@ -142,7 +135,7 @@ public class CalculatorFragment extends Fragment {
 
 
     private void buildRecyclerView(View rootView) {
-        RecyclerView mRecyclerView = rootView.findViewById(R.id.recycler_view_product);
+        RecyclerView mRecyclerView = rootView.findViewById(R.id.recyclerViewCalculatorFragment);
         mRecyclerView.setHasFixedSize(true);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
 
