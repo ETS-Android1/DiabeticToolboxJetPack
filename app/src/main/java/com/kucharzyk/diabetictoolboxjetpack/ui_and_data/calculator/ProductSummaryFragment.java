@@ -112,6 +112,7 @@ public class ProductSummaryFragment extends Fragment {
 
                 navController.navigateUp();
             }
+            //TODO While updating existing product it would be better to add current values to the existing ones instead of replacing ones
         });
 
     }

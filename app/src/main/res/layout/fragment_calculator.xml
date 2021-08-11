@@ -60,7 +60,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/guideline3">
+        app:layout_constraintTop_toBottomOf="@+id/guidelineCalculatorFragment">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/layout_meal_summary_constraint_layout"
@@ -175,7 +175,7 @@
     </androidx.cardview.widget.CardView>
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline3"
+        android:id="@+id/guidelineCalculatorFragment"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"

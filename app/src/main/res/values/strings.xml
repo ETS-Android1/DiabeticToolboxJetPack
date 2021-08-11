@@ -30,5 +30,7 @@
     <string name="serving_size_quantity">gram/ml</string>
     <string name="save_button">Save button</string>
     <string name="product_serving_size">g/ml</string>
+    <string name="save_meal_button">Save Meal</string>
+    <string name="delete_meal_button">Delete Meal</string>
 
 </resources>

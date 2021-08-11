@@ -3,6 +3,7 @@ package com.kucharzyk.diabetictoolboxjetpack.ui_and_data.calculator;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
@@ -16,6 +17,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.kucharzyk.diabetictoolboxjetpack.R;
 import com.kucharzyk.diabetictoolboxjetpack.room_database.Product;
 
@@ -27,6 +29,8 @@ public class MealSummaryFragment extends Fragment {
     private NavController navController;
     private MealSummaryAdapter mMealSummaryAdapter;
 
+    FloatingActionButton mSaveMealButton, mDeleteMealButton;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -34,6 +38,9 @@ public class MealSummaryFragment extends Fragment {
         View child = inflater.inflate(R.layout.fragment_meal_summary, container, false);
         navController = NavHostFragment.findNavController(this);
         buildRecyclerView(child);
+
+        mSaveMealButton = child.findViewById(R.id.button_save_meal);
+        mDeleteMealButton = child.findViewById(R.id.button_delete_meal);
 
         final Observer<List<Product>> mealSummaryObserver = new Observer<List<Product>>() {
             @Override
@@ -44,6 +51,19 @@ public class MealSummaryFragment extends Fragment {
 
         calculatorViewModel.getMealSummary().observe(getViewLifecycleOwner(), mealSummaryObserver);
         return child;
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+
+        mDeleteMealButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                calculatorViewModel.getMeal().clear();
+                NavDirections action = MealSummaryFragmentDirections.actionMealSummaryToNavigationCalculator();
+                navController.navigate(action);
+            }
+        });
     }
 
     private void buildRecyclerView(View rootView) {
