@@ -12,71 +12,71 @@ public class Product implements Parcelable {
 
     @PrimaryKey(autoGenerate = true)
     @NonNull
-    private int mPid;
-    private String mProductName;
-    private Double mCarbohydrates;
-    private Double mFat;
-    private Double mProteins;
-    private Double mServingSize;
+    private int pid;
+    private String productName;
+    private Double carbohydrates;
+    private Double fat;
+    private Double proteins;
+    private Double servingSize;
 
     public Product(@NonNull String productName, Double carbohydrates, Double fat, Double proteins,
                    Double servingSize) {
-        this.mProductName = productName;
-        this.mCarbohydrates = carbohydrates;
-        this.mFat = fat;
-        this.mProteins = proteins;
-        this.mServingSize = servingSize;
+        this.productName = productName;
+        this.carbohydrates = carbohydrates;
+        this.fat = fat;
+        this.proteins = proteins;
+        this.servingSize = servingSize;
     }
 
-    public void setPid(int mPid) { this.mPid = mPid; }
+    public void setPid(int mPid) { this.pid = mPid; }
 
 
-    public int getPid() { return mPid; }
+    public int getPid() { return pid; }
 
     public String getProductName() {
-        return mProductName;
+        return productName;
     }
 
     public Double getCarbohydrates() {
-        return mCarbohydrates;
+        return carbohydrates;
     }
 
     public Double getFat() {
-        return mFat;
+        return fat;
     }
 
     public Double getProteins() {
-        return mProteins;
+        return proteins;
     }
 
     public Double getServingSize() {
-        return mServingSize;
+        return servingSize;
     }
 
     //************* Parcelable *****************//
 
     protected Product(Parcel in) {
-        mPid = in.readInt();
-        mProductName = in.readString();
+        pid = in.readInt();
+        productName = in.readString();
         if (in.readByte() == 0) {
-            mCarbohydrates = null;
+            carbohydrates = null;
         } else {
-            mCarbohydrates = in.readDouble();
+            carbohydrates = in.readDouble();
         }
         if (in.readByte() == 0) {
-            mFat = null;
+            fat = null;
         } else {
-            mFat = in.readDouble();
+            fat = in.readDouble();
         }
         if (in.readByte() == 0) {
-            mProteins = null;
+            proteins = null;
         } else {
-            mProteins = in.readDouble();
+            proteins = in.readDouble();
         }
         if (in.readByte() == 0) {
-            mServingSize = null;
+            servingSize = null;
         } else {
-            mServingSize = in.readDouble();
+            servingSize = in.readDouble();
         }
     }
 
@@ -99,31 +99,31 @@ public class Product implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeInt(mPid);
-        dest.writeString(mProductName);
-        if (mCarbohydrates == null) {
+        dest.writeInt(pid);
+        dest.writeString(productName);
+        if (carbohydrates == null) {
             dest.writeByte((byte) 0);
         } else {
             dest.writeByte((byte) 1);
-            dest.writeDouble(mCarbohydrates);
+            dest.writeDouble(carbohydrates);
         }
-        if (mFat == null) {
+        if (fat == null) {
             dest.writeByte((byte) 0);
         } else {
             dest.writeByte((byte) 1);
-            dest.writeDouble(mFat);
+            dest.writeDouble(fat);
         }
-        if (mProteins == null) {
+        if (proteins == null) {
             dest.writeByte((byte) 0);
         } else {
             dest.writeByte((byte) 1);
-            dest.writeDouble(mProteins);
+            dest.writeDouble(proteins);
         }
-        if (mServingSize == null) {
+        if (servingSize == null) {
             dest.writeByte((byte) 0);
         } else {
             dest.writeByte((byte) 1);
-            dest.writeDouble(mServingSize);
+            dest.writeDouble(servingSize);
         }
     }
 }

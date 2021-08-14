@@ -12,11 +12,14 @@ import androidx.sqlite.db.SupportSQLiteDatabase;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-@Database(entities = {User.class, Product.class}, version = 1)
+@Database(entities = {User.class, Product.class, Meal.class, MealProductCrossRef.class}, version = 1)
 public abstract class AppDatabase extends RoomDatabase {
 
     public abstract UserDao userDao();
     public abstract ProductDao productDao();
+    public abstract MealDao mealDao();
+    public abstract MealProductCrossRefDao mealProductCrossRefDao();
+    public abstract MealWithProductsDao mealWithProductsDao();
 
     public static final String TAG = "AppDatabase";
     private static AppDatabase INSTANCE;
@@ -61,17 +64,24 @@ public abstract class AppDatabase extends RoomDatabase {
             databaseWriteExecutor.execute(() -> {
                 // Populate the database in the background.
                 // If you want to start with more words, just add them.
-                //UserDao userDao = INSTANCE.userDao();
+                UserDao userDao = INSTANCE.userDao();
                 ProductDao productDao = INSTANCE.productDao();
 
                 //userDao.deleteAll();
 
-                //User user = new User("Konrad");
-                //userDao.insert(user);
+                User user = new User("Konrad");
+                userDao.insert(user);
                 Log.d(TAG, "onCreate: before new product");
-                Product product = new Product("TestProduct", 10.0, 5.0, 2.0, 100.0);
-                productDao.insert(product);
-                Log.d(TAG, "onCreate: product inserted: " + product);
+                productDao.insert(new Product("Agrest", 11.8, 0.9, 1.2, 100.0));
+                productDao.insert(new Product("Banan", 17.0, 0.3, 0.9, 100.0));
+                productDao.insert(new Product("Chleb orkiszowy", 50.0, 1.2, 8.0, 100.0));
+                productDao.insert(new Product("Delicje", 71.5, 8.4, 3.5, 100.0));
+                productDao.insert(new Product("Fasola biała gotowana", 25.7, 0.7, 8.9, 100.0));
+                productDao.insert(new Product("Herbatniki", 76.8, 11.0, 8.2, 100.0));
+                productDao.insert(new Product("Jabłko", 12.1, 0.7, 0.6, 100.0));
+                productDao.insert(new Product("Kiełbasa biała", 3.0, 28.0, 14.3, 100.0));
+                productDao.insert(new Product("Leczo", 5.5, 4.4, 1.2, 100.0));
+                productDao.insert(new Product("Marchew surowa", 8.7, 0.2, 1.0, 100.0));
 
             });
         }
