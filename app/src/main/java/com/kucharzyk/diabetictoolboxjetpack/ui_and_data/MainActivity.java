@@ -3,6 +3,7 @@ package com.kucharzyk.diabetictoolboxjetpack.ui_and_data;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
+import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 import androidx.room.Room;
@@ -22,6 +23,7 @@ public class MainActivity extends AppCompatActivity {
     private UserViewModel userViewModel;
     public static final String TAG = "MainActivity";
     private ArrayList<DiaryEntry> mDiaryEntryList;
+    private NavController navController;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,47 +37,23 @@ public class MainActivity extends AppCompatActivity {
                 R.id.navigation_diary)
                 .build();
 
-        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
-        NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
-        NavigationUI.setupWithNavController(navView, navController);
-
-/*
-        RecyclerView recyclerView = findViewById(R.id.recyclerview);
-        final UserListAdapter adapter = new UserListAdapter(new UserListAdapter.UserDiff());
-        recyclerView.setAdapter(adapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-
-        userViewModel = new ViewModelProvider(this).get(UserViewModel.class);
-        userViewModel.getAllUsers().observe(this, users -> {
-            // Update the cached copy of the words in the adapter.
-            adapter.submitList(users);
-        });
-
-        FloatingActionButton fab = findViewById(R.id.floatingActionButton);
-        fab.setOnClickListener( view -> {
-            Intent intent = new Intent(MainActivity.this, NewUserActivity.class);
-            startActivityForResult(intent, NEW_USER_ACTIVITY_REQUEST_CODE);
-        });
-*/
+        NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment);
+        if (navHostFragment != null) {
+            navController = navHostFragment.getNavController();
+            setSupportActionBar(findViewById(R.id.toolbar));
+            NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
+            NavigationUI.setupWithNavController(navView, navController);
+        }
 
         AppDatabase appDatabase = Room.databaseBuilder(getApplicationContext(),
-                AppDatabase.class, "user_database")
+                AppDatabase.class, "app_database")
                 .build();
 
-        //userDatabase.clearDatabase(userDatabase);
+//        userDatabase.clearDatabase(userDatabase);
     }
 
-/*    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        if(requestCode == NEW_USER_ACTIVITY_REQUEST_CODE && resultCode == RESULT_OK) {
-            User user = new User(data.getStringExtra(NewUserActivity.EXTRA_REPLY));
-            userViewModel.insert(user);
-        } else {
-            Toast.makeText(getApplicationContext()
-            , R.string.empty_not_saved,
-                    Toast.LENGTH_LONG).show();
-        }
-    }*/
+    @Override
+    public boolean onSupportNavigateUp() {
+        return navController.navigateUp() || super.onSupportNavigateUp();
+    }
 }

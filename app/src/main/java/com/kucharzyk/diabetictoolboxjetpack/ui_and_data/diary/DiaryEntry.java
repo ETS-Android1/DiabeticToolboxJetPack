@@ -3,8 +3,9 @@ package com.kucharzyk.diabetictoolboxjetpack.ui_and_data.diary;
 import com.kucharzyk.diabetictoolboxjetpack.room_database.Product;
 
 public class DiaryEntry extends Product {
-    public DiaryEntry(String productName, Double carbohydrates, Double fat, Double proteins) {
-        super(productName, carbohydrates, fat, proteins);
+    public DiaryEntry(String productName, Double carbohydrates, Double fat, Double proteins,
+                      Double servingSize) {
+        super(productName, carbohydrates, fat, proteins, servingSize);
     }
 /*    private String mProductName;
     private Double mCarbohydrates;

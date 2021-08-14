@@ -3,9 +3,11 @@
     <string name="title_calculator">Calculator</string>
     <string name="title_stats">Stats</string>
     <string name="title_diary">Diary</string>
+    <string name="example_product">Example Product</string>
+    <string name="example_producer">Example Producer</string>
     <string name="app_name">Diabetic Toolbox Jetpack</string>
     <string name="add_user">Add User </string>
-    <string name="hint_user">User...</string>
+    <string name="hint_user">User…</string>
     <string name="button_save">Save</string>
     <string name="button_next">Next</string>
     <string name="home_tab">Home </string>
@@ -13,7 +15,7 @@
     <string name="stats_tab">Stats</string>
     <string name="diary_tab">Diary</string>
     <string name="empty_not_saved">User not saved because it is empty.</string>
-    <string name="search_product">Search product...</string>
+    <string name="search_product">Search product…</string>
     <string name="macro_carbs">Carbohydrates: </string>
     <string name="macro_fat">Fat: </string>
     <string name="macro_proteins">Proteins: </string>
@@ -22,5 +24,13 @@
     <string name="common_numeric_value_double">00.00 </string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="add_product_sign">Add product sign</string>
+    <string name="delete_product_sign">Delete product sign</string>
+    <string name="example_serving_size">Serving Size</string>
+    <string name="serving_size_quantity">gram/ml</string>
+    <string name="save_button">Save button</string>
+    <string name="product_serving_size">g/ml</string>
+    <string name="save_meal_button">Save Meal</string>
+    <string name="delete_meal_button">Delete Meal</string>
 
 </resources>

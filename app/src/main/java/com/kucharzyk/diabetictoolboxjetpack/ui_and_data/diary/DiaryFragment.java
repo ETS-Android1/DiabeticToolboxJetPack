@@ -13,16 +13,14 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.kucharzyk.diabetictoolboxjetpack.R;
-
-import java.util.ArrayList;
+import com.kucharzyk.diabetictoolboxjetpack.room_database.MealWithProducts;
 
 public class DiaryFragment extends Fragment {
+    public static final String TAG = "DiaryFragment";
 
     private DiaryEntryViewModel diaryEntryViewModel;
     private DiaryEntryAdapter mAdapter;
-    private RecyclerView mDiaryRecyclerView;
-    private RecyclerView.LayoutManager mLayoutManager;
-    private ArrayList<DiaryEntry> mDiaryEntryList;
+    private MealWithProducts mealWithProducts;
 
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -31,29 +29,32 @@ public class DiaryFragment extends Fragment {
                 new ViewModelProvider(this).get(DiaryEntryViewModel.class);
         View root = inflater.inflate(R.layout.fragment_diary, container, false);
 
-        createExampleDiaryEntryList();
         buildRecyclerView(root);
+
+/*        final Observer<List<Product>> diaryEntriesObserver = new Observer<List<Product>>() {
+            @Override
+            public void onChanged(List<Product> diaryEntries) {
+                mAdapter.setDiaryEntries(diaryEntries);
+            }
+        };
+
+        diaryEntryViewModel.getAllProducts().observe(getViewLifecycleOwner(), diaryEntriesObserver);*/
+        mealWithProducts = diaryEntryViewModel.getMealWithProducts();
+        mAdapter.setDiaryEntries(mealWithProducts.getProducts());
+
 
         return root;
     }
 
     private void buildRecyclerView(View rootView){
-        mDiaryRecyclerView = rootView.findViewById(R.id.diary_recycler_view);
+        RecyclerView mDiaryRecyclerView = rootView.findViewById(R.id.diary_recycler_view);
         mDiaryRecyclerView.setHasFixedSize(true);
-        mLayoutManager = new LinearLayoutManager(getActivity());
+        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
 
-        mAdapter = new DiaryEntryAdapter(mDiaryEntryList);
+        mAdapter = new DiaryEntryAdapter();
 
         mDiaryRecyclerView.setLayoutManager(mLayoutManager);
         mDiaryRecyclerView.setAdapter(mAdapter);
     }
 
-    private void createExampleDiaryEntryList(){
-        mDiaryEntryList = new ArrayList<>();
-        mDiaryEntryList.add(new DiaryEntry("banana", 20.24, 0.33, 1.09));;
-    }
-
-    public void addDiaryEntry(DiaryEntry newDiaryEntry){
-        mDiaryEntryList.add(newDiaryEntry);
-    }
 }

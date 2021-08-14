@@ -10,12 +10,15 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.kucharzyk.diabetictoolboxjetpack.R;
+import com.kucharzyk.diabetictoolboxjetpack.room_database.Product;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class FoodProductAdapter extends RecyclerView.Adapter<FoodProductAdapter.ProductViewHolder> {
 
-    private ArrayList<FoodProduct> mFoodProduct;
+    private List<Product> mFoodProducts = new ArrayList<>();
+    private List<Product> mFoodProductsFull;
     private OnItemClickListener mOnItemClickListener;
 
     public interface OnItemClickListener {
@@ -26,14 +29,14 @@ public class FoodProductAdapter extends RecyclerView.Adapter<FoodProductAdapter.
         void onDeleteProductClick(int position);
     }
 
-    public void setOnItemClickListener(OnItemClickListener listener) {
-        mOnItemClickListener = listener;
+    public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
+        mOnItemClickListener = onItemClickListener;
     }
 
     public static class ProductViewHolder extends RecyclerView.ViewHolder {
 
         public TextView mProductName;
-        public TextView mProductBrand;
+        public TextView mProductProducer;
         public TextView mProductQuantity;
 
         public TextView mProductCarbsValue;
@@ -49,8 +52,8 @@ public class FoodProductAdapter extends RecyclerView.Adapter<FoodProductAdapter.
 
         public ProductViewHolder(@NonNull View itemView, OnItemClickListener listener) {
             super(itemView);
-            mProductName = itemView.findViewById(R.id.text_meal_name);
-            mProductBrand = itemView.findViewById(R.id.text_product_brand);
+            mProductName = itemView.findViewById(R.id.text_product_name);
+            mProductProducer = itemView.findViewById(R.id.text_producer_name);
             mProductQuantity = itemView.findViewById(R.id.text_product_quantity);
 
             mProductCarbsValue = itemView.findViewById(R.id.text_product_carbs_value);
@@ -63,7 +66,7 @@ public class FoodProductAdapter extends RecyclerView.Adapter<FoodProductAdapter.
             mDeleteProductImage = itemView.findViewById(R.id.image_delete_product);
             mEditProductImage = itemView.findViewById(R.id.image_edit_product);
 
-/*            itemView.setOnClickListener(new View.OnClickListener() {
+            itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     if (listener != null) {
@@ -73,7 +76,7 @@ public class FoodProductAdapter extends RecyclerView.Adapter<FoodProductAdapter.
                         }
                     }
                 }
-            });*/
+            });
 
             mAddProductImage.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -101,11 +104,6 @@ public class FoodProductAdapter extends RecyclerView.Adapter<FoodProductAdapter.
         }
     }
 
-    public FoodProductAdapter(ArrayList<FoodProduct> foodProduct) {
-        mFoodProduct = foodProduct;
-    }
-
-
     @NonNull
     @Override
     public ProductViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -116,21 +114,34 @@ public class FoodProductAdapter extends RecyclerView.Adapter<FoodProductAdapter.
 
     @Override
     public void onBindViewHolder(@NonNull ProductViewHolder holder, int position) {
-        FoodProduct currentMeal = mFoodProduct.get(position);
+        Product currentMeal = mFoodProducts.get(position);
         holder.mProductName.setText(currentMeal.getProductName());
-        holder.mProductCarbsValue.setText(currentMeal.getCarbohydrates().toString());
-        holder.mProductFatValue.setText(currentMeal.getFat().toString());
-        holder.mProductProteinsValue.setText(currentMeal.getProteins().toString());
     }
-
 
     @Override
     public int getItemCount() {
-        return mFoodProduct.size();
+        return mFoodProducts.size();
     }
 
-    public void filterList(ArrayList<FoodProduct> filteredList) {
-        mFoodProduct = filteredList;
+    public void setProducts(List<Product> mFoodProducts){
+        this.mFoodProducts = mFoodProducts;
+        mFoodProductsFull = new ArrayList<>(mFoodProducts);
         notifyDataSetChanged();
+    }
+
+    public void filterList(List<Product> filteredList) {
+        mFoodProducts = filteredList;
+        notifyDataSetChanged();
+    }
+
+    public Product getProduct(int position) {return mFoodProducts.get(position); }
+
+    public List<Product> getProductsList() {
+        if (mFoodProductsFull != null){
+            return new ArrayList<>(mFoodProductsFull);
+        }
+        else {
+            return new ArrayList<>(mFoodProducts);
+        }
     }
 }

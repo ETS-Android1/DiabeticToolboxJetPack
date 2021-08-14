@@ -1,58 +1,129 @@
 package com.kucharzyk.diabetictoolboxjetpack.room_database;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
+import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
 @Entity(tableName = "product_table")
-public class Product {
+public class Product implements Parcelable {
 
     @PrimaryKey(autoGenerate = true)
-    private Integer mPid;
-    private String mProductName;
-    private Double mCarbohydrates;
-    private Double mFat;
-    private Double mProteins;
+    @NonNull
+    private int pid;
+    private String productName;
+    private Double carbohydrates;
+    private Double fat;
+    private Double proteins;
+    private Double servingSize;
 
-    public Product(String productName, Double carbohydrates, Double fat, Double proteins) {
-        this.mProductName = productName;
-        this.mCarbohydrates = carbohydrates;
-        this.mFat = fat;
-        this.mProteins = proteins;
+    public Product(@NonNull String productName, Double carbohydrates, Double fat, Double proteins,
+                   Double servingSize) {
+        this.productName = productName;
+        this.carbohydrates = carbohydrates;
+        this.fat = fat;
+        this.proteins = proteins;
+        this.servingSize = servingSize;
     }
 
-    public void setPid(Integer mPid) { this.mPid = mPid; }
+    public void setPid(int mPid) { this.pid = mPid; }
 
-    public void setProductName(String name) {
-        this.mProductName = name;
-    }
 
-    public void setCarbohydrates(Double carbohydrates) {
-        this.mCarbohydrates = carbohydrates;
-    }
-
-    public void setFat(Double fat) {
-        this.mFat = fat;
-    }
-
-    public void setProteins(Double proteins) {
-        this.mProteins = proteins;
-    }
-
-    public Integer getPid() { return mPid; }
+    public int getPid() { return pid; }
 
     public String getProductName() {
-        return mProductName;
+        return productName;
     }
 
     public Double getCarbohydrates() {
-        return mCarbohydrates;
+        return carbohydrates;
     }
 
     public Double getFat() {
-        return mFat;
+        return fat;
     }
 
     public Double getProteins() {
-        return mProteins;
+        return proteins;
+    }
+
+    public Double getServingSize() {
+        return servingSize;
+    }
+
+    //************* Parcelable *****************//
+
+    protected Product(Parcel in) {
+        pid = in.readInt();
+        productName = in.readString();
+        if (in.readByte() == 0) {
+            carbohydrates = null;
+        } else {
+            carbohydrates = in.readDouble();
+        }
+        if (in.readByte() == 0) {
+            fat = null;
+        } else {
+            fat = in.readDouble();
+        }
+        if (in.readByte() == 0) {
+            proteins = null;
+        } else {
+            proteins = in.readDouble();
+        }
+        if (in.readByte() == 0) {
+            servingSize = null;
+        } else {
+            servingSize = in.readDouble();
+        }
+    }
+
+    public static final Creator<Product> CREATOR = new Creator<Product>() {
+        @Override
+        public Product createFromParcel(Parcel in) {
+            return new Product(in);
+        }
+
+        @Override
+        public Product[] newArray(int size) {
+            return new Product[size];
+        }
+    };
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(pid);
+        dest.writeString(productName);
+        if (carbohydrates == null) {
+            dest.writeByte((byte) 0);
+        } else {
+            dest.writeByte((byte) 1);
+            dest.writeDouble(carbohydrates);
+        }
+        if (fat == null) {
+            dest.writeByte((byte) 0);
+        } else {
+            dest.writeByte((byte) 1);
+            dest.writeDouble(fat);
+        }
+        if (proteins == null) {
+            dest.writeByte((byte) 0);
+        } else {
+            dest.writeByte((byte) 1);
+            dest.writeDouble(proteins);
+        }
+        if (servingSize == null) {
+            dest.writeByte((byte) 0);
+        } else {
+            dest.writeByte((byte) 1);
+            dest.writeDouble(servingSize);
+        }
     }
 }
