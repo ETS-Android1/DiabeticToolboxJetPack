@@ -32,5 +32,18 @@
     <string name="product_serving_size">g/ml</string>
     <string name="save_meal_button">Save Meal</string>
     <string name="delete_meal_button">Delete Meal</string>
+    <string name="type_a_date">Type a date</string>
+    <string name="macro_calories">Calories:</string>
+    <string name="meal_image_view">Meal</string>
+    <string name="date">Date</string>
+    <string name="image_view_exercises">Exercises</string>
+    <string name="macro_calories_burned">Calories burned:</string>
+    <string name="macro_carbs_exchanger_used">WW used:</string>
+    <string name="image_view_glucose">Glucose measurements</string>
+    <string name="glucose_measurements_taken">Measurements taken:</string>
+    <string name="common_numeric_value_int">00</string>
+    <string name="glucose_measurements_hyperglycemia">Hyperglycemia:</string>
+    <string name="glucose_measurements_standard">Standard:</string>
+    <string name="glucose_measurements_hypoglycemia">Hypoglycemia:</string>
 
 </resources>

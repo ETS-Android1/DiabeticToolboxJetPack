@@ -1,0 +1,391 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/diaryEntryOverviewGuideline66"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.66" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/diaryEntryOverviewGuideline33"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.33" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/diaryEntryCardViewDate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@id/diaryEntryCardViewMeal"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/diaryEntryTextViewDate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/date"
+            android:textAlignment="center"
+            android:textSize="24sp"/>
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/diaryEntryCardViewMeal"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toStartOf="@+id/diaryEntryOverviewGuideline33"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/diaryEntryCardViewDate">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/diaryEntryImageViewMeal"
+                android:layout_width="0dp"
+                android:layout_height="128dp"
+                android:background="#3F51B5"
+                android:contentDescription="@string/meal_image_view"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_save_meal" />
+
+            <TextView
+                android:id="@+id/diaryEntryTextViewCarbs"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="4dp"
+                android:text="@string/macro_carbs"
+                android:textSize="11sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/diaryEntryImageViewMeal" />
+
+            <TextView
+                android:id="@+id/diaryEntryTextViewCarbsValue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="4dp"
+                android:text="@string/common_numeric_value_double"
+                android:textSize="11sp"
+                app:layout_constraintBaseline_toBaselineOf="@id/diaryEntryTextViewCarbs"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+            <TextView
+                android:id="@+id/diaryEntryTextViewFat"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="4dp"
+                android:text="@string/macro_fat"
+                android:textSize="11sp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/diaryEntryTextViewCarbs" />
+
+            <TextView
+                android:id="@+id/diaryEntryTextViewFatValue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="4dp"
+                android:text="@string/common_numeric_value_double"
+                android:textSize="11sp"
+                app:layout_constraintBaseline_toBaselineOf="@id/diaryEntryTextViewFat"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+            <TextView
+                android:id="@+id/diaryEntryTextViewProteins"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="4dp"
+                android:text="@string/macro_proteins"
+                android:textSize="11sp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/diaryEntryTextViewFat" />
+
+            <TextView
+                android:id="@+id/diaryEntryTextViewProteinsValue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="4dp"
+                android:text="@string/common_numeric_value_double"
+                android:textSize="11sp"
+                app:layout_constraintBaseline_toBaselineOf="@id/diaryEntryTextViewProteins"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+            <TextView
+                android:id="@+id/diaryEntryTextViewCalories"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="4dp"
+                android:text="@string/macro_calories"
+                android:textSize="11sp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/diaryEntryTextViewProteins" />
+
+            <TextView
+                android:id="@+id/diaryEntryTextViewCaloriesValue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="4dp"
+                android:text="@string/common_numeric_value_double"
+                android:textSize="11sp"
+                app:layout_constraintBaseline_toBaselineOf="@id/diaryEntryTextViewCalories"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+            <TextView
+                android:id="@+id/diaryEntryTextViewCarbsExchanger"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="4dp"
+                android:text="@string/macro_carbs_exchanger"
+                android:textSize="11sp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/diaryEntryTextViewCalories" />
+
+            <TextView
+                android:id="@+id/diaryEntryTextViewCarbsExchangerValue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="4dp"
+                android:text="@string/common_numeric_value_double"
+                android:textSize="11sp"
+                app:layout_constraintBaseline_toBaselineOf="@id/diaryEntryTextViewCarbsExchanger"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+            <TextView
+                android:id="@+id/diaryEntryTextViewFatExchanger"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="4dp"
+                android:text="@string/macro_fat_exchanger"
+                android:textSize="11sp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/diaryEntryTextViewCarbsExchanger" />
+
+            <TextView
+                android:id="@+id/diaryEntryTextViewFatExchangerValue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="4dp"
+                android:text="@string/common_numeric_value_double"
+                android:textSize="11sp"
+                app:layout_constraintBaseline_toBaselineOf="@id/diaryEntryTextViewFatExchanger"
+                app:layout_constraintEnd_toEndOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/diaryEntryCardViewExercises"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="@+id/diaryEntryCardViewMeal"
+        app:layout_constraintEnd_toStartOf="@id/diaryEntryOverviewGuideline66"
+        app:layout_constraintStart_toStartOf="@id/diaryEntryOverviewGuideline33"
+        app:layout_constraintTop_toBottomOf="@id/diaryEntryCardViewDate">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/diaryEntryImageViewExercise"
+                android:layout_width="0dp"
+                android:layout_height="128dp"
+                android:background="#3F51B5"
+                android:contentDescription="@string/image_view_exercises"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_exercises" />
+
+            <TextView
+                android:id="@+id/diaryEntryTextCaloriesBurned"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="4dp"
+                android:text="@string/macro_calories_burned"
+                android:textSize="11sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/diaryEntryImageViewExercise" />
+
+            <TextView
+                android:id="@+id/diaryEntryTextCaloriesBurnedValue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="4dp"
+                android:text="@string/common_numeric_value_double"
+                android:textSize="11sp"
+                app:layout_constraintBaseline_toBaselineOf="@id/diaryEntryTextCaloriesBurned"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+            <TextView
+                android:id="@+id/diaryEntryTextViewCarbsExchangerUsed"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="4dp"
+                android:text="@string/macro_carbs_exchanger_used"
+                android:textSize="11sp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/diaryEntryTextCaloriesBurned" />
+
+            <TextView
+                android:id="@+id/diaryEntryTextViewCarbsExchangerUsedValue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="4dp"
+                android:text="@string/common_numeric_value_double"
+                android:textSize="11sp"
+                app:layout_constraintBaseline_toBaselineOf="@id/diaryEntryTextViewCarbsExchangerUsed"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+            <TextView
+                android:id="@+id/diaryEntryTextViewFatExchangerUsed"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="4dp"
+                android:text="@string/macro_proteins"
+                android:textSize="11sp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/diaryEntryTextViewCarbsExchangerUsed" />
+
+            <TextView
+                android:id="@+id/diaryEntryTextViewFatExchangerUsedValue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="4dp"
+                android:text="@string/common_numeric_value_double"
+                android:textSize="11sp"
+                app:layout_constraintBaseline_toBaselineOf="@id/diaryEntryTextViewFatExchangerUsed"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/diaryEntryCardViewMeasurements"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="@+id/diaryEntryCardViewMeal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@id/diaryEntryOverviewGuideline66"
+        app:layout_constraintTop_toBottomOf="@+id/diaryEntryCardViewDate">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/diaryEntryImageViewMeasurements"
+                android:layout_width="0dp"
+                android:layout_height="128dp"
+                android:background="#3F51B5"
+                android:contentDescription="@string/image_view_glucose"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_glucose" />
+
+            <TextView
+                android:id="@+id/diaryEntryTextMeasurementsTaken"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="4dp"
+                android:text="@string/glucose_measurements_taken"
+                android:textSize="11sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/diaryEntryImageViewMeasurements" />
+
+            <TextView
+                android:id="@+id/diaryEntryTextMeasurementsTakenValue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="4dp"
+                android:text="@string/common_numeric_value_int"
+                android:textSize="11sp"
+                app:layout_constraintBaseline_toBaselineOf="@id/diaryEntryTextMeasurementsTaken"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+            <TextView
+                android:id="@+id/diaryEntryTextViewHyperglycemia"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="4dp"
+                android:text="@string/glucose_measurements_hyperglycemia"
+                android:textSize="11sp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/diaryEntryTextMeasurementsTaken" />
+
+            <TextView
+                android:id="@+id/diaryEntryTextViewHyperglycemiaValue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="4dp"
+                android:text="@string/common_numeric_value_int"
+                android:textSize="11sp"
+                app:layout_constraintBaseline_toBaselineOf="@id/diaryEntryTextViewHyperglycemia"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+            <TextView
+                android:id="@+id/diaryEntryTextViewMeasurementStandard"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="4dp"
+                android:text="@string/glucose_measurements_standard"
+                android:textSize="11sp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/diaryEntryTextViewHyperglycemia" />
+
+            <TextView
+                android:id="@+id/diaryEntryTextViewMeasurementStandardValue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="4dp"
+                android:text="@string/common_numeric_value_int"
+                android:textSize="11sp"
+                app:layout_constraintBaseline_toBaselineOf="@id/diaryEntryTextViewMeasurementStandard"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+            <TextView
+                android:id="@+id/diaryEntryTextViewHypoglycemia"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="4dp"
+                android:text="@string/glucose_measurements_hypoglycemia"
+                android:textSize="11sp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/diaryEntryTextViewMeasurementStandard" />
+
+            <TextView
+                android:id="@+id/diaryEntryTextViewHypoglycemiaValue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="4dp"
+                android:text="@string/common_numeric_value_int"
+                android:textSize="11sp"
+                app:layout_constraintBaseline_toBaselineOf="@id/diaryEntryTextViewHypoglycemia"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
