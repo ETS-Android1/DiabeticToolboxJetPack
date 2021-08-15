@@ -11,9 +11,11 @@ public class Meal {
     @NonNull
     private int mid;
     private String mealName;
+    private String mealDate;
 
-    public Meal(String mealName) {
+    public Meal(String mealName, String mealDate) {
         this.mealName = mealName;
+        this.mealDate = mealDate;
     }
 
     public void setMid(int mid) {
@@ -26,5 +28,9 @@ public class Meal {
 
     public String getMealName() {
         return mealName;
+    }
+
+    public String getMealDate() {
+        return mealDate;
     }
 }

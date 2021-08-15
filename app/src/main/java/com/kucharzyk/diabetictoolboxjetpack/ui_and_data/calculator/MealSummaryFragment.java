@@ -21,6 +21,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.kucharzyk.diabetictoolboxjetpack.Globals;
 import com.kucharzyk.diabetictoolboxjetpack.R;
 import com.kucharzyk.diabetictoolboxjetpack.room_database.Meal;
 import com.kucharzyk.diabetictoolboxjetpack.room_database.MealProductCrossRef;
@@ -79,7 +80,8 @@ public class MealSummaryFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
-                Meal testMeal = new Meal("gowno" + System.currentTimeMillis());
+                Meal testMeal = new Meal("Meal " + Globals.SIMPLE_DATE_TIME_FORMAT.format(System.currentTimeMillis()),
+                        Globals.SIMPLE_DATE_FORMAT.format(System.currentTimeMillis()));
                 Log.d(TAG, "testMeal id: " + testMeal.getMid());
                 long mealId = calculatorViewModel.insertMeal(testMeal);
 
