@@ -12,10 +12,10 @@ public interface MealWithProductsDao {
 
     @Transaction
     @Query("SELECT * FROM meal_table WHERE mid = :mid")
-    public MealWithProducts getMealWithProducts(long mid);
+    public LiveData<MealWithProducts> getMealWithProducts(long mid);
 
     @Transaction
     @Query("SELECT * FROM meal_table WHERE mealDate = :date")
-    public MealWithProducts getMealWithProductsFromDate(String date);
+    public LiveData<MealWithProducts> getMealWithProductsFromDate(String date);
 
 }
