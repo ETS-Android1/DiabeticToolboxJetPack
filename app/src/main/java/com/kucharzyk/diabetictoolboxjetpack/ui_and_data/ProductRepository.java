@@ -45,9 +45,7 @@ public class ProductRepository {
     }
 
     public void deleteAllProducts(){
-        AppDatabase.databaseWriteExecutor.execute(() -> {
-            mProductDao.deleteAllProducts();
-        });
+        AppDatabase.databaseWriteExecutor.execute(mProductDao::deleteAllProducts);
     }
 
 

@@ -39,9 +39,11 @@ public class DiaryFragment extends Fragment {
         };
 
         diaryEntryViewModel.getAllProducts().observe(getViewLifecycleOwner(), diaryEntriesObserver);*/
-        mealWithProducts = diaryEntryViewModel.getMealWithProducts();
-        mAdapter.setDiaryEntries(mealWithProducts.getProducts());
-
+        //mealWithProducts = diaryEntryViewModel.getMealWithProducts();
+        mealWithProducts = diaryEntryViewModel.getMealWithProductsFromDate();
+        if(mealWithProducts != null) {
+            mAdapter.setDiaryEntries(mealWithProducts.getProducts());
+        }
 
         return root;
     }

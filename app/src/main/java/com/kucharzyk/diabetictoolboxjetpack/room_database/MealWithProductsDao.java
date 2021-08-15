@@ -14,4 +14,8 @@ public interface MealWithProductsDao {
     @Query("SELECT * FROM meal_table WHERE mid = :mid")
     public MealWithProducts getMealWithProducts(long mid);
 
+    @Transaction
+    @Query("SELECT * FROM meal_table WHERE mealDate = :date")
+    public MealWithProducts getMealWithProductsFromDate(String date);
+
 }

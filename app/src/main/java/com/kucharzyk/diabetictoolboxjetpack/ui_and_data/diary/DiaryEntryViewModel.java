@@ -26,6 +26,7 @@ public class DiaryEntryViewModel extends AndroidViewModel {
     private final LiveData<List<Product>> allProducts;
     private final LiveData<List<Meal>> allMeals;
     private final MealWithProducts mealWithProducts;
+    private final MealWithProducts mealWithProductsFromDate;
 
 
     public DiaryEntryViewModel(@NonNull Application application) {
@@ -37,6 +38,7 @@ public class DiaryEntryViewModel extends AndroidViewModel {
         allProducts = productRepository.getAllProducts();
         allMeals = mealRepository.getAllMeals();
         mealWithProducts = mealWithProductsRepository.getMealWithProducts();
+        mealWithProductsFromDate = mealWithProductsRepository.getMealWithProductsFromDate();
     }
 
     public void insert(Product product){
@@ -53,6 +55,7 @@ public class DiaryEntryViewModel extends AndroidViewModel {
     public MealWithProducts getMealWithProducts() {
         return mealWithProducts;
     }
+    public MealWithProducts getMealWithProductsFromDate() { return mealWithProductsFromDate; }
 
     public void deleteLastProduct(Product lastProduct) {
         List<Product> currentProductList = getAllProducts().getValue();
