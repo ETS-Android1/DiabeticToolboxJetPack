@@ -17,21 +17,19 @@ public class MealWithProductsRepository {
 
     private final MealWithProductsDao mealWithProductsDao;
     private final LiveData<MealWithProducts> mealWithProducts;
-    private final LiveData<MealWithProducts> mealWithProductsFromDate;
 
     public MealWithProductsRepository(Application application){
         AppDatabase db = AppDatabase.getDatabase(application);
         mealWithProductsDao = db.mealWithProductsDao();
         mealWithProducts = mealWithProductsDao.getMealWithProducts(1);
-        mealWithProductsFromDate = mealWithProductsDao.getMealWithProductsFromDate("15-08-2021");
     }
 
     public LiveData<MealWithProducts> getMealWithProducts() {
         return mealWithProducts;
     }
 
-    public LiveData<MealWithProducts> getMealWithProductsFromDate() {
-        return mealWithProductsFromDate;
+    public LiveData<MealWithProducts> getMealWithProductsFromDate(String date) {
+        return mealWithProductsDao.getMealWithProductsFromDate(date);
     }
 
 }
