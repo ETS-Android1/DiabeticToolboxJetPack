@@ -16,6 +16,6 @@ public interface MealWithProductsDao {
 
     @Transaction
     @Query("SELECT * FROM meal_table WHERE mealDate = :date")
-    public LiveData<MealWithProducts> getMealWithProductsFromDate(String date);
+    public LiveData<List<MealWithProducts>> getMealWithProductsFromDate(String date);
 
 }

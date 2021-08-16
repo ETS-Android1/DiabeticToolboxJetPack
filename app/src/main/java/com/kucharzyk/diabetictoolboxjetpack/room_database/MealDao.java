@@ -16,4 +16,7 @@ public interface MealDao {
 
     @Query("SELECT * FROM meal_table")
     LiveData<List<Meal>> getAllMeals();
+
+    @Query("SELECT DISTINCT mealDate FROM meal_table")
+    LiveData<List<String>> getAllMealDates();
 }

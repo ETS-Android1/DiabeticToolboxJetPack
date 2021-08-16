@@ -18,6 +18,7 @@ import com.kucharzyk.diabetictoolboxjetpack.R;
 import com.kucharzyk.diabetictoolboxjetpack.room_database.MealWithProducts;
 import com.kucharzyk.diabetictoolboxjetpack.room_database.Product;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -26,6 +27,8 @@ public class DiaryFragment extends Fragment {
 
     private DiaryEntryViewModel diaryEntryViewModel;
     private DiaryEntryAdapter mAdapter;
+    private final List<Product> unpackedProducts = new ArrayList<>();
+    private List<String> distinctDates = new ArrayList<>();
 
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -45,18 +48,31 @@ public class DiaryFragment extends Fragment {
 
         diaryEntryViewModel.getAllProducts().observe(getViewLifecycleOwner(), diaryEntriesObserver);*/
         //mealWithProducts = diaryEntryViewModel.getMealWithProducts();
-
-        final Observer<MealWithProducts> diaryEntriesObserverTest = new Observer<MealWithProducts>() {
+        final Observer<List<String>> distinctDatesObserver = new Observer<List<String>>() {
             @Override
-            public void onChanged(MealWithProducts mealWithProducts) {
+            public void onChanged(List<String> strings) {
+                distinctDates = diaryEntryViewModel.getAllMealDates().getValue();
+                assert distinctDates != null;
+                mAdapter.setDiarySize(distinctDates.size());
+            }
+        };
+
+        final Observer<List<MealWithProducts>> diaryEntriesObserverTest = new Observer<List<MealWithProducts>>() {
+            @Override
+            public void onChanged(List<MealWithProducts> mealWithProducts) {
                 mealWithProducts = diaryEntryViewModel.getMealWithProductsFromDate().getValue();
                 if(mealWithProducts != null) {
-                    mAdapter.setDiaryEntries(Objects.requireNonNull(mealWithProducts).getProducts());
+                    for (MealWithProducts meal: mealWithProducts
+                         ) {
+                        unpackedProducts.addAll(meal.getProducts());
+                    }
+                    mAdapter.setDiaryEntries(Objects.requireNonNull(unpackedProducts));
                 }
             }
         };
 
         diaryEntryViewModel.getMealWithProductsFromDate().observe(getViewLifecycleOwner(), diaryEntriesObserverTest);
+        diaryEntryViewModel.getAllMealDates().observe(getViewLifecycleOwner(), distinctDatesObserver);
 
         return root;
     }

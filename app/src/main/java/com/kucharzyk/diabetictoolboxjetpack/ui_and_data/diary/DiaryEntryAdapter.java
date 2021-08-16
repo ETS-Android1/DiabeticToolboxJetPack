@@ -9,8 +9,11 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.kucharzyk.diabetictoolboxjetpack.Globals;
 import com.kucharzyk.diabetictoolboxjetpack.R;
+import com.kucharzyk.diabetictoolboxjetpack.room_database.MealProductCrossRef;
 import com.kucharzyk.diabetictoolboxjetpack.room_database.Product;
+import com.kucharzyk.diabetictoolboxjetpack.ui_and_data.MealRepository;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,6 +23,7 @@ public class DiaryEntryAdapter extends RecyclerView.Adapter<DiaryEntryAdapter.Di
 
     private List<Product> diaryEntries = new ArrayList<>();
     private OnItemClickListener mOnItemClickListener;
+    private int diarySize;
 
     public interface OnItemClickListener {
         void onItemClick(int position);
@@ -35,27 +39,29 @@ public class DiaryEntryAdapter extends RecyclerView.Adapter<DiaryEntryAdapter.Di
 
     public static class DiaryEntryViewHolder extends RecyclerView.ViewHolder{
 
-        private final TextView mProductName;
-/*        public TextView mProductBrand;
+/*        private final TextView mProductName;
+        public TextView mProductBrand;
         public TextView mProductQuantity;*/
 
-        private final TextView mProductCarbsValue;
-        private final TextView mProductFatValue;
-        private final TextView mProductProteinsValue;
-        private final TextView mProductCarbsExchangerValue;
-        private final TextView mProductFatExchangerValue;
+        private final TextView diaryEntryCarbohydrateValue;
+        private final TextView diaryEntryFatValue;
+        private final TextView diaryEntryProteinsValue;
+        //private final TextView diaryEntryCaloriesValue;
+        private final TextView diaryEntryCarbsExchangerValue;
+        private final TextView diaryEntryFatExchangerValue;
 
         public DiaryEntryViewHolder(@NonNull View itemView, DiaryEntryAdapter.OnItemClickListener listener) {
             super(itemView);
-            mProductName = itemView.findViewById(R.id.diary_text_meal_summary);
-/*            mProductBrand = itemView.findViewById(R.id.text_product_brand);
+/*            mProductName = itemView.findViewById(R.id.diary_text_meal_summary);
+            mProductBrand = itemView.findViewById(R.id.text_product_brand);
             mProductQuantity = itemView.findViewById(R.id.text_product_quantity);*/
 
-            mProductCarbsValue = itemView.findViewById(R.id.diary_text_carbs_summary_value);
-            mProductFatValue = itemView.findViewById(R.id.diary_text_fat_summary_value);
-            mProductProteinsValue = itemView.findViewById(R.id.diary_text_proteins_summary_value);
-            mProductCarbsExchangerValue = itemView.findViewById(R.id.diary_text_carbs_exchanger_summary_value);
-            mProductFatExchangerValue = itemView.findViewById(R.id.diary_text_protein_fat_exchanger_summary_value);
+            diaryEntryCarbohydrateValue = itemView.findViewById(R.id.diaryEntryTextViewCarbsValue);
+            diaryEntryFatValue = itemView.findViewById(R.id.diaryEntryTextViewFatValue);
+            diaryEntryProteinsValue = itemView.findViewById(R.id.diaryEntryTextViewProteinsValue);
+            //diaryEntryCaloriesValue = itemView.findViewById(R.id.diaryEntryTextViewCaloriesValue);
+            diaryEntryCarbsExchangerValue = itemView.findViewById(R.id.diaryEntryTextViewCarbsExchangerValue);
+            diaryEntryFatExchangerValue = itemView.findViewById(R.id.diaryEntryTextViewFatExchangerValue);
 
 
 /*            itemView.setOnClickListener(new View.OnClickListener() {
@@ -100,7 +106,7 @@ public class DiaryEntryAdapter extends RecyclerView.Adapter<DiaryEntryAdapter.Di
     @NonNull
     @Override
     public DiaryEntryViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.example_diary_entry, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.example_diary_entry_overview, parent, false);
         DiaryEntryViewHolder diaryEntryViewHolder = new DiaryEntryViewHolder(view, mOnItemClickListener);
         return diaryEntryViewHolder;
     }
@@ -108,11 +114,21 @@ public class DiaryEntryAdapter extends RecyclerView.Adapter<DiaryEntryAdapter.Di
 
     @Override
     public void onBindViewHolder(@NonNull DiaryEntryViewHolder holder, int position) {
-        Product currentDiaryEntry = diaryEntries.get(position);
-        holder.mProductName.setText(currentDiaryEntry.getProductName());
-        holder.mProductCarbsValue.setText(currentDiaryEntry.getCarbohydrates().toString());
-        holder.mProductFatValue.setText(currentDiaryEntry.getFat().toString());
-        holder.mProductProteinsValue.setText(currentDiaryEntry.getProteins().toString());
+        //Product currentDiaryEntry = diaryEntries.get(position);
+        double carbohydrates = 0, fat = 0, proteins = 0;
+        for (Product product: diaryEntries
+        ) {
+            carbohydrates = carbohydrates + product.getCarbohydrates();
+            fat = fat + product.getFat();
+            proteins = proteins + product.getProteins();
+        }
+        holder.diaryEntryCarbohydrateValue.setText(Globals.REAL_FORMATTER.format(carbohydrates));
+        holder.diaryEntryFatValue.setText(Globals.REAL_FORMATTER.format(fat));
+        holder.diaryEntryProteinsValue.setText(Globals.REAL_FORMATTER.format(proteins));
+        holder.diaryEntryCarbsExchangerValue.setText(Globals.REAL_FORMATTER.
+                format((carbohydrates)/12));
+        holder.diaryEntryFatExchangerValue.setText(Globals.REAL_FORMATTER.
+                format((9 * fat + 4 * proteins) / 100));
     }
 
 
@@ -123,7 +139,8 @@ public class DiaryEntryAdapter extends RecyclerView.Adapter<DiaryEntryAdapter.Di
             return 0;
         }
 
-        return diaryEntries.size();
+        //return diaryEntries.size();
+        return diarySize;
     }
 
     public void setDiaryEntries(List<Product> diaryEntries){
@@ -134,5 +151,9 @@ public class DiaryEntryAdapter extends RecyclerView.Adapter<DiaryEntryAdapter.Di
     public void filterList(ArrayList<Product> filteredList) {
         diaryEntries = filteredList;
         notifyDataSetChanged();
+    }
+
+    public void setDiarySize(int size) {
+        diarySize = size;
     }
 }

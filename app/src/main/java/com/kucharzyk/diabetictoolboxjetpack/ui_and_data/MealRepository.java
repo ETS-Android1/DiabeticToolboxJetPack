@@ -16,11 +16,13 @@ import java.util.concurrent.Future;
 public class MealRepository {
 
     private final MealDao mealDao;
+    private final LiveData<List<String>> allMealDates;
     private final LiveData<List<Meal>> allMeals;
 
     public MealRepository(Application application) {
         AppDatabase db = AppDatabase.getDatabase(application);
         mealDao = db.mealDao();
+        allMealDates = mealDao.getAllMealDates();
         allMeals = mealDao.getAllMeals();
     }
 
@@ -40,4 +42,6 @@ public class MealRepository {
     public LiveData<List<Meal>> getAllMeals() {
         return allMeals;
     }
+
+    public LiveData<List<String>> getAllMealDates() {return allMealDates; }
 }
