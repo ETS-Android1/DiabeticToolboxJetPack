@@ -38,6 +38,8 @@ public class CalculatorFragment extends Fragment {
     private TextView mMealCarbsValue;
     private TextView mMealFatValue;
     private TextView mMealProteinValue;
+    private TextView mealCarbsExchangerValue;
+    private TextView mealFatExchangerValue;
 
     private CalculatorViewModel calculatorViewModel;
     private FoodProductAdapter mFoodProductAdapter;
@@ -55,6 +57,8 @@ public class CalculatorFragment extends Fragment {
         mMealCarbsValue = root.findViewById(R.id.text_carbs_summary_value);
         mMealFatValue = root.findViewById(R.id.text_fat_summary_value);
         mMealProteinValue = root.findViewById(R.id.text_proteins_summary_value);
+        mealCarbsExchangerValue = root.findViewById(R.id.text_carbs_exchanger_summary_value);
+        mealFatExchangerValue = root.findViewById(R.id.text_protein_fat_exchanger_summary_value);
         AutoCompleteTextView mMealTextView = root.findViewById(R.id.MealAutoCompleteTextView);
         CardView mMealSummaryCardView = root.findViewById(R.id.view_meal_summary_card_view);
         ConstraintLayout mMealSummaryConstraintLayout = root.findViewById(R.id.layout_meal_summary_constraint_layout);
@@ -93,6 +97,12 @@ public class CalculatorFragment extends Fragment {
                 mMealCarbsValue.setText(Globals.REAL_FORMATTER.format(sumMealCarbsValue));
                 mMealFatValue.setText(Globals.REAL_FORMATTER.format(sumMealFatValue));
                 mMealProteinValue.setText(Globals.REAL_FORMATTER.format(sumMealProteinsValue));
+                mealCarbsExchangerValue.
+                        setText(Globals.REAL_FORMATTER.format
+                                (sumMealCarbsValue / 12));
+                mealFatExchangerValue.
+                        setText(Globals.REAL_FORMATTER.format
+                                ((9 * sumMealFatValue + 4 * sumMealProteinsValue) / 100));
             }
         };
 

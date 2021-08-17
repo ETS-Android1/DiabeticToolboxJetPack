@@ -126,7 +126,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
-                android:text="0"
+                android:text="@string/common_numeric_value_double"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -135,7 +135,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="24dp"
-                android:text="999"
+                android:text="@string/common_numeric_value_double"
                 app:layout_constraintBaseline_toBaselineOf="@+id/text_meal_carbs_summary"
                 app:layout_constraintEnd_toStartOf="@+id/text_meal_carbs_summary" />
 
@@ -146,7 +146,7 @@
                 android:layout_marginTop="32dp"
                 android:layout_marginEnd="8dp"
                 android:layout_marginBottom="32dp"
-                android:text="0"
+                android:text="@string/common_numeric_value_double"
                 app:layout_constraintBottom_toTopOf="@+id/text_proteins_summary_value"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/text_carbs_summary_value"
@@ -157,7 +157,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8dp"
-                android:text="0"
+                android:text="@string/common_numeric_value_double"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/text_fat_summary_value" />
 
@@ -166,7 +166,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="24dp"
-                android:text="999"
+                android:text="@string/common_numeric_value_double"
                 app:layout_constraintBaseline_toBaselineOf="@+id/text_meal_proteins_summary"
                 app:layout_constraintEnd_toStartOf="@+id/text_meal_carbs_summary" />
 

@@ -85,8 +85,6 @@ public class MealSummaryFragment extends Fragment {
                 Log.d(TAG, "testMeal id: " + testMeal.getMid());
                 long mealId = calculatorViewModel.insertMeal(testMeal);
 
-
-
                 for (Product product: calculatorViewModel.getMeal()
                      ) {
                     MealProductCrossRef mpcr =  new MealProductCrossRef();
@@ -94,6 +92,10 @@ public class MealSummaryFragment extends Fragment {
                     mpcr.setPid(product.getPid());
                     calculatorViewModel.insertMealProductCrossRef(mpcr);
                 }
+
+                calculatorViewModel.getMeal().clear();
+                NavDirections action = MealSummaryFragmentDirections.actionMealSummaryToNavigationCalculator();
+                navController.navigate(action);
             }
         });
     }

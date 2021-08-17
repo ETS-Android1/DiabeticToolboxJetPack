@@ -40,8 +40,8 @@ public class DiaryEntryViewModel extends AndroidViewModel {
         allProducts = productRepository.getAllProducts();
         allMeals = mealRepository.getAllMeals();
         allMealDates = mealRepository.getAllMealDates();
-        mealWithProducts = mealWithProductsRepository.getMealWithProducts(2);
-        mealWithProductsFromDate = mealWithProductsRepository.getMealWithProductsFromDate("16-08-2021");
+        mealWithProducts = mealWithProductsRepository.getMealWithProducts(1);
+        mealWithProductsFromDate = mealWithProductsRepository.getMealWithProductsFromDate("17-08-2021");
     }
 
     public void insert(Product product){
