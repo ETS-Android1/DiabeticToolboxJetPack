@@ -1,18 +1,16 @@
 package com.kucharzyk.diabetictoolboxjetpack.ui_and_data.diary;
 
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 
 import com.kucharzyk.diabetictoolboxjetpack.R;
 import com.kucharzyk.diabetictoolboxjetpack.room_database.MealWithProducts;
@@ -48,14 +46,14 @@ public class DiaryFragment extends Fragment {
 
         diaryEntryViewModel.getAllProducts().observe(getViewLifecycleOwner(), diaryEntriesObserver);*/
         //mealWithProducts = diaryEntryViewModel.getMealWithProducts();
-        final Observer<List<String>> distinctDatesObserver = new Observer<List<String>>() {
+/*        final Observer<List<String>> distinctDatesObserver = new Observer<List<String>>() {
             @Override
             public void onChanged(List<String> strings) {
                 distinctDates = diaryEntryViewModel.getAllMealDates().getValue();
                 assert distinctDates != null;
                 mAdapter.setDiarySize(distinctDates.size());
             }
-        };
+        };*/
 
         final Observer<List<MealWithProducts>> diaryEntriesObserverTest = new Observer<List<MealWithProducts>>() {
             @Override
@@ -72,7 +70,7 @@ public class DiaryFragment extends Fragment {
         };
 
         diaryEntryViewModel.getMealWithProductsFromDate().observe(getViewLifecycleOwner(), diaryEntriesObserverTest);
-        diaryEntryViewModel.getAllMealDates().observe(getViewLifecycleOwner(), distinctDatesObserver);
+        //diaryEntryViewModel.getAllMealDates().observe(getViewLifecycleOwner(), distinctDatesObserver);
 
         return root;
     }

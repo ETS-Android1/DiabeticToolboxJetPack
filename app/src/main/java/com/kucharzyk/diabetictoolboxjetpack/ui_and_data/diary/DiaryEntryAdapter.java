@@ -11,9 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.kucharzyk.diabetictoolboxjetpack.Globals;
 import com.kucharzyk.diabetictoolboxjetpack.R;
-import com.kucharzyk.diabetictoolboxjetpack.room_database.MealProductCrossRef;
 import com.kucharzyk.diabetictoolboxjetpack.room_database.Product;
-import com.kucharzyk.diabetictoolboxjetpack.ui_and_data.MealRepository;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,7 +35,7 @@ public class DiaryEntryAdapter extends RecyclerView.Adapter<DiaryEntryAdapter.Di
         mOnItemClickListener = listener;
     }
 
-    public static class DiaryEntryViewHolder extends RecyclerView.ViewHolder{
+    public static class DiaryEntryViewHolder extends RecyclerView.ViewHolder {
 
 /*        private final TextView mProductName;
         public TextView mProductBrand;
@@ -116,7 +114,7 @@ public class DiaryEntryAdapter extends RecyclerView.Adapter<DiaryEntryAdapter.Di
     public void onBindViewHolder(@NonNull DiaryEntryViewHolder holder, int position) {
         //Product currentDiaryEntry = diaryEntries.get(position);
         double carbohydrates = 0, fat = 0, proteins = 0;
-        for (Product product: diaryEntries
+        for (Product product : diaryEntries
         ) {
             carbohydrates = carbohydrates + product.getCarbohydrates();
             fat = fat + product.getFat();
@@ -126,7 +124,7 @@ public class DiaryEntryAdapter extends RecyclerView.Adapter<DiaryEntryAdapter.Di
         holder.diaryEntryFatValue.setText(Globals.REAL_FORMATTER.format(fat));
         holder.diaryEntryProteinsValue.setText(Globals.REAL_FORMATTER.format(proteins));
         holder.diaryEntryCarbsExchangerValue.setText(Globals.REAL_FORMATTER.
-                format((carbohydrates)/12));
+                format((carbohydrates) / 12));
         holder.diaryEntryFatExchangerValue.setText(Globals.REAL_FORMATTER.
                 format((9 * fat + 4 * proteins) / 100));
     }
@@ -134,16 +132,16 @@ public class DiaryEntryAdapter extends RecyclerView.Adapter<DiaryEntryAdapter.Di
 
     @Override
     public int getItemCount() {
-        if (diaryEntries == null){
+        if (diaryEntries == null) {
             Log.d(TAG, "getItemCount: No elements to display");
             return 0;
         }
 
-        //return diaryEntries.size();
-        return diarySize;
+        return diaryEntries.size();
+        //return diarySize;
     }
 
-    public void setDiaryEntries(List<Product> diaryEntries){
+    public void setDiaryEntries(List<Product> diaryEntries) {
         this.diaryEntries = diaryEntries;
         notifyDataSetChanged();
     }

@@ -2,7 +2,6 @@ package com.kucharzyk.diabetictoolboxjetpack.ui_and_data;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
@@ -13,16 +12,11 @@ import android.os.Bundle;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.kucharzyk.diabetictoolboxjetpack.R;
 import com.kucharzyk.diabetictoolboxjetpack.room_database.AppDatabase;
-import com.kucharzyk.diabetictoolboxjetpack.ui_and_data.diary.DiaryEntry;
-
-import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
     public static final int NEW_USER_ACTIVITY_REQUEST_CODE = 1;
-    private UserViewModel userViewModel;
     public static final String TAG = "MainActivity";
-    private ArrayList<DiaryEntry> mDiaryEntryList;
     private NavController navController;
 
     @Override

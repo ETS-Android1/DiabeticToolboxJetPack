@@ -6,6 +6,7 @@ import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Dao
@@ -18,5 +19,5 @@ public interface MealDao {
     LiveData<List<Meal>> getAllMeals();
 
     @Query("SELECT DISTINCT mealDate FROM meal_table")
-    LiveData<List<String>> getAllMealDates();
+    LiveData<List<LocalDate>> getAllMealDates();
 }

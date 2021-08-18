@@ -4,6 +4,8 @@ import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
+import java.time.LocalDate;
+
 @Entity(tableName = "meal_table")
 public class Meal {
 
@@ -11,9 +13,9 @@ public class Meal {
     @NonNull
     private int mid;
     private String mealName;
-    private String mealDate;
+    private LocalDate mealDate;
 
-    public Meal(String mealName, String mealDate) {
+    public Meal(String mealName, LocalDate mealDate) {
         this.mealName = mealName;
         this.mealDate = mealDate;
     }
@@ -30,7 +32,7 @@ public class Meal {
         return mealName;
     }
 
-    public String getMealDate() {
+    public LocalDate getMealDate() {
         return mealDate;
     }
 }

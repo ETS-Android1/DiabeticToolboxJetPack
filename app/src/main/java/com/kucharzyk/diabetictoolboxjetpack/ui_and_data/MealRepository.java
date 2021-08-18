@@ -8,6 +8,7 @@ import com.kucharzyk.diabetictoolboxjetpack.room_database.AppDatabase;
 import com.kucharzyk.diabetictoolboxjetpack.room_database.Meal;
 import com.kucharzyk.diabetictoolboxjetpack.room_database.MealDao;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
@@ -16,7 +17,7 @@ import java.util.concurrent.Future;
 public class MealRepository {
 
     private final MealDao mealDao;
-    private final LiveData<List<String>> allMealDates;
+    private final LiveData<List<LocalDate>> allMealDates;
     private final LiveData<List<Meal>> allMeals;
 
     public MealRepository(Application application) {
@@ -43,5 +44,5 @@ public class MealRepository {
         return allMeals;
     }
 
-    public LiveData<List<String>> getAllMealDates() {return allMealDates; }
+    public LiveData<List<LocalDate>> getAllMealDates() {return allMealDates; }
 }

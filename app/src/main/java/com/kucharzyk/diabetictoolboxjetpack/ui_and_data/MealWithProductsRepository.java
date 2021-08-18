@@ -5,14 +5,11 @@ import android.app.Application;
 import androidx.lifecycle.LiveData;
 
 import com.kucharzyk.diabetictoolboxjetpack.room_database.AppDatabase;
-import com.kucharzyk.diabetictoolboxjetpack.room_database.Meal;
 import com.kucharzyk.diabetictoolboxjetpack.room_database.MealWithProducts;
 import com.kucharzyk.diabetictoolboxjetpack.room_database.MealWithProductsDao;
 
+import java.time.LocalDate;
 import java.util.List;
-import java.util.concurrent.Callable;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.Future;
 
 public class MealWithProductsRepository {
 
@@ -28,8 +25,8 @@ public class MealWithProductsRepository {
         return mealWithProductsDao.getMealWithProducts(mealID);
     }
 
-    public LiveData<List<MealWithProducts>> getMealWithProductsFromDate(String date) {
-        return mealWithProductsDao.getMealWithProductsFromDate(date);
+    public LiveData<List<MealWithProducts>> getMealWithProductsFromDate(LocalDate localDate) {
+        return mealWithProductsDao.getMealWithProductsFromDate(localDate);
     }
 
 }

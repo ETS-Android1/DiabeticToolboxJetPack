@@ -1,6 +1,10 @@
 package com.kucharzyk.diabetictoolboxjetpack.ui_and_data.calculator;
 
 import android.os.Bundle;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -13,13 +17,6 @@ import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.os.SystemClock;
-import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.TextView;
-
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.kucharzyk.diabetictoolboxjetpack.Globals;
 import com.kucharzyk.diabetictoolboxjetpack.R;
@@ -27,7 +24,7 @@ import com.kucharzyk.diabetictoolboxjetpack.room_database.Meal;
 import com.kucharzyk.diabetictoolboxjetpack.room_database.MealProductCrossRef;
 import com.kucharzyk.diabetictoolboxjetpack.room_database.Product;
 
-import java.time.Clock;
+import java.time.LocalDate;
 import java.util.List;
 
 public class MealSummaryFragment extends Fragment {
@@ -81,16 +78,16 @@ public class MealSummaryFragment extends Fragment {
             public void onClick(View v) {
 
                 Meal testMeal = new Meal("Meal " + Globals.SIMPLE_DATE_TIME_FORMAT.format(System.currentTimeMillis()),
-                        Globals.SIMPLE_DATE_FORMAT.format(System.currentTimeMillis()));
+                        LocalDate.now());
                 Log.d(TAG, "testMeal id: " + testMeal.getMid());
                 long mealId = calculatorViewModel.insertMeal(testMeal);
 
                 for (Product product: calculatorViewModel.getMeal()
                      ) {
-                    MealProductCrossRef mpcr =  new MealProductCrossRef();
-                    mpcr.setMid((int) mealId);
-                    mpcr.setPid(product.getPid());
-                    calculatorViewModel.insertMealProductCrossRef(mpcr);
+                    MealProductCrossRef mealProductCrossRef =  new MealProductCrossRef();
+                    mealProductCrossRef.setMid((int) mealId);
+                    mealProductCrossRef.setPid(product.getPid());
+                    calculatorViewModel.insertMealProductCrossRef(mealProductCrossRef);
                 }
 
                 calculatorViewModel.getMeal().clear();

@@ -14,6 +14,7 @@ import com.kucharzyk.diabetictoolboxjetpack.ui_and_data.MealRepository;
 import com.kucharzyk.diabetictoolboxjetpack.ui_and_data.MealWithProductsRepository;
 import com.kucharzyk.diabetictoolboxjetpack.ui_and_data.ProductRepository;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,7 +28,7 @@ public class DiaryEntryViewModel extends AndroidViewModel {
     private final LiveData<List<Meal>> allMeals;
     private final LiveData<MealWithProducts> mealWithProducts;
     private final LiveData<List<MealWithProducts>> mealWithProductsFromDate;
-    private final LiveData<List<String>> allMealDates;
+    private final LiveData<List<LocalDate>> allMealDates;
 
 
     public DiaryEntryViewModel(@NonNull Application application) {
@@ -40,8 +41,8 @@ public class DiaryEntryViewModel extends AndroidViewModel {
         allProducts = productRepository.getAllProducts();
         allMeals = mealRepository.getAllMeals();
         allMealDates = mealRepository.getAllMealDates();
-        mealWithProducts = mealWithProductsRepository.getMealWithProducts(1);
-        mealWithProductsFromDate = mealWithProductsRepository.getMealWithProductsFromDate("17-08-2021");
+        mealWithProducts = mealWithProductsRepository.getMealWithProducts(99);
+        mealWithProductsFromDate = mealWithProductsRepository.getMealWithProductsFromDate(LocalDate.now());
     }
 
     public void insert(Product product){
@@ -55,7 +56,7 @@ public class DiaryEntryViewModel extends AndroidViewModel {
     public LiveData<List<Meal>> getAllMeals() {
         return allMeals;
     }
-    public LiveData<List<String>> getAllMealDates() {return allMealDates; }
+    public LiveData<List<LocalDate>> getAllMealDates() {return allMealDates; }
     public LiveData<MealWithProducts> getMealWithProducts() {
         return mealWithProducts;
     }
