@@ -157,8 +157,10 @@ public class CalculatorFragment extends Fragment {
         mFoodProductAdapter.setOnItemClickListener(new FoodProductAdapter.OnItemClickListener() {
             @Override
             public void onAddProductClick(int position) {
-                calculatorViewModel.getMeal().add(mFoodProductAdapter.getProduct(position));
-                calculatorViewModel.getMealSummary().setValue(calculatorViewModel.getMeal());
+                if (!calculatorViewModel.getMeal().contains(mFoodProductAdapter.getProduct(position))) {
+                    calculatorViewModel.getMeal().add(mFoodProductAdapter.getProduct(position));
+                    calculatorViewModel.getMealSummary().setValue(calculatorViewModel.getMeal());
+                }
             }
 
             @Override
