@@ -13,7 +13,7 @@ import androidx.sqlite.db.SupportSQLiteDatabase;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-@Database(entities = {User.class, Product.class, Meal.class, MealProductCrossRef.class}, version = 1)
+@Database(entities = {User.class, Product.class, Meal.class, MealProductCrossRef.class, DiaryEntry.class}, version = 1)
 @TypeConverters({Converters.class})
 public abstract class AppDatabase extends RoomDatabase {
 
@@ -22,6 +22,8 @@ public abstract class AppDatabase extends RoomDatabase {
     public abstract MealDao mealDao();
     public abstract MealProductCrossRefDao mealProductCrossRefDao();
     public abstract MealWithProductsDao mealWithProductsDao();
+    public abstract DiaryEntryDao diaryEntryDao();
+    public abstract DiaryEntryWithMealsAndProductsDao diaryEntryWithMealsAndProductsDao();
 
     public static final String TAG = "AppDatabase";
     private static AppDatabase INSTANCE;

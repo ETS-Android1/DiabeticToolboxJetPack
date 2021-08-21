@@ -7,7 +7,7 @@ import androidx.room.PrimaryKey;
 public class User {
 
     @PrimaryKey(autoGenerate = true)
-    private Integer uid;
+    private Integer userID;
     private String username;
     //private String name;
     //private String surname;
@@ -34,8 +34,8 @@ public class User {
         this.username = username;
     }
 
-    public void setUid(Integer uid) {
-        this.uid = uid;
+    public void setUserID(Integer userID) {
+        this.userID = userID;
     }
 
     public void setUsername(String username) {
@@ -74,8 +74,8 @@ public class User {
         this.medicalData = medicalData;
     }*/
 
-    public Integer getUid() {
-        return uid;
+    public Integer getUserID() {
+        return userID;
     }
 
     public String getUsername() {

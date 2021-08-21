@@ -9,8 +9,8 @@ import java.util.List;
 public class MealWithProducts {
     @Embedded private Meal meal;
     @Relation(
-            parentColumn = "mid",
-            entityColumn = "pid",
+            parentColumn = "mealId",
+            entityColumn = "productId",
             associateBy = @Junction(MealProductCrossRef.class)
     )
     private List<Product> products;

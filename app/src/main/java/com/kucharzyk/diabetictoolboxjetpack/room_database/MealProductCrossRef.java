@@ -2,25 +2,25 @@ package com.kucharzyk.diabetictoolboxjetpack.room_database;
 
 import androidx.room.Entity;
 
-@Entity(primaryKeys = {"mid", "pid"})
+@Entity(primaryKeys = {"mealId", "productId"})
 public class MealProductCrossRef {
-    private int mid;
-    private int pid;
+    private int mealId;
+    private int productId;
 
-    public void setMid(int mid) {
-        this.mid = mid;
+    public void setMealId(int mealId) {
+        this.mealId = mealId;
     }
 
-    public void setPid(int pid) {
-        this.pid = pid;
+    public void setProductId(int productId) {
+        this.productId = productId;
     }
 
-    public int getMid() {
-        return mid;
+    public int getMealId() {
+        return mealId;
     }
 
-    public int getPid() {
-        return pid;
+    public int getProductId() {
+        return productId;
     }
 }
 

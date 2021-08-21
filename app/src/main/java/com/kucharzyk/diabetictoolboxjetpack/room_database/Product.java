@@ -12,7 +12,7 @@ public class Product implements Parcelable {
 
     @PrimaryKey(autoGenerate = true)
     @NonNull
-    private int pid;
+    private int productId;
     private String productName;
     private Double carbohydrates;
     private Double fat;
@@ -28,10 +28,10 @@ public class Product implements Parcelable {
         this.servingSize = servingSize;
     }
 
-    public void setPid(int mPid) { this.pid = mPid; }
+    public void setProductId(int productId) { this.productId = productId; }
 
 
-    public int getPid() { return pid; }
+    public int getProductId() { return productId; }
 
     public String getProductName() {
         return productName;
@@ -56,7 +56,7 @@ public class Product implements Parcelable {
     //************* Parcelable *****************//
 
     protected Product(Parcel in) {
-        pid = in.readInt();
+        productId = in.readInt();
         productName = in.readString();
         if (in.readByte() == 0) {
             carbohydrates = null;
@@ -99,7 +99,7 @@ public class Product implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeInt(pid);
+        dest.writeInt(productId);
         dest.writeString(productName);
         if (carbohydrates == null) {
             dest.writeByte((byte) 0);

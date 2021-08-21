@@ -12,11 +12,11 @@ import java.util.List;
 public interface MealWithProductsDao {
 
     @Transaction
-    @Query("SELECT * FROM meal_table WHERE mid = :mid")
-    public LiveData<MealWithProducts> getMealWithProducts(long mid);
+    @Query("SELECT * FROM meal_table WHERE mealId = :mealId")
+    public LiveData<MealWithProducts> getMealWithProducts(long mealId);
 
     @Transaction
-    @Query("SELECT * FROM meal_table WHERE mealDate = :localDate")
-    public LiveData<List<MealWithProducts>> getMealWithProductsFromDate(LocalDate localDate);
+    @Query("SELECT * FROM meal_table WHERE mealDate = :date")
+    public LiveData<List<MealWithProducts>> getMealWithProductsFromDate(LocalDate date);
 
 }

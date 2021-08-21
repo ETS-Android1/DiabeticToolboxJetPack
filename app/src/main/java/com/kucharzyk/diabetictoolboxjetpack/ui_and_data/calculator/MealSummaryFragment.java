@@ -1,7 +1,6 @@
 package com.kucharzyk.diabetictoolboxjetpack.ui_and_data.calculator;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,6 +19,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.kucharzyk.diabetictoolboxjetpack.Globals;
 import com.kucharzyk.diabetictoolboxjetpack.R;
+import com.kucharzyk.diabetictoolboxjetpack.room_database.DiaryEntry;
 import com.kucharzyk.diabetictoolboxjetpack.room_database.Meal;
 import com.kucharzyk.diabetictoolboxjetpack.room_database.MealProductCrossRef;
 import com.kucharzyk.diabetictoolboxjetpack.room_database.Product;
@@ -77,19 +77,22 @@ public class MealSummaryFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
-                Meal testMeal = new Meal("Meal " + Globals.SIMPLE_DATE_TIME_FORMAT.format(System.currentTimeMillis()),
+                Meal currentMeal = new Meal("Meal " + Globals.SIMPLE_DATE_TIME_FORMAT.format(System.currentTimeMillis()),
                         LocalDate.now());
-                Log.d(TAG, "testMeal id: " + testMeal.getMid());
-                long mealId = calculatorViewModel.insertMeal(testMeal);
+                long mealId = calculatorViewModel.insertMeal(currentMeal);
 
                 for (Product product: calculatorViewModel.getMeal()
                      ) {
                     MealProductCrossRef mealProductCrossRef =  new MealProductCrossRef();
-                    mealProductCrossRef.setMid((int) mealId);
-                    mealProductCrossRef.setPid(product.getPid());
+                    mealProductCrossRef.setMealId((int) mealId);
+                    mealProductCrossRef.setProductId(product.getProductId());
                     calculatorViewModel.insertMealProductCrossRef(mealProductCrossRef);
                 }
 
+/*                if (calculatorViewModel.getDiaryEntryFromDate(currentMeal.getMealDate()).getValue() == null) {
+                    calculatorViewModel.insertDiaryEntry(new DiaryEntry(currentMeal.getMealDate()));
+                }*/
+                calculatorViewModel.insertDiaryEntry(new DiaryEntry(currentMeal.getMealDate()));
                 calculatorViewModel.getMeal().clear();
                 NavDirections action = MealSummaryFragmentDirections.actionMealSummaryToNavigationCalculator();
                 navController.navigate(action);

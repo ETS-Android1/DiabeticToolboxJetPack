@@ -11,7 +11,7 @@ public class Meal {
 
     @PrimaryKey(autoGenerate = true)
     @NonNull
-    private int mid;
+    private int mealId;
     private String mealName;
     private LocalDate mealDate;
 
@@ -20,12 +20,12 @@ public class Meal {
         this.mealDate = mealDate;
     }
 
-    public void setMid(int mid) {
-        this.mid = mid;
+    public void setMealId(int mealId) {
+        this.mealId = mealId;
     }
 
-    public int getMid() {
-        return mid;
+    public int getMealId() {
+        return mealId;
     }
 
     public String getMealName() {

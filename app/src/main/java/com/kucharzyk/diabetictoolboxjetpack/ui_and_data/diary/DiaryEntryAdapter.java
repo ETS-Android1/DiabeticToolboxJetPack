@@ -11,7 +11,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.kucharzyk.diabetictoolboxjetpack.Globals;
 import com.kucharzyk.diabetictoolboxjetpack.R;
-import com.kucharzyk.diabetictoolboxjetpack.room_database.Product;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,7 +18,7 @@ import java.util.List;
 public class DiaryEntryAdapter extends RecyclerView.Adapter<DiaryEntryAdapter.DiaryEntryViewHolder> {
     public static final String TAG = "DiaryEntryAdapter";
 
-    private List<Product> diaryEntries = new ArrayList<>();
+    private List<DiaryEntrySummary> diaryEntries = new ArrayList<>();
     private OnItemClickListener mOnItemClickListener;
     private int diarySize;
 
@@ -112,21 +111,17 @@ public class DiaryEntryAdapter extends RecyclerView.Adapter<DiaryEntryAdapter.Di
 
     @Override
     public void onBindViewHolder(@NonNull DiaryEntryViewHolder holder, int position) {
-        //Product currentDiaryEntry = diaryEntries.get(position);
-        double carbohydrates = 0, fat = 0, proteins = 0;
-        for (Product product : diaryEntries
-        ) {
-            carbohydrates = carbohydrates + product.getCarbohydrates();
-            fat = fat + product.getFat();
-            proteins = proteins + product.getProteins();
-        }
-        holder.diaryEntryCarbohydrateValue.setText(Globals.REAL_FORMATTER.format(carbohydrates));
-        holder.diaryEntryFatValue.setText(Globals.REAL_FORMATTER.format(fat));
-        holder.diaryEntryProteinsValue.setText(Globals.REAL_FORMATTER.format(proteins));
+        DiaryEntrySummary currentDiaryEntry = diaryEntries.get(position);
+        holder.diaryEntryCarbohydrateValue.setText(Globals.REAL_FORMATTER.
+                format(currentDiaryEntry.getCarbohydrates()));
+        holder.diaryEntryFatValue.setText(Globals.REAL_FORMATTER.
+                format(currentDiaryEntry.getFat()));
+        holder.diaryEntryProteinsValue.setText(Globals.REAL_FORMATTER.
+                format(currentDiaryEntry.getProteins()));
         holder.diaryEntryCarbsExchangerValue.setText(Globals.REAL_FORMATTER.
-                format((carbohydrates) / 12));
+                format((currentDiaryEntry.getCarbohydrates()) / 12));
         holder.diaryEntryFatExchangerValue.setText(Globals.REAL_FORMATTER.
-                format((9 * fat + 4 * proteins) / 100));
+                format((9 * currentDiaryEntry.getFat() + 4 * currentDiaryEntry.getProteins()) / 100));
     }
 
 
@@ -141,12 +136,12 @@ public class DiaryEntryAdapter extends RecyclerView.Adapter<DiaryEntryAdapter.Di
         //return diarySize;
     }
 
-    public void setDiaryEntries(List<Product> diaryEntries) {
+    public void setDiaryEntries(List<DiaryEntrySummary> diaryEntries) {
         this.diaryEntries = diaryEntries;
         notifyDataSetChanged();
     }
 
-    public void filterList(ArrayList<Product> filteredList) {
+    public void filterList(ArrayList<DiaryEntrySummary> filteredList) {
         diaryEntries = filteredList;
         notifyDataSetChanged();
     }
