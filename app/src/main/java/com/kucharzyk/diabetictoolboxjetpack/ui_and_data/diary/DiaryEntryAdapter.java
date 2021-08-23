@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.kucharzyk.diabetictoolboxjetpack.Globals;
 import com.kucharzyk.diabetictoolboxjetpack.R;
 
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,7 +21,6 @@ public class DiaryEntryAdapter extends RecyclerView.Adapter<DiaryEntryAdapter.Di
 
     private List<DiaryEntrySummary> diaryEntries = new ArrayList<>();
     private OnItemClickListener mOnItemClickListener;
-    private int diarySize;
 
     public interface OnItemClickListener {
         void onItemClick(int position);
@@ -46,6 +46,7 @@ public class DiaryEntryAdapter extends RecyclerView.Adapter<DiaryEntryAdapter.Di
         //private final TextView diaryEntryCaloriesValue;
         private final TextView diaryEntryCarbsExchangerValue;
         private final TextView diaryEntryFatExchangerValue;
+        private final TextView diaryEntryDate;
 
         public DiaryEntryViewHolder(@NonNull View itemView, DiaryEntryAdapter.OnItemClickListener listener) {
             super(itemView);
@@ -59,6 +60,7 @@ public class DiaryEntryAdapter extends RecyclerView.Adapter<DiaryEntryAdapter.Di
             //diaryEntryCaloriesValue = itemView.findViewById(R.id.diaryEntryTextViewCaloriesValue);
             diaryEntryCarbsExchangerValue = itemView.findViewById(R.id.diaryEntryTextViewCarbsExchangerValue);
             diaryEntryFatExchangerValue = itemView.findViewById(R.id.diaryEntryTextViewFatExchangerValue);
+            diaryEntryDate = itemView.findViewById(R.id.diaryEntryTextViewDate);
 
 
 /*            itemView.setOnClickListener(new View.OnClickListener() {
@@ -112,6 +114,8 @@ public class DiaryEntryAdapter extends RecyclerView.Adapter<DiaryEntryAdapter.Di
     @Override
     public void onBindViewHolder(@NonNull DiaryEntryViewHolder holder, int position) {
         DiaryEntrySummary currentDiaryEntry = diaryEntries.get(position);
+        holder.diaryEntryDate.setText(currentDiaryEntry.getDiaryEntryDate().
+                format(DateTimeFormatter.ofPattern("dd-MM-yyyy")));
         holder.diaryEntryCarbohydrateValue.setText(Globals.REAL_FORMATTER.
                 format(currentDiaryEntry.getCarbohydrates()));
         holder.diaryEntryFatValue.setText(Globals.REAL_FORMATTER.
@@ -144,9 +148,5 @@ public class DiaryEntryAdapter extends RecyclerView.Adapter<DiaryEntryAdapter.Di
     public void filterList(ArrayList<DiaryEntrySummary> filteredList) {
         diaryEntries = filteredList;
         notifyDataSetChanged();
-    }
-
-    public void setDiarySize(int size) {
-        diarySize = size;
     }
 }

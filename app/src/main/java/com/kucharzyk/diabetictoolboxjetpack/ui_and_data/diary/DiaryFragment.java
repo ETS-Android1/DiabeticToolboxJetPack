@@ -42,7 +42,7 @@ public class DiaryFragment extends Fragment {
                 assert diaryEntryWithMealsAndProducts != null;
                 for (DiaryEntryWithMealsAndProducts diaryEntry:diaryEntryWithMealsAndProducts
                      ) {
-                        diaryEntrySummaries.add(new DiaryEntrySummary(diaryEntry.meals));
+                        diaryEntrySummaries.add(new DiaryEntrySummary(diaryEntry.meals, diaryEntry.diaryEntry.getDiaryEntryDate()));
                 }
                 mAdapter.setDiaryEntries(diaryEntrySummaries);
             }
