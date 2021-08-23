@@ -3,6 +3,7 @@ package com.kucharzyk.diabetictoolboxjetpack.ui_and_data.calculator;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,9 +23,11 @@ import com.kucharzyk.diabetictoolboxjetpack.Globals;
 import com.kucharzyk.diabetictoolboxjetpack.R;
 import com.kucharzyk.diabetictoolboxjetpack.room_database.Product;
 
+import java.util.List;
 import java.util.Objects;
 
 public class ProductSummaryFragment extends Fragment {
+    public static final String TAG = "ProductSummaryFragment";
 
     private CalculatorViewModel calculatorViewModel;
     private NavController navController;
@@ -45,6 +48,7 @@ public class ProductSummaryFragment extends Fragment {
     TextView mProductProteinFatExchangerValue;
     TextInputEditText mProductServingSize;
     FloatingActionButton mSaveProductButton;
+    Product currentProduct;
 
     @Nullable
     @Override
@@ -65,8 +69,8 @@ public class ProductSummaryFragment extends Fragment {
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        Product currentProduct = ProductSummaryFragmentArgs.fromBundle(getArguments()).getParcelizedProduct();
-        Integer currentProductPosition = ProductSummaryFragmentArgs.fromBundle(getArguments()).getPosition();
+        currentProduct = ProductSummaryFragmentArgs.fromBundle(getArguments()).getParcelizedProduct();
+        //Integer currentProductPosition = ProductSummaryFragmentArgs.fromBundle(getArguments()).getPosition();
 
         String productName = currentProduct.getProductName();
         productServingSize = currentProduct.getServingSize();
@@ -85,8 +89,7 @@ public class ProductSummaryFragment extends Fragment {
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 if (count > 0) {
                     productServingSize = Double.parseDouble(Objects.requireNonNull(mProductServingSize.getText()).toString());
-                }
-                else productServingSize = 100.0;
+                } else productServingSize = 100.0;
                 getProductAttributes(currentProduct, productServingSize);
                 setProductAttributes(productName, productCarbohydrates, productFat, productProteins,
                         productCarbohydrateExchangerValue, productProteinFatExchangerValue);
@@ -100,16 +103,31 @@ public class ProductSummaryFragment extends Fragment {
         mSaveProductButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (Globals.containsProduct(calculatorViewModel.getMeal(), currentProduct.getProductName())){
-                    calculatorViewModel.getMeal().
-                            set(currentProductPosition, new Product(productName, productCarbohydrates, productFat, productProteins, productServingSize));
+                Product newProduct = new Product(productName, productCarbohydrates, productFat, productProteins, productServingSize);
+                List<Product> allProducts = calculatorViewModel.getMeal();
+                Log.d(TAG, "onClick: currentProduct: " + currentProduct.getProductName());
+                Log.d(TAG, "onClick: allProducts:" + allProducts);
+                if (Globals.containsProduct(allProducts, currentProduct.getProductName())) {
+                    boolean isFound = false;
+                    for (int i = 0; i < allProducts.size() && !isFound; i++){
+                        String productNameToReplace = allProducts.get(i).getProductName();
+                        if (productNameToReplace.equals(newProduct.getProductName())){
+                            allProducts.set(i, newProduct);
+                            isFound = true;
+                        }
+                    }
+                    if (!isFound){
+                        try {
+                            throw new Exception("Unreachable");
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+                } else {
+                    allProducts.add(newProduct);
                 }
-                else {
-                    calculatorViewModel.getMeal().
-                            add(new Product(productName, productCarbohydrates, productFat, productProteins, productServingSize));
-                }
-                calculatorViewModel.getMealSummary().setValue(calculatorViewModel.getMeal());
-
+                calculatorViewModel.getMealSummary().setValue(allProducts);
+                Log.d(TAG, "onClick: indexOf: " + allProducts.indexOf(newProduct));
                 navController.navigateUp();
             }
             //TODO While updating existing product it would be better to add current values to the existing ones instead of replacing ones
@@ -129,13 +147,13 @@ public class ProductSummaryFragment extends Fragment {
         mProductProteinFatExchangerValue.setText(Globals.REAL_FORMATTER.format(productProteinFatExchangerValue));
     }
 
-    private void getProductAttributes(Product currentProduct, Double productServingSize){
+    private void getProductAttributes(Product currentProduct, Double productServingSize) {
 
-            productCarbohydrates = ratio * productServingSize * currentProduct.getCarbohydrates();
-            productFat = ratio * productServingSize * currentProduct.getFat();
-            productProteins = ratio * productServingSize * currentProduct.getProteins();
-            productCarbohydrateExchangerValue = productCarbohydrates / 12;
-            productProteinFatExchangerValue = (9 * productFat + 4 * productProteins) / 100;
+        productCarbohydrates = ratio * productServingSize * currentProduct.getCarbohydrates();
+        productFat = ratio * productServingSize * currentProduct.getFat();
+        productProteins = ratio * productServingSize * currentProduct.getProteins();
+        productCarbohydrateExchangerValue = productCarbohydrates / 12;
+        productProteinFatExchangerValue = (9 * productFat + 4 * productProteins) / 100;
     }
 
     private Double calculateRatio(Double productServingSize) {

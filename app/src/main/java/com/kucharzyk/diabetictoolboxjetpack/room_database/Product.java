@@ -3,12 +3,13 @@ package com.kucharzyk.diabetictoolboxjetpack.room_database;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import androidx.annotation.Keep;
 import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
 @Entity(tableName = "product_table")
-public class Product implements Parcelable {
+@Keep public class Product implements Parcelable {
 
     @PrimaryKey(autoGenerate = true)
     @NonNull
