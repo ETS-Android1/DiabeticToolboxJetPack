@@ -45,5 +45,8 @@
     <string name="glucose_measurements_hyperglycemia">Hyperglycemia:</string>
     <string name="glucose_measurements_standard">Standard:</string>
     <string name="glucose_measurements_hypoglycemia">Hypoglycemia:</string>
+    <string name="food_tab">Food</string>
+    <string name="exercises_tab">Exercises</string>
+    <string name="measurements_tab">Measurements</string>
 
 </resources>

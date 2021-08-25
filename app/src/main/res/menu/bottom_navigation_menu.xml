@@ -6,18 +6,28 @@
         android:icon="@drawable/ic_home"
         android:title="@string/home_tab"/>
     <item
-        android:id="@+id/navigation_calculator"
+        android:id="@+id/navigation_food"
         android:enabled="true"
-        android:icon="@drawable/ic_calculator"
-        android:title="@string/calc_tab"/>
+        android:icon="@drawable/ic_save_meal"
+        android:title="@string/food_tab"/>
+    <item
+        android:id="@+id/navigation_exercises"
+        android:enabled="true"
+        android:icon="@drawable/ic_exercises"
+        android:title="@string/exercises_tab"/>
+    <item
+        android:id="@+id/navigation_measurements"
+        android:enabled="true"
+        android:icon="@drawable/ic_glucose"
+        android:title="@string/measurements_tab"/>
     <item
         android:id="@+id/navigation_diary"
         android:enabled="true"
         android:icon="@drawable/ic_diary"
         android:title="@string/diary_tab"/>
-    <item
+<!--    <item
         android:id="@+id/navigation_stats"
         android:enabled="true"
         android:icon="@drawable/ic_stats"
-        android:title="@string/stats_tab"/>
+        android:title="@string/stats_tab"/>-->
 </menu>

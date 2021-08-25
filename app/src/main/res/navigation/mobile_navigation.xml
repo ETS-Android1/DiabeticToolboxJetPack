@@ -11,7 +11,7 @@
         android:label="@string/title_home"
         tools:layout="@layout/fragment_home" />
     <fragment
-        android:id="@+id/navigation_calculator"
+        android:id="@+id/navigation_food"
         android:name="com.kucharzyk.diabetictoolboxjetpack.ui_and_data.calculator.CalculatorFragment"
         android:label="@string/title_calculator"
         tools:layout="@layout/fragment_calculator" >
@@ -41,7 +41,7 @@
             app:argType="com.kucharzyk.diabetictoolboxjetpack.room_database.Product" />
         <action
             android:id="@+id/action_productSummaryFragment_to_navigation_calculator"
-            app:destination="@id/navigation_calculator" />
+            app:destination="@id/navigation_food" />
         <action
             android:id="@+id/action_productSummaryFragment_to_mealSummary"
             app:destination="@id/mealSummary" />
@@ -56,7 +56,7 @@
         tools:layout="@layout/fragment_meal_summary">
         <action
             android:id="@+id/action_mealSummary_to_navigation_calculator"
-            app:destination="@id/navigation_calculator" />
+            app:destination="@id/navigation_food" />
         <action
             android:id="@+id/action_mealSummary_to_productSummaryFragment"
             app:destination="@id/productSummaryFragment" />
