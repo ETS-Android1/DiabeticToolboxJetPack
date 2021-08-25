@@ -12,8 +12,8 @@ public class Meal {
     @PrimaryKey(autoGenerate = true)
     @NonNull
     private int mealId;
-    private String mealName;
-    private LocalDate mealDate;
+    private final String mealName;
+    private final LocalDate mealDate;
 
     public Meal(String mealName, LocalDate mealDate) {
         this.mealName = mealName;

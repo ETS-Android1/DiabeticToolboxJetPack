@@ -11,7 +11,7 @@ public class DiaryEntry {
 
     @PrimaryKey(autoGenerate = true)
     private int diaryEntryId;
-    private LocalDate diaryEntryDate;
+    private final LocalDate diaryEntryDate;
 
     public DiaryEntry(LocalDate diaryEntryDate) {
         this.diaryEntryDate = diaryEntryDate;

@@ -3,7 +3,6 @@ package com.kucharzyk.diabetictoolboxjetpack.ui_and_data.calculator;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,7 +13,6 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
-import androidx.navigation.NavDirections;
 import androidx.navigation.fragment.NavHostFragment;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -104,9 +102,8 @@ public class ProductSummaryFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Product newProduct = new Product(productName, productCarbohydrates, productFat, productProteins, productServingSize);
+                newProduct.setProductId(currentProduct.getProductId());
                 List<Product> allProducts = calculatorViewModel.getMeal();
-                Log.d(TAG, "onClick: currentProduct: " + currentProduct.getProductName());
-                Log.d(TAG, "onClick: allProducts:" + allProducts);
                 if (Globals.containsProduct(allProducts, currentProduct.getProductName())) {
                     boolean isFound = false;
                     for (int i = 0; i < allProducts.size() && !isFound; i++){
@@ -127,10 +124,8 @@ public class ProductSummaryFragment extends Fragment {
                     allProducts.add(newProduct);
                 }
                 calculatorViewModel.getMealSummary().setValue(allProducts);
-                Log.d(TAG, "onClick: indexOf: " + allProducts.indexOf(newProduct));
                 navController.navigateUp();
             }
-            //TODO While updating existing product it would be better to add current values to the existing ones instead of replacing ones
         });
 
     }

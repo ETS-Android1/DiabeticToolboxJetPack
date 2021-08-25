@@ -1,5 +1,6 @@
 package com.kucharzyk.diabetictoolboxjetpack.ui_and_data.diary;
 
+import com.kucharzyk.diabetictoolboxjetpack.room_database.MealProductCrossRef;
 import com.kucharzyk.diabetictoolboxjetpack.room_database.MealWithProducts;
 import com.kucharzyk.diabetictoolboxjetpack.room_database.Product;
 
@@ -8,8 +9,9 @@ import java.util.List;
 
 public class DiaryEntrySummary {
 
-    private List<MealWithProducts> mealWithProductsList;
-    private LocalDate diaryEntryDate;
+    private final List<MealWithProducts> mealWithProductsList;
+    private final LocalDate diaryEntryDate;
+    private List<MealProductCrossRef> productsWithServingSizes;
 
     public DiaryEntrySummary (List<MealWithProducts> mealsWithProducts, LocalDate entryDate) {
         mealWithProductsList = mealsWithProducts;
@@ -22,7 +24,7 @@ public class DiaryEntrySummary {
              ) {
             for (Product product:meal.getProducts()
                  ) {
-                carbohydrates += product.getCarbohydrates();
+                carbohydrates += product.getCarbohydrates() * 0.01 * product.getServingSize();
             }
         }
         return carbohydrates;
@@ -34,7 +36,7 @@ public class DiaryEntrySummary {
         ) {
             for (Product product:meal.getProducts()
             ) {
-                fat += product.getFat();
+                fat += product.getFat() * 0.01 * product.getServingSize();
             }
         }
         return fat;
@@ -46,7 +48,7 @@ public class DiaryEntrySummary {
         ) {
             for (Product product:meal.getProducts()
             ) {
-                proteins += product.getProteins();
+                proteins += product.getProteins() * 0.01 * product.getServingSize();
             }
         }
         return proteins;

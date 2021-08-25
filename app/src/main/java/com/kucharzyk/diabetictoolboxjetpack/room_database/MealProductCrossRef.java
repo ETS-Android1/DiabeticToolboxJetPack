@@ -6,6 +6,8 @@ import androidx.room.Entity;
 public class MealProductCrossRef {
     private int mealId;
     private int productId;
+    private Double servingSize;
+
 
     public void setMealId(int mealId) {
         this.mealId = mealId;
@@ -15,12 +17,20 @@ public class MealProductCrossRef {
         this.productId = productId;
     }
 
+    public void setServingSize(Double servingSize) {
+        this.servingSize = servingSize;
+    }
+
     public int getMealId() {
         return mealId;
     }
 
     public int getProductId() {
         return productId;
+    }
+
+    public Double getServingSize() {
+        return servingSize;
     }
 }
 

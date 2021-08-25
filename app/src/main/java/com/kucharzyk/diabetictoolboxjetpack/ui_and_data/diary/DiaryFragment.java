@@ -14,7 +14,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.kucharzyk.diabetictoolboxjetpack.R;
 import com.kucharzyk.diabetictoolboxjetpack.room_database.DiaryEntryWithMealsAndProducts;
-import com.kucharzyk.diabetictoolboxjetpack.room_database.Product;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,7 +23,6 @@ public class DiaryFragment extends Fragment {
 
     private DiaryEntryViewModel diaryEntryViewModel;
     private DiaryEntryAdapter mAdapter;
-    private final List<Product> unpackedProducts = new ArrayList<>();
     private List<DiaryEntrySummary> diaryEntrySummaries = new ArrayList<>();
 
     public View onCreateView(@NonNull LayoutInflater inflater,

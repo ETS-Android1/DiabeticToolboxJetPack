@@ -86,6 +86,7 @@ public class MealSummaryFragment extends Fragment {
                     MealProductCrossRef mealProductCrossRef =  new MealProductCrossRef();
                     mealProductCrossRef.setMealId((int) mealId);
                     mealProductCrossRef.setProductId(product.getProductId());
+                    mealProductCrossRef.setServingSize(product.getServingSize());
                     calculatorViewModel.insertMealProductCrossRef(mealProductCrossRef);
                 }
 
