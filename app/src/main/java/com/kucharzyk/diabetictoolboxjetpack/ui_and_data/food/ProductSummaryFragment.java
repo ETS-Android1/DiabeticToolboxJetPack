@@ -1,4 +1,4 @@
-package com.kucharzyk.diabetictoolboxjetpack.ui_and_data.calculator;
+package com.kucharzyk.diabetictoolboxjetpack.ui_and_data.food;
 
 import android.os.Bundle;
 import android.text.Editable;
@@ -27,7 +27,7 @@ import java.util.Objects;
 public class ProductSummaryFragment extends Fragment {
     public static final String TAG = "ProductSummaryFragment";
 
-    private CalculatorViewModel calculatorViewModel;
+    private FoodViewModel foodViewModel;
     private NavController navController;
     private Double ratio;
 
@@ -51,8 +51,8 @@ public class ProductSummaryFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        calculatorViewModel = new ViewModelProvider(requireActivity()).get(CalculatorViewModel.class);
-        View child = inflater.inflate(R.layout.fragment_product_summary, container, false);
+        foodViewModel = new ViewModelProvider(requireActivity()).get(FoodViewModel.class);
+        View child = inflater.inflate(R.layout.product_summary_fragment, container, false);
         navController = NavHostFragment.findNavController(this);
         mProductName = child.findViewById(R.id.text_product_name);
         mProductCarbohydrates = child.findViewById(R.id.text_product_carbs_value);
@@ -103,7 +103,7 @@ public class ProductSummaryFragment extends Fragment {
             public void onClick(View v) {
                 Product newProduct = new Product(productName, productCarbohydrates, productFat, productProteins, productServingSize);
                 newProduct.setProductId(currentProduct.getProductId());
-                List<Product> allProducts = calculatorViewModel.getMeal();
+                List<Product> allProducts = foodViewModel.getMeal();
                 if (Globals.containsProduct(allProducts, currentProduct.getProductName())) {
                     boolean isFound = false;
                     for (int i = 0; i < allProducts.size() && !isFound; i++){
@@ -123,7 +123,7 @@ public class ProductSummaryFragment extends Fragment {
                 } else {
                     allProducts.add(newProduct);
                 }
-                calculatorViewModel.getMealSummary().setValue(allProducts);
+                foodViewModel.getMealSummary().setValue(allProducts);
                 navController.navigateUp();
             }
         });

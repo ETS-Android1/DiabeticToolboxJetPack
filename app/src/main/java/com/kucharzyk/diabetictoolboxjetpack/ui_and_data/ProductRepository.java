@@ -9,43 +9,42 @@ import com.kucharzyk.diabetictoolboxjetpack.room_database.AppDatabase;
 import com.kucharzyk.diabetictoolboxjetpack.room_database.Product;
 import com.kucharzyk.diabetictoolboxjetpack.room_database.ProductDao;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class ProductRepository {
 
     private static final String TAG = "ProductRepository";
-    private final ProductDao mProductDao;
+    private final ProductDao productDao;
     private final LiveData<List<Product>> mAllProducts;
 
     public ProductRepository(Application application){
         AppDatabase db = AppDatabase.getDatabase(application);
-        mProductDao = db.productDao();
-        mAllProducts = mProductDao.getAllProducts();
+        productDao = db.productDao();
+        mAllProducts = productDao.getAllProducts();
     }
 
     public void insert(Product product) {
         AppDatabase.databaseWriteExecutor.execute(() -> {
             Log.d(TAG, "insert " + product + " starting");
-            mProductDao.insert(product);
+            productDao.insert(product);
         });
     }
 
     public void update(Product product){
         AppDatabase.databaseWriteExecutor.execute(() -> {
-            mProductDao.update(product);
+            productDao.update(product);
         });
     }
 
     public void delete(Product product){
         AppDatabase.databaseWriteExecutor.execute(() -> {
             Log.d(TAG, "delete: starting");
-            mProductDao.delete(product);
+            productDao.delete(product);
         });
     }
 
     public void deleteAllProducts(){
-        AppDatabase.databaseWriteExecutor.execute(mProductDao::deleteAllProducts);
+        AppDatabase.databaseWriteExecutor.execute(productDao::deleteAllProducts);
     }
 
 

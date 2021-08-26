@@ -237,7 +237,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="4dp"
                 android:layout_marginTop="4dp"
-                android:text="@string/macro_carbs_exchanger_used"
+                android:text="@string/macro_carb_exchangers_used"
                 android:textSize="11sp"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/diaryEntryTextCaloriesBurned" />

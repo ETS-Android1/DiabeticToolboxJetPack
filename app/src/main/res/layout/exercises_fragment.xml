@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/exercises_fragment"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui_and_data.exercises.ExercisesFragment">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/exercises_card_view_selection"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/exercises_card_view_summary"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <AutoCompleteTextView
+                android:id="@+id/exercises_auto_complete_text_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:hint="@string/search_exercise"
+                android:minHeight="48dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/exercises_recycler_view"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp"
+                android:scrollbars="vertical"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/exercises_auto_complete_text_view"
+                app:layout_constraintVertical_bias="0.0" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/exercises_card_view_summary"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/exercise_guideline">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/exercises_constraint_layout_summary"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clickable="true">
+
+            <TextView
+                android:id="@+id/exercises_text_summary"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="@string/exercises_summary"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/exercises_text_calories_burned"
+                android:layout_width="wrap_content"
+                android:layout_height="19dp"
+                android:layout_marginEnd="8dp"
+                android:text="@string/macro_calories_burned"
+                app:layout_constraintBaseline_toBaselineOf="@+id/exercises_text_calories_burned_value"
+                app:layout_constraintEnd_toStartOf="@+id/exercises_text_calories_burned_value" />
+
+            <TextView
+                android:id="@+id/exercises_text_carb_exchangers_used"
+                android:layout_width="wrap_content"
+                android:layout_height="19dp"
+                android:text="@string/macro_carb_exchangers_used"
+                app:layout_constraintBaseline_toBaselineOf="@+id/exercises_text_carb_exchangers_used_value"
+                app:layout_constraintEnd_toEndOf="@+id/exercises_text_calories_burned" />
+
+            <TextView
+                android:id="@+id/exercises_text_time_spent"
+                android:layout_width="wrap_content"
+                android:layout_height="19dp"
+                android:text="@string/cardio_time_spent"
+                app:layout_constraintBaseline_toBaselineOf="@+id/exercises_text_time_spent_value"
+                app:layout_constraintEnd_toEndOf="@+id/exercises_text_calories_burned" />
+
+            <TextView
+                android:id="@+id/exercises_text_calories_burned_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:text="@string/common_numeric_value_double"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/exercises_text_carb_exchangers_used_value"
+                android:layout_width="wrap_content"
+                android:layout_height="19dp"
+                android:layout_marginTop="32dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="32dp"
+                android:text="@string/common_numeric_value_double"
+                app:layout_constraintBottom_toTopOf="@+id/exercises_text_time_spent_value"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/exercises_text_calories_burned_value"
+                app:layout_constraintTop_toBottomOf="@+id/exercises_text_calories_burned_value" />
+
+            <TextView
+                android:id="@+id/exercises_text_time_spent_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:text="@string/common_numeric_value_double"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/exercises_text_carb_exchangers_used_value" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/exercise_guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.8" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

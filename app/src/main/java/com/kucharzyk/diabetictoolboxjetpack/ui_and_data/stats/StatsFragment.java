@@ -23,7 +23,7 @@ public class StatsFragment extends Fragment {
                              ViewGroup container, Bundle savedInstanceState) {
         statsViewModel =
                 new ViewModelProvider(this).get(StatsViewModel.class);
-        View root = inflater.inflate(R.layout.fragment_stats, container, false);
+        View root = inflater.inflate(R.layout.stats_fragment, container, false);
         final TextView textView = root.findViewById(R.id.text_stats);
         statsViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override

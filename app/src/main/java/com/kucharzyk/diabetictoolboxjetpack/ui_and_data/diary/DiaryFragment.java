@@ -29,7 +29,7 @@ public class DiaryFragment extends Fragment {
                              ViewGroup container, Bundle savedInstanceState) {
         diaryEntryViewModel =
                 new ViewModelProvider(this).get(DiaryEntryViewModel.class);
-        View root = inflater.inflate(R.layout.fragment_diary, container, false);
+        View root = inflater.inflate(R.layout.diary_fragment, container, false);
 
         buildRecyclerView(root);
 

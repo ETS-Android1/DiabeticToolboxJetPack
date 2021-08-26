@@ -19,6 +19,7 @@ public abstract class AppDatabase extends RoomDatabase {
 
     public abstract UserDao userDao();
     public abstract ProductDao productDao();
+    public abstract ExerciseDao exerciseDao();
     public abstract MealDao mealDao();
     public abstract MealProductCrossRefDao mealProductCrossRefDao();
     public abstract MealWithProductsDao mealWithProductsDao();

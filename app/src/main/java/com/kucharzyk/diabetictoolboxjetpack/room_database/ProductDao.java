@@ -8,7 +8,6 @@ import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 import androidx.room.Update;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Dao
@@ -23,10 +22,10 @@ public interface ProductDao {
     @Delete
     void delete (Product product);
 
-    @Query("DELETE FROM product_table")
+    @Query("DELETE FROM Products")
     void deleteAllProducts ();
 
-    @Query("SELECT * FROM product_table")
+    @Query("SELECT * FROM Products")
     LiveData<List<Product>> getAllProducts();
 
 }

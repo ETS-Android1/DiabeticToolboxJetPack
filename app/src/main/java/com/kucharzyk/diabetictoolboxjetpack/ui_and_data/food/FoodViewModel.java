@@ -1,4 +1,4 @@
-package com.kucharzyk.diabetictoolboxjetpack.ui_and_data.calculator;
+package com.kucharzyk.diabetictoolboxjetpack.ui_and_data.food;
 
 import android.app.Application;
 
@@ -24,7 +24,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CalculatorViewModel extends AndroidViewModel {
+public class FoodViewModel extends AndroidViewModel {
     private List<Product> meal;
     private MutableLiveData<List<Product>> mealSummary;
     private final LiveData<List<Product>> allProducts;
@@ -35,7 +35,7 @@ public class CalculatorViewModel extends AndroidViewModel {
     private final DiaryEntryRepository diaryEntryRepository;
     private final DiaryEntryWithMealsAndProductsRepository diaryEntryWithMealsAndProductsRepository;
 
-    public CalculatorViewModel(@NonNull @NotNull Application application) {
+    public FoodViewModel(@NonNull @NotNull Application application) {
         super(application);
 
         productRepository = new ProductRepository(application);

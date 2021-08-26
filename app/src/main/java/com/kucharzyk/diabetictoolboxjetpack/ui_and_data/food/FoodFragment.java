@@ -1,21 +1,6 @@
-package com.kucharzyk.diabetictoolboxjetpack.ui_and_data.calculator;
+package com.kucharzyk.diabetictoolboxjetpack.ui_and_data.food;
 
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-
-import androidx.cardview.widget.CardView;
-import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.fragment.app.Fragment;
-
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProvider;
-import androidx.navigation.NavController;
-import androidx.navigation.NavDirections;
-import androidx.navigation.fragment.NavHostFragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
@@ -24,6 +9,17 @@ import android.view.ViewGroup;
 import android.widget.AutoCompleteTextView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.NavController;
+import androidx.navigation.NavDirections;
+import androidx.navigation.fragment.NavHostFragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.kucharzyk.diabetictoolboxjetpack.Globals;
 import com.kucharzyk.diabetictoolboxjetpack.R;
@@ -32,7 +28,7 @@ import com.kucharzyk.diabetictoolboxjetpack.room_database.Product;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CalculatorFragment extends Fragment {
+public class FoodFragment extends Fragment {
     public static final String TAG = "CalculatorFragment";
 
     private TextView mMealCarbsValue;
@@ -41,15 +37,15 @@ public class CalculatorFragment extends Fragment {
     private TextView mealCarbsExchangerValue;
     private TextView mealFatExchangerValue;
 
-    private CalculatorViewModel calculatorViewModel;
+    private FoodViewModel foodViewModel;
     private FoodProductAdapter mFoodProductAdapter;
 
     private NavController navController;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        calculatorViewModel = new ViewModelProvider(requireActivity()).get(CalculatorViewModel.class);
-        View root = inflater.inflate(R.layout.fragment_calculator, container, false);
+        foodViewModel = new ViewModelProvider(requireActivity()).get(FoodViewModel.class);
+        View root = inflater.inflate(R.layout.food_fragment, container, false);
         navController = NavHostFragment.findNavController(this);
 
         buildRecyclerView(root);
@@ -116,13 +112,13 @@ public class CalculatorFragment extends Fragment {
         mMealSummaryConstraintLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                NavDirections action = CalculatorFragmentDirections.actionNavigationCalculatorToMealSummary();
+                NavDirections action = FoodFragmentDirections.actionNavigationCalculatorToMealSummary();
                 navController.navigate(action);
             }
         });
 
-        calculatorViewModel.getMealSummary().observe(getViewLifecycleOwner(), mealSummaryObserver);
-        calculatorViewModel.getAllProducts().observe(getViewLifecycleOwner(), allProductsObserver);
+        foodViewModel.getMealSummary().observe(getViewLifecycleOwner(), mealSummaryObserver);
+        foodViewModel.getAllProducts().observe(getViewLifecycleOwner(), allProductsObserver);
         return root;
     }
 
@@ -157,23 +153,23 @@ public class CalculatorFragment extends Fragment {
         mFoodProductAdapter.setOnItemClickListener(new FoodProductAdapter.OnItemClickListener() {
             @Override
             public void onAddProductClick(int position) {
-                if (!calculatorViewModel.getMeal().contains(mFoodProductAdapter.getProduct(position))) {
-                    calculatorViewModel.getMeal().add(mFoodProductAdapter.getProduct(position));
-                    calculatorViewModel.getMealSummary().setValue(calculatorViewModel.getMeal());
+                if (!foodViewModel.getMeal().contains(mFoodProductAdapter.getProduct(position))) {
+                    foodViewModel.getMeal().add(mFoodProductAdapter.getProduct(position));
+                    foodViewModel.getMealSummary().setValue(foodViewModel.getMeal());
                 }
             }
 
             @Override
             public void onDeleteProductClick(int position) {
-                calculatorViewModel.getMeal().remove(mFoodProductAdapter.getProduct(position));
-                calculatorViewModel.getMealSummary().setValue(calculatorViewModel.getMeal());
+                foodViewModel.getMeal().remove(mFoodProductAdapter.getProduct(position));
+                foodViewModel.getMealSummary().setValue(foodViewModel.getMeal());
             }
 
             @Override
             public void onItemClick(int position) {
                 Product product = mFoodProductAdapter.getProduct(position);
 
-                @NonNull NavDirections action = CalculatorFragmentDirections.
+                @NonNull NavDirections action = FoodFragmentDirections.
                         actionNavigationCalculatorToProductSummaryFragment(product, position);
                 navController.navigate(action);
             }

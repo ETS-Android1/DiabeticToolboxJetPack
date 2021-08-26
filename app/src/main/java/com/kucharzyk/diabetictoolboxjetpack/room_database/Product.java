@@ -8,17 +8,17 @@ import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
-@Entity(tableName = "product_table")
+@Entity(tableName = "Products")
 @Keep public class Product implements Parcelable {
 
     @PrimaryKey(autoGenerate = true)
     @NonNull
     private int productId;
-    private String productName;
-    private Double carbohydrates;
-    private Double fat;
-    private Double proteins;
-    private Double servingSize;
+    private final String productName;
+    private final Double carbohydrates;
+    private final Double fat;
+    private final Double proteins;
+    private final Double servingSize;
 
     public Product(@NonNull String productName, Double carbohydrates, Double fat, Double proteins,
                    Double servingSize) {

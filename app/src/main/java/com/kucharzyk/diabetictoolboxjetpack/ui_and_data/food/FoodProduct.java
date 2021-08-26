@@ -1,4 +1,4 @@
-package com.kucharzyk.diabetictoolboxjetpack.ui_and_data.calculator;
+package com.kucharzyk.diabetictoolboxjetpack.ui_and_data.food;
 
 import com.kucharzyk.diabetictoolboxjetpack.room_database.Product;
 

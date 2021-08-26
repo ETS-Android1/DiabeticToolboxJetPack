@@ -1,4 +1,4 @@
-package com.kucharzyk.diabetictoolboxjetpack.ui_and_data.calculator;
+package com.kucharzyk.diabetictoolboxjetpack.ui_and_data.food;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -62,8 +62,8 @@ public class FoodProductAdapter extends RecyclerView.Adapter<FoodProductAdapter.
             mProductCarbsExchangerValue = itemView.findViewById(R.id.text_product_carbs_exchanger_value);
             mProductFatExchangerValue = itemView.findViewById(R.id.text_product_fat_exchanger_value);
 
-            mAddProductImage = itemView.findViewById(R.id.image_add_product);
-            mDeleteProductImage = itemView.findViewById(R.id.image_delete_product);
+            mAddProductImage = itemView.findViewById(R.id.execrise_example_image_add);
+            mDeleteProductImage = itemView.findViewById(R.id.exercise_example_image_delete);
             mEditProductImage = itemView.findViewById(R.id.image_edit_product);
 
             itemView.setOnClickListener(new View.OnClickListener() {

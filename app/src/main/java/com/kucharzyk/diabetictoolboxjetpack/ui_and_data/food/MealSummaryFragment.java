@@ -1,4 +1,4 @@
-package com.kucharzyk.diabetictoolboxjetpack.ui_and_data.calculator;
+package com.kucharzyk.diabetictoolboxjetpack.ui_and_data.food;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -30,7 +30,7 @@ import java.util.List;
 public class MealSummaryFragment extends Fragment {
     public static final String TAG = "MealSummaryFragment";
 
-    private CalculatorViewModel calculatorViewModel;
+    private FoodViewModel foodViewModel;
     private NavController navController;
     private MealSummaryAdapter mMealSummaryAdapter;
     //private TextView mealName;
@@ -40,7 +40,7 @@ public class MealSummaryFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        calculatorViewModel = new ViewModelProvider(requireActivity()).get(CalculatorViewModel.class);
+        foodViewModel = new ViewModelProvider(requireActivity()).get(FoodViewModel.class);
         View child = inflater.inflate(R.layout.fragment_meal_summary, container, false);
         navController = NavHostFragment.findNavController(this);
         buildRecyclerView(child);
@@ -57,7 +57,7 @@ public class MealSummaryFragment extends Fragment {
             }
         };
 
-        calculatorViewModel.getMealSummary().observe(getViewLifecycleOwner(), mealSummaryObserver);
+        foodViewModel.getMealSummary().observe(getViewLifecycleOwner(), mealSummaryObserver);
         return child;
     }
 
@@ -67,7 +67,7 @@ public class MealSummaryFragment extends Fragment {
         mDeleteMealButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                calculatorViewModel.getMeal().clear();
+                foodViewModel.getMeal().clear();
                 NavDirections action = MealSummaryFragmentDirections.actionMealSummaryToNavigationCalculator();
                 navController.navigate(action);
             }
@@ -79,22 +79,22 @@ public class MealSummaryFragment extends Fragment {
 
                 Meal currentMeal = new Meal("Meal " + Globals.SIMPLE_DATE_TIME_FORMAT.format(System.currentTimeMillis()),
                         LocalDate.now());
-                long mealId = calculatorViewModel.insertMeal(currentMeal);
+                long mealId = foodViewModel.insertMeal(currentMeal);
 
-                for (Product product: calculatorViewModel.getMeal()
+                for (Product product: foodViewModel.getMeal()
                      ) {
                     MealProductCrossRef mealProductCrossRef =  new MealProductCrossRef();
                     mealProductCrossRef.setMealId((int) mealId);
                     mealProductCrossRef.setProductId(product.getProductId());
                     mealProductCrossRef.setServingSize(product.getServingSize());
-                    calculatorViewModel.insertMealProductCrossRef(mealProductCrossRef);
+                    foodViewModel.insertMealProductCrossRef(mealProductCrossRef);
                 }
 
 /*                if (calculatorViewModel.getDiaryEntryFromDate(currentMeal.getMealDate()).getValue() == null) {
                     calculatorViewModel.insertDiaryEntry(new DiaryEntry(currentMeal.getMealDate()));
                 }*/
-                calculatorViewModel.insertDiaryEntry(new DiaryEntry(currentMeal.getMealDate()));
-                calculatorViewModel.getMeal().clear();
+                foodViewModel.insertDiaryEntry(new DiaryEntry(currentMeal.getMealDate()));
+                foodViewModel.getMeal().clear();
                 NavDirections action = MealSummaryFragmentDirections.actionMealSummaryToNavigationCalculator();
                 navController.navigate(action);
             }
@@ -122,8 +122,8 @@ public class MealSummaryFragment extends Fragment {
 
             @Override
             public void onDeleteProductClick(int position) {
-                calculatorViewModel.getMeal().remove(mMealSummaryAdapter.getProduct(position));
-                calculatorViewModel.getMealSummary().setValue(calculatorViewModel.getMeal());
+                foodViewModel.getMeal().remove(mMealSummaryAdapter.getProduct(position));
+                foodViewModel.getMealSummary().setValue(foodViewModel.getMeal());
                 //TODO If numof(products) == 0 then go back to the CalculatorFragment
             }
         });

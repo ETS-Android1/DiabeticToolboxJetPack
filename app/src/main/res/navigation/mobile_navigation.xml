@@ -9,12 +9,12 @@
         android:id="@+id/navigation_home"
         android:name="com.kucharzyk.diabetictoolboxjetpack.ui_and_data.home.HomeFragment"
         android:label="@string/title_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/home_fragment" />
     <fragment
         android:id="@+id/navigation_food"
-        android:name="com.kucharzyk.diabetictoolboxjetpack.ui_and_data.calculator.CalculatorFragment"
+        android:name="com.kucharzyk.diabetictoolboxjetpack.ui_and_data.food.FoodFragment"
         android:label="@string/title_calculator"
-        tools:layout="@layout/fragment_calculator" >
+        tools:layout="@layout/food_fragment" >
         <action
             android:id="@+id/action_navigation_calculator_to_productSummaryFragment"
             app:destination="@id/productSummaryFragment" />
@@ -26,15 +26,15 @@
         android:id="@+id/navigation_stats"
         android:name="com.kucharzyk.diabetictoolboxjetpack.ui_and_data.stats.StatsFragment"
         android:label="@string/title_stats"
-        tools:layout="@layout/fragment_stats" />
+        tools:layout="@layout/stats_fragment" />
     <fragment
         android:id="@+id/navigation_diary"
         android:name="com.kucharzyk.diabetictoolboxjetpack.ui_and_data.diary.DiaryFragment"
         android:label="@string/title_diary"
-        tools:layout="@layout/fragment_diary" />
+        tools:layout="@layout/diary_fragment" />
     <fragment
         android:id="@+id/productSummaryFragment"
-        android:name="com.kucharzyk.diabetictoolboxjetpack.ui_and_data.calculator.ProductSummaryFragment"
+        android:name="com.kucharzyk.diabetictoolboxjetpack.ui_and_data.food.ProductSummaryFragment"
         android:label="Product Summary">
         <argument
             android:name="ParcelizedProduct"
@@ -51,7 +51,7 @@
     </fragment>
     <fragment
         android:id="@+id/mealSummary"
-        android:name="com.kucharzyk.diabetictoolboxjetpack.ui_and_data.calculator.MealSummaryFragment"
+        android:name="com.kucharzyk.diabetictoolboxjetpack.ui_and_data.food.MealSummaryFragment"
         android:label="Meal Summary"
         tools:layout="@layout/fragment_meal_summary">
         <action

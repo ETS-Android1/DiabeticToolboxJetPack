@@ -38,7 +38,7 @@
     <string name="date">Date</string>
     <string name="image_view_exercises">Exercises</string>
     <string name="macro_calories_burned">Calories burned:</string>
-    <string name="macro_carbs_exchanger_used">WW used:</string>
+    <string name="macro_carb_exchangers_used">WW used:</string>
     <string name="image_view_glucose">Glucose measurements</string>
     <string name="glucose_measurements_taken">Measurements taken:</string>
     <string name="common_numeric_value_int">00</string>
@@ -48,5 +48,10 @@
     <string name="food_tab">Food</string>
     <string name="exercises_tab">Exercises</string>
     <string name="measurements_tab">Measurements</string>
+    <string name="search_exercise">Search exercise...</string>
+    <string name="meal_summary">Meal Summary</string>
+    <string name="exercises_summary">Exercises Summary</string>
+    <string name="cardio_time_spent">Total time:</string>
+    <string name="example_exercise">Example Exercise</string>
 
 </resources>
