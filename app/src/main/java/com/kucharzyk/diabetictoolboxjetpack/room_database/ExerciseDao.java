@@ -15,6 +15,6 @@ public interface ExerciseDao {
     void insert(Exercise exercise);
 
     @Query("SELECT * FROM Exercises")
-    LiveData<List<Exercise>> getAllExercies();
+    LiveData<List<Exercise>> getAllExercises();
 
 }

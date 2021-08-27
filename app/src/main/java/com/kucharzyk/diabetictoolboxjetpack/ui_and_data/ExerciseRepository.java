@@ -19,7 +19,7 @@ public class ExerciseRepository {
     public ExerciseRepository(Application application){
         AppDatabase db = AppDatabase.getDatabase(application);
         exerciseDao = db.exerciseDao();
-        allExercises = exerciseDao.getAllExercies();
+        allExercises = exerciseDao.getAllExercises();
     }
 
     public void insert(Exercise exercise) {

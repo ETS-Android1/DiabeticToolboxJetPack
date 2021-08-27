@@ -9,9 +9,11 @@ import androidx.lifecycle.LiveData;
 
 import com.kucharzyk.diabetictoolboxjetpack.room_database.DiaryEntryWithMealsAndProducts;
 import com.kucharzyk.diabetictoolboxjetpack.room_database.Meal;
+import com.kucharzyk.diabetictoolboxjetpack.room_database.MealProductCrossRef;
 import com.kucharzyk.diabetictoolboxjetpack.room_database.MealWithProducts;
 import com.kucharzyk.diabetictoolboxjetpack.room_database.Product;
 import com.kucharzyk.diabetictoolboxjetpack.ui_and_data.DiaryEntryWithMealsAndProductsRepository;
+import com.kucharzyk.diabetictoolboxjetpack.ui_and_data.MealProductCrossRefRepository;
 import com.kucharzyk.diabetictoolboxjetpack.ui_and_data.MealRepository;
 import com.kucharzyk.diabetictoolboxjetpack.ui_and_data.MealWithProductsRepository;
 import com.kucharzyk.diabetictoolboxjetpack.ui_and_data.ProductRepository;
@@ -26,6 +28,7 @@ public class DiaryEntryViewModel extends AndroidViewModel {
     private final ProductRepository productRepository;
     private final MealRepository mealRepository;
     private final MealWithProductsRepository mealWithProductsRepository;
+    private final MealProductCrossRefRepository mealProductCrossRefRepository;
     private final DiaryEntryWithMealsAndProductsRepository diaryEntryWithMealsAndProductsRepository;
     private final LiveData<List<Product>> allProducts;
     private final LiveData<List<Meal>> allMeals;
@@ -41,6 +44,7 @@ public class DiaryEntryViewModel extends AndroidViewModel {
         mealRepository = new MealRepository(application);
         mealWithProductsRepository = new MealWithProductsRepository(application);
         diaryEntryWithMealsAndProductsRepository = new DiaryEntryWithMealsAndProductsRepository(application);
+        mealProductCrossRefRepository = new MealProductCrossRefRepository(application);
 
         allProducts = productRepository.getAllProducts();
         allMeals = mealRepository.getAllMeals();
@@ -53,6 +57,12 @@ public class DiaryEntryViewModel extends AndroidViewModel {
         productRepository.insert(product);
     }
     public void delete(Product product) { productRepository.delete(product); }
+    public LiveData<MealProductCrossRef> getMealRefByProductId(int productId) {
+        return mealProductCrossRefRepository.getByProductId(productId);
+    }
+    public LiveData<List<MealProductCrossRef>> getAllCrossRefs() {
+        return mealProductCrossRefRepository.getAll();
+    }
     public LiveData<List<Product>> getAllProducts() {
         return allProducts;
     }

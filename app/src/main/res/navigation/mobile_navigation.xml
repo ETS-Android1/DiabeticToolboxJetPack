@@ -13,7 +13,7 @@
     <fragment
         android:id="@+id/navigation_food"
         android:name="com.kucharzyk.diabetictoolboxjetpack.ui_and_data.food.FoodFragment"
-        android:label="@string/title_calculator"
+        android:label="@string/title_food"
         tools:layout="@layout/food_fragment" >
         <action
             android:id="@+id/action_navigation_calculator_to_productSummaryFragment"
@@ -61,4 +61,9 @@
             android:id="@+id/action_mealSummary_to_productSummaryFragment"
             app:destination="@id/productSummaryFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/navigation_exercises"
+        android:name="com.kucharzyk.diabetictoolboxjetpack.ui_and_data.exercises.ExercisesFragment"
+        android:label="exercises_fragment"
+        tools:layout="@layout/exercises_fragment" />
 </navigation>

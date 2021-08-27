@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.kucharzyk.diabetictoolboxjetpack.R;
 import com.kucharzyk.diabetictoolboxjetpack.room_database.DiaryEntryWithMealsAndProducts;
+import com.kucharzyk.diabetictoolboxjetpack.room_database.MealProductCrossRef;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,6 +25,7 @@ public class DiaryFragment extends Fragment {
     private DiaryEntryViewModel diaryEntryViewModel;
     private DiaryEntryAdapter mAdapter;
     private List<DiaryEntrySummary> diaryEntrySummaries = new ArrayList<>();
+    private List<MealProductCrossRef> mealProductCrossRefList = new ArrayList<>();
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -37,17 +39,24 @@ public class DiaryFragment extends Fragment {
             @Override
             public void onChanged(List<DiaryEntryWithMealsAndProducts> diaryEntryWithMealsAndProducts) {
                 diaryEntryWithMealsAndProducts = diaryEntryViewModel.getAllDiaryEntries().getValue();
+
                 assert diaryEntryWithMealsAndProducts != null;
                 for (DiaryEntryWithMealsAndProducts diaryEntry:diaryEntryWithMealsAndProducts
                      ) {
-                        diaryEntrySummaries.add(new DiaryEntrySummary(diaryEntry.meals, diaryEntry.diaryEntry.getDiaryEntryDate()));
+                        diaryEntrySummaries.add(new DiaryEntrySummary(diaryEntry.meals, mealProductCrossRefList, diaryEntry.diaryEntry.getDiaryEntryDate()));
                 }
                 mAdapter.setDiaryEntries(diaryEntrySummaries);
             }
         };
 
+        final Observer<List<MealProductCrossRef>> refsObserver = new Observer<List<MealProductCrossRef>>() {
+            @Override
+            public void onChanged(List<MealProductCrossRef> refs) {
+                mealProductCrossRefList = refs;
+            }
+        };
+        diaryEntryViewModel.getAllCrossRefs().observe(getViewLifecycleOwner(), refsObserver);
         diaryEntryViewModel.getAllDiaryEntries().observe(getViewLifecycleOwner(), diaryEntriesObserver);
-
         return root;
     }
 

@@ -28,6 +28,16 @@ public class MealProductCrossRefRepository {
         });
     }
 
+    public LiveData<MealProductCrossRef> getByProductId(int productId) {
+        return mealProductCrossRefDao.getByProductId(productId);
+    }
+
+    public LiveData<List<MealProductCrossRef>> getAll() {
+        return mealProductCrossRefDao.getAllCrossRef();
+    }
+
+
+
 /*    public LiveData<List<Meal>> getAllMeals() {
         return allMeals;
     }*/

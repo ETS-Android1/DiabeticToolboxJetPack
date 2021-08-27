@@ -13,7 +13,8 @@ import androidx.sqlite.db.SupportSQLiteDatabase;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-@Database(entities = {User.class, Product.class, Meal.class, MealProductCrossRef.class, DiaryEntry.class}, version = 1)
+@Database(entities = {User.class, Product.class, Exercise.class, Meal.class,
+        MealProductCrossRef.class, DiaryEntry.class}, version = 1)
 @TypeConverters({Converters.class})
 public abstract class AppDatabase extends RoomDatabase {
 
@@ -71,6 +72,7 @@ public abstract class AppDatabase extends RoomDatabase {
                 // If you want to start with more words, just add them.
                 UserDao userDao = INSTANCE.userDao();
                 ProductDao productDao = INSTANCE.productDao();
+                ExerciseDao exerciseDao = INSTANCE.exerciseDao();
 
                 //userDao.deleteAll();
 
@@ -87,6 +89,13 @@ public abstract class AppDatabase extends RoomDatabase {
                 productDao.insert(new Product("Kiełbasa biała", 3.0, 28.0, 14.3, 100.0));
                 productDao.insert(new Product("Leczo", 5.5, 4.4, 1.2, 100.0));
                 productDao.insert(new Product("Marchew surowa", 8.7, 0.2, 1.0, 100.0));
+
+                exerciseDao.insert(new Exercise("Chodzenie 5 km/h", 122.0, 30.0));
+                exerciseDao.insert(new Exercise("Bieganie 8 km/h", 290.0, 30.0));
+                exerciseDao.insert(new Exercise("Bieganie 10 km/h", 367.0, 30.0));
+                exerciseDao.insert(new Exercise("Bieganie 12 km/h", 413.0, 30.0));
+                exerciseDao.insert(new Exercise("Jazda na rowerze (16-19 km/h)", 238.0, 30.0));
+                exerciseDao.insert(new Exercise("Jazda na rowerze (19-22 km/h)", 280.0, 30.0));
 
             });
         }

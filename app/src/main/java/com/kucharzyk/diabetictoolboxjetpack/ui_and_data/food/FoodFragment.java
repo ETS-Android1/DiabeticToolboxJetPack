@@ -141,7 +141,7 @@ public class FoodFragment extends Fragment {
 
 
     private void buildRecyclerView(View rootView) {
-        RecyclerView mRecyclerView = rootView.findViewById(R.id.recyclerViewCalculatorFragment);
+        RecyclerView mRecyclerView = rootView.findViewById(R.id.recyclerViewFoodFragment);
         mRecyclerView.setHasFixedSize(true);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
 

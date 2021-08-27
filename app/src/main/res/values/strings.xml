@@ -53,5 +53,7 @@
     <string name="exercises_summary">Exercises Summary</string>
     <string name="cardio_time_spent">Total time:</string>
     <string name="example_exercise">Example Exercise</string>
+    <string name="title_food">Food</string>
+    <string name="title_exercises">Exercises</string>
 
 </resources>

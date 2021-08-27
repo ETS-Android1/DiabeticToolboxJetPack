@@ -6,6 +6,7 @@ import com.kucharzyk.diabetictoolboxjetpack.room_database.Product;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
 public class DiaryEntrySummary {
 
@@ -13,8 +14,9 @@ public class DiaryEntrySummary {
     private final LocalDate diaryEntryDate;
     private List<MealProductCrossRef> productsWithServingSizes;
 
-    public DiaryEntrySummary (List<MealWithProducts> mealsWithProducts, LocalDate entryDate) {
+    public DiaryEntrySummary (List<MealWithProducts> mealsWithProducts, List<MealProductCrossRef> mealProductCrossRef, LocalDate entryDate) {
         mealWithProductsList = mealsWithProducts;
+        productsWithServingSizes = mealProductCrossRef;
         diaryEntryDate = entryDate;
     }
 
@@ -24,7 +26,8 @@ public class DiaryEntrySummary {
              ) {
             for (Product product:meal.getProducts()
                  ) {
-                carbohydrates += product.getCarbohydrates() * 0.01 * product.getServingSize();
+                Double servingSize = getServingSizeFromProductId(productsWithServingSizes, product);
+                carbohydrates += product.getCarbohydrates() * 0.01 * servingSize;
             }
         }
         return carbohydrates;
@@ -36,7 +39,8 @@ public class DiaryEntrySummary {
         ) {
             for (Product product:meal.getProducts()
             ) {
-                fat += product.getFat() * 0.01 * product.getServingSize();
+                Double servingSize = getServingSizeFromProductId(productsWithServingSizes, product);
+                fat += product.getFat() * 0.01 * servingSize;
             }
         }
         return fat;
@@ -48,7 +52,8 @@ public class DiaryEntrySummary {
         ) {
             for (Product product:meal.getProducts()
             ) {
-                proteins += product.getProteins() * 0.01 * product.getServingSize();
+                Double servingSize = getServingSizeFromProductId(productsWithServingSizes, product);
+                proteins += product.getProteins() * 0.01 * servingSize;
             }
         }
         return proteins;
@@ -56,5 +61,11 @@ public class DiaryEntrySummary {
 
     public LocalDate getDiaryEntryDate() {
         return diaryEntryDate;
+    }
+
+    private Double getServingSizeFromProductId(List<MealProductCrossRef> productsWithServingSizes, Product product) {
+        Optional<MealProductCrossRef> optionalCrossRef = productsWithServingSizes.stream().
+                filter(x -> x.getProductId() == product.getProductId()).findFirst();
+        return optionalCrossRef.isPresent() ? optionalCrossRef.get().getServingSize(): product.getServingSize();
     }
 }

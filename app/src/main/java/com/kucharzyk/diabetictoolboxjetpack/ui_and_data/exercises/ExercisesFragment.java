@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
@@ -15,15 +16,16 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.kucharzyk.diabetictoolboxjetpack.R;
+import com.kucharzyk.diabetictoolboxjetpack.room_database.Exercise;
+import com.kucharzyk.diabetictoolboxjetpack.room_database.Product;
+
+import java.util.List;
 
 public class ExercisesFragment extends Fragment {
 
     private ExercisesViewModel exercisesViewModel;
+    private ExerciseAdapter exerciseAdapter;
     private NavController navController;
-
-    public static ExercisesFragment newInstance() {
-        return new ExercisesFragment();
-    }
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
@@ -33,13 +35,27 @@ public class ExercisesFragment extends Fragment {
         navController = NavHostFragment.findNavController(this);
 
         buildRecyclerView(root);
+
+
+        final Observer<List<Exercise>> allExercisesObserver = new Observer<List<Exercise>>() {
+            @Override
+            public void onChanged(List<Exercise> exercises) {
+                exerciseAdapter.setExercises(exercises);
+            }
+        };
+
+        exercisesViewModel.getAllExercises().observe(getViewLifecycleOwner(),allExercisesObserver);
         return root;
     }
 
     private void buildRecyclerView(View rootView) {
-        RecyclerView mRecyclerView = rootView.findViewById(R.id.recyclerViewCalculatorFragment);
-        mRecyclerView.setHasFixedSize(true);
-        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
+        RecyclerView recyclerView = rootView.findViewById(R.id.exercises_recycler_view);
+        recyclerView.setHasFixedSize(true);
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
+
+        exerciseAdapter = new ExerciseAdapter();
+        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setAdapter(exerciseAdapter);
 
     }
 

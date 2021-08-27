@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.kucharzyk.diabetictoolboxjetpack.R;
 import com.kucharzyk.diabetictoolboxjetpack.room_database.Exercise;
+import com.kucharzyk.diabetictoolboxjetpack.room_database.Product;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -73,5 +74,11 @@ public class ExerciseAdapter extends RecyclerView.Adapter<ExerciseAdapter.Exerci
     @Override
     public int getItemCount() {
         return exercises.size();
+    }
+
+    public void setExercises(List<Exercise> exercises){
+        this.exercises = exercises;
+        exercisesFull = new ArrayList<>(exercises);
+        notifyDataSetChanged();
     }
 }
