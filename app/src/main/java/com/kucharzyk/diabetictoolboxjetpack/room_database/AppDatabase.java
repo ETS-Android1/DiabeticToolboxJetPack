@@ -78,17 +78,27 @@ public abstract class AppDatabase extends RoomDatabase {
 
                 User user = new User("Konrad");
                 userDao.insert(user);
-                Log.d(TAG, "onCreate: before new product");
-                productDao.insert(new Product("Agrest", 11.8, 0.9, 1.2, 100.0));
-                productDao.insert(new Product("Banan", 17.0, 0.3, 0.9, 100.0));
-                productDao.insert(new Product("Chleb orkiszowy", 50.0, 1.2, 8.0, 100.0));
-                productDao.insert(new Product("Delicje", 71.5, 8.4, 3.5, 100.0));
-                productDao.insert(new Product("Fasola biała gotowana", 25.7, 0.7, 8.9, 100.0));
-                productDao.insert(new Product("Herbatniki", 76.8, 11.0, 8.2, 100.0));
-                productDao.insert(new Product("Jabłko", 12.1, 0.7, 0.6, 100.0));
-                productDao.insert(new Product("Kiełbasa biała", 3.0, 28.0, 14.3, 100.0));
-                productDao.insert(new Product("Leczo", 5.5, 4.4, 1.2, 100.0));
-                productDao.insert(new Product("Marchew surowa", 8.7, 0.2, 1.0, 100.0));
+                productDao.insert(new Product("Agrest", 11.8, 0.9, 1.2, 60.0, 100.0));
+                productDao.insert(new Product("Ananas", 7.8, 0.0, 0.2, 33.0, 100.0));
+                productDao.insert(new Product("Banan", 17.0, 0.3, 0.9, 74.0, 100.0));
+                productDao.insert(new Product("Bakłażan", 6.3, 0.1, 1.1, 26.0, 100.0));
+                productDao.insert(new Product("Chleb orkiszowy", 50.0, 1.2, 8.0, 250.0, 100.0));
+                productDao.insert(new Product("Czekolada mleczna", 54.2, 30.7, 8.0, 526.0, 100.0));
+                productDao.insert(new Product("Delicje", 71.5, 8.4, 3.5, 376.0, 100.0));
+                productDao.insert(new Product("Dynia", 7.7, 0.3, 1.3, 39.0, 100.0));
+                productDao.insert(new Product("Fasola biała gotowana", 25.7, 0.7, 8.9, 141.0, 100.0));
+                productDao.insert(new Product("Figi suszone", 68.4, 1.2, 4.0, 300.0, 100.0));
+                productDao.insert(new Product("Galaretka wieprzowa", 4.3, 10.6, 14.7, 166.0, 100.0));
+                productDao.insert(new Product("Groszek zielony", 17.0, 0.4, 6.7, 98.0, 100.0));
+                productDao.insert(new Product("Herbatniki", 76.8, 11.0, 8.2, 439.0, 100.0));
+                productDao.insert(new Product("Jabłko", 12.1, 0.7, 0.6, 57.0,100.0));
+                productDao.insert(new Product("Jajecznica", 0.8, 9.7, 10.0, 131.0, 100.0));
+                productDao.insert(new Product("Kiełbasa biała", 3.0, 28.0, 14.3, 323.0,  100.0));
+                productDao.insert(new Product("Kotlet mielony", 21.1, 11.8, 13.0, 284.0, 100.0));
+                productDao.insert(new Product("Leczo", 5.5, 4.4, 1.2, 60.0,  100.0));
+                productDao.insert(new Product("Lody waniliowe", 13.6, 6.5, 1.8, 120.0, 100.0));
+                productDao.insert(new Product("Marchew surowa", 8.7, 0.2, 1.0, 40.0,  100.0));
+                productDao.insert(new Product("Morele", 11.9, 0.2, 0.7, 52.0, 100.0));
 
                 exerciseDao.insert(new Exercise("Chodzenie 5 km/h", 122.0, 30.0));
                 exerciseDao.insert(new Exercise("Bieganie 8 km/h", 290.0, 30.0));

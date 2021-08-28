@@ -43,7 +43,7 @@ public class DiaryEntryAdapter extends RecyclerView.Adapter<DiaryEntryAdapter.Di
         private final TextView diaryEntryCarbohydrateValue;
         private final TextView diaryEntryFatValue;
         private final TextView diaryEntryProteinsValue;
-        //private final TextView diaryEntryCaloriesValue;
+        private final TextView diaryEntryCaloriesValue;
         private final TextView diaryEntryCarbsExchangerValue;
         private final TextView diaryEntryFatExchangerValue;
         private final TextView diaryEntryDate;
@@ -57,7 +57,7 @@ public class DiaryEntryAdapter extends RecyclerView.Adapter<DiaryEntryAdapter.Di
             diaryEntryCarbohydrateValue = itemView.findViewById(R.id.diaryEntryTextViewCarbsValue);
             diaryEntryFatValue = itemView.findViewById(R.id.diaryEntryTextViewFatValue);
             diaryEntryProteinsValue = itemView.findViewById(R.id.diaryEntryTextViewProteinsValue);
-            //diaryEntryCaloriesValue = itemView.findViewById(R.id.diaryEntryTextViewCaloriesValue);
+            diaryEntryCaloriesValue = itemView.findViewById(R.id.diaryEntryTextViewCaloriesValue);
             diaryEntryCarbsExchangerValue = itemView.findViewById(R.id.diaryEntryTextViewCarbsExchangerValue);
             diaryEntryFatExchangerValue = itemView.findViewById(R.id.diaryEntryTextViewFatExchangerValue);
             diaryEntryDate = itemView.findViewById(R.id.diaryEntryTextViewDate);
@@ -122,6 +122,8 @@ public class DiaryEntryAdapter extends RecyclerView.Adapter<DiaryEntryAdapter.Di
                 format(currentDiaryEntry.getFat()));
         holder.diaryEntryProteinsValue.setText(Globals.REAL_FORMATTER.
                 format(currentDiaryEntry.getProteins()));
+        holder.diaryEntryCaloriesValue.setText(Globals.REAL_FORMATTER.
+                format(currentDiaryEntry.getCalories()));
         holder.diaryEntryCarbsExchangerValue.setText(Globals.REAL_FORMATTER.
                 format((currentDiaryEntry.getCarbohydrates()) / 12));
         holder.diaryEntryFatExchangerValue.setText(Globals.REAL_FORMATTER.

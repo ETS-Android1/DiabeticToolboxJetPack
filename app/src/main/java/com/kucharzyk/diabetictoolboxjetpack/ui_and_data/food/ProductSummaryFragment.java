@@ -34,6 +34,7 @@ public class ProductSummaryFragment extends Fragment {
     private Double productCarbohydrates;
     private Double productFat;
     private Double productProteins;
+    private Double productCalories;
     private Double productCarbohydrateExchangerValue;
     private Double productProteinFatExchangerValue;
     private Double productServingSize;
@@ -42,6 +43,7 @@ public class ProductSummaryFragment extends Fragment {
     TextView mProductCarbohydrates;
     TextView mProductFat;
     TextView mProductProteins;
+    TextView mProductCalories;
     TextView mProductCarbohydrateExchangerValue;
     TextView mProductProteinFatExchangerValue;
     TextInputEditText mProductServingSize;
@@ -58,6 +60,7 @@ public class ProductSummaryFragment extends Fragment {
         mProductCarbohydrates = child.findViewById(R.id.text_product_carbs_value);
         mProductFat = child.findViewById(R.id.text_product_fat_value);
         mProductProteins = child.findViewById(R.id.text_product_proteins_value);
+        mProductCalories = child.findViewById(R.id.text_product_calories_value);
         mProductCarbohydrateExchangerValue = child.findViewById(R.id.text_product_carbs_exchanger_value);
         mProductProteinFatExchangerValue = child.findViewById(R.id.text_product_fat_exchanger_value);
         mProductServingSize = child.findViewById(R.id.edit_text_input_serving_size);
@@ -75,7 +78,7 @@ public class ProductSummaryFragment extends Fragment {
         ratio = calculateRatio(productServingSize);
         getProductAttributes(currentProduct, productServingSize);
         setProductAttributes(productName, productCarbohydrates, productFat, productProteins,
-                productCarbohydrateExchangerValue, productProteinFatExchangerValue);
+                productCalories, productCarbohydrateExchangerValue, productProteinFatExchangerValue);
 
         mProductServingSize.addTextChangedListener(new TextWatcher() {
             @Override
@@ -90,7 +93,7 @@ public class ProductSummaryFragment extends Fragment {
                 } else productServingSize = 100.0;
                 getProductAttributes(currentProduct, productServingSize);
                 setProductAttributes(productName, productCarbohydrates, productFat, productProteins,
-                        productCarbohydrateExchangerValue, productProteinFatExchangerValue);
+                        productCalories, productCarbohydrateExchangerValue, productProteinFatExchangerValue);
             }
 
             @Override
@@ -101,7 +104,8 @@ public class ProductSummaryFragment extends Fragment {
         mSaveProductButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Product newProduct = new Product(productName, productCarbohydrates, productFat, productProteins, productServingSize);
+                Product newProduct = new Product(productName, productCarbohydrates, productFat,
+                        productProteins, productCalories, productServingSize);
                 newProduct.setProductId(currentProduct.getProductId());
                 List<Product> allProducts = foodViewModel.getMeal();
                 if (Globals.containsProduct(allProducts, currentProduct.getProductName())) {
@@ -132,12 +136,14 @@ public class ProductSummaryFragment extends Fragment {
 
     private void setProductAttributes(String productName, Double productCarbohydrates,
                                       Double productFat, Double productProteins,
+                                      Double productCalories,
                                       Double productCarbohydrateExchangerValue,
                                       Double productProteinFatExchangerValue) {
         mProductName.setText(productName);
         mProductCarbohydrates.setText(Globals.REAL_FORMATTER.format((productCarbohydrates)));
         mProductFat.setText(Globals.REAL_FORMATTER.format(productFat));
         mProductProteins.setText(Globals.REAL_FORMATTER.format(productProteins));
+        mProductCalories.setText(Globals.REAL_FORMATTER.format(productCalories));
         mProductCarbohydrateExchangerValue.setText(Globals.REAL_FORMATTER.format(productCarbohydrateExchangerValue));
         mProductProteinFatExchangerValue.setText(Globals.REAL_FORMATTER.format(productProteinFatExchangerValue));
     }
@@ -147,6 +153,7 @@ public class ProductSummaryFragment extends Fragment {
         productCarbohydrates = ratio * productServingSize * currentProduct.getCarbohydrates();
         productFat = ratio * productServingSize * currentProduct.getFat();
         productProteins = ratio * productServingSize * currentProduct.getProteins();
+        productCalories = ratio * productServingSize * currentProduct.getCalories();
         productCarbohydrateExchangerValue = productCarbohydrates / 12;
         productProteinFatExchangerValue = (9 * productFat + 4 * productProteins) / 100;
     }

@@ -18,14 +18,16 @@ import androidx.room.PrimaryKey;
     private final Double carbohydrates;
     private final Double fat;
     private final Double proteins;
+    private final Double calories;
     private final Double servingSize;
 
     public Product(@NonNull String productName, Double carbohydrates, Double fat, Double proteins,
-                   Double servingSize) {
+                   Double calories, Double servingSize) {
         this.productName = productName;
         this.carbohydrates = carbohydrates;
         this.fat = fat;
         this.proteins = proteins;
+        this.calories = calories;
         this.servingSize = servingSize;
     }
 
@@ -48,6 +50,10 @@ import androidx.room.PrimaryKey;
 
     public Double getProteins() {
         return proteins;
+    }
+
+    public Double getCalories() {
+        return calories;
     }
 
     public Double getServingSize() {
@@ -73,6 +79,11 @@ import androidx.room.PrimaryKey;
             proteins = null;
         } else {
             proteins = in.readDouble();
+        }
+        if (in.readByte() == 0) {
+            calories = null;
+        } else {
+            calories = in.readDouble();
         }
         if (in.readByte() == 0) {
             servingSize = null;
@@ -119,6 +130,12 @@ import androidx.room.PrimaryKey;
         } else {
             dest.writeByte((byte) 1);
             dest.writeDouble(proteins);
+        }
+        if (calories == null) {
+            dest.writeByte((byte) 0);
+        } else {
+            dest.writeByte((byte) 1);
+            dest.writeDouble(calories);
         }
         if (servingSize == null) {
             dest.writeByte((byte) 0);

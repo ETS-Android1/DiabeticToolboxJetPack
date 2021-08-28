@@ -59,6 +59,19 @@ public class DiaryEntrySummary {
         return proteins;
     }
 
+    public Double getCalories() {
+        double calories = 0;
+        for (MealWithProducts meal:mealWithProductsList
+        ) {
+            for (Product product:meal.getProducts()
+            ) {
+                Double servingSize = getServingSizeFromProductId(productsWithServingSizes, product);
+                calories += product.getCalories() * 0.01 * servingSize;
+            }
+        }
+        return calories;
+    }
+
     public LocalDate getDiaryEntryDate() {
         return diaryEntryDate;
     }

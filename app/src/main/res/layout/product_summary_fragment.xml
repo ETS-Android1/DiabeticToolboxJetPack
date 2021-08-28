@@ -164,6 +164,27 @@
                     app:layout_constraintEnd_toEndOf="parent" />
 
                 <TextView
+                    android:id="@+id/text_product_calories"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginTop="16dp"
+                    android:text="@string/macro_calories"
+                    android:textSize="18sp"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/text_product_proteins" />
+
+                <TextView
+                    android:id="@+id/text_product_calories_value"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="4dp"
+                    android:text="@string/common_numeric_value_double"
+                    android:textSize="18sp"
+                    app:layout_constraintBaseline_toBaselineOf="@id/text_product_calories"
+                    app:layout_constraintEnd_toEndOf="parent" />
+
+                <TextView
                     android:id="@+id/text_product_carbs_exchanger"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -172,7 +193,7 @@
                     android:text="@string/macro_carbs_exchanger"
                     android:textSize="18sp"
                     app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/text_product_proteins" />
+                    app:layout_constraintTop_toBottomOf="@id/text_product_calories" />
 
                 <TextView
                     android:id="@+id/text_product_carbs_exchanger_value"

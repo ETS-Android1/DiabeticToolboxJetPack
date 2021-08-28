@@ -34,6 +34,7 @@ public class FoodFragment extends Fragment {
     private TextView mMealCarbsValue;
     private TextView mMealFatValue;
     private TextView mMealProteinValue;
+    private TextView mMealCaloriesValue;
     private TextView mealCarbsExchangerValue;
     private TextView mealFatExchangerValue;
 
@@ -53,6 +54,7 @@ public class FoodFragment extends Fragment {
         mMealCarbsValue = root.findViewById(R.id.text_carbs_summary_value);
         mMealFatValue = root.findViewById(R.id.text_fat_summary_value);
         mMealProteinValue = root.findViewById(R.id.text_proteins_summary_value);
+        mMealCaloriesValue = root.findViewById(R.id.text_calories_summary_value);
         mealCarbsExchangerValue = root.findViewById(R.id.text_carbs_exchanger_summary_value);
         mealFatExchangerValue = root.findViewById(R.id.text_protein_fat_exchanger_summary_value);
         AutoCompleteTextView mMealTextView = root.findViewById(R.id.MealAutoCompleteTextView);
@@ -82,17 +84,20 @@ public class FoodFragment extends Fragment {
                 Double sumMealCarbsValue = 0.0;
                 Double sumMealFatValue = 0.0;
                 Double sumMealProteinsValue = 0.0;
+                Double sumMealCaloriesValue = 0.0;
 
                 if (foodProducts != null) {
                     for (Product product : foodProducts) {
-                        sumMealCarbsValue = sumMealCarbsValue + product.getCarbohydrates();
-                        sumMealFatValue = sumMealFatValue + product.getFat();
-                        sumMealProteinsValue = sumMealProteinsValue + product.getProteins();
+                        sumMealCarbsValue += product.getCarbohydrates();
+                        sumMealFatValue += product.getFat();
+                        sumMealProteinsValue += product.getProteins();
+                        sumMealCaloriesValue += product.getCalories();
                     }
                 }
                 mMealCarbsValue.setText(Globals.REAL_FORMATTER.format(sumMealCarbsValue));
                 mMealFatValue.setText(Globals.REAL_FORMATTER.format(sumMealFatValue));
                 mMealProteinValue.setText(Globals.REAL_FORMATTER.format(sumMealProteinsValue));
+                mMealCaloriesValue.setText(Globals.REAL_FORMATTER.format(sumMealCaloriesValue));
                 mealCarbsExchangerValue.
                         setText(Globals.REAL_FORMATTER.format
                                 (sumMealCarbsValue / 12));

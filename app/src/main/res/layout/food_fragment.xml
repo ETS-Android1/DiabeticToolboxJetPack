@@ -82,7 +82,7 @@
                 android:id="@+id/text_carbs_exchanger"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="4dp"
+                android:layout_marginEnd="8dp"
                 android:text="WW:"
                 app:layout_constraintBaseline_toBaselineOf="@+id/text_carbs_exchanger_summary_value"
                 app:layout_constraintEnd_toStartOf="@+id/text_carbs_exchanger_summary_value" />
@@ -100,7 +100,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="19dp"
                 android:text="@string/macro_fat"
-                app:layout_constraintBaseline_toBaselineOf="@+id/text_fat_summary_value"
+                app:layout_constraintBaseline_toBaselineOf="@+id/text_protein_fat_exchanger_summary_value"
                 app:layout_constraintEnd_toEndOf="@+id/text_meal_carbs_summary" />
 
             <TextView
@@ -108,20 +108,46 @@
                 android:layout_width="wrap_content"
                 android:layout_height="19dp"
                 android:text="@string/macro_proteins"
-                app:layout_constraintBaseline_toBaselineOf="@+id/text_proteins_summary_value"
+                app:layout_constraintBaseline_toBaselineOf="@+id/text_calories_summary_value"
                 app:layout_constraintEnd_toEndOf="@+id/text_meal_fat_summary" />
 
             <TextView
                 android:id="@+id/text_meal_carbs_summary"
                 android:layout_width="wrap_content"
                 android:layout_height="19dp"
-                android:layout_marginEnd="8dp"
+                android:layout_marginEnd="6dp"
                 android:text="@string/macro_carbs"
-                app:layout_constraintBaseline_toBaselineOf="@+id/text_carbs_summary_value"
+                app:layout_constraintBaseline_toBaselineOf="@+id/text_carbs_exchanger_summary_value"
                 app:layout_constraintEnd_toStartOf="@+id/text_carbs_summary_value" />
 
             <TextView
+                android:id="@+id/text_meal_calories_summary"
+                android:layout_width="wrap_content"
+                android:layout_height="19dp"
+                android:text="@string/macro_calories"
+                app:layout_constraintBaseline_toBaselineOf="@+id/text_calories_summary_value"
+                app:layout_constraintEnd_toEndOf="@+id/text_protein_fat_exchanger" />
+
+            <TextView
                 android:id="@+id/text_carbs_summary_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="24dp"
+                android:text="@string/common_numeric_value_double"
+                app:layout_constraintBaseline_toBaselineOf="@+id/text_carbs_exchanger_summary_value"
+                app:layout_constraintEnd_toStartOf="@+id/text_meal_calories_summary" />
+
+            <TextView
+                android:id="@+id/text_calories_summary_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:text="@string/common_numeric_value_double"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/text_protein_fat_exchanger_summary_value" />
+
+            <TextView
+                android:id="@+id/text_carbs_exchanger_summary_value"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
@@ -131,44 +157,31 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/text_carbs_exchanger_summary_value"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="24dp"
-                android:text="@string/common_numeric_value_double"
-                app:layout_constraintBaseline_toBaselineOf="@+id/text_meal_carbs_summary"
-                app:layout_constraintEnd_toStartOf="@+id/text_meal_carbs_summary" />
-
-            <TextView
                 android:id="@+id/text_fat_summary_value"
                 android:layout_width="wrap_content"
                 android:layout_height="19dp"
-                android:layout_marginTop="32dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginBottom="32dp"
                 android:text="@string/common_numeric_value_double"
-                app:layout_constraintBottom_toTopOf="@+id/text_proteins_summary_value"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="@+id/text_carbs_summary_value"
-                app:layout_constraintTop_toBottomOf="@+id/text_carbs_summary_value" />
+                app:layout_constraintBaseline_toBaselineOf="@+id/text_protein_fat_exchanger_summary_value"
+                app:layout_constraintEnd_toEndOf="@+id/text_carbs_summary_value" />
 
             <TextView
                 android:id="@+id/text_proteins_summary_value"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
                 android:text="@string/common_numeric_value_double"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="@+id/text_fat_summary_value" />
+                app:layout_constraintBaseline_toBaselineOf="@+id/text_calories_summary_value"
+                app:layout_constraintEnd_toEndOf="@+id/text_fat_summary_value" />
 
             <TextView
                 android:id="@+id/text_protein_fat_exchanger_summary_value"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="24dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
                 android:text="@string/common_numeric_value_double"
-                app:layout_constraintBaseline_toBaselineOf="@+id/text_meal_proteins_summary"
-                app:layout_constraintEnd_toStartOf="@+id/text_meal_carbs_summary" />
+                app:layout_constraintBottom_toTopOf="@+id/text_calories_summary_value"
+                app:layout_constraintEnd_toEndOf="@+id/text_carbs_exchanger_summary_value"
+                app:layout_constraintTop_toBottomOf="@+id/text_carbs_exchanger_summary_value" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
