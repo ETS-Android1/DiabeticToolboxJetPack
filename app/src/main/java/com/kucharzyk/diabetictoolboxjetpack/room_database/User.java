@@ -1,14 +1,18 @@
 package com.kucharzyk.diabetictoolboxjetpack.room_database;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
 @Entity(tableName = "user_table")
-public class User {
+public class User implements Parcelable {
 
     @PrimaryKey(autoGenerate = true)
     private Integer userID;
-    private String username;
+    private final String username;
+    private final Double weight;
     //private String name;
     //private String surname;
     //private String email;
@@ -20,27 +24,42 @@ public class User {
     //@Embedded
     //private MedicalData medicalData;
 
-    /*public User(String username, String name, String surname, String email, String phoneNumber, String gender, Integer age) {
-        this.username = username;
-        this.name = name;
-        this.surname = surname;
-        this.email = email;
-        this.phoneNumber = phoneNumber;
-        this.gender = gender;
-        this.age = age;
-    }*/
 
-    public User(String username){
+    public User(String username, Double weight) {
         this.username = username;
+        this.weight = weight;
     }
+
+    protected User(Parcel in) {
+        if (in.readByte() == 0) {
+            userID = null;
+        } else {
+            userID = in.readInt();
+        }
+        username = in.readString();
+        if (in.readByte() == 0) {
+            weight = null;
+        } else {
+            weight = in.readDouble();
+        }
+    }
+
+    public static final Creator<User> CREATOR = new Creator<User>() {
+        @Override
+        public User createFromParcel(Parcel in) {
+            return new User(in);
+        }
+
+        @Override
+        public User[] newArray(int size) {
+            return new User[size];
+        }
+    };
 
     public void setUserID(Integer userID) {
         this.userID = userID;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
-    }
     /*
     public void setName(String name) {
         this.name = name;
@@ -81,6 +100,33 @@ public class User {
     public String getUsername() {
         return username;
     }
+
+    public Double getWeight() {
+        return weight;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+        if (userID == null) {
+            parcel.writeByte((byte) 0);
+        } else {
+            parcel.writeByte((byte) 1);
+            parcel.writeInt(userID);
+        }
+        parcel.writeString(username);
+        if (weight == null) {
+            parcel.writeByte((byte) 0);
+        } else {
+            parcel.writeByte((byte) 1);
+            parcel.writeDouble(weight);
+        }
+    }
+
     /*
     public String getName() {
         return name;

@@ -8,13 +8,11 @@ import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 import androidx.room.Update;
 
-import java.util.List;
-
 @Dao
 public interface UserDao {
 
     @Query("SELECT * FROM user_table")
-    LiveData<List<User>> getAllUsers();
+    LiveData<User> getUser();
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     void insert (User user);

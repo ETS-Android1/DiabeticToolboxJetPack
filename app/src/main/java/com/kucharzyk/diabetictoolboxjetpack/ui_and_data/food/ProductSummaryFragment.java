@@ -54,7 +54,7 @@ public class ProductSummaryFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         foodViewModel = new ViewModelProvider(requireActivity()).get(FoodViewModel.class);
-        View child = inflater.inflate(R.layout.product_summary_fragment, container, false);
+        View child = inflater.inflate(R.layout.fragment_product_summary, container, false);
         navController = NavHostFragment.findNavController(this);
         mProductName = child.findViewById(R.id.text_product_name);
         mProductCarbohydrates = child.findViewById(R.id.text_product_carbs_value);
@@ -71,7 +71,6 @@ public class ProductSummaryFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         currentProduct = ProductSummaryFragmentArgs.fromBundle(getArguments()).getParcelizedProduct();
-        //Integer currentProductPosition = ProductSummaryFragmentArgs.fromBundle(getArguments()).getPosition();
 
         String productName = currentProduct.getProductName();
         productServingSize = currentProduct.getServingSize();

@@ -6,7 +6,6 @@ import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AutoCompleteTextView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -21,6 +20,7 @@ import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.textfield.TextInputEditText;
 import com.kucharzyk.diabetictoolboxjetpack.Globals;
 import com.kucharzyk.diabetictoolboxjetpack.R;
 import com.kucharzyk.diabetictoolboxjetpack.room_database.Product;
@@ -57,11 +57,11 @@ public class FoodFragment extends Fragment {
         mMealCaloriesValue = root.findViewById(R.id.text_calories_summary_value);
         mealCarbsExchangerValue = root.findViewById(R.id.text_carbs_exchanger_summary_value);
         mealFatExchangerValue = root.findViewById(R.id.text_protein_fat_exchanger_summary_value);
-        AutoCompleteTextView mMealTextView = root.findViewById(R.id.MealAutoCompleteTextView);
+        TextInputEditText productSearchBar = root.findViewById(R.id.food_fragment_TextInputEditText_searched_product);
         CardView mMealSummaryCardView = root.findViewById(R.id.view_meal_summary_card_view);
         ConstraintLayout mMealSummaryConstraintLayout = root.findViewById(R.id.layout_meal_summary_constraint_layout);
 
-        mMealTextView.addTextChangedListener(new TextWatcher() {
+        productSearchBar.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 

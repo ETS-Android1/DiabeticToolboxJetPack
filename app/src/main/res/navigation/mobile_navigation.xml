@@ -35,7 +35,7 @@
     <fragment
         android:id="@+id/productSummaryFragment"
         android:name="com.kucharzyk.diabetictoolboxjetpack.ui_and_data.food.ProductSummaryFragment"
-        android:label="Product Summary">
+        android:label="@string/title_product_summary">
         <argument
             android:name="ParcelizedProduct"
             app:argType="com.kucharzyk.diabetictoolboxjetpack.room_database.Product" />
@@ -64,6 +64,25 @@
     <fragment
         android:id="@+id/navigation_exercises"
         android:name="com.kucharzyk.diabetictoolboxjetpack.ui_and_data.exercises.ExercisesFragment"
-        android:label="exercises_fragment"
-        tools:layout="@layout/exercises_fragment" />
+        android:label="@string/title_exercises"
+        tools:layout="@layout/exercises_fragment" >
+        <action
+            android:id="@+id/action_navigation_exercises_to_exerciseSummaryFragment"
+            app:destination="@id/exerciseSummaryFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/exerciseSummaryFragment"
+        android:name="com.kucharzyk.diabetictoolboxjetpack.ui_and_data.exercises.ExerciseSummaryFragment"
+        android:label="@string/title_exercise_summary"
+        tools:layout="@layout/fragment_exercise_summary" >
+        <argument
+            android:name="parcelizedExercise"
+            app:argType="com.kucharzyk.diabetictoolboxjetpack.room_database.Exercise" />
+        <argument
+            android:name="position"
+            app:argType="integer" />
+        <argument
+            android:name="parcelizedUser"
+            app:argType="com.kucharzyk.diabetictoolboxjetpack.room_database.User" />
+    </fragment>
 </navigation>

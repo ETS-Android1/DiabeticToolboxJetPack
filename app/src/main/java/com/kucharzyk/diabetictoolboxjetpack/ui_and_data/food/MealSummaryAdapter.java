@@ -34,16 +34,15 @@ public class MealSummaryAdapter extends RecyclerView.Adapter<MealSummaryAdapter.
 
     public static class MealSummaryViewHolder extends RecyclerView.ViewHolder {
 
-        private TextView mProductName;
-        private TextView mProductBrand;
-        private TextView mProductQuantity;
-        private TextView mProductCarbsValue;
-        private TextView mProductFatValue;
-        private TextView mProductProteinsValue;
-        private TextView mProductCarbsExchangerValue;
-        private TextView mProductFatExchangerValue;
-        private ImageView mEditProductImage;
-        private ImageView mDeleteProductImage;
+        private final TextView mProductName;
+        private final TextView mProductBrand;
+        private final TextView mProductQuantity;
+        private final TextView mProductCarbsValue;
+        private final TextView mProductFatValue;
+        private final TextView mProductProteinsValue;
+        private final TextView mProductCaloriesValue;
+        private final TextView mProductCarbsExchangerValue;
+        private final TextView mProductFatExchangerValue;
 
         public MealSummaryViewHolder(@NonNull View itemView, OnItemClickListener listener) {
             super(itemView);
@@ -53,10 +52,11 @@ public class MealSummaryAdapter extends RecyclerView.Adapter<MealSummaryAdapter.
             mProductCarbsValue = itemView.findViewById(R.id.text_product_carbs_value);
             mProductFatValue = itemView.findViewById(R.id.text_product_fat_value);
             mProductProteinsValue = itemView.findViewById(R.id.text_product_proteins_value);
+            mProductCaloriesValue = itemView.findViewById(R.id.text_product_calories_value);
             mProductCarbsExchangerValue = itemView.findViewById(R.id.text_product_carbs_exchanger_value);
             mProductFatExchangerValue = itemView.findViewById(R.id.text_product_fat_exchanger_value);
-            mEditProductImage = itemView.findViewById(R.id.image_edit_product);
-            mDeleteProductImage = itemView.findViewById(R.id.exercise_example_image_delete);
+            ImageView mEditProductImage = itemView.findViewById(R.id.image_edit_product);
+            ImageView mDeleteProductImage = itemView.findViewById(R.id.exercise_example_image_delete);
 
             mEditProductImage.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -99,6 +99,11 @@ public class MealSummaryAdapter extends RecyclerView.Adapter<MealSummaryAdapter.
         holder.mProductCarbsValue.setText(Globals.REAL_FORMATTER.format(currentProduct.getCarbohydrates()));
         holder.mProductFatValue.setText(Globals.REAL_FORMATTER.format(currentProduct.getFat()));
         holder.mProductProteinsValue.setText(Globals.REAL_FORMATTER.format(currentProduct.getProteins()));
+        holder.mProductCaloriesValue.setText(Globals.REAL_FORMATTER.format(currentProduct.getCalories()));
+        holder.mProductCarbsExchangerValue.setText(Globals.REAL_FORMATTER.
+                format((currentProduct.getCarbohydrates()) / 12));
+        holder.mProductFatExchangerValue.setText(Globals.REAL_FORMATTER.
+                format((9 * currentProduct.getFat() + 4 * currentProduct.getProteins()) / 100));
     }
 
     @Override

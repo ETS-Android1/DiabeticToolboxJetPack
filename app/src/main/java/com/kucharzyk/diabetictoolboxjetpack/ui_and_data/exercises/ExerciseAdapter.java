@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.kucharzyk.diabetictoolboxjetpack.R;
 import com.kucharzyk.diabetictoolboxjetpack.room_database.Exercise;
-import com.kucharzyk.diabetictoolboxjetpack.room_database.Product;
+import com.kucharzyk.diabetictoolboxjetpack.room_database.User;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,14 +20,15 @@ public class ExerciseAdapter extends RecyclerView.Adapter<ExerciseAdapter.Exerci
 
     private List<Exercise> exercises = new ArrayList<>();
     private List<Exercise> exercisesFull;
+    private User currentUser;
     private ExerciseAdapter.OnItemClickListener onItemClickListener;
 
     public interface OnItemClickListener {
         void onItemClick(int position);
 
-        void onAddExerciseClick(int position);
+        /*void onAddExerciseClick(int position);
 
-        void onDeleteExerciseClick(int position);
+        void onDeleteExerciseClick(int position);*/
     }
 
     public void setOnItemClickListener(ExerciseAdapter.OnItemClickListener onItemClickListener) {
@@ -52,6 +53,18 @@ public class ExerciseAdapter extends RecyclerView.Adapter<ExerciseAdapter.Exerci
         public ExerciseViewHolder(@NonNull View itemView, OnItemClickListener listener) {
             super(itemView);
             exerciseName = itemView.findViewById(R.id.exercise_example_text_name);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (listener != null) {
+                        int position = getAdapterPosition();
+                        if (position != RecyclerView.NO_POSITION) {
+                            listener.onItemClick(position);
+                        }
+                    }
+                }
+            });
         }
 
 
@@ -80,5 +93,30 @@ public class ExerciseAdapter extends RecyclerView.Adapter<ExerciseAdapter.Exerci
         this.exercises = exercises;
         exercisesFull = new ArrayList<>(exercises);
         notifyDataSetChanged();
+    }
+
+    public void setCurrentUser(User user) {
+        this.currentUser = user;
+        notifyDataSetChanged();
+    }
+
+    public void filterList(List<Exercise> filteredList) {
+        exercises = filteredList;
+        notifyDataSetChanged();
+    }
+
+    public Exercise getExercise(int position) {return exercises.get(position); }
+
+    public List<Exercise> getExercisesList() {
+        if (exercisesFull != null){
+            return new ArrayList<>(exercisesFull);
+        }
+        else {
+            return new ArrayList<>(exercises);
+        }
+    }
+
+    public User getCurrentUser() {
+        return currentUser;
     }
 }

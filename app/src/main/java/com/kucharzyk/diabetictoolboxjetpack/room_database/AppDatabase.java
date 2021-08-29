@@ -76,7 +76,7 @@ public abstract class AppDatabase extends RoomDatabase {
 
                 //userDao.deleteAll();
 
-                User user = new User("Konrad");
+                User user = new User("Konrad", 68.7);
                 userDao.insert(user);
                 productDao.insert(new Product("Agrest", 11.8, 0.9, 1.2, 60.0, 100.0));
                 productDao.insert(new Product("Ananas", 7.8, 0.0, 0.2, 33.0, 100.0));
@@ -100,12 +100,12 @@ public abstract class AppDatabase extends RoomDatabase {
                 productDao.insert(new Product("Marchew surowa", 8.7, 0.2, 1.0, 40.0,  100.0));
                 productDao.insert(new Product("Morele", 11.9, 0.2, 0.7, 52.0, 100.0));
 
-                exerciseDao.insert(new Exercise("Chodzenie 5 km/h", 122.0, 30.0));
-                exerciseDao.insert(new Exercise("Bieganie 8 km/h", 290.0, 30.0));
-                exerciseDao.insert(new Exercise("Bieganie 10 km/h", 367.0, 30.0));
-                exerciseDao.insert(new Exercise("Bieganie 12 km/h", 413.0, 30.0));
-                exerciseDao.insert(new Exercise("Jazda na rowerze (16-19 km/h)", 238.0, 30.0));
-                exerciseDao.insert(new Exercise("Jazda na rowerze (19-22 km/h)", 280.0, 30.0));
+                exerciseDao.insert(new Exercise("Chodzenie 5 km/h", 2.0, 30.0));
+                exerciseDao.insert(new Exercise("Bieganie 8 km/h", 6.0, 30.0));
+                exerciseDao.insert(new Exercise("Bieganie 10 km/h", 10.0, 30.0));
+                exerciseDao.insert(new Exercise("Bieganie 12 km/h", 11.5, 30.0));
+                exerciseDao.insert(new Exercise("Jazda na rowerze (16-19 km/h)", 6.8, 30.0));
+                exerciseDao.insert(new Exercise("Jazda na rowerze (19-22 km/h)", 8.0, 30.0));
 
             });
         }

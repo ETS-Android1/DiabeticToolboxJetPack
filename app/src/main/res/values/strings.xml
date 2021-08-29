@@ -55,5 +55,9 @@
     <string name="example_exercise">Example Exercise</string>
     <string name="title_food">Food</string>
     <string name="title_exercises">Exercises</string>
+    <string name="exercise_duration">Duration:</string>
+    <string name="exercise_duration_abbr">minutes</string>
+    <string name="title_exercise_summary">Exercise Summary</string>
+    <string name="title_product_summary">Product Summary</string>
 
 </resources>
