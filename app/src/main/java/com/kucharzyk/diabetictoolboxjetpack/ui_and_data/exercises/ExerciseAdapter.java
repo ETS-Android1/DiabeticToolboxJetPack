@@ -3,7 +3,6 @@ package com.kucharzyk.diabetictoolboxjetpack.ui_and_data.exercises;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -40,15 +39,6 @@ public class ExerciseAdapter extends RecyclerView.Adapter<ExerciseAdapter.Exerci
 
         public TextView exerciseName;
 
-        public TextView mProductCarbsValue;
-        public TextView mProductFatValue;
-        public TextView mProductProteinsValue;
-        public TextView mProductCarbsExchangerValue;
-        public TextView mProductFatExchangerValue;
-
-        public ImageView addExerciseImage;
-        public ImageView deleteExerciseImage;
-        public ImageView editExerciseImage;
 
         public ExerciseViewHolder(@NonNull View itemView, OnItemClickListener listener) {
             super(itemView);

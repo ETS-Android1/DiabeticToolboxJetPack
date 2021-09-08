@@ -7,9 +7,16 @@ import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
+import com.kucharzyk.diabetictoolboxjetpack.room_database.DiaryEntry;
 import com.kucharzyk.diabetictoolboxjetpack.room_database.Exercise;
+import com.kucharzyk.diabetictoolboxjetpack.room_database.Training;
+import com.kucharzyk.diabetictoolboxjetpack.room_database.TrainingExerciseCrossRef;
 import com.kucharzyk.diabetictoolboxjetpack.room_database.User;
+import com.kucharzyk.diabetictoolboxjetpack.ui_and_data.DiaryEntryRepository;
 import com.kucharzyk.diabetictoolboxjetpack.ui_and_data.ExerciseRepository;
+import com.kucharzyk.diabetictoolboxjetpack.ui_and_data.TrainingExerciseCrossRefRepository;
+import com.kucharzyk.diabetictoolboxjetpack.ui_and_data.TrainingRepository;
+import com.kucharzyk.diabetictoolboxjetpack.ui_and_data.TrainingWithExercisesRepository;
 import com.kucharzyk.diabetictoolboxjetpack.ui_and_data.UserRepository;
 
 import org.jetbrains.annotations.NotNull;
@@ -18,30 +25,46 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ExercisesViewModel extends AndroidViewModel {
-    private final ExerciseRepository exerciseRepository;
     private final UserRepository userRepository;
+    private final ExerciseRepository exerciseRepository;
+    private final TrainingRepository trainingRepository;
+    private final TrainingWithExercisesRepository trainingWithExercisesRepository;
+    private final TrainingExerciseCrossRefRepository trainingExerciseCrossRefRepository;
+    private final DiaryEntryRepository diaryEntryRepository;
 
     private List<Exercise> listOfExercises;
     private MutableLiveData<List<Exercise>> trainingSummary;
     private final LiveData<List<Exercise>> allExercises;
-    private final LiveData<User> currentUser;
+    public final LiveData<User> currentUser;
 
 
     public ExercisesViewModel(@NonNull @NotNull Application application) {
         super(application);
 
-        exerciseRepository = new ExerciseRepository(application);
         userRepository = new UserRepository(application);
+        exerciseRepository = new ExerciseRepository(application);
+        trainingRepository = new TrainingRepository(application);
+        trainingWithExercisesRepository = new TrainingWithExercisesRepository(application);
+        trainingExerciseCrossRefRepository = new TrainingExerciseCrossRefRepository(application);
+        diaryEntryRepository = new DiaryEntryRepository(application);
 
-        allExercises = exerciseRepository.getAllExercises();
         currentUser = userRepository.getCurrentUser();
+        allExercises = exerciseRepository.getAllExercises();
     }
+
+    public LiveData<User> getCurrentUser() {return  currentUser; }
+
+    public long insertTraining(Training training) {return trainingRepository.insert(training); }
+
+    public void insertTrainingExerciseCrossRef(TrainingExerciseCrossRef trainingExerciseCrossRef) {
+        trainingExerciseCrossRefRepository.insert(trainingExerciseCrossRef);
+    }
+
+    public void insertDiaryEntry(DiaryEntry diaryEntry) { diaryEntryRepository.insert(diaryEntry); }
 
     public LiveData<List<Exercise>> getAllExercises() {
         return allExercises;
     }
-
-    public LiveData<User> getCurrentUser() {return  currentUser; }
 
     public MutableLiveData<List<Exercise>> getTrainingSummary(){
         if (trainingSummary == null) {

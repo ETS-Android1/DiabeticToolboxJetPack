@@ -5,8 +5,6 @@ import android.app.Application;
 import androidx.lifecycle.LiveData;
 
 import com.kucharzyk.diabetictoolboxjetpack.room_database.AppDatabase;
-import com.kucharzyk.diabetictoolboxjetpack.room_database.Meal;
-import com.kucharzyk.diabetictoolboxjetpack.room_database.MealDao;
 import com.kucharzyk.diabetictoolboxjetpack.room_database.MealProductCrossRef;
 import com.kucharzyk.diabetictoolboxjetpack.room_database.MealProductCrossRefDao;
 
@@ -32,7 +30,7 @@ public class MealProductCrossRefRepository {
         return mealProductCrossRefDao.getByProductId(productId);
     }
 
-    public LiveData<List<MealProductCrossRef>> getAll() {
+    public LiveData<List<MealProductCrossRef>> getAllMealProductCrossRef() {
         return mealProductCrossRefDao.getAllCrossRef();
     }
 

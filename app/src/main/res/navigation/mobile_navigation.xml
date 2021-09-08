@@ -69,6 +69,9 @@
         <action
             android:id="@+id/action_navigation_exercises_to_exerciseSummaryFragment"
             app:destination="@id/exerciseSummaryFragment" />
+        <action
+            android:id="@+id/action_navigation_exercises_to_trainingSummaryFragment"
+            app:destination="@id/trainingSummaryFragment" />
     </fragment>
     <fragment
         android:id="@+id/exerciseSummaryFragment"
@@ -81,6 +84,27 @@
         <argument
             android:name="position"
             app:argType="integer" />
+        <argument
+            android:name="parcelizedUser"
+            app:argType="com.kucharzyk.diabetictoolboxjetpack.room_database.User" />
+        <action
+            android:id="@+id/action_exerciseSummaryFragment_to_navigation_exercises"
+            app:destination="@id/navigation_exercises" />
+        <action
+            android:id="@+id/action_exerciseSummaryFragment_to_trainingSummaryFragment"
+            app:destination="@id/trainingSummaryFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/trainingSummaryFragment"
+        android:name="com.kucharzyk.diabetictoolboxjetpack.ui_and_data.exercises.TrainingSummaryFragment"
+        android:label="fragment_training_summary"
+        tools:layout="@layout/fragment_training_summary" >
+        <action
+            android:id="@+id/action_trainingSummaryFragment_to_navigation_exercises"
+            app:destination="@id/navigation_exercises" />
+        <action
+            android:id="@+id/action_trainingSummaryFragment_to_exerciseSummaryFragment"
+            app:destination="@id/exerciseSummaryFragment" />
         <argument
             android:name="parcelizedUser"
             app:argType="com.kucharzyk.diabetictoolboxjetpack.room_database.User" />

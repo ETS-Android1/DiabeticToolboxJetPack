@@ -21,7 +21,7 @@
     <string name="macro_proteins">Proteins: </string>
     <string name="macro_carbs_exchanger">WW: </string>
     <string name="macro_fat_exchanger">WBT: </string>
-    <string name="common_numeric_value_double">00.00 </string>
+    <string name="common_numeric_value_double">0.0 </string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="add_product_sign">Add product sign</string>
@@ -30,7 +30,7 @@
     <string name="serving_size_quantity">gram/ml</string>
     <string name="save_button">Save button</string>
     <string name="product_serving_size">g/ml</string>
-    <string name="save_meal_button">Save Meal</string>
+    <string name="save_training_button">Save Meal</string>
     <string name="delete_meal_button">Delete Meal</string>
     <string name="type_a_date">Type a date</string>
     <string name="macro_calories">Calories:</string>
@@ -41,7 +41,7 @@
     <string name="macro_carb_exchangers_used">WW used:</string>
     <string name="image_view_glucose">Glucose measurements</string>
     <string name="glucose_measurements_taken">Measurements taken:</string>
-    <string name="common_numeric_value_int">00</string>
+    <string name="common_numeric_value_int">0</string>
     <string name="glucose_measurements_hyperglycemia">Hyperglycemia:</string>
     <string name="glucose_measurements_standard">Standard:</string>
     <string name="glucose_measurements_hypoglycemia">Hypoglycemia:</string>
@@ -59,5 +59,9 @@
     <string name="exercise_duration_abbr">minutes</string>
     <string name="title_exercise_summary">Exercise Summary</string>
     <string name="title_product_summary">Product Summary</string>
+    <string name="delete_meal_training">Delete Training</string>
+    <string name="edit_exercise_image">Edit exercise</string>
+    <string name="delete_exercise_sign">Delete exercise</string>
+    <string name="macro_fat_exchangers_used">WBT used:</string>
 
 </resources>

@@ -61,7 +61,7 @@ public class DiaryEntryViewModel extends AndroidViewModel {
         return mealProductCrossRefRepository.getByProductId(productId);
     }
     public LiveData<List<MealProductCrossRef>> getAllCrossRefs() {
-        return mealProductCrossRefRepository.getAll();
+        return mealProductCrossRefRepository.getAllMealProductCrossRef();
     }
     public LiveData<List<Product>> getAllProducts() {
         return allProducts;

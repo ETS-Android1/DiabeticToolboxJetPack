@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
@@ -53,6 +54,7 @@ public class ExercisesFragment extends Fragment {
         mTrainingCarbohydrateExchangersUsed = root.findViewById(R.id.exercises_text_carb_exchangers_used_value);
         mTrainingDuration = root.findViewById(R.id.exercises_text_time_spent_value);
         TextInputEditText exerciseSearchBar = root.findViewById(R.id.exercises_fragment_TextInputEditText_searched_exercise);
+        ConstraintLayout mTrainingSummaryConstraintLayout = root.findViewById(R.id.exercises_constraint_layout_summary);
 
         exerciseSearchBar.addTextChangedListener(new TextWatcher() {
             @Override
@@ -112,6 +114,14 @@ public class ExercisesFragment extends Fragment {
                 currentUser = exerciseAdapter.getCurrentUser();
             }
         };
+
+        mTrainingSummaryConstraintLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                NavDirections action = ExercisesFragmentDirections.actionNavigationExercisesToTrainingSummaryFragment(currentUser);
+                navController.navigate(action);
+            }
+        });
 
         exercisesViewModel.getAllExercises().observe(getViewLifecycleOwner(),allExercisesObserver);
         exercisesViewModel.getCurrentUser().observe(getViewLifecycleOwner(), currentUserObserver);

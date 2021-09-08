@@ -4,9 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
-    tools:context=".ui_and_data.food.MealSummaryFragment">
-
+    tools:context=".ui_and_data.exercises.TrainingSummaryFragment">
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
@@ -15,7 +13,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerViewMealSummary"
+            android:id="@+id/recyclerViewTrainingSummary"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:scrollbars="vertical">
@@ -28,9 +26,9 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guidelineMealSummaryFragment"/>
+        app:layout_constraintTop_toTopOf="@+id/guidelineTrainingSummaryFragment"/>
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/button_save_meal"
+        android:id="@+id/button_save_training"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
@@ -45,25 +43,27 @@
         app:tint="@color/white" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/button_delete_meal"
+        android:id="@+id/button_delete_training"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="8dp"
         android:backgroundTint="@color/purple_500"
         android:clickable="true"
-        android:contentDescription="@string/delete_meal_button"
+        android:contentDescription="@string/delete_meal_training"
         android:tint="#009C3939"
-        app:layout_constraintBottom_toTopOf="@+id/button_save_meal"
+        app:layout_constraintBottom_toTopOf="@+id/button_save_training"
         app:layout_constraintEnd_toEndOf="parent"
         app:srcCompat="@drawable/ic_delete_all"
         app:tint="@color/white" />
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guidelineMealSummaryFragment"
+        android:id="@+id/guidelineTrainingSummaryFragment"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.8" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+
+
