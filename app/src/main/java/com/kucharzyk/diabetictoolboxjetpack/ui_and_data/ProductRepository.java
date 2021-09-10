@@ -25,7 +25,6 @@ public class ProductRepository {
 
     public void insert(Product product) {
         AppDatabase.databaseWriteExecutor.execute(() -> {
-            Log.d(TAG, "insert " + product + " starting");
             productDao.insert(product);
         });
     }
@@ -38,7 +37,6 @@ public class ProductRepository {
 
     public void delete(Product product){
         AppDatabase.databaseWriteExecutor.execute(() -> {
-            Log.d(TAG, "delete: starting");
             productDao.delete(product);
         });
     }

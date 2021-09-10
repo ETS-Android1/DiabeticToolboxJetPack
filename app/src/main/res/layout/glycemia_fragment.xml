@@ -35,10 +35,14 @@
         app:layout_constraintTop_toBottomOf="@id/glycemia_time_textInputLayout">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/glycemia_value_textInputEditText"
             android:inputType="numberDecimal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/glycemia_unit" />
+            android:hint="@string/glycemia_unit"
+            android:maxLength="3"
+            app:errorEnabled="true"
+            app:errorIconDrawable="@drawable/ic_error" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
