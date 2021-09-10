@@ -1,7 +1,6 @@
 package com.kucharzyk.diabetictoolboxjetpack.ui_and_data.diary;
 
 import android.app.Application;
-import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
@@ -19,7 +18,6 @@ import com.kucharzyk.diabetictoolboxjetpack.ui_and_data.MealWithProductsReposito
 import com.kucharzyk.diabetictoolboxjetpack.ui_and_data.ProductRepository;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 
 public class DiaryEntryViewModel extends AndroidViewModel {
@@ -72,22 +70,6 @@ public class DiaryEntryViewModel extends AndroidViewModel {
     public LiveData<List<LocalDate>> getAllMealDates() {return allMealDates; }
     public LiveData<List<MealWithProducts>> getMealWithProductsFromDate() { return mealWithProductsFromDate; }
     public LiveData<List<DiaryEntryWithMealsAndProducts>> getAllDiaryEntries() { return allDiaryEntries; }
-
-
-    public void deleteLastProduct(Product lastProduct) {
-        List<Product> currentProductList = getAllProducts().getValue();
-        if (currentProductList == null){
-            currentProductList = new ArrayList<>();
-        }
-        int id = 0;
-        for (Product product : currentProductList){
-            if (product.getProductId() > id) { id = product.getProductId(); }
-            Log.d(TAG, "deleteLastProduct: " + product);
-        }
-        Log.d(TAG, "deleteLastProduct: " + id);
-        lastProduct.setProductId(id);
-        delete(lastProduct);
-    }
 
 
 }

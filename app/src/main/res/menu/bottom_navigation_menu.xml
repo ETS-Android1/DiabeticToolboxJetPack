@@ -16,10 +16,10 @@
         android:icon="@drawable/ic_exercises"
         android:title="@string/exercises_tab"/>
     <item
-        android:id="@+id/navigation_measurements"
+        android:id="@+id/navigation_glycemia"
         android:enabled="true"
         android:icon="@drawable/ic_glucose"
-        android:title="@string/measurements_tab"/>
+        android:title="@string/glycemia_tab"/>
     <item
         android:id="@+id/navigation_diary"
         android:enabled="true"

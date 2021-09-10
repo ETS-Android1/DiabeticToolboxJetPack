@@ -109,4 +109,9 @@
             android:name="parcelizedUser"
             app:argType="com.kucharzyk.diabetictoolboxjetpack.room_database.User" />
     </fragment>
+    <fragment
+        android:id="@+id/navigation_glycemia"
+        android:name="com.kucharzyk.diabetictoolboxjetpack.ui_and_data.glycemia.GlycemiaFragment"
+        android:label="@string/title_glycemia"
+        tools:layout="@layout/glycemia_fragment" />
 </navigation>

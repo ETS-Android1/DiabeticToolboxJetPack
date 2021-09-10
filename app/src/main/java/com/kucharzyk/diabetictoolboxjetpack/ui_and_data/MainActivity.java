@@ -28,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
         // menu should be considered as top level destinations.
         AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
                 R.id.navigation_home, R.id.navigation_food, R.id.navigation_exercises,
-                R.id.navigation_measurements, R.id.navigation_diary)
+                R.id.navigation_glycemia, R.id.navigation_diary)
                 .build();
 
         NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment);
