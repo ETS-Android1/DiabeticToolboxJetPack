@@ -1,25 +1,22 @@
-package com.kucharzyk.diabetictoolboxjetpack.ui_and_data;
-
-import androidx.appcompat.app.AppCompatActivity;
+package com.kucharzyk.diabetictoolboxjetpack.logging_and_registration;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.kucharzyk.diabetictoolboxjetpack.R;
-import com.kucharzyk.diabetictoolboxjetpack.room_database.User;
+import com.kucharzyk.diabetictoolboxjetpack.ui_and_data.MainActivity;
 
-public class WelcomeActivity extends AppCompatActivity {
 
-    private User currentUser;
-    private boolean isUserLoggedIn(User user){
-        return true;
-    }
+public class LoggingActivity extends AppCompatActivity {
+    private static final String TAG = "LoggingActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_welcome);
+        setContentView(R.layout.activity_logging);
     }
 
     /** Called when the user taps the Send button */
@@ -27,5 +24,6 @@ public class WelcomeActivity extends AppCompatActivity {
         Intent myIntent = new Intent(this, MainActivity.class);
         startActivity(myIntent);
     }
+
 
 }

@@ -9,7 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.DiabeticToolboxJetpack">
-        <activity android:name=".ui_and_data.WelcomeActivity"
+        <activity android:name=".logging_and_registration.WelcomeActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -17,6 +17,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".logging_and_registration.LoggingActivity" />
         <activity android:name=".ui_and_data.NewUserActivity" />
         <activity android:name=".ui_and_data.MainActivity" />
     </application>

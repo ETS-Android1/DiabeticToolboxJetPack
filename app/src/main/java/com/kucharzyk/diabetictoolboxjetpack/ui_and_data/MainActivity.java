@@ -7,11 +7,9 @@ import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
-import androidx.room.Room;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.kucharzyk.diabetictoolboxjetpack.R;
-import com.kucharzyk.diabetictoolboxjetpack.room_database.AppDatabase;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -39,9 +37,9 @@ public class MainActivity extends AppCompatActivity {
             NavigationUI.setupWithNavController(navView, navController);
         }
 
-        AppDatabase appDatabase = Room.databaseBuilder(getApplicationContext(),
+/*        AppDatabase appDatabase = Room.databaseBuilder(getApplicationContext(),
                 AppDatabase.class, "app_database")
-                .build();
+                .build();*/
 
 //        userDatabase.clearDatabase(userDatabase);
     }

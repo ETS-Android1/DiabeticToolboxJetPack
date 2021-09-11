@@ -114,4 +114,9 @@
         android:name="com.kucharzyk.diabetictoolboxjetpack.ui_and_data.glycemia.GlycemiaFragment"
         android:label="@string/title_glycemia"
         tools:layout="@layout/glycemia_fragment" />
+    <activity
+        android:id="@+id/welcomeActivity"
+        android:name="com.kucharzyk.diabetictoolboxjetpack.logging_and_registration.WelcomeActivity"
+        android:label="fragment_welcome"
+        tools:layout="@layout/activity_welcome" />
 </navigation>

@@ -5,7 +5,7 @@
     <string name="title_diary">Diary</string>
     <string name="example_product">Example Product</string>
     <string name="example_producer">Example Producer</string>
-    <string name="app_name">Diabetic Toolbox Jetpack</string>
+    <string name="app_name">DiabeticToolbox</string>
     <string name="add_user">Add User </string>
     <string name="hint_user">User…</string>
     <string name="button_save">Save</string>
@@ -67,5 +67,9 @@
     <string name="time">Time</string>
     <string name="glycemia">Glycemia:</string>
     <string name="glycemia_unit">mg/dL</string>
+    <string name="username">Username</string>
+    <string name="password">Password</string>
+    <string name="button_cancel">CANCEL</string>
+    <string name="proceed">Proceed</string>
 
 </resources>
