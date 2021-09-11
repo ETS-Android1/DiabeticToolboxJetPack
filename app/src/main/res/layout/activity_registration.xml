@@ -6,11 +6,11 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="center"
-    tools:context=".logging_and_registration.WelcomeActivity">
+    tools:context=".login_and_registration.RegistrationActivity">
 
     <com.google.android.material.textfield.TextInputLayout
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:id="@+id/logging_username_textInputLayout"
+        android:id="@+id/registration_username_textInputLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -21,7 +21,7 @@
         app:endIconMode="clear_text">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/logging_username_textInputEditText"
+            android:id="@+id/registration_username_textInputEditText"
             android:maxLines="1"
             android:maxLength="20"
             android:layout_width="match_parent"
@@ -32,7 +32,7 @@
 
     <com.google.android.material.textfield.TextInputLayout
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:id="@+id/logging_password_textInputLayout"
+        android:id="@+id/registration_password_textInputLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -42,7 +42,7 @@
         app:endIconMode="password_toggle">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/logging_password_textInputEditText"
+            android:id="@+id/registration_password_textInputEditText"
             android:maxLines="1"
             android:maxLength="20"
             android:layout_width="match_parent"
@@ -51,11 +51,31 @@
             android:inputType="textPassword" />
     </com.google.android.material.textfield.TextInputLayout>
 
+    <com.google.android.material.textfield.TextInputLayout
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:id="@+id/registration_weight_textInputLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        app:startIconDrawable="@drawable/ic_monitor_weight">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/registration_weight_textInputEditText"
+            android:maxLines="1"
+            android:maxLength="3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/weight"
+            android:inputType="numberDecimal" />
+    </com.google.android.material.textfield.TextInputLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:padding="8dp"
+        android:padding="16dp"
         android:orientation="horizontal">
 
         <Button
@@ -63,8 +83,8 @@
             android:layout_width="110dp"
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
-            android:onClick="login"
-            android:text="@string/button_login" />
+            android:onClick="goBack"
+            android:text="@string/button_back" />
 
         <Button
             android:id="@+id/cancel_action"

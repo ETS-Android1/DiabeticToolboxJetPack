@@ -1,7 +1,6 @@
 package com.kucharzyk.diabetictoolboxjetpack.ui_and_data;
 
 import android.app.Application;
-import android.util.Log;
 
 import androidx.lifecycle.LiveData;
 
@@ -9,16 +8,18 @@ import com.kucharzyk.diabetictoolboxjetpack.room_database.AppDatabase;
 import com.kucharzyk.diabetictoolboxjetpack.room_database.User;
 import com.kucharzyk.diabetictoolboxjetpack.room_database.UserDao;
 
+import java.util.List;
+
 public class UserRepository {
 
     private static final String TAG = "UserRepository";
     private final UserDao userDao;
-    private final LiveData<User> currentUser;
+    private final LiveData<List<User>> appUsers;
 
     public UserRepository(Application application){
         AppDatabase db = AppDatabase.getDatabase(application);
         userDao = db.userDao();
-        currentUser = userDao.getUser();
+        appUsers = userDao.getUsers();
     }
 
     public void insert(User user) {
@@ -40,7 +41,7 @@ public class UserRepository {
     }
 
 
-    public LiveData<User> getCurrentUser() {
-        return currentUser;
+    public LiveData<List<User>> getAppUsers() {
+        return appUsers;
     }
 }

@@ -35,7 +35,7 @@ public class ExercisesViewModel extends AndroidViewModel {
     private List<Exercise> listOfExercises;
     private MutableLiveData<List<Exercise>> trainingSummary;
     private final LiveData<List<Exercise>> allExercises;
-    public final LiveData<User> currentUser;
+    public final LiveData<List<User>> appUsers;
 
 
     public ExercisesViewModel(@NonNull @NotNull Application application) {
@@ -48,11 +48,11 @@ public class ExercisesViewModel extends AndroidViewModel {
         trainingExerciseCrossRefRepository = new TrainingExerciseCrossRefRepository(application);
         diaryEntryRepository = new DiaryEntryRepository(application);
 
-        currentUser = userRepository.getCurrentUser();
+        appUsers = userRepository.getAppUsers();
         allExercises = exerciseRepository.getAllExercises();
     }
 
-    public LiveData<User> getCurrentUser() {return  currentUser; }
+    public LiveData<List<User>> getAppUsers() {return appUsers; }
 
     public long insertTraining(Training training) {return trainingRepository.insert(training); }
 

@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="center"
-    tools:context=".logging_and_registration.WelcomeActivity">
+    tools:context=".login_and_registration.WelcomeActivity">
 
     <TextView
         android:id="@+id/textView"

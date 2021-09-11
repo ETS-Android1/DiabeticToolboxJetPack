@@ -13,6 +13,7 @@ public class User implements Parcelable {
     private Integer userID;
     private final String username;
     private final Double weight;
+    private final String passwordHash;
     //private String name;
     //private String surname;
     //private String email;
@@ -25,10 +26,12 @@ public class User implements Parcelable {
     //private MedicalData medicalData;
 
 
-    public User(String username, Double weight) {
+    public User(String username, Double weight, String passwordHash) {
         this.username = username;
         this.weight = weight;
+        this.passwordHash = passwordHash;
     }
+
 
     protected User(Parcel in) {
         if (in.readByte() == 0) {
@@ -42,6 +45,7 @@ public class User implements Parcelable {
         } else {
             weight = in.readDouble();
         }
+        passwordHash = in.readString();
     }
 
     public static final Creator<User> CREATOR = new Creator<User>() {
@@ -105,6 +109,10 @@ public class User implements Parcelable {
         return weight;
     }
 
+    public String getPasswordHash() {
+        return passwordHash;
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -125,7 +133,9 @@ public class User implements Parcelable {
             parcel.writeByte((byte) 1);
             parcel.writeDouble(weight);
         }
+        parcel.writeString(passwordHash);
     }
+
 
     /*
     public String getName() {

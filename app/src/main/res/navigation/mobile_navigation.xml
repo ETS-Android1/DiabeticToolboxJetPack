@@ -116,7 +116,7 @@
         tools:layout="@layout/glycemia_fragment" />
     <activity
         android:id="@+id/welcomeActivity"
-        android:name="com.kucharzyk.diabetictoolboxjetpack.logging_and_registration.WelcomeActivity"
+        android:name="com.kucharzyk.diabetictoolboxjetpack.login_and_registration.WelcomeActivity"
         android:label="fragment_welcome"
         tools:layout="@layout/activity_welcome" />
 </navigation>

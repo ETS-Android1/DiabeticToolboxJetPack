@@ -59,9 +59,7 @@ public abstract class AppDatabase extends RoomDatabase {
     }
 
     private static void clearDatabase(AppDatabase database){
-        databaseWriteExecutor.execute(() -> {
-            database.clearAllTables();
-        });
+        databaseWriteExecutor.execute(database::clearAllTables);
     }
 
     private static RoomDatabase.Callback sRoomDatabaseCallback = new RoomDatabase.Callback() {
@@ -81,8 +79,8 @@ public abstract class AppDatabase extends RoomDatabase {
 
                 //userDao.deleteAll();
 
-                User user = new User("Konrad", 68.7);
-                userDao.insert(user);
+                //User user = new User("Konrad", 68.7, "dupa");
+                //userDao.insert(user);
                 productDao.insert(new Product("Agrest", 11.8, 0.9, 1.2, 60.0, 100.0));
                 productDao.insert(new Product("Ananas", 7.8, 0.0, 0.2, 33.0, 100.0));
                 productDao.insert(new Product("Banan", 17.0, 0.3, 0.9, 74.0, 100.0));

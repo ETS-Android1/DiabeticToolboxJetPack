@@ -73,5 +73,7 @@
     <string name="proceed">Proceed</string>
     <string name="button_login">Login</string>
     <string name="button_register">Register</string>
+    <string name="weight">Weight</string>
+    <string name="button_back">Back</string>
 
 </resources>

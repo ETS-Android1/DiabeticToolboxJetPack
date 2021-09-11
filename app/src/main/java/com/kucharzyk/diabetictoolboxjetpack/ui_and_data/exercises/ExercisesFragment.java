@@ -107,10 +107,10 @@ public class ExercisesFragment extends Fragment {
             }
         };
 
-        final Observer<User> currentUserObserver = new Observer<User>() {
+        final Observer<List<User>> userObserver = new Observer<List<User>>() {
             @Override
-            public void onChanged(User user) {
-                exerciseAdapter.setCurrentUser(user);
+            public void onChanged(List<User> user) {
+                exerciseAdapter.setCurrentUser(user.get(0));
                 currentUser = exerciseAdapter.getCurrentUser();
             }
         };
@@ -124,7 +124,7 @@ public class ExercisesFragment extends Fragment {
         });
 
         exercisesViewModel.getAllExercises().observe(getViewLifecycleOwner(),allExercisesObserver);
-        exercisesViewModel.getCurrentUser().observe(getViewLifecycleOwner(), currentUserObserver);
+        exercisesViewModel.getAppUsers().observe(getViewLifecycleOwner(), userObserver);
         exercisesViewModel.getTrainingSummary().observe(getViewLifecycleOwner(), trainingObserver);
         return root;
     }

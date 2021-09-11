@@ -1,4 +1,4 @@
-package com.kucharzyk.diabetictoolboxjetpack.logging_and_registration;
+package com.kucharzyk.diabetictoolboxjetpack.login_and_registration;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -27,7 +27,7 @@ public class WelcomeActivity extends AppCompatActivity {
 
     /** Called when the user taps the Send button */
     public void changeActivity(View view) {
-        Intent myIntent = new Intent(this, LoggingActivity.class);
+        Intent myIntent = new Intent(this, LoginActivity.class);
         startActivity(myIntent);
     }
 
