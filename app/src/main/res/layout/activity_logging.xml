@@ -60,17 +60,17 @@
 
         <Button
             android:id="@+id/nextActivity"
-            android:layout_width="100dp"
+            android:layout_width="110dp"
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
-            android:onClick="changeActivity"
-            android:text="@string/button_next" />
+            android:onClick="login"
+            android:text="@string/button_login" />
 
         <Button
             android:id="@+id/cancel_action"
-            android:layout_width="100dp"
+            android:layout_width="110dp"
             android:layout_height="wrap_content"
-            android:onClick="changeActivity"
-            android:text="@string/button_cancel" />
+            android:onClick="register"
+            android:text="@string/button_register" />
     </LinearLayout>
 </LinearLayout>
