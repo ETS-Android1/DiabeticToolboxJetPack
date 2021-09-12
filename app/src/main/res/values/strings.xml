@@ -78,5 +78,6 @@
     <string name="button_register">Register</string>
     <string name="weight">Weight</string>
     <string name="button_back">Back</string>
+    <string name="macro_calories_burned_shortcut">Kcal burned:</string>
 
 </resources>

@@ -31,6 +31,7 @@ public abstract class AppDatabase extends RoomDatabase {
     public abstract TrainingWithExercisesDao trainingWithExercisesDao();
     public abstract DiaryEntryDao diaryEntryDao();
     public abstract DiaryEntryWithMealsAndProductsDao diaryEntryWithMealsAndProductsDao();
+    public abstract DiaryEntryWithTrainingsAndExercisesDao diaryEntryWithTrainingsAndExercisesDao();
 
     public static final String TAG = "AppDatabase";
     private static AppDatabase INSTANCE;

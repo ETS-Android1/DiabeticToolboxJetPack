@@ -8,13 +8,14 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
-public class DiaryEntrySummary {
+public class DiaryMealEntrySummary {
 
     private final List<MealWithProducts> mealWithProductsList;
-    private final LocalDate diaryEntryDate;
     private final List<MealProductCrossRef> productsWithServingSizes;
+    private final LocalDate diaryEntryDate;
 
-    public DiaryEntrySummary (List<MealWithProducts> mealsWithProducts, List<MealProductCrossRef> mealProductCrossRef, LocalDate entryDate) {
+
+    public DiaryMealEntrySummary(List<MealWithProducts> mealsWithProducts, List<MealProductCrossRef> mealProductCrossRef, LocalDate entryDate) {
         mealWithProductsList = mealsWithProducts;
         productsWithServingSizes = mealProductCrossRef;
         diaryEntryDate = entryDate;

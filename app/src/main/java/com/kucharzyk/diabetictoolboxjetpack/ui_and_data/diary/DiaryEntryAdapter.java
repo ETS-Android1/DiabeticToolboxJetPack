@@ -18,7 +18,8 @@ import java.util.List;
 public class DiaryEntryAdapter extends RecyclerView.Adapter<DiaryEntryAdapter.DiaryEntryViewHolder> {
     public static final String TAG = "DiaryEntryAdapter";
 
-    private List<DiaryEntrySummary> diaryEntries = new ArrayList<>();
+    private List<DiaryMealEntrySummary> diaryMealEntries = new ArrayList<>();
+    private List<DiaryTrainingEntrySummary> diaryTrainingEntries = new ArrayList<>();
     private OnItemClickListener mOnItemClickListener;
 
     public interface OnItemClickListener {
@@ -45,6 +46,11 @@ public class DiaryEntryAdapter extends RecyclerView.Adapter<DiaryEntryAdapter.Di
         private final TextView diaryEntryCaloriesValue;
         private final TextView diaryEntryCarbsExchangerValue;
         private final TextView diaryEntryFatExchangerValue;
+
+        private final TextView diaryEntryCaloriesBurnedValue;
+        private final TextView diaryEntryCarbsExchangerUsedValue;
+        private final TextView diaryEntryProteinFatExchangerUsedValue;
+
         private final TextView diaryEntryDate;
 
         public DiaryEntryViewHolder(@NonNull View itemView, DiaryEntryAdapter.OnItemClickListener listener) {
@@ -59,6 +65,11 @@ public class DiaryEntryAdapter extends RecyclerView.Adapter<DiaryEntryAdapter.Di
             diaryEntryCaloriesValue = itemView.findViewById(R.id.diaryEntryTextViewCaloriesValue);
             diaryEntryCarbsExchangerValue = itemView.findViewById(R.id.diaryEntryTextViewCarbsExchangerValue);
             diaryEntryFatExchangerValue = itemView.findViewById(R.id.diaryEntryTextViewFatExchangerValue);
+
+            diaryEntryCaloriesBurnedValue = itemView.findViewById(R.id.diaryEntryTextCaloriesBurnedValue);
+            diaryEntryCarbsExchangerUsedValue = itemView.findViewById(R.id.diaryEntryTextViewCarbsExchangerUsedValue);
+            diaryEntryProteinFatExchangerUsedValue = itemView.findViewById(R.id.diaryEntryTextViewFatExchangerUsedValue);
+
             diaryEntryDate = itemView.findViewById(R.id.diaryEntryTextViewDate);
 
 
@@ -112,21 +123,31 @@ public class DiaryEntryAdapter extends RecyclerView.Adapter<DiaryEntryAdapter.Di
 
     @Override
     public void onBindViewHolder(@NonNull DiaryEntryViewHolder holder, int position) {
-        DiaryEntrySummary currentDiaryEntry = diaryEntries.get(position);
-        String diaryEntryCarbohydrate = Globals.REAL_FORMATTER.
-                format(currentDiaryEntry.getCarbohydrates()) + " g";
-        String diaryEntryFat = Globals.REAL_FORMATTER.
-                format(currentDiaryEntry.getFat()) + " g";
-        String diaryEntryProteins = Globals.REAL_FORMATTER.
-                format(currentDiaryEntry.getProteins()) + " g";
-        String diaryEntryCalories = Globals.REAL_FORMATTER.
-                format(currentDiaryEntry.getCalories()) + " kcal";
-        String diaryEntryCarbsExchanger = Globals.REAL_FORMATTER.
-                format((currentDiaryEntry.getCarbohydrates()) / 12) + " units";
-        String diaryEntryFatExchanger = Globals.REAL_FORMATTER.
-                format((9 * currentDiaryEntry.getFat() + 4 * currentDiaryEntry.getProteins()) / 100) + " units";
 
-        holder.diaryEntryDate.setText(currentDiaryEntry.getDiaryEntryDate().
+        DiaryTrainingEntrySummary currentDiaryTrainingEntrySummary = diaryTrainingEntries.get(position);
+        DiaryMealEntrySummary currentDiaryMealEntrySummary = diaryMealEntries.get(position);
+
+        String diaryEntryCarbohydrate = Globals.REAL_FORMATTER.
+                format(currentDiaryMealEntrySummary.getCarbohydrates()) + " g";
+        String diaryEntryFat = Globals.REAL_FORMATTER.
+                format(currentDiaryMealEntrySummary.getFat()) + " g";
+        String diaryEntryProteins = Globals.REAL_FORMATTER.
+                format(currentDiaryMealEntrySummary.getProteins()) + " g";
+        String diaryEntryCalories = Globals.REAL_FORMATTER.
+                format(currentDiaryMealEntrySummary.getCalories()) + " kcal";
+        String diaryEntryCarbsExchanger = Globals.REAL_FORMATTER.
+                format((currentDiaryMealEntrySummary.getCarbohydrates()) / 12) + " units";
+        String diaryEntryFatExchanger = Globals.REAL_FORMATTER.
+                format((9 * currentDiaryMealEntrySummary.getFat() + 4 * currentDiaryMealEntrySummary.getProteins()) / 100) + " units";
+
+        String diaryEntryCaloriesBurned = Globals.REAL_FORMATTER.
+                format(currentDiaryTrainingEntrySummary.getCaloriesBurned()) + " kcal";
+        String diaryEntryCarbsExchangerUsed = Globals.REAL_FORMATTER.
+                format(currentDiaryTrainingEntrySummary.getCarbsExchangerUsed())  + " units";
+        String diaryEntryProteinFatExchangerUsed = Globals.REAL_FORMATTER.
+                format(currentDiaryTrainingEntrySummary.getProteinFatExchangerUsed()) + " units";
+
+        holder.diaryEntryDate.setText(currentDiaryMealEntrySummary.getDiaryEntryDate().
                 format(DateTimeFormatter.ofPattern("dd-MM-yyyy")));
         holder.diaryEntryCarbohydrateValue.setText(diaryEntryCarbohydrate);
         holder.diaryEntryFatValue.setText(diaryEntryFat);
@@ -134,25 +155,34 @@ public class DiaryEntryAdapter extends RecyclerView.Adapter<DiaryEntryAdapter.Di
         holder.diaryEntryCaloriesValue.setText(diaryEntryCalories);
         holder.diaryEntryCarbsExchangerValue.setText(diaryEntryCarbsExchanger);
         holder.diaryEntryFatExchangerValue.setText(diaryEntryFatExchanger);
+
+        holder.diaryEntryCaloriesBurnedValue.setText(diaryEntryCaloriesBurned);
+        holder.diaryEntryCarbsExchangerUsedValue.setText(diaryEntryCarbsExchangerUsed);
+        holder.diaryEntryProteinFatExchangerUsedValue.setText(diaryEntryProteinFatExchangerUsed);
     }
 
 
     @Override
     public int getItemCount() {
-        if (diaryEntries == null) {
+        if (diaryMealEntries == null) {
             return 0;
         }
 
-        return diaryEntries.size();
+        return diaryMealEntries.size();
     }
 
-    public void setDiaryEntries(List<DiaryEntrySummary> diaryEntries) {
-        this.diaryEntries = diaryEntries;
+    public void setDiaryMealEntries(List<DiaryMealEntrySummary> diaryMealEntries) {
+        this.diaryMealEntries = diaryMealEntries;
         notifyDataSetChanged();
     }
 
-    public void filterList(ArrayList<DiaryEntrySummary> filteredList) {
-        diaryEntries = filteredList;
+    public void setDiaryTrainingEntries(List<DiaryTrainingEntrySummary> diaryTrainingEntries) {
+        this.diaryTrainingEntries = diaryTrainingEntries;
+        notifyDataSetChanged();
+    }
+
+    public void filterList(ArrayList<DiaryMealEntrySummary> filteredList) {
+        diaryMealEntries = filteredList;
         notifyDataSetChanged();
     }
 }
