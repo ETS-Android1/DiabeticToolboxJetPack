@@ -12,7 +12,7 @@ public class DiaryEntrySummary {
 
     private final List<MealWithProducts> mealWithProductsList;
     private final LocalDate diaryEntryDate;
-    private List<MealProductCrossRef> productsWithServingSizes;
+    private final List<MealProductCrossRef> productsWithServingSizes;
 
     public DiaryEntrySummary (List<MealWithProducts> mealsWithProducts, List<MealProductCrossRef> mealProductCrossRef, LocalDate entryDate) {
         mealWithProductsList = mealsWithProducts;

@@ -1,6 +1,5 @@
 package com.kucharzyk.diabetictoolboxjetpack.ui_and_data.diary;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -141,12 +140,10 @@ public class DiaryEntryAdapter extends RecyclerView.Adapter<DiaryEntryAdapter.Di
     @Override
     public int getItemCount() {
         if (diaryEntries == null) {
-            Log.d(TAG, "getItemCount: No elements to display");
             return 0;
         }
 
         return diaryEntries.size();
-        //return diarySize;
     }
 
     public void setDiaryEntries(List<DiaryEntrySummary> diaryEntries) {
