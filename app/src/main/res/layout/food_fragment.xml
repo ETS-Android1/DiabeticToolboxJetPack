@@ -138,7 +138,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="24dp"
-                android:text="@string/common_numeric_value_double"
+                android:text="@string/common_value_gram"
                 app:layout_constraintBaseline_toBaselineOf="@+id/text_carbs_exchanger_summary_value"
                 app:layout_constraintEnd_toStartOf="@+id/text_meal_calories_summary" />
 
@@ -147,7 +147,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8dp"
-                android:text="@string/common_numeric_value_double"
+                android:text="@string/common_value_kcal"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@+id/text_protein_fat_exchanger_summary_value" />
 
@@ -157,7 +157,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
-                android:text="@string/common_numeric_value_double"
+                android:text="@string/common_value_units"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -165,7 +165,7 @@
                 android:id="@+id/text_fat_summary_value"
                 android:layout_width="wrap_content"
                 android:layout_height="19dp"
-                android:text="@string/common_numeric_value_double"
+                android:text="@string/common_value_gram"
                 app:layout_constraintBaseline_toBaselineOf="@+id/text_protein_fat_exchanger_summary_value"
                 app:layout_constraintEnd_toEndOf="@+id/text_carbs_summary_value" />
 
@@ -173,7 +173,7 @@
                 android:id="@+id/text_proteins_summary_value"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/common_numeric_value_double"
+                android:text="@string/common_value_gram"
                 app:layout_constraintBaseline_toBaselineOf="@+id/text_calories_summary_value"
                 app:layout_constraintEnd_toEndOf="@+id/text_fat_summary_value" />
 
@@ -183,7 +183,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:layout_marginBottom="8dp"
-                android:text="@string/common_numeric_value_double"
+                android:text="@string/common_value_units"
                 app:layout_constraintBottom_toTopOf="@+id/text_calories_summary_value"
                 app:layout_constraintEnd_toEndOf="@+id/text_carbs_exchanger_summary_value"
                 app:layout_constraintTop_toBottomOf="@+id/text_carbs_exchanger_summary_value" />

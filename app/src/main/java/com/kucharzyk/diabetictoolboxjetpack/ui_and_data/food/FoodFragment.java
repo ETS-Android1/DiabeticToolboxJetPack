@@ -94,16 +94,21 @@ public class FoodFragment extends Fragment {
                         sumMealCaloriesValue += product.getCalories();
                     }
                 }
-                mMealCarbsValue.setText(Globals.REAL_FORMATTER.format(sumMealCarbsValue));
-                mMealFatValue.setText(Globals.REAL_FORMATTER.format(sumMealFatValue));
-                mMealProteinValue.setText(Globals.REAL_FORMATTER.format(sumMealProteinsValue));
-                mMealCaloriesValue.setText(Globals.REAL_FORMATTER.format(sumMealCaloriesValue));
-                mealCarbsExchangerValue.
-                        setText(Globals.REAL_FORMATTER.format
-                                (sumMealCarbsValue / 12));
-                mealFatExchangerValue.
-                        setText(Globals.REAL_FORMATTER.format
-                                ((9 * sumMealFatValue + 4 * sumMealProteinsValue) / 100));
+                String mealCarbs = Globals.REAL_FORMATTER.format(sumMealCarbsValue) + " g";
+                String mealFat = Globals.REAL_FORMATTER.format(sumMealFatValue) + " g";
+                String mealProteins = Globals.REAL_FORMATTER.format(sumMealProteinsValue) + " g";
+                String mealCalories = Globals.REAL_FORMATTER.format(sumMealCaloriesValue) + " kcal";
+                String mealCarbsExchanger = Globals.REAL_FORMATTER.format
+                        (sumMealCarbsValue / 12) + " units";
+                String mealFatExchanger = Globals.REAL_FORMATTER.format
+                        ((9 * sumMealFatValue + 4 * sumMealProteinsValue) / 100) + " units";
+
+                mMealCarbsValue.setText(mealCarbs);
+                mMealFatValue.setText(mealFat);
+                mMealProteinValue.setText(mealProteins);
+                mMealCaloriesValue.setText(mealCalories);
+                mealCarbsExchangerValue.setText(mealCarbsExchanger);
+                mealFatExchangerValue.setText(mealFatExchanger);
             }
         };
 

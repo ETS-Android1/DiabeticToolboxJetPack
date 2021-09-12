@@ -129,6 +129,7 @@ public class ExercisesFragment extends Fragment {
         return root;
     }
 
+
     private void buildRecyclerView(View rootView) {
         RecyclerView recyclerView = rootView.findViewById(R.id.exercises_recycler_view);
         recyclerView.setHasFixedSize(true);

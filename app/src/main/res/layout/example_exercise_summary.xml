@@ -61,7 +61,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
-            android:text="@string/common_numeric_value_double"
+            android:text="@string/common_value_units"
             android:textSize="12sp"
             app:layout_constraintBaseline_toBaselineOf="@+id/textView_example_exercise_calories_burned"
             app:layout_constraintStart_toEndOf="@+id/textView_example_exercise_calories_burned" />
@@ -94,7 +94,7 @@
             android:id="@+id/textView_example_exercise_carbohydrate_exchangers_used_value"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/common_numeric_value_double"
+            android:text="@string/common_value_units"
             android:textSize="12sp"
             app:layout_constraintBaseline_toBaselineOf="@+id/textView_example_exercise_carbohydrate_exchangers_used"
             app:layout_constraintStart_toStartOf="@+id/textView_example_exercise_calories_burned_value" />
@@ -103,7 +103,7 @@
             android:id="@+id/textView_example_exercise_duration_value"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/common_numeric_value_int"
+            android:text="@string/common_value_min"
             android:textSize="12sp"
             app:layout_constraintBaseline_toBaselineOf="@+id/textView_example_exercise_duration"
             app:layout_constraintStart_toStartOf="@+id/textView_example_exercise_carbohydrate_exchangers_used_value" />

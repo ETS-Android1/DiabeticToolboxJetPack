@@ -107,7 +107,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="4dp"
-                    android:text="@string/common_numeric_value_double"
+                    android:text="@string/common_value_units"
                     android:textSize="18sp"
                     app:layout_constraintBaseline_toBaselineOf="@id/exercise_summary_textView_calories_burned"
                     app:layout_constraintEnd_toEndOf="parent" />
@@ -130,7 +130,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="4dp"
-                    android:text="@string/common_numeric_value_double"
+                    android:text="@string/common_value_units"
                     android:textSize="18sp"
                     app:layout_constraintBaseline_toBaselineOf="@id/exercise_summary_textView_carbs_exchanger_used"
                     app:layout_constraintEnd_toEndOf="parent" />

@@ -114,20 +114,27 @@ public class DiaryEntryAdapter extends RecyclerView.Adapter<DiaryEntryAdapter.Di
     @Override
     public void onBindViewHolder(@NonNull DiaryEntryViewHolder holder, int position) {
         DiaryEntrySummary currentDiaryEntry = diaryEntries.get(position);
+        String diaryEntryCarbohydrate = Globals.REAL_FORMATTER.
+                format(currentDiaryEntry.getCarbohydrates()) + " g";
+        String diaryEntryFat = Globals.REAL_FORMATTER.
+                format(currentDiaryEntry.getFat()) + " g";
+        String diaryEntryProteins = Globals.REAL_FORMATTER.
+                format(currentDiaryEntry.getProteins()) + " g";
+        String diaryEntryCalories = Globals.REAL_FORMATTER.
+                format(currentDiaryEntry.getCalories()) + " kcal";
+        String diaryEntryCarbsExchanger = Globals.REAL_FORMATTER.
+                format((currentDiaryEntry.getCarbohydrates()) / 12) + " units";
+        String diaryEntryFatExchanger = Globals.REAL_FORMATTER.
+                format((9 * currentDiaryEntry.getFat() + 4 * currentDiaryEntry.getProteins()) / 100) + " units";
+
         holder.diaryEntryDate.setText(currentDiaryEntry.getDiaryEntryDate().
                 format(DateTimeFormatter.ofPattern("dd-MM-yyyy")));
-        holder.diaryEntryCarbohydrateValue.setText(Globals.REAL_FORMATTER.
-                format(currentDiaryEntry.getCarbohydrates()));
-        holder.diaryEntryFatValue.setText(Globals.REAL_FORMATTER.
-                format(currentDiaryEntry.getFat()));
-        holder.diaryEntryProteinsValue.setText(Globals.REAL_FORMATTER.
-                format(currentDiaryEntry.getProteins()));
-        holder.diaryEntryCaloriesValue.setText(Globals.REAL_FORMATTER.
-                format(currentDiaryEntry.getCalories()));
-        holder.diaryEntryCarbsExchangerValue.setText(Globals.REAL_FORMATTER.
-                format((currentDiaryEntry.getCarbohydrates()) / 12));
-        holder.diaryEntryFatExchangerValue.setText(Globals.REAL_FORMATTER.
-                format((9 * currentDiaryEntry.getFat() + 4 * currentDiaryEntry.getProteins()) / 100));
+        holder.diaryEntryCarbohydrateValue.setText(diaryEntryCarbohydrate);
+        holder.diaryEntryFatValue.setText(diaryEntryFat);
+        holder.diaryEntryProteinsValue.setText(diaryEntryProteins);
+        holder.diaryEntryCaloriesValue.setText(diaryEntryCalories);
+        holder.diaryEntryCarbsExchangerValue.setText(diaryEntryCarbsExchanger);
+        holder.diaryEntryFatExchangerValue.setText(diaryEntryFatExchanger);
     }
 
 

@@ -62,7 +62,7 @@ public class DiaryFragment extends Fragment {
 
     private void buildRecyclerView(View rootView){
         RecyclerView mDiaryRecyclerView = rootView.findViewById(R.id.diary_recycler_view);
-        mDiaryRecyclerView.setHasFixedSize(true);
+        //mDiaryRecyclerView.setHasFixedSize(true);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
 
         mAdapter = new DiaryEntryAdapter();

@@ -21,7 +21,10 @@
     <string name="macro_proteins">Proteins: </string>
     <string name="macro_carbs_exchanger">WW: </string>
     <string name="macro_fat_exchanger">WBT: </string>
-    <string name="common_numeric_value_double">0.0 </string>
+    <string name="common_value_kcal">0 kcal </string>
+    <string name="common_value_min">0 min </string>
+    <string name="common_value_units">0 units </string>
+    <string name="common_value_gram">0 g </string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="add_product_sign">Add product sign</string>
