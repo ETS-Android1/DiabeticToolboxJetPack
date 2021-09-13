@@ -18,6 +18,7 @@ import com.kucharzyk.diabetictoolboxjetpack.room_database.DiaryEntryWithTraining
 import com.kucharzyk.diabetictoolboxjetpack.room_database.MealProductCrossRef;
 import com.kucharzyk.diabetictoolboxjetpack.room_database.TrainingExerciseCrossRef;
 import com.kucharzyk.diabetictoolboxjetpack.room_database.User;
+import com.kucharzyk.diabetictoolboxjetpack.ui_and_data.home.HomeFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,20 +39,12 @@ public class DiaryFragment extends Fragment {
         diaryEntryViewModel =
                 new ViewModelProvider(this).get(DiaryEntryViewModel.class);
         View root = inflater.inflate(R.layout.diary_fragment, container, false);
-
         buildRecyclerView(root);
 
-        final Observer<List<DiaryEntryWithMealsAndProducts>> diaryMealEntriesObserver = new Observer<List<DiaryEntryWithMealsAndProducts>>() {
+        final Observer<List<User>> appUsersObserver = new Observer<List<User>>() {
             @Override
-            public void onChanged(List<DiaryEntryWithMealsAndProducts> diaryEntryWithMealsAndProducts) {
-                diaryEntryWithMealsAndProducts = diaryEntryViewModel.getAllDiaryMealEntries().getValue();
-
-                assert diaryEntryWithMealsAndProducts != null;
-                for (DiaryEntryWithMealsAndProducts diaryEntry:diaryEntryWithMealsAndProducts
-                     ) {
-                        diaryMealEntrySummaries.add(new DiaryMealEntrySummary(diaryEntry.meals, mealProductCrossRefList, diaryEntry.diaryEntry.getDiaryEntryDate()));
-                }
-                mAdapter.setDiaryMealEntries(diaryMealEntrySummaries);
+            public void onChanged(List<User> users) {
+                appUsers = users;
             }
         };
 
@@ -64,9 +57,23 @@ public class DiaryFragment extends Fragment {
                 for (DiaryEntryWithTrainingsAndExercises diaryEntry:diaryEntryWithTrainingsAndExercises
                 ) {
                     diaryTrainingEntrySummaries.add(new DiaryTrainingEntrySummary(diaryEntry.trainings, trainingExerciseCrossRefList,
-                            diaryEntry.diaryEntry.getDiaryEntryDate(), appUsers.get(0)));
+                            diaryEntry.diaryEntry.getDiaryEntryDate(), HomeFragment.currentUser));
                 }
                 mAdapter.setDiaryTrainingEntries(diaryTrainingEntrySummaries);
+            }
+        };
+
+        final Observer<List<DiaryEntryWithMealsAndProducts>> diaryMealEntriesObserver = new Observer<List<DiaryEntryWithMealsAndProducts>>() {
+            @Override
+            public void onChanged(List<DiaryEntryWithMealsAndProducts> diaryEntryWithMealsAndProducts) {
+                diaryEntryWithMealsAndProducts = diaryEntryViewModel.getAllDiaryMealEntries().getValue();
+
+                assert diaryEntryWithMealsAndProducts != null;
+                for (DiaryEntryWithMealsAndProducts diaryEntry:diaryEntryWithMealsAndProducts
+                     ) {
+                        diaryMealEntrySummaries.add(new DiaryMealEntrySummary(diaryEntry.meals, mealProductCrossRefList, diaryEntry.diaryEntry.getDiaryEntryDate()));
+                }
+                mAdapter.setDiaryMealEntries(diaryMealEntrySummaries);
             }
         };
 
@@ -84,18 +91,12 @@ public class DiaryFragment extends Fragment {
             }
         };
 
-        final Observer<List<User>> appUsersObserver = new Observer<List<User>>() {
-            @Override
-            public void onChanged(List<User> users) {
-                appUsers = users;
-            }
-        };
-
-        diaryEntryViewModel.getAllMealCrossRefs().observe(getViewLifecycleOwner(), mealsRefObserver);
-        diaryEntryViewModel.getAllTrainingCrossRefs().observe(getViewLifecycleOwner(), trainingsRefObserver);
         diaryEntryViewModel.getAllApplicationUsers().observe(getViewLifecycleOwner(), appUsersObserver);
-        diaryEntryViewModel.getAllDiaryMealEntries().observe(getViewLifecycleOwner(), diaryMealEntriesObserver);
+        diaryEntryViewModel.getAllTrainingCrossRefs().observe(getViewLifecycleOwner(), trainingsRefObserver);
         diaryEntryViewModel.getAllDiaryTrainingEntries().observe(getViewLifecycleOwner(), diaryTrainingEntriesObserver);
+        diaryEntryViewModel.getAllMealCrossRefs().observe(getViewLifecycleOwner(), mealsRefObserver);
+        diaryEntryViewModel.getAllDiaryMealEntries().observe(getViewLifecycleOwner(), diaryMealEntriesObserver);
+
         return root;
     }
 

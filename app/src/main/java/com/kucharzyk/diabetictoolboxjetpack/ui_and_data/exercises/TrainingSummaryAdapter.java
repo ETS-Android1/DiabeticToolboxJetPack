@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.kucharzyk.diabetictoolboxjetpack.Globals;
 import com.kucharzyk.diabetictoolboxjetpack.R;
 import com.kucharzyk.diabetictoolboxjetpack.room_database.Exercise;
+import com.kucharzyk.diabetictoolboxjetpack.ui_and_data.home.HomeFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -84,17 +85,21 @@ public class TrainingSummaryAdapter extends RecyclerView.Adapter<TrainingSummary
         return trainingSummaryViewHolder;
     }
 
-    private Double quickHelper(Exercise exercise) {
+/*    private Double quickHelper(Exercise exercise) {
         return Globals.calculateCaloriesBurned(exercise.getExerciseDuration(),
                 exercise.getMetabolicEquivalentOfTask(), 68.0);
-    }
+    }*/
 
     @Override
     public void onBindViewHolder(@NonNull TrainingSummaryViewHolder holder, int position) {
         Exercise currentExercise = trainingSummary.get(position);
         holder.mExerciseName.setText(currentExercise.getExerciseName());
-        holder.mCaloriesBurnedValue.setText(Globals.REAL_FORMATTER.format(quickHelper(currentExercise)));
-        holder.mCarbohydrateExchangersUsed.setText(Globals.REAL_FORMATTER.format(quickHelper(currentExercise) / 4 / 12));
+        holder.mCaloriesBurnedValue.setText(Globals.REAL_FORMATTER.
+                format(Globals.calculateCaloriesBurned(currentExercise.getExerciseDuration(),
+                        currentExercise.getMetabolicEquivalentOfTask(), HomeFragment.currentUser.getWeight())));
+        holder.mCarbohydrateExchangersUsed.setText(Globals.REAL_FORMATTER.
+                format(Globals.calculateCaloriesBurned(currentExercise.getExerciseDuration(),
+                        currentExercise.getMetabolicEquivalentOfTask(), HomeFragment.currentUser.getWeight()) / 4 / 12));
         holder.mDuration.setText(Globals.REAL_FORMATTER.format(currentExercise.getExerciseDuration()));
     }
 
