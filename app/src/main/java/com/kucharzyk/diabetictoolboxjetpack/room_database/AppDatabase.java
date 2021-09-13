@@ -15,7 +15,8 @@ import java.util.concurrent.Executors;
 
 @Database(entities = {User.class, Product.class, Exercise.class, Glycemia.class,
         Meal.class, Training.class,
-        MealProductCrossRef.class, TrainingExerciseCrossRef.class, DiaryEntry.class}, version = 1)
+        MealProductCrossRef.class, TrainingExerciseCrossRef.class,
+        DiaryEntry.class}, version = 1)
 @TypeConverters({Converters.class})
 public abstract class AppDatabase extends RoomDatabase {
 
@@ -30,6 +31,7 @@ public abstract class AppDatabase extends RoomDatabase {
     public abstract TrainingExerciseCrossRefDao trainingExerciseCrossRefDao();
     public abstract TrainingWithExercisesDao trainingWithExercisesDao();
     public abstract DiaryEntryDao diaryEntryDao();
+    public abstract DiaryEntryWithGlycemiaDao diaryEntryWithGlycemiaDao();
     public abstract DiaryEntryWithMealsAndProductsDao diaryEntryWithMealsAndProductsDao();
     public abstract DiaryEntryWithTrainingsAndExercisesDao diaryEntryWithTrainingsAndExercisesDao();
 

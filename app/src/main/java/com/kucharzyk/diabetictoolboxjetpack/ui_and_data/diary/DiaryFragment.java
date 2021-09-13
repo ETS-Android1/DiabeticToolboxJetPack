@@ -1,6 +1,7 @@
 package com.kucharzyk.diabetictoolboxjetpack.ui_and_data.diary;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,11 +14,11 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.kucharzyk.diabetictoolboxjetpack.R;
+import com.kucharzyk.diabetictoolboxjetpack.room_database.DiaryEntryWithGlycemia;
 import com.kucharzyk.diabetictoolboxjetpack.room_database.DiaryEntryWithMealsAndProducts;
 import com.kucharzyk.diabetictoolboxjetpack.room_database.DiaryEntryWithTrainingsAndExercises;
 import com.kucharzyk.diabetictoolboxjetpack.room_database.MealProductCrossRef;
 import com.kucharzyk.diabetictoolboxjetpack.room_database.TrainingExerciseCrossRef;
-import com.kucharzyk.diabetictoolboxjetpack.room_database.User;
 import com.kucharzyk.diabetictoolboxjetpack.ui_and_data.home.HomeFragment;
 
 import java.util.ArrayList;
@@ -28,11 +29,11 @@ public class DiaryFragment extends Fragment {
 
     private DiaryEntryViewModel diaryEntryViewModel;
     private DiaryEntryAdapter mAdapter;
-    private List<DiaryMealEntrySummary> diaryMealEntrySummaries = new ArrayList<>();
-    private List<DiaryTrainingEntrySummary> diaryTrainingEntrySummaries = new ArrayList<>();
+    private final List<DiaryMealEntrySummary> diaryMealEntrySummaries = new ArrayList<>();
+    private final List<DiaryTrainingEntrySummary> diaryTrainingEntrySummaries = new ArrayList<>();
+    private final List<DiaryMeasurementEntrySummary> diaryMeasurementEntrySummaries = new ArrayList<>();
     private List<MealProductCrossRef> mealProductCrossRefList = new ArrayList<>();
     private List<TrainingExerciseCrossRef> trainingExerciseCrossRefList = new ArrayList<>();
-    private List<User> appUsers = new ArrayList<>();
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -40,13 +41,6 @@ public class DiaryFragment extends Fragment {
                 new ViewModelProvider(this).get(DiaryEntryViewModel.class);
         View root = inflater.inflate(R.layout.diary_fragment, container, false);
         buildRecyclerView(root);
-
-        final Observer<List<User>> appUsersObserver = new Observer<List<User>>() {
-            @Override
-            public void onChanged(List<User> users) {
-                appUsers = users;
-            }
-        };
 
         final Observer<List<DiaryEntryWithTrainingsAndExercises>> diaryTrainingEntriesObserver = new Observer<List<DiaryEntryWithTrainingsAndExercises>>() {
             @Override
@@ -56,8 +50,9 @@ public class DiaryFragment extends Fragment {
                 assert diaryEntryWithTrainingsAndExercises != null;
                 for (DiaryEntryWithTrainingsAndExercises diaryEntry:diaryEntryWithTrainingsAndExercises
                 ) {
-                    diaryTrainingEntrySummaries.add(new DiaryTrainingEntrySummary(diaryEntry.trainings, trainingExerciseCrossRefList,
-                            diaryEntry.diaryEntry.getDiaryEntryDate(), HomeFragment.currentUser));
+                    diaryTrainingEntrySummaries.
+                            add(new DiaryTrainingEntrySummary(diaryEntry.trainings,
+                                    trainingExerciseCrossRefList, diaryEntry.diaryEntry.getDiaryEntryDate(), HomeFragment.currentUser));
                 }
                 mAdapter.setDiaryTrainingEntries(diaryTrainingEntrySummaries);
             }
@@ -71,9 +66,30 @@ public class DiaryFragment extends Fragment {
                 assert diaryEntryWithMealsAndProducts != null;
                 for (DiaryEntryWithMealsAndProducts diaryEntry:diaryEntryWithMealsAndProducts
                      ) {
-                        diaryMealEntrySummaries.add(new DiaryMealEntrySummary(diaryEntry.meals, mealProductCrossRefList, diaryEntry.diaryEntry.getDiaryEntryDate()));
+                        diaryMealEntrySummaries.
+                                add(new DiaryMealEntrySummary(diaryEntry.meals,
+                                        mealProductCrossRefList, diaryEntry.diaryEntry.getDiaryEntryDate()));
+                    Log.d(TAG, "onChanged: diaryMealEntriesObserver carbsValue = " + diaryEntry.meals);
                 }
                 mAdapter.setDiaryMealEntries(diaryMealEntrySummaries);
+            }
+        };
+
+        final Observer<List<DiaryEntryWithGlycemia>> diaryMeasurementEntriesObserver = new Observer<List<DiaryEntryWithGlycemia>>() {
+            @Override
+            public void onChanged(List<DiaryEntryWithGlycemia> diaryEntryWithMeasurements) {
+                diaryEntryWithMeasurements = diaryEntryViewModel.getAllDiaryMeasurementEntries().getValue();
+
+                assert diaryEntryWithMeasurements != null;
+                for (DiaryEntryWithGlycemia diaryEntry:diaryEntryWithMeasurements
+                ) {
+                    diaryMeasurementEntrySummaries.
+                            add(new DiaryMeasurementEntrySummary(diaryEntry.getGlycemiaMeasurements(),
+                                    diaryEntry.getDiaryEntry().getDiaryEntryDate()));
+                    Log.d(TAG, "onChanged: diaryMeasurementEntriesObserver measValue = " + diaryEntry.getGlycemiaMeasurements()
+                    + " size: " + diaryEntry.getGlycemiaMeasurements().size() + " value: " + diaryEntry.getGlycemiaMeasurements().get(0).getMeasurementValue());
+                }
+                mAdapter.setDiaryMeasurementEntries(diaryMeasurementEntrySummaries);
             }
         };
 
@@ -91,11 +107,11 @@ public class DiaryFragment extends Fragment {
             }
         };
 
-        diaryEntryViewModel.getAllApplicationUsers().observe(getViewLifecycleOwner(), appUsersObserver);
         diaryEntryViewModel.getAllTrainingCrossRefs().observe(getViewLifecycleOwner(), trainingsRefObserver);
         diaryEntryViewModel.getAllDiaryTrainingEntries().observe(getViewLifecycleOwner(), diaryTrainingEntriesObserver);
         diaryEntryViewModel.getAllMealCrossRefs().observe(getViewLifecycleOwner(), mealsRefObserver);
         diaryEntryViewModel.getAllDiaryMealEntries().observe(getViewLifecycleOwner(), diaryMealEntriesObserver);
+        diaryEntryViewModel.getAllDiaryMeasurementEntries().observe(getViewLifecycleOwner(), diaryMeasurementEntriesObserver);
 
         return root;
     }

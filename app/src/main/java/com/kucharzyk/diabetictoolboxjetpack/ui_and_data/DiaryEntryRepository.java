@@ -2,9 +2,13 @@ package com.kucharzyk.diabetictoolboxjetpack.ui_and_data;
 
 import android.app.Application;
 
+import androidx.lifecycle.LiveData;
+
 import com.kucharzyk.diabetictoolboxjetpack.room_database.AppDatabase;
 import com.kucharzyk.diabetictoolboxjetpack.room_database.DiaryEntry;
 import com.kucharzyk.diabetictoolboxjetpack.room_database.DiaryEntryDao;
+
+import java.time.LocalDate;
 
 public class DiaryEntryRepository {
 
@@ -27,4 +31,9 @@ public class DiaryEntryRepository {
             diaryEntryDao.update(diaryEntry);
         });
     }
+
+    public LiveData<DiaryEntry> getDiaryEntryFromDate(LocalDate localDate) {
+        return diaryEntryDao.getDiaryEntryFromDate(localDate);
+    }
+
 }

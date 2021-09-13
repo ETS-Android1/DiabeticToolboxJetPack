@@ -20,7 +20,7 @@ public interface GlycemiaDao {
     void delete(Glycemia glycemiaMeasurement);
 
     @Update
-    void update(Glycemia glycemiaMEasurement);
+    void update(Glycemia glycemiaMeasurement);
 
     @Query("SELECT * FROM `Glycemia measurements`")
     LiveData<List<Glycemia>> getAllMeasurements();

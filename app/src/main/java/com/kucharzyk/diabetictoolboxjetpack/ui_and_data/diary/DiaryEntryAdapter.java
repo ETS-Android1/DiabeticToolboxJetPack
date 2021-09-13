@@ -21,6 +21,7 @@ public class DiaryEntryAdapter extends RecyclerView.Adapter<DiaryEntryAdapter.Di
 
     private List<DiaryMealEntrySummary> diaryMealEntries = new ArrayList<>();
     private List<DiaryTrainingEntrySummary> diaryTrainingEntries = new ArrayList<>();
+    private List<DiaryMeasurementEntrySummary> diaryMeasurementEntries = new ArrayList<>();
     private OnItemClickListener mOnItemClickListener;
 
     public interface OnItemClickListener {
@@ -52,6 +53,11 @@ public class DiaryEntryAdapter extends RecyclerView.Adapter<DiaryEntryAdapter.Di
         private final TextView diaryEntryCarbsExchangerUsedValue;
         private final TextView diaryEntryProteinFatExchangerUsedValue;
 
+        private final TextView diarEntryGlycemiaMeasurementsTakenValue;
+        private final TextView diarEntryHyperglycemiaMeasurementsTakenValue;
+        private final TextView diarEntryStandardMeasurementsTakenValue;
+        private final TextView diarEntryHypoglycemiaMeasurementsTakenValue;
+
         private final TextView diaryEntryDate;
 
         public DiaryEntryViewHolder(@NonNull View itemView, DiaryEntryAdapter.OnItemClickListener listener) {
@@ -70,6 +76,11 @@ public class DiaryEntryAdapter extends RecyclerView.Adapter<DiaryEntryAdapter.Di
             diaryEntryCaloriesBurnedValue = itemView.findViewById(R.id.diaryEntryTextCaloriesBurnedValue);
             diaryEntryCarbsExchangerUsedValue = itemView.findViewById(R.id.diaryEntryTextViewCarbsExchangerUsedValue);
             diaryEntryProteinFatExchangerUsedValue = itemView.findViewById(R.id.diaryEntryTextViewFatExchangerUsedValue);
+
+            diarEntryGlycemiaMeasurementsTakenValue = itemView.findViewById(R.id.diaryEntryTextMeasurementsTakenValue);
+            diarEntryHyperglycemiaMeasurementsTakenValue = itemView.findViewById(R.id.diaryEntryTextViewHyperglycemiaValue);
+            diarEntryStandardMeasurementsTakenValue = itemView.findViewById(R.id.diaryEntryTextViewMeasurementStandardValue);
+            diarEntryHypoglycemiaMeasurementsTakenValue = itemView.findViewById(R.id.diaryEntryTextViewHypoglycemiaValue);
 
             diaryEntryDate = itemView.findViewById(R.id.diaryEntryTextViewDate);
 
@@ -173,13 +184,35 @@ public class DiaryEntryAdapter extends RecyclerView.Adapter<DiaryEntryAdapter.Di
             Log.i(TAG, "onBindViewHolder: diaryMealEntries not ready yet");
         }
 
+        try {
+            DiaryMeasurementEntrySummary currentDiaryMeasurementEntrySummary = diaryMeasurementEntries.get(position);
+
+            String diarEntryGlycemiaMeasurementsTaken = Globals.REAL_FORMATTER.
+                    format(currentDiaryMeasurementEntrySummary.getMeasurementsCount());
+            String diarEntryHyperglycemiaMeasurementsTaken = Globals.REAL_FORMATTER.
+                    format(currentDiaryMeasurementEntrySummary.getHyperglycemiaMeasurementsCount());
+            String diarEntryStandardMeasurementsTaken = Globals.REAL_FORMATTER.
+                    format(currentDiaryMeasurementEntrySummary.getStandardMeasurementsCount());
+            String diarEntryHypoglycemiaMeasurementsTaken = Globals.REAL_FORMATTER.
+                    format(currentDiaryMeasurementEntrySummary.getHypoglycemiaMeasurementsCount());
+
+            holder.diarEntryGlycemiaMeasurementsTakenValue.setText(diarEntryGlycemiaMeasurementsTaken);
+            holder.diarEntryHyperglycemiaMeasurementsTakenValue.setText(diarEntryHyperglycemiaMeasurementsTaken);
+            holder.diarEntryStandardMeasurementsTakenValue.setText(diarEntryStandardMeasurementsTaken);
+            holder.diarEntryHypoglycemiaMeasurementsTakenValue.setText(diarEntryHypoglycemiaMeasurementsTaken);
+
+        } catch (IndexOutOfBoundsException e) {
+            Log.i(TAG, "onBindViewHolder: diaryMesurementEntries not ready yet");
+        }
+
     }
 
 
     @Override
     public int getItemCount() {
         int biggerList;
-        biggerList = Math.max(diaryMealEntries.size(), diaryTrainingEntries.size());
+        biggerList = Math.max(diaryMealEntries.size(),
+                Math.max(diaryTrainingEntries.size(), diaryMeasurementEntries.size()));
         Log.d(TAG, "getItemCount: biggerList= " + biggerList);
         return biggerList;
     }
@@ -191,6 +224,11 @@ public class DiaryEntryAdapter extends RecyclerView.Adapter<DiaryEntryAdapter.Di
 
     public void setDiaryTrainingEntries(List<DiaryTrainingEntrySummary> diaryTrainingEntries) {
         this.diaryTrainingEntries = diaryTrainingEntries;
+        notifyDataSetChanged();
+    }
+
+    public void setDiaryMeasurementEntries(List<DiaryMeasurementEntrySummary> diaryMeasurementEntries) {
+        this.diaryMeasurementEntries = diaryMeasurementEntries;
         notifyDataSetChanged();
     }
 

@@ -19,15 +19,19 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 import com.kucharzyk.diabetictoolboxjetpack.R;
+import com.kucharzyk.diabetictoolboxjetpack.room_database.DiaryEntry;
 import com.kucharzyk.diabetictoolboxjetpack.room_database.Glycemia;
+import com.kucharzyk.diabetictoolboxjetpack.ui_and_data.diary.DiaryEntryViewModel;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Objects;
 
 public class GlycemiaFragment extends Fragment {
     public static final String TAG = "GlycemiaFragment";
 
     private GlycemiaViewModel glycemiaViewModel;
+    private DiaryEntryViewModel diaryEntryViewModel;
     private LocalDateTime currentDateTime;
 
     private TextView mGlycemiaValue;
@@ -40,6 +44,7 @@ public class GlycemiaFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         glycemiaViewModel = new ViewModelProvider(requireActivity()).get(GlycemiaViewModel.class);
+
         View root =  inflater.inflate(R.layout.glycemia_fragment, container, false);
 
         mGlycemiaValueLayout = root.findViewById(R.id.glycemia_glycemia_textInputLayout);
@@ -51,8 +56,12 @@ public class GlycemiaFragment extends Fragment {
         mSaveMeasurementButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (mGlycemiaValueLayout.getError() == null) {
-                    glycemiaViewModel.insert(new Glycemia(currentDateTime));
+
+                if (mGlycemiaValueLayout.getError() == null && mGlycemiaValue.getText() != null) {
+                    glycemiaViewModel.insertDiaryEntry(new DiaryEntry(currentDateTime.toLocalDate()));
+                    glycemiaViewModel.insertMeasurement(new Glycemia(currentDateTime, Integer.parseInt(mGlycemiaValue.getText().toString())));
+                    Objects.requireNonNull(mGlycemiaValueLayout.getEditText()).getText().clear();
+                    Toast.makeText(requireContext(), "Measurement was successfully saved!", Toast.LENGTH_SHORT).show();
                 }
                 else {
                     Toast.makeText(requireContext(), "Glycemia value is invalid!", Toast.LENGTH_SHORT).show();
@@ -64,10 +73,6 @@ public class GlycemiaFragment extends Fragment {
         mGlycemiaValue.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int start, int count, int after) {
-                if(after < count){
-                    Log.d(TAG, "beforeTextChanged: character deleted");
-                    Log.d(TAG, "charSequence: " + charSequence);
-                }
 
             }
 
@@ -85,9 +90,14 @@ public class GlycemiaFragment extends Fragment {
 
             @Override
             public void afterTextChanged(Editable editable) {
-                if(Integer.parseInt(editable.toString()) < 20 || Integer.parseInt(editable.toString()) > 600){
-                    mGlycemiaValueLayout.setError("Podaj wartość z przedziału 20-600");
+                try {
+                    if(Integer.parseInt(editable.toString()) < 20 || Integer.parseInt(editable.toString()) > 600){
+                        mGlycemiaValueLayout.setError("Podaj wartość z przedziału 20-600");
+                    }
+                } catch (NumberFormatException e) {
+                    Log.e(TAG, "afterTextChanged: glycemiaValueEditText cleared", e);
                 }
+
             }
         });
 

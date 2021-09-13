@@ -6,16 +6,16 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 
+import com.kucharzyk.diabetictoolboxjetpack.room_database.DiaryEntryWithGlycemia;
 import com.kucharzyk.diabetictoolboxjetpack.room_database.DiaryEntryWithMealsAndProducts;
 import com.kucharzyk.diabetictoolboxjetpack.room_database.DiaryEntryWithTrainingsAndExercises;
 import com.kucharzyk.diabetictoolboxjetpack.room_database.MealProductCrossRef;
 import com.kucharzyk.diabetictoolboxjetpack.room_database.TrainingExerciseCrossRef;
-import com.kucharzyk.diabetictoolboxjetpack.room_database.User;
+import com.kucharzyk.diabetictoolboxjetpack.ui_and_data.DiaryEntryWithGlycemiaRepository;
 import com.kucharzyk.diabetictoolboxjetpack.ui_and_data.DiaryEntryWithMealsAndProductsRepository;
 import com.kucharzyk.diabetictoolboxjetpack.ui_and_data.DiaryEntryWithTrainingsAndExercisesRepository;
 import com.kucharzyk.diabetictoolboxjetpack.ui_and_data.MealProductCrossRefRepository;
 import com.kucharzyk.diabetictoolboxjetpack.ui_and_data.TrainingExerciseCrossRefRepository;
-import com.kucharzyk.diabetictoolboxjetpack.ui_and_data.UserRepository;
 
 import java.util.List;
 
@@ -25,12 +25,9 @@ public class DiaryEntryViewModel extends AndroidViewModel {
 
     private final MealProductCrossRefRepository mealProductCrossRefRepository;
     private final TrainingExerciseCrossRefRepository trainingExerciseCrossRefRepository;
-    private final DiaryEntryWithMealsAndProductsRepository diaryEntryWithMealsAndProductsRepository;
-    private final DiaryEntryWithTrainingsAndExercisesRepository diaryEntryWithTrainingsAndExercisesRepository;
-    private final UserRepository userRepository;
     private final LiveData<List<DiaryEntryWithMealsAndProducts>> allDiaryMealEntries;
     private final LiveData<List<DiaryEntryWithTrainingsAndExercises>> allDiaryTrainingEntries;
-    private final LiveData<List<User>> allApplicationUsers;
+    private final LiveData<List<DiaryEntryWithGlycemia>> allDiaryMeasurementEntries;
 
 
     public DiaryEntryViewModel(@NonNull Application application) {
@@ -38,13 +35,14 @@ public class DiaryEntryViewModel extends AndroidViewModel {
 
         mealProductCrossRefRepository = new MealProductCrossRefRepository(application);
         trainingExerciseCrossRefRepository = new TrainingExerciseCrossRefRepository(application);
-        diaryEntryWithMealsAndProductsRepository = new DiaryEntryWithMealsAndProductsRepository(application);
-        diaryEntryWithTrainingsAndExercisesRepository = new DiaryEntryWithTrainingsAndExercisesRepository(application);
-        userRepository = new UserRepository(application);
+        DiaryEntryWithGlycemiaRepository diaryEntryWithGlycemiaRepository = new DiaryEntryWithGlycemiaRepository(application);
+        DiaryEntryWithMealsAndProductsRepository diaryEntryWithMealsAndProductsRepository = new DiaryEntryWithMealsAndProductsRepository(application);
+        DiaryEntryWithTrainingsAndExercisesRepository diaryEntryWithTrainingsAndExercisesRepository = new DiaryEntryWithTrainingsAndExercisesRepository(application);
 
         allDiaryMealEntries = diaryEntryWithMealsAndProductsRepository.getAllDiaryEntries();
         allDiaryTrainingEntries = diaryEntryWithTrainingsAndExercisesRepository.getAllDiaryEntries();
-        allApplicationUsers = userRepository.getAppUsers();
+        allDiaryMeasurementEntries = diaryEntryWithGlycemiaRepository.getDiaryEntryWithMeasurements();
+
     }
 
     public LiveData<List<MealProductCrossRef>> getAllMealCrossRefs() {
@@ -59,7 +57,7 @@ public class DiaryEntryViewModel extends AndroidViewModel {
 
     public LiveData<List<DiaryEntryWithTrainingsAndExercises>> getAllDiaryTrainingEntries() { return allDiaryTrainingEntries; }
 
-    public LiveData<List<User>> getAllApplicationUsers() { return allApplicationUsers; }
+    public LiveData<List<DiaryEntryWithGlycemia>> getAllDiaryMeasurementEntries() {return allDiaryMeasurementEntries; }
 
 
 }

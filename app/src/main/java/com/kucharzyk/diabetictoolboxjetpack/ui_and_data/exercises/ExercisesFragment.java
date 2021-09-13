@@ -24,7 +24,7 @@ import com.google.android.material.textfield.TextInputEditText;
 import com.kucharzyk.diabetictoolboxjetpack.Globals;
 import com.kucharzyk.diabetictoolboxjetpack.R;
 import com.kucharzyk.diabetictoolboxjetpack.room_database.Exercise;
-import com.kucharzyk.diabetictoolboxjetpack.room_database.User;
+import com.kucharzyk.diabetictoolboxjetpack.ui_and_data.home.HomeFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,7 +33,6 @@ import java.util.Objects;
 public class ExercisesFragment extends Fragment {
 
     private ExercisesViewModel exercisesViewModel;
-    private User currentUser;
     private ExerciseAdapter exerciseAdapter;
     private NavController navController;
 
@@ -84,7 +83,7 @@ public class ExercisesFragment extends Fragment {
                     for (Exercise exercise : exerciseList) {
                         sumTrainingCaloriesBurned += Globals.calculateCaloriesBurned(exercise.getExerciseDuration()
                                 , exercise.getMetabolicEquivalentOfTask(),
-                                Objects.requireNonNull(currentUser.getWeight()));
+                                Objects.requireNonNull(HomeFragment.currentUser.getWeight()));
                         sumTrainingCarbohydrateExchangersUsed += sumTrainingCaloriesBurned / 4 / 12;
                         sumTrainingDuration += exercise.getExerciseDuration();
                     }
@@ -107,24 +106,16 @@ public class ExercisesFragment extends Fragment {
             }
         };
 
-        final Observer<List<User>> userObserver = new Observer<List<User>>() {
-            @Override
-            public void onChanged(List<User> user) {
-                exerciseAdapter.setCurrentUser(user.get(0));
-                currentUser = exerciseAdapter.getCurrentUser();
-            }
-        };
 
         mTrainingSummaryConstraintLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                NavDirections action = ExercisesFragmentDirections.actionNavigationExercisesToTrainingSummaryFragment(currentUser);
+                NavDirections action = ExercisesFragmentDirections.actionNavigationExercisesToTrainingSummaryFragment(HomeFragment.currentUser);
                 navController.navigate(action);
             }
         });
 
         exercisesViewModel.getAllExercises().observe(getViewLifecycleOwner(),allExercisesObserver);
-        exercisesViewModel.getAppUsers().observe(getViewLifecycleOwner(), userObserver);
         exercisesViewModel.getTrainingSummary().observe(getViewLifecycleOwner(), trainingObserver);
         return root;
     }
@@ -159,7 +150,7 @@ public class ExercisesFragment extends Fragment {
                 Exercise exercise = exerciseAdapter.getExercise(position);
 
                 @NonNull NavDirections action = ExercisesFragmentDirections.
-                        actionNavigationExercisesToExerciseSummaryFragment(exercise, position, currentUser);
+                        actionNavigationExercisesToExerciseSummaryFragment(exercise, position, HomeFragment.currentUser);
                 navController.navigate(action);
             }
         });
