@@ -23,11 +23,6 @@ import java.util.List;
 public class HomeFragment extends Fragment {
 
     private TextView userWelcome;
-    private CardView userInformationCard;
-    private CardView mealCard;
-    private CardView exercisesCard;
-    private CardView measurementsCard;
-    private CardView diaryCard;
 
     private HomeViewModel homeViewModel;
     public static User currentUser;
@@ -40,11 +35,12 @@ public class HomeFragment extends Fragment {
         navController = NavHostFragment.findNavController(this);
 
         userWelcome = root.findViewById(R.id.home_welcome_user_textView);
-        userInformationCard = root.findViewById(R.id.home_user_cardView);
-        mealCard = root.findViewById(R.id.home_food_cardView);
-        exercisesCard = root.findViewById(R.id.home_exercises_cardView);
-        measurementsCard = root.findViewById(R.id.home_measurements_cardView);
-        diaryCard = root.findViewById(R.id.home_diary_cardView);
+        CardView updateUserInformationCard = root.findViewById(R.id.home_user_cardView);
+        CardView changeUserPasswordCard = root.findViewById(R.id.home_changePassword_cardView);
+        CardView mealCard = root.findViewById(R.id.home_food_cardView);
+        CardView exercisesCard = root.findViewById(R.id.home_exercises_cardView);
+        CardView measurementsCard = root.findViewById(R.id.home_measurements_cardView);
+        CardView diaryCard = root.findViewById(R.id.home_diary_cardView);
 
 
         mealCard.setOnClickListener(new View.OnClickListener() {
@@ -75,6 +71,22 @@ public class HomeFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 NavDirections action = HomeFragmentDirections.actionNavigationHomeToNavigationDiary();
+                navController.navigate(action);
+            }
+        });
+
+        updateUserInformationCard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                NavDirections action = HomeFragmentDirections.actionNavigationHomeToUpdateUserInformationFragment(currentUser);
+                navController.navigate(action);
+            }
+        });
+
+        changeUserPasswordCard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                NavDirections action = HomeFragmentDirections.actionNavigationHomeToChangePasswordFragment(currentUser);
                 navController.navigate(action);
             }
         });

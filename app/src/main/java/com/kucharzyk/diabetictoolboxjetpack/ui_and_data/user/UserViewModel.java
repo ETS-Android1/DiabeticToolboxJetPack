@@ -28,5 +28,7 @@ public class UserViewModel extends AndroidViewModel {
         return appUsers;
     }
     public void insertUser(User user) {userRepository.insert(user); }
-
+    public void updateUsername(String newUsername) {userRepository.updateUsername(newUsername); }
+    public void updateUserWeight(Double newUserWeight) {userRepository.updateUserWeight(newUserWeight); }
+    public void updateUserPassword(String newUserPassword) {userRepository.updateUserPassword(newUserPassword); }
 }

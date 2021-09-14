@@ -33,14 +33,38 @@
         app:layout_constraintTop_toBottomOf="@id/home_welcome_user_textView" />
 
     <androidx.cardview.widget.CardView
+        android:id="@+id/home_changePassword_cardView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_margin="4dp"
+        android:backgroundTint="#336200EE"
+        app:cardCornerRadius="4dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/home_vertical_guideline"
+        app:layout_constraintTop_toBottomOf="@id/home_horizontal_guideline_part1"
+        app:layout_constraintBottom_toBottomOf="@id/home_horizontal_guideline_part2">
+
+        <TextView
+            android:id="@+id/home_changePassword_cardView_textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="8dp"
+            android:textAlignment="center"
+            android:fontFamily="@font/lato_italic"
+            android:textSize="20sp"
+            android:text="Change password" />
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
         android:id="@+id/home_user_cardView"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_margin="4dp"
         android:backgroundTint="#336200EE"
         app:cardCornerRadius="4dp"
         app:layout_constraintBottom_toBottomOf="@id/home_horizontal_guideline_part2"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/home_vertical_guideline"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@id/home_horizontal_guideline_part1">
 
@@ -50,6 +74,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_margin="8dp"
+            android:textAlignment="center"
             android:fontFamily="@font/lato_italic"
             android:textSize="20sp"
             android:text="Update user information" />

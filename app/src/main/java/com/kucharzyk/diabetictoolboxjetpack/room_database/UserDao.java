@@ -28,4 +28,13 @@ public interface UserDao {
     @Query("DELETE FROM user_table")
     void deleteAll ();
 
+    @Query("UPDATE user_table SET username = :newUsername WHERE userID = 1")
+    void updateUsername(String newUsername);
+
+    @Query("UPDATE user_table SET weight = :newUserWeight WHERE userID = 1")
+    void updateUserWeight(Double newUserWeight);
+
+    @Query("UPDATE user_table SET passwordHash = :newUserPassword WHERE userID = 1")
+    void updateUserPassword(String newUserPassword);
+
 }

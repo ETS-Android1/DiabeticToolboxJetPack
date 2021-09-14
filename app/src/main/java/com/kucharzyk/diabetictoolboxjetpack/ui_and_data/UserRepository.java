@@ -40,6 +40,24 @@ public class UserRepository {
         });
     }
 
+    public void updateUsername(String newUsername) {
+        AppDatabase.databaseWriteExecutor.execute(() -> {
+            userDao.updateUsername(newUsername);
+        });
+    }
+
+    public void updateUserWeight(Double newUserWeight) {
+        AppDatabase.databaseWriteExecutor.execute(() -> {
+            userDao.updateUserWeight(newUserWeight);
+        });
+    }
+
+    public void updateUserPassword(String newUserPassword) {
+        AppDatabase.databaseWriteExecutor.execute(() -> {
+            userDao.updateUserPassword(newUserPassword);
+        });
+    }
+
 
     public LiveData<List<User>> getAppUsers() {
         return appUsers;

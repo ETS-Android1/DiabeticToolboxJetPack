@@ -22,6 +22,12 @@
         <action
             android:id="@+id/action_navigation_home_to_navigation_exercises"
             app:destination="@id/navigation_exercises" />
+        <action
+            android:id="@+id/action_navigation_home_to_updateUserInformationFragment"
+            app:destination="@id/updateUserInformationFragment" />
+        <action
+            android:id="@+id/action_navigation_home_to_changePasswordFragment"
+            app:destination="@id/changePasswordFragment" />
     </fragment>
     <fragment
         android:id="@+id/navigation_food"
@@ -132,4 +138,20 @@
         android:name="com.kucharzyk.diabetictoolboxjetpack.login_and_registration.WelcomeActivity"
         android:label="fragment_welcome"
         tools:layout="@layout/activity_welcome" />
+    <fragment
+        android:id="@+id/updateUserInformationFragment"
+        android:name="com.kucharzyk.diabetictoolboxjetpack.ui_and_data.home.UpdateUserInformationFragment"
+        android:label="Update user">
+        <argument
+            android:name="parcelizedUser"
+            app:argType="com.kucharzyk.diabetictoolboxjetpack.room_database.User" />
+    </fragment>
+    <fragment
+        android:id="@+id/changePasswordFragment"
+        android:name="com.kucharzyk.diabetictoolboxjetpack.ui_and_data.home.ChangePasswordFragment"
+        android:label="Change password" >
+        <argument
+            android:name="parcelizedUser"
+            app:argType="com.kucharzyk.diabetictoolboxjetpack.room_database.User" />
+    </fragment>
 </navigation>

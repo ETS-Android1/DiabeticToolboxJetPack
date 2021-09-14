@@ -6,11 +6,11 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="center"
-    tools:context=".login_and_registration.RegistrationActivity">
+    tools:context=".ui_and_data.home.HomeFragment">
 
     <com.google.android.material.textfield.TextInputLayout
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:id="@+id/registration_username_textInputLayout"
+        android:id="@+id/home_fragment_update_username_textInputLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -21,39 +21,18 @@
         app:endIconMode="clear_text">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/registration_username_textInputEditText"
+            android:id="@+id/home_fragment_update_username_username_textInputEditText"
             android:maxLines="1"
             android:maxLength="20"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/username"
+            android:hint="@string/update_username"
             android:inputType="textPersonName" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:id="@+id/registration_password_textInputLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="16dp"
-        app:startIconDrawable="@drawable/ic_lock"
-        app:endIconMode="password_toggle">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/registration_password_textInputEditText"
-            android:maxLines="1"
-            android:maxLength="20"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/password"
-            android:inputType="textPassword" />
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:id="@+id/registration_weight_textInputLayout"
+        android:id="@+id/home_fragment_update_weight_textInputLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -62,12 +41,12 @@
         app:startIconDrawable="@drawable/ic_monitor_weight">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/registration_weight_textInputEditText"
+            android:id="@+id/home_fragment_update_weight_textInputEditText"
             android:maxLines="1"
             android:maxLength="5"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/weight"
+            android:hint="@string/update_weight"
             android:inputType="numberDecimal" />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -79,18 +58,16 @@
         android:orientation="horizontal">
 
         <Button
-            android:id="@+id/nextActivity"
+            android:id="@+id/home_fragment_cancel_update_button"
             android:layout_width="110dp"
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
-            android:onClick="goBack"
             android:text="@string/button_back" />
 
         <Button
-            android:id="@+id/cancel_action"
+            android:id="@+id/home_fragment_update_user_button"
             android:layout_width="110dp"
             android:layout_height="wrap_content"
-            android:onClick="register"
-            android:text="@string/button_register" />
+            android:text="@string/button_update" />
     </LinearLayout>
 </LinearLayout>

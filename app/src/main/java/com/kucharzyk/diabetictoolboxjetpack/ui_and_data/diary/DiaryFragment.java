@@ -13,6 +13,7 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.textfield.TextInputEditText;
 import com.kucharzyk.diabetictoolboxjetpack.R;
 import com.kucharzyk.diabetictoolboxjetpack.room_database.DiaryEntryWithGlycemia;
 import com.kucharzyk.diabetictoolboxjetpack.room_database.DiaryEntryWithMealsAndProducts;
@@ -34,13 +35,32 @@ public class DiaryFragment extends Fragment {
     private final List<DiaryMeasurementEntrySummary> diaryMeasurementEntrySummaries = new ArrayList<>();
     private List<MealProductCrossRef> mealProductCrossRefList = new ArrayList<>();
     private List<TrainingExerciseCrossRef> trainingExerciseCrossRefList = new ArrayList<>();
+    private TextInputEditText diaryEntrySearchBar;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         diaryEntryViewModel =
                 new ViewModelProvider(this).get(DiaryEntryViewModel.class);
         View root = inflater.inflate(R.layout.diary_fragment, container, false);
+        diaryEntrySearchBar = root.findViewById(R.id.diary_fragment_TextInputEditText_searched_entry);
         buildRecyclerView(root);
+
+/*        diaryEntrySearchBar.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                filter(s.toString());
+            }
+        });*/
 
         final Observer<List<DiaryEntryWithTrainingsAndExercises>> diaryTrainingEntriesObserver = new Observer<List<DiaryEntryWithTrainingsAndExercises>>() {
             @Override
@@ -86,8 +106,6 @@ public class DiaryFragment extends Fragment {
                     diaryMeasurementEntrySummaries.
                             add(new DiaryMeasurementEntrySummary(diaryEntry.getGlycemiaMeasurements(),
                                     diaryEntry.getDiaryEntry().getDiaryEntryDate()));
-                    Log.d(TAG, "onChanged: diaryMeasurementEntriesObserver measValue = " + diaryEntry.getGlycemiaMeasurements()
-                    + " size: " + diaryEntry.getGlycemiaMeasurements().size() + " value: " + diaryEntry.getGlycemiaMeasurements().get(0).getMeasurementValue());
                 }
                 mAdapter.setDiaryMeasurementEntries(diaryMeasurementEntrySummaries);
             }
@@ -115,6 +133,17 @@ public class DiaryFragment extends Fragment {
 
         return root;
     }
+
+/*    private void filter(String diaryEntryDate) {
+        ArrayList<DiaryMealEntrySummary> filteredList = new ArrayList<>();
+
+        for (DiaryMealEntrySummary entry : mAdapter.getDiaryEntriesList()) {
+            if (entry.getDiaryEntryDate().format(DateTimeFormatter.ofPattern("dd-MM-yyyy")).toLowerCase().contains(diaryEntryDate.toLowerCase())) {
+                filteredList.add(entry);
+            }
+        }
+        mAdapter.filterList(filteredList);
+    }*/
 
     private void buildRecyclerView(View rootView){
         RecyclerView mDiaryRecyclerView = rootView.findViewById(R.id.diary_recycler_view);
