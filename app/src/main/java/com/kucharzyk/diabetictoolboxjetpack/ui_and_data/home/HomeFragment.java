@@ -7,47 +7,93 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
+import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.NavController;
+import androidx.navigation.NavDirections;
+import androidx.navigation.fragment.NavHostFragment;
 
 import com.kucharzyk.diabetictoolboxjetpack.R;
 import com.kucharzyk.diabetictoolboxjetpack.room_database.User;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class HomeFragment extends Fragment {
 
+    private TextView userWelcome;
+    private CardView userInformationCard;
+    private CardView mealCard;
+    private CardView exercisesCard;
+    private CardView measurementsCard;
+    private CardView diaryCard;
+
     private HomeViewModel homeViewModel;
-    private List<User> appUsers = new ArrayList<>();
     public static User currentUser;
+    private NavController navController;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        homeViewModel =
-                new ViewModelProvider(this).get(HomeViewModel.class);
+        homeViewModel = new ViewModelProvider(this).get(HomeViewModel.class);
         View root = inflater.inflate(R.layout.home_fragment, container, false);
-        final TextView textView = root.findViewById(R.id.text_home);
-        homeViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
+        navController = NavHostFragment.findNavController(this);
+
+        userWelcome = root.findViewById(R.id.home_welcome_user_textView);
+        userInformationCard = root.findViewById(R.id.home_user_cardView);
+        mealCard = root.findViewById(R.id.home_food_cardView);
+        exercisesCard = root.findViewById(R.id.home_exercises_cardView);
+        measurementsCard = root.findViewById(R.id.home_measurements_cardView);
+        diaryCard = root.findViewById(R.id.home_diary_cardView);
+
+
+        mealCard.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onChanged(@Nullable String s) {
-                textView.setText(s);
+            public void onClick(View v) {
+                NavDirections action = HomeFragmentDirections.actionNavigationHomeToNavigationFood();
+                navController.navigate(action);
+            }
+        });
+
+        exercisesCard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                NavDirections action = HomeFragmentDirections.actionNavigationHomeToNavigationExercises();
+                navController.navigate(action);
+            }
+        });
+
+        measurementsCard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                NavDirections action = HomeFragmentDirections.actionNavigationHomeToNavigationGlycemia();
+                navController.navigate(action);
+            }
+        });
+
+        diaryCard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                NavDirections action = HomeFragmentDirections.actionNavigationHomeToNavigationDiary();
+                navController.navigate(action);
             }
         });
 
         final Observer<List<User>> appUsersObserver = new Observer<List<User>>() {
             @Override
             public void onChanged(List<User> users) {
-                appUsers = users;
                 currentUser = users.get(0);
+                setUserWelcome(currentUser.getUsername());
             }
         };
 
         homeViewModel.getAllApplicationUsers().observe(getViewLifecycleOwner(), appUsersObserver);
-
         return root;
+    }
+
+    private void setUserWelcome(String username){
+        String welcome = "Welcome " + username;
+        userWelcome.setText(welcome);
     }
 
 }

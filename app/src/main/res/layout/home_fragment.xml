@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -7,17 +7,176 @@
     tools:context=".ui_and_data.home.HomeFragment">
 
     <TextView
-        android:id="@+id/text_home"
-        android:layout_width="match_parent"
+        android:id="@+id/home_welcome_user_textView"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:textAlignment="center"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_margin="8dp"
+        android:fontFamily="@font/lato_italic"
+        android:gravity="center"
+        android:text="Welcome User"
+        android:textSize="40sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-</FrameLayout>
+    <TextView
+        android:id="@+id/home_welcome_user_part2_textView_textView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:fontFamily="@font/lato_light_italic"
+        android:gravity="center"
+        android:text="What would You like to do?"
+        android:textSize="32sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/home_welcome_user_textView" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/home_user_cardView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_margin="4dp"
+        android:backgroundTint="#336200EE"
+        app:cardCornerRadius="4dp"
+        app:layout_constraintBottom_toBottomOf="@id/home_horizontal_guideline_part2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/home_horizontal_guideline_part1">
+
+        <TextView
+            android:id="@+id/home_user_cardView_textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="8dp"
+            android:fontFamily="@font/lato_italic"
+            android:textSize="20sp"
+            android:text="Update user information" />
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/home_diary_cardView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_margin="4dp"
+        android:backgroundTint="#336200EE"
+        app:cardCornerRadius="4dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/home_vertical_guideline"
+        app:layout_constraintTop_toBottomOf="@id/home_horizontal_guideline_part3"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <TextView
+            android:id="@+id/home_diary_cardView_textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="8dp"
+            android:textAlignment="center"
+            android:fontFamily="@font/lato_italic"
+            android:textSize="20sp"
+            android:text="Check your Diary" />
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/home_measurements_cardView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_margin="4dp"
+        android:backgroundTint="#336200EE"
+        app:cardCornerRadius="4dp"
+        app:layout_constraintEnd_toEndOf="@id/home_vertical_guideline"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/home_horizontal_guideline_part3"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <TextView
+            android:id="@+id/home_measurements_cardView_textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="8dp"
+            android:textAlignment="center"
+            android:fontFamily="@font/lato_italic"
+            android:textSize="20sp"
+            android:text="Insert glucose Measurements" />
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/home_exercises_cardView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_margin="4dp"
+        android:backgroundTint="#336200EE"
+        app:cardCornerRadius="4dp"
+        app:layout_constraintBottom_toBottomOf="@id/home_horizontal_guideline_part3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/home_vertical_guideline"
+        app:layout_constraintTop_toBottomOf="@id/home_horizontal_guideline_part2">
+
+        <TextView
+            android:id="@+id/home_exercises_cardView_textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="8dp"
+            android:textAlignment="center"
+            android:fontFamily="@font/lato_italic"
+            android:textSize="20sp"
+            android:text="Insert exercises and calculate energy consumprion" />
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/home_food_cardView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_margin="4dp"
+        android:backgroundTint="#336200EE"
+        app:cardCornerRadius="4dp"
+        app:layout_constraintEnd_toEndOf="@id/home_vertical_guideline"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/home_horizontal_guideline_part2"
+        app:layout_constraintBottom_toBottomOf="@id/home_horizontal_guideline_part3">
+
+        <TextView
+            android:id="@+id/home_food_cardView_textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="8dp"
+            android:textAlignment="center"
+            android:fontFamily="@font/lato_italic"
+            android:textSize="20sp"
+            android:text="Insert meal and calculate macroelements intake" />
+    </androidx.cardview.widget.CardView>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/home_vertical_guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.5" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/home_horizontal_guideline_part1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.16" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/home_horizontal_guideline_part2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.44" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/home_horizontal_guideline_part3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.72" />
+</androidx.constraintlayout.widget.ConstraintLayout>

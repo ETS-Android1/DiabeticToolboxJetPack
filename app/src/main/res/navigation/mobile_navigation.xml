@@ -9,7 +9,20 @@
         android:id="@+id/navigation_home"
         android:name="com.kucharzyk.diabetictoolboxjetpack.ui_and_data.home.HomeFragment"
         android:label="@string/title_home"
-        tools:layout="@layout/home_fragment" />
+        tools:layout="@layout/home_fragment" >
+        <action
+            android:id="@+id/action_navigation_home_to_navigation_diary"
+            app:destination="@id/navigation_diary" />
+        <action
+            android:id="@+id/action_navigation_home_to_navigation_glycemia"
+            app:destination="@id/navigation_glycemia" />
+        <action
+            android:id="@+id/action_navigation_home_to_navigation_food"
+            app:destination="@id/navigation_food" />
+        <action
+            android:id="@+id/action_navigation_home_to_navigation_exercises"
+            app:destination="@id/navigation_exercises" />
+    </fragment>
     <fragment
         android:id="@+id/navigation_food"
         android:name="com.kucharzyk.diabetictoolboxjetpack.ui_and_data.food.FoodFragment"
@@ -97,8 +110,8 @@
     <fragment
         android:id="@+id/trainingSummaryFragment"
         android:name="com.kucharzyk.diabetictoolboxjetpack.ui_and_data.exercises.TrainingSummaryFragment"
-        android:label="fragment_training_summary"
-        tools:layout="@layout/fragment_training_summary" >
+        android:label="Training Summary"
+        tools:layout="@layout/fragment_training_summary">
         <action
             android:id="@+id/action_trainingSummaryFragment_to_navigation_exercises"
             app:destination="@id/navigation_exercises" />
