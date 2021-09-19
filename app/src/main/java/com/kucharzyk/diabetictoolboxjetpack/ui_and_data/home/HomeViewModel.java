@@ -8,7 +8,7 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import com.kucharzyk.diabetictoolboxjetpack.room_database.User;
-import com.kucharzyk.diabetictoolboxjetpack.ui_and_data.UserRepository;
+import com.kucharzyk.diabetictoolboxjetpack.ui_and_data.repositories.UserRepository;
 
 import java.util.List;
 

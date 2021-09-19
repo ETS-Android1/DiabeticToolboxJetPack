@@ -26,6 +26,7 @@
             android:layout_height="wrap_content"
             android:maxLines="1"
             android:maxLength="10"
+            android:inputType="date"
             android:hint="@string/type_a_date" />
     </com.google.android.material.textfield.TextInputLayout>
 

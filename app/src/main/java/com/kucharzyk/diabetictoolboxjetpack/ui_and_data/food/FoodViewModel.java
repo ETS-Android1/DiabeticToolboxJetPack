@@ -12,11 +12,11 @@ import com.kucharzyk.diabetictoolboxjetpack.room_database.DiaryEntryWithMealsAnd
 import com.kucharzyk.diabetictoolboxjetpack.room_database.Meal;
 import com.kucharzyk.diabetictoolboxjetpack.room_database.MealProductCrossRef;
 import com.kucharzyk.diabetictoolboxjetpack.room_database.Product;
-import com.kucharzyk.diabetictoolboxjetpack.ui_and_data.DiaryEntryRepository;
-import com.kucharzyk.diabetictoolboxjetpack.ui_and_data.DiaryEntryWithMealsAndProductsRepository;
-import com.kucharzyk.diabetictoolboxjetpack.ui_and_data.MealProductCrossRefRepository;
-import com.kucharzyk.diabetictoolboxjetpack.ui_and_data.MealRepository;
-import com.kucharzyk.diabetictoolboxjetpack.ui_and_data.ProductRepository;
+import com.kucharzyk.diabetictoolboxjetpack.ui_and_data.repositories.DiaryEntryRepository;
+import com.kucharzyk.diabetictoolboxjetpack.ui_and_data.repositories.DiaryEntryWithMealsAndProductsRepository;
+import com.kucharzyk.diabetictoolboxjetpack.ui_and_data.repositories.MealProductCrossRefRepository;
+import com.kucharzyk.diabetictoolboxjetpack.ui_and_data.repositories.MealRepository;
+import com.kucharzyk.diabetictoolboxjetpack.ui_and_data.repositories.ProductRepository;
 
 import org.jetbrains.annotations.NotNull;
 

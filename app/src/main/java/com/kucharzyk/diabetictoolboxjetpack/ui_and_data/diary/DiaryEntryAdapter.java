@@ -20,21 +20,11 @@ public class DiaryEntryAdapter extends RecyclerView.Adapter<DiaryEntryAdapter.Di
     public static final String TAG = "DiaryEntryAdapter";
 
     private List<DiaryMealEntrySummary> diaryMealEntries = new ArrayList<>();
+    private List<DiaryMealEntrySummary> diaryMealEntriesFull;
     private List<DiaryTrainingEntrySummary> diaryTrainingEntries = new ArrayList<>();
+    private List<DiaryTrainingEntrySummary> diaryTrainingEntriesFull;
     private List<DiaryMeasurementEntrySummary> diaryMeasurementEntries = new ArrayList<>();
-    private OnItemClickListener mOnItemClickListener;
-
-    public interface OnItemClickListener {
-        void onItemClick(int position);
-
-        void onAddProductClick(int position);
-
-        void onDeleteProductClick(int position);
-    }
-
-    public void setOnItemClickListener(OnItemClickListener listener) {
-        mOnItemClickListener = listener;
-    }
+    private List<DiaryMeasurementEntrySummary> diaryMeasurementEntriesFull;
 
     public static class DiaryEntryViewHolder extends RecyclerView.ViewHolder {
 
@@ -60,7 +50,7 @@ public class DiaryEntryAdapter extends RecyclerView.Adapter<DiaryEntryAdapter.Di
 
         private final TextView diaryEntryDate;
 
-        public DiaryEntryViewHolder(@NonNull View itemView, DiaryEntryAdapter.OnItemClickListener listener) {
+        public DiaryEntryViewHolder(@NonNull View itemView) {
             super(itemView);
 /*            mProductName = itemView.findViewById(R.id.diary_text_meal_summary);
             mProductBrand = itemView.findViewById(R.id.text_product_brand);
@@ -83,43 +73,6 @@ public class DiaryEntryAdapter extends RecyclerView.Adapter<DiaryEntryAdapter.Di
             diarEntryHypoglycemiaMeasurementsTakenValue = itemView.findViewById(R.id.diaryEntryTextViewHypoglycemiaValue);
 
             diaryEntryDate = itemView.findViewById(R.id.diaryEntryTextViewDate);
-
-
-/*            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if (listener != null) {
-                        int position = getAdapterPosition();
-                        if (position != RecyclerView.NO_POSITION) {
-                            listener.onItemClick(position);
-                        }
-                    }
-                }
-            });*/
-
-/*            mAddProductImage.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if (listener != null) {
-                        int position = getAdapterPosition();
-                        if (position != RecyclerView.NO_POSITION) {
-                            listener.onAddProductClick(position);
-                        }
-                    }
-                }
-            });
-
-            mDeleteProductImage.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if (listener != null) {
-                        int position = getAdapterPosition();
-                        if (position != RecyclerView.NO_POSITION) {
-                            listener.onDeleteProductClick(position);
-                        }
-                    }
-                }
-            });*/
         }
     }
 
@@ -128,7 +81,7 @@ public class DiaryEntryAdapter extends RecyclerView.Adapter<DiaryEntryAdapter.Di
     @Override
     public DiaryEntryViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.example_diary_entry_overview, parent, false);
-        DiaryEntryViewHolder diaryEntryViewHolder = new DiaryEntryViewHolder(view, mOnItemClickListener);
+        DiaryEntryViewHolder diaryEntryViewHolder = new DiaryEntryViewHolder(view);
         return diaryEntryViewHolder;
     }
 
@@ -219,21 +172,55 @@ public class DiaryEntryAdapter extends RecyclerView.Adapter<DiaryEntryAdapter.Di
 
     public void setDiaryMealEntries(List<DiaryMealEntrySummary> diaryMealEntries) {
         this.diaryMealEntries = diaryMealEntries;
+        diaryMealEntriesFull = new ArrayList<>(diaryMealEntries);
         notifyDataSetChanged();
     }
 
     public void setDiaryTrainingEntries(List<DiaryTrainingEntrySummary> diaryTrainingEntries) {
         this.diaryTrainingEntries = diaryTrainingEntries;
+        diaryTrainingEntriesFull = new ArrayList<>(diaryTrainingEntries);
         notifyDataSetChanged();
     }
 
     public void setDiaryMeasurementEntries(List<DiaryMeasurementEntrySummary> diaryMeasurementEntries) {
         this.diaryMeasurementEntries = diaryMeasurementEntries;
+        diaryMeasurementEntriesFull = new ArrayList<>(diaryMeasurementEntries);
         notifyDataSetChanged();
     }
 
-    public void filterList(ArrayList<DiaryMealEntrySummary> filteredList) {
-        diaryMealEntries = filteredList;
+    public void filterList(ArrayList<DiaryMealEntrySummary> filteredMealList,
+                           ArrayList<DiaryTrainingEntrySummary> filteredTrainingList,
+                           ArrayList<DiaryMeasurementEntrySummary> filteredMeasurementList) {
+        diaryMealEntries = filteredMealList;
+        diaryTrainingEntries = filteredTrainingList;
+        diaryMeasurementEntries = filteredMeasurementList;
         notifyDataSetChanged();
+    }
+
+    public List<DiaryMealEntrySummary> getDiaryMealEntriesList() {
+        if (diaryMealEntriesFull != null){
+            return new ArrayList<>(diaryMealEntriesFull);
+        }
+        else {
+            return new ArrayList<>(diaryMealEntries);
+        }
+    }
+
+    public List<DiaryTrainingEntrySummary> getDiaryTrainingEntriesList() {
+        if (diaryTrainingEntriesFull != null){
+            return new ArrayList<>(diaryTrainingEntriesFull);
+        }
+        else {
+            return new ArrayList<>(diaryTrainingEntries);
+        }
+    }
+
+    public List<DiaryMeasurementEntrySummary> getDiaryMeasurementEntriesList() {
+        if (diaryMeasurementEntriesFull != null){
+            return new ArrayList<>(diaryMeasurementEntriesFull);
+        }
+        else {
+            return new ArrayList<>(diaryMeasurementEntries);
+        }
     }
 }

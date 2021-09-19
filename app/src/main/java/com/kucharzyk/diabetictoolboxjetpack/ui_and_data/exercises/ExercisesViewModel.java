@@ -11,10 +11,10 @@ import com.kucharzyk.diabetictoolboxjetpack.room_database.DiaryEntry;
 import com.kucharzyk.diabetictoolboxjetpack.room_database.Exercise;
 import com.kucharzyk.diabetictoolboxjetpack.room_database.Training;
 import com.kucharzyk.diabetictoolboxjetpack.room_database.TrainingExerciseCrossRef;
-import com.kucharzyk.diabetictoolboxjetpack.ui_and_data.DiaryEntryRepository;
-import com.kucharzyk.diabetictoolboxjetpack.ui_and_data.ExerciseRepository;
-import com.kucharzyk.diabetictoolboxjetpack.ui_and_data.TrainingExerciseCrossRefRepository;
-import com.kucharzyk.diabetictoolboxjetpack.ui_and_data.TrainingRepository;
+import com.kucharzyk.diabetictoolboxjetpack.ui_and_data.repositories.DiaryEntryRepository;
+import com.kucharzyk.diabetictoolboxjetpack.ui_and_data.repositories.ExerciseRepository;
+import com.kucharzyk.diabetictoolboxjetpack.ui_and_data.repositories.TrainingExerciseCrossRefRepository;
+import com.kucharzyk.diabetictoolboxjetpack.ui_and_data.repositories.TrainingRepository;
 
 import org.jetbrains.annotations.NotNull;
 

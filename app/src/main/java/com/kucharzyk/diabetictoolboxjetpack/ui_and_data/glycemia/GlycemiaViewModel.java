@@ -8,8 +8,8 @@ import androidx.lifecycle.LiveData;
 
 import com.kucharzyk.diabetictoolboxjetpack.room_database.DiaryEntry;
 import com.kucharzyk.diabetictoolboxjetpack.room_database.Glycemia;
-import com.kucharzyk.diabetictoolboxjetpack.ui_and_data.DiaryEntryRepository;
-import com.kucharzyk.diabetictoolboxjetpack.ui_and_data.GlycemiaRepository;
+import com.kucharzyk.diabetictoolboxjetpack.ui_and_data.repositories.DiaryEntryRepository;
+import com.kucharzyk.diabetictoolboxjetpack.ui_and_data.repositories.GlycemiaRepository;
 
 import java.time.LocalDate;
 

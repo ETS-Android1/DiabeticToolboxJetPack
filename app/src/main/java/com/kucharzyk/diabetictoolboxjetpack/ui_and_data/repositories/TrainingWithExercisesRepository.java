@@ -1,4 +1,4 @@
-package com.kucharzyk.diabetictoolboxjetpack.ui_and_data;
+package com.kucharzyk.diabetictoolboxjetpack.ui_and_data.repositories;
 
 import android.app.Application;
 

@@ -1,6 +1,8 @@
 package com.kucharzyk.diabetictoolboxjetpack.ui_and_data.diary;
 
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,6 +24,7 @@ import com.kucharzyk.diabetictoolboxjetpack.room_database.MealProductCrossRef;
 import com.kucharzyk.diabetictoolboxjetpack.room_database.TrainingExerciseCrossRef;
 import com.kucharzyk.diabetictoolboxjetpack.ui_and_data.home.HomeFragment;
 
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,7 +32,7 @@ public class DiaryFragment extends Fragment {
     public static final String TAG = "DiaryFragment";
 
     private DiaryEntryViewModel diaryEntryViewModel;
-    private DiaryEntryAdapter mAdapter;
+    private DiaryEntryAdapter diaryEntryAdapter;
     private final List<DiaryMealEntrySummary> diaryMealEntrySummaries = new ArrayList<>();
     private final List<DiaryTrainingEntrySummary> diaryTrainingEntrySummaries = new ArrayList<>();
     private final List<DiaryMeasurementEntrySummary> diaryMeasurementEntrySummaries = new ArrayList<>();
@@ -45,7 +48,7 @@ public class DiaryFragment extends Fragment {
         diaryEntrySearchBar = root.findViewById(R.id.diary_fragment_TextInputEditText_searched_entry);
         buildRecyclerView(root);
 
-/*        diaryEntrySearchBar.addTextChangedListener(new TextWatcher() {
+        diaryEntrySearchBar.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
@@ -60,7 +63,7 @@ public class DiaryFragment extends Fragment {
             public void afterTextChanged(Editable s) {
                 filter(s.toString());
             }
-        });*/
+        });
 
         final Observer<List<DiaryEntryWithTrainingsAndExercises>> diaryTrainingEntriesObserver = new Observer<List<DiaryEntryWithTrainingsAndExercises>>() {
             @Override
@@ -74,7 +77,7 @@ public class DiaryFragment extends Fragment {
                             add(new DiaryTrainingEntrySummary(diaryEntry.trainings,
                                     trainingExerciseCrossRefList, diaryEntry.diaryEntry.getDiaryEntryDate(), HomeFragment.currentUser));
                 }
-                mAdapter.setDiaryTrainingEntries(diaryTrainingEntrySummaries);
+                diaryEntryAdapter.setDiaryTrainingEntries(diaryTrainingEntrySummaries);
             }
         };
 
@@ -91,7 +94,7 @@ public class DiaryFragment extends Fragment {
                                         mealProductCrossRefList, diaryEntry.diaryEntry.getDiaryEntryDate()));
                     Log.d(TAG, "onChanged: diaryMealEntriesObserver carbsValue = " + diaryEntry.meals);
                 }
-                mAdapter.setDiaryMealEntries(diaryMealEntrySummaries);
+                diaryEntryAdapter.setDiaryMealEntries(diaryMealEntrySummaries);
             }
         };
 
@@ -107,7 +110,7 @@ public class DiaryFragment extends Fragment {
                             add(new DiaryMeasurementEntrySummary(diaryEntry.getGlycemiaMeasurements(),
                                     diaryEntry.getDiaryEntry().getDiaryEntryDate()));
                 }
-                mAdapter.setDiaryMeasurementEntries(diaryMeasurementEntrySummaries);
+                diaryEntryAdapter.setDiaryMeasurementEntries(diaryMeasurementEntrySummaries);
             }
         };
 
@@ -134,26 +137,40 @@ public class DiaryFragment extends Fragment {
         return root;
     }
 
-/*    private void filter(String diaryEntryDate) {
-        ArrayList<DiaryMealEntrySummary> filteredList = new ArrayList<>();
+    private void filter(String diaryEntryDate) {
+        ArrayList<DiaryMealEntrySummary> filteredMealList = new ArrayList<>();
+        ArrayList<DiaryTrainingEntrySummary> filteredTrainingList = new ArrayList<>();
+        ArrayList<DiaryMeasurementEntrySummary> filteredMeasurementList = new ArrayList<>();
 
-        for (DiaryMealEntrySummary entry : mAdapter.getDiaryEntriesList()) {
+        for (DiaryMealEntrySummary entry : diaryEntryAdapter.getDiaryMealEntriesList()) {
             if (entry.getDiaryEntryDate().format(DateTimeFormatter.ofPattern("dd-MM-yyyy")).toLowerCase().contains(diaryEntryDate.toLowerCase())) {
-                filteredList.add(entry);
+                filteredMealList.add(entry);
             }
         }
-        mAdapter.filterList(filteredList);
-    }*/
+
+        for (DiaryTrainingEntrySummary entry : diaryEntryAdapter.getDiaryTrainingEntriesList()) {
+            if (entry.getDiaryEntryDate().format(DateTimeFormatter.ofPattern("dd-MM-yyyy")).toLowerCase().contains(diaryEntryDate.toLowerCase())) {
+                filteredTrainingList.add(entry);
+            }
+        }
+
+        for (DiaryMeasurementEntrySummary entry : diaryEntryAdapter.getDiaryMeasurementEntriesList()) {
+            if (entry.getDiaryEntryDate().format(DateTimeFormatter.ofPattern("dd-MM-yyyy")).toLowerCase().contains(diaryEntryDate.toLowerCase())) {
+                filteredMeasurementList.add(entry);
+            }
+        }
+        diaryEntryAdapter.filterList(filteredMealList, filteredTrainingList, filteredMeasurementList);
+    }
 
     private void buildRecyclerView(View rootView){
         RecyclerView mDiaryRecyclerView = rootView.findViewById(R.id.diary_recycler_view);
         //mDiaryRecyclerView.setHasFixedSize(true);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
 
-        mAdapter = new DiaryEntryAdapter();
+        diaryEntryAdapter = new DiaryEntryAdapter();
 
         mDiaryRecyclerView.setLayoutManager(mLayoutManager);
-        mDiaryRecyclerView.setAdapter(mAdapter);
+        mDiaryRecyclerView.setAdapter(diaryEntryAdapter);
     }
 
 }
