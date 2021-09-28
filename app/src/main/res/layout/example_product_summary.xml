@@ -22,7 +22,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
+        <!--<TextView
             android:id="@+id/text_product_brand"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -30,9 +30,9 @@
             android:text="Example Brand"
             android:textSize="12sp"
             app:layout_constraintStart_toStartOf="@+id/text_product_name"
-            app:layout_constraintTop_toBottomOf="@+id/text_product_name" />
+            app:layout_constraintTop_toBottomOf="@+id/text_product_name" />-->
 
-        <TextView
+        <!--<TextView
             android:id="@+id/text_product_quantity"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -40,7 +40,7 @@
             android:text="Example Quantity"
             android:textSize="12sp"
             app:layout_constraintBaseline_toBaselineOf="@+id/text_product_brand"
-            app:layout_constraintStart_toEndOf="@+id/text_product_brand" />
+            app:layout_constraintStart_toEndOf="@+id/text_product_brand" />-->
 
         <ImageView
             android:id="@+id/image_edit_product"
@@ -74,11 +74,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="4dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="4dp"
             android:text="@string/macro_carbs"
             android:textSize="12sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/text_product_brand" />
+            app:layout_constraintTop_toBottomOf="@+id/text_product_name" />
 
         <TextView
             android:id="@+id/text_product_fat"

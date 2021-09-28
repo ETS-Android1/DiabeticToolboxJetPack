@@ -36,12 +36,7 @@ public class MainActivity extends AppCompatActivity {
             NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
             NavigationUI.setupWithNavController(navView, navController);
         }
-
-/*        AppDatabase appDatabase = Room.databaseBuilder(getApplicationContext(),
-                AppDatabase.class, "app_database")
-                .build();*/
-
-//        userDatabase.clearDatabase(userDatabase);
+        
     }
 
     @Override

@@ -56,6 +56,11 @@ public class GlycemiaFragment extends Fragment {
         mSaveMeasurementButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                String currentDateString = Objects.requireNonNull(currentDateEditText.getText()).toString();
+                String currentTimeString = Objects.requireNonNull(currentTimeEditText.getText()).toString();
+                String currentDateTimeString = currentDateString + " " + currentTimeString;
+                currentDateTime = LocalDateTime.parse(currentDateTimeString, DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss"));
+
 
                 if (mGlycemiaValueLayout.getError() == null && mGlycemiaValue.getText() != null) {
                     glycemiaViewModel.insertDiaryEntry(new DiaryEntry(currentDateTime.toLocalDate()));
