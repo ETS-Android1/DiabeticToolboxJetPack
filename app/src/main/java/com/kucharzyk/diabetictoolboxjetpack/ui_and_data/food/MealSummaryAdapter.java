@@ -35,26 +35,26 @@ public class MealSummaryAdapter extends RecyclerView.Adapter<MealSummaryAdapter.
     public static class MealSummaryViewHolder extends RecyclerView.ViewHolder {
 
         private final TextView mProductName;
-        private final TextView mProductBrand;
-        private final TextView mProductQuantity;
+/*        private final TextView mProductBrand;
+        private final TextView mProductQuantity;*/
         private final TextView mProductCarbsValue;
         private final TextView mProductFatValue;
         private final TextView mProductProteinsValue;
         private final TextView mProductCaloriesValue;
         private final TextView mProductCarbsExchangerValue;
-        private final TextView mProductFatExchangerValue;
+        private final TextView mProductProteinFatExchangerValue;
 
         public MealSummaryViewHolder(@NonNull View itemView, OnItemClickListener listener) {
             super(itemView);
             mProductName = itemView.findViewById(R.id.text_product_name);
-            mProductBrand = itemView.findViewById(R.id.text_product_brand);
-            mProductQuantity = itemView.findViewById(R.id.text_product_quantity);
+/*            mProductBrand = itemView.findViewById(R.id.text_product_brand);
+            mProductQuantity = itemView.findViewById(R.id.text_product_quantity);*/
             mProductCarbsValue = itemView.findViewById(R.id.text_product_carbs_value);
             mProductFatValue = itemView.findViewById(R.id.text_product_fat_value);
             mProductProteinsValue = itemView.findViewById(R.id.text_product_proteins_value);
             mProductCaloriesValue = itemView.findViewById(R.id.text_product_calories_value);
             mProductCarbsExchangerValue = itemView.findViewById(R.id.text_product_carbs_exchanger_value);
-            mProductFatExchangerValue = itemView.findViewById(R.id.text_product_fat_exchanger_value);
+            mProductProteinFatExchangerValue = itemView.findViewById(R.id.text_product_fat_exchanger_value);
             ImageView mEditProductImage = itemView.findViewById(R.id.image_edit_product);
             ImageView mDeleteProductImage = itemView.findViewById(R.id.exercise_example_image_delete);
 
@@ -95,15 +95,23 @@ public class MealSummaryAdapter extends RecyclerView.Adapter<MealSummaryAdapter.
     @Override
     public void onBindViewHolder(@NonNull MealSummaryViewHolder holder, int position) {
         Product currentProduct = mMealSummary.get(position);
+
+        String mProductCarbs = Globals.REAL_FORMATTER.format(currentProduct.getCarbohydrates()) + " g";
+        String mProductFat = Globals.REAL_FORMATTER.format(currentProduct.getFat()) + " g";
+        String mProductProteins = Globals.REAL_FORMATTER.format(currentProduct.getProteins()) + " g";
+        String mProductCalories = Globals.REAL_FORMATTER.format(currentProduct.getCalories()) + " kcal";
+        String mProductCarbsExchanger = Globals.REAL_FORMATTER.
+                format((currentProduct.getCarbohydrates()) / 12) + " units";
+        String mProductProteinFatExchanger = Globals.REAL_FORMATTER.
+                format((9 * currentProduct.getFat() + 4 * currentProduct.getProteins()) / 100) + " units";
+
         holder.mProductName.setText(currentProduct.getProductName());
-        holder.mProductCarbsValue.setText(Globals.REAL_FORMATTER.format(currentProduct.getCarbohydrates()));
-        holder.mProductFatValue.setText(Globals.REAL_FORMATTER.format(currentProduct.getFat()));
-        holder.mProductProteinsValue.setText(Globals.REAL_FORMATTER.format(currentProduct.getProteins()));
-        holder.mProductCaloriesValue.setText(Globals.REAL_FORMATTER.format(currentProduct.getCalories()));
-        holder.mProductCarbsExchangerValue.setText(Globals.REAL_FORMATTER.
-                format((currentProduct.getCarbohydrates()) / 12));
-        holder.mProductFatExchangerValue.setText(Globals.REAL_FORMATTER.
-                format((9 * currentProduct.getFat() + 4 * currentProduct.getProteins()) / 100));
+        holder.mProductCarbsValue.setText(mProductCarbs);
+        holder.mProductFatValue.setText(mProductFat);
+        holder.mProductProteinsValue.setText(mProductProteins);
+        holder.mProductCaloriesValue.setText(mProductCalories);
+        holder.mProductCarbsExchangerValue.setText(mProductCarbsExchanger);
+        holder.mProductProteinFatExchangerValue.setText(mProductProteinFatExchanger);
     }
 
     @Override

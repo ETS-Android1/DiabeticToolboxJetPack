@@ -36,8 +36,8 @@ public class FoodProductAdapter extends RecyclerView.Adapter<FoodProductAdapter.
     public static class ProductViewHolder extends RecyclerView.ViewHolder {
 
         public TextView mProductName;
-        public TextView mProductProducer;
-        public TextView mProductQuantity;
+/*        public TextView mProductProducer;
+        public TextView mProductQuantity;*/
 
         public TextView mProductCarbsValue;
         public TextView mProductFatValue;
@@ -53,8 +53,9 @@ public class FoodProductAdapter extends RecyclerView.Adapter<FoodProductAdapter.
         public ProductViewHolder(@NonNull View itemView, OnItemClickListener listener) {
             super(itemView);
             mProductName = itemView.findViewById(R.id.text_product_name);
-            mProductProducer = itemView.findViewById(R.id.text_producer_name);
-            mProductQuantity = itemView.findViewById(R.id.text_product_quantity);
+/*            mProductProducer = itemView.findViewById(R.id.text_producer_name);
+            mProductQuantity = itemView.findViewById(R.idyou
+                    .text_product_quantity);*/
 
             mProductCarbsValue = itemView.findViewById(R.id.text_product_carbs_value);
             mProductFatValue = itemView.findViewById(R.id.text_product_fat_value);

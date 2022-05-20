@@ -40,10 +40,10 @@ public class ProductSummaryFragment extends Fragment {
     private Double productServingSize;
 
     TextView mProductName;
-    TextView mProductCarbohydrates;
-    TextView mProductFat;
-    TextView mProductProteins;
-    TextView mProductCalories;
+    TextView mProductCarbohydratesValue;
+    TextView mProductFatValue;
+    TextView mProductProteinsValue;
+    TextView mProductCaloriesValue;
     TextView mProductCarbohydrateExchangerValue;
     TextView mProductProteinFatExchangerValue;
     TextInputEditText mProductServingSize;
@@ -57,10 +57,10 @@ public class ProductSummaryFragment extends Fragment {
         View child = inflater.inflate(R.layout.fragment_product_summary, container, false);
         navController = NavHostFragment.findNavController(this);
         mProductName = child.findViewById(R.id.text_product_name);
-        mProductCarbohydrates = child.findViewById(R.id.text_product_carbs_value);
-        mProductFat = child.findViewById(R.id.text_product_fat_value);
-        mProductProteins = child.findViewById(R.id.text_product_proteins_value);
-        mProductCalories = child.findViewById(R.id.text_product_calories_value);
+        mProductCarbohydratesValue = child.findViewById(R.id.text_product_carbs_value);
+        mProductFatValue = child.findViewById(R.id.text_product_fat_value);
+        mProductProteinsValue = child.findViewById(R.id.text_product_proteins_value);
+        mProductCaloriesValue = child.findViewById(R.id.text_product_calories_value);
         mProductCarbohydrateExchangerValue = child.findViewById(R.id.text_product_carbs_exchanger_value);
         mProductProteinFatExchangerValue = child.findViewById(R.id.text_product_fat_exchanger_value);
         mProductServingSize = child.findViewById(R.id.edit_text_input_serving_size);
@@ -138,13 +138,21 @@ public class ProductSummaryFragment extends Fragment {
                                       Double productCalories,
                                       Double productCarbohydrateExchangerValue,
                                       Double productProteinFatExchangerValue) {
+
+        String mProductCarbohydrates = Globals.REAL_FORMATTER.format((productCarbohydrates)) + " g";
+        String mProductFat = Globals.REAL_FORMATTER.format(productFat) + " g";
+        String mProductProteins = Globals.REAL_FORMATTER.format(productProteins) + " g";
+        String mProductCalories = Globals.REAL_FORMATTER.format(productCalories) + " kcal";
+        String mProductCarbohydrateExchanger = Globals.REAL_FORMATTER.format(productCarbohydrateExchangerValue) + " units";
+        String mProductProteinFatExchanger = Globals.REAL_FORMATTER.format(productProteinFatExchangerValue) + " units";
+
         mProductName.setText(productName);
-        mProductCarbohydrates.setText(Globals.REAL_FORMATTER.format((productCarbohydrates)));
-        mProductFat.setText(Globals.REAL_FORMATTER.format(productFat));
-        mProductProteins.setText(Globals.REAL_FORMATTER.format(productProteins));
-        mProductCalories.setText(Globals.REAL_FORMATTER.format(productCalories));
-        mProductCarbohydrateExchangerValue.setText(Globals.REAL_FORMATTER.format(productCarbohydrateExchangerValue));
-        mProductProteinFatExchangerValue.setText(Globals.REAL_FORMATTER.format(productProteinFatExchangerValue));
+        mProductCarbohydratesValue.setText(mProductCarbohydrates);
+        mProductFatValue.setText(mProductFat);
+        mProductProteinsValue.setText(mProductProteins);
+        mProductCaloriesValue.setText(mProductCalories);
+        mProductCarbohydrateExchangerValue.setText(mProductCarbohydrateExchanger);
+        mProductProteinFatExchangerValue.setText(mProductProteinFatExchanger);
     }
 
     private void getProductAttributes(Product currentProduct, Double productServingSize) {

@@ -41,7 +41,7 @@ public class DiaryEntryAdapter extends RecyclerView.Adapter<DiaryEntryAdapter.Di
 
         private final TextView diaryEntryCaloriesBurnedValue;
         private final TextView diaryEntryCarbsExchangerUsedValue;
-        private final TextView diaryEntryProteinFatExchangerUsedValue;
+        /*private final TextView diaryEntryProteinFatExchangerUsedValue;*/
 
         private final TextView diarEntryGlycemiaMeasurementsTakenValue;
         private final TextView diarEntryHyperglycemiaMeasurementsTakenValue;
@@ -65,7 +65,7 @@ public class DiaryEntryAdapter extends RecyclerView.Adapter<DiaryEntryAdapter.Di
 
             diaryEntryCaloriesBurnedValue = itemView.findViewById(R.id.diaryEntryTextCaloriesBurnedValue);
             diaryEntryCarbsExchangerUsedValue = itemView.findViewById(R.id.diaryEntryTextViewCarbsExchangerUsedValue);
-            diaryEntryProteinFatExchangerUsedValue = itemView.findViewById(R.id.diaryEntryTextViewFatExchangerUsedValue);
+            /*diaryEntryProteinFatExchangerUsedValue = itemView.findViewById(R.id.diaryEntryTextViewFatExchangerUsedValue);*/
 
             diarEntryGlycemiaMeasurementsTakenValue = itemView.findViewById(R.id.diaryEntryTextMeasurementsTakenValue);
             diarEntryHyperglycemiaMeasurementsTakenValue = itemView.findViewById(R.id.diaryEntryTextViewHyperglycemiaValue);
@@ -97,14 +97,14 @@ public class DiaryEntryAdapter extends RecyclerView.Adapter<DiaryEntryAdapter.Di
                     format(currentDiaryTrainingEntrySummary.getCaloriesBurned()) + " kcal";
             String diaryEntryCarbsExchangerUsed = Globals.REAL_FORMATTER.
                     format(currentDiaryTrainingEntrySummary.getCarbsExchangerUsed())  + " units";
-            String diaryEntryProteinFatExchangerUsed = Globals.REAL_FORMATTER.
-                    format(currentDiaryTrainingEntrySummary.getProteinFatExchangerUsed()) + " units";
+            /*String diaryEntryProteinFatExchangerUsed = Globals.REAL_FORMATTER.
+                    format(currentDiaryTrainingEntrySummary.getProteinFatExchangerUsed()) + " units";*/
 
             holder.diaryEntryDate.setText(currentDiaryTrainingEntrySummary.getDiaryEntryDate().
                     format(DateTimeFormatter.ofPattern("dd-MM-yyyy")));
             holder.diaryEntryCaloriesBurnedValue.setText(diaryEntryCaloriesBurned);
             holder.diaryEntryCarbsExchangerUsedValue.setText(diaryEntryCarbsExchangerUsed);
-            holder.diaryEntryProteinFatExchangerUsedValue.setText(diaryEntryProteinFatExchangerUsed);
+            /*holder.diaryEntryProteinFatExchangerUsedValue.setText(diaryEntryProteinFatExchangerUsed);*/
 
         } catch (IndexOutOfBoundsException e) {
             Log.i(TAG, "onBindViewHolder: diaryTrainingEntries not ready yet");
